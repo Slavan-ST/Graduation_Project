@@ -11,11 +11,12 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.14" />
     <PackageReference Include="ReactiveUI" Version="19.5.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClientAvalonia\ClientAvalonia.csproj" />
+    <ProjectReference Include="..\ServerAvalonia\ServerAvalonia.csproj" />
   </ItemGroup>
 </Project>
