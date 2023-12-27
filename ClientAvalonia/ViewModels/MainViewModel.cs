@@ -1,6 +1,15 @@
-﻿namespace ClientAvalonia.ViewModels;
+﻿using ClientAvalonia.Models.TestFromOld;
+using ReactiveUI.Fody.Helpers;
+
+namespace ClientAvalonia.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public string Greeting => "Welcome to Avalonia!";
+    [Reactive]
+    public string Greeting { get; set; } = "Welcome!";
+
+    public MainViewModel()
+    {
+        WorkingWithServer.SendMessage();
+    }
 }
