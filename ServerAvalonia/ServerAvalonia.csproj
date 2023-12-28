@@ -23,6 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\ClientAvalonia\ClientAvalonia.csproj" />
   </ItemGroup>
 </Project>

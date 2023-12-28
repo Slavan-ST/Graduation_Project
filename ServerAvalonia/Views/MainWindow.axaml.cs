@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using ServerAvalonia.Models;
 
 namespace ServerAvalonia.Views;
 

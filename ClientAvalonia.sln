@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientAvalonia.Desktop", "ClientAvalonia.Desktop\ClientAvalonia.Desktop.csproj", "{07F7DC6A-F3B6-4695-A8D3-7F8A07CCE8E3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerAvalonia", "ServerAvalonia\ServerAvalonia.csproj", "{55AAC868-F283-4FC9-A13A-54DF045E36FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ABED2CCA-2415-467B-A876-6FDB54ED544E} = {ABED2CCA-2415-467B-A876-6FDB54ED544E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerAvalonia.Desktop", "ServerAvalonia.Desktop\ServerAvalonia.Desktop.csproj", "{6109BF9C-6D39-43A4-B8B9-B87D0E294451}"
 EndProject

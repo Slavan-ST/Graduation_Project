@@ -12,5 +12,17 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<StackPanel>
+		<TextBox MinWidth="200" Text="{Binding Text}"/>
+		<Button Content="Send" Command="{Binding Send}"/>
+		<TextBlock/>
+
+
+		<ScrollViewer MinWidth="300" MinHeight="200">
+			<TextBox Text="{Binding Answer}"/>
+		</ScrollViewer>
+		<StackPanel >
+		</StackPanel>
+	</StackPanel>
+	
 </UserControl>

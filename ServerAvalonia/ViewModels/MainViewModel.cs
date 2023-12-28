@@ -1,21 +1,25 @@
 ﻿using ReactiveUI.Fody.Helpers;
-using ServerAvalonia.TestFromOld;
+using ServerAvalonia.Models;
 using System.Threading;
 
 namespace ServerAvalonia.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
+    Thread ServerThread;
+
     [Reactive]
     public string Greeting { get; set; } = "Welcome!";
 
     public MainViewModel()
     {
-        new Thread(TestMe).Start();
+        ServerThread = new Thread(RunServer);
+        ServerThread.Start();
     }
 
-    void TestMe()
+
+    void RunServer()
     {
-        Test.MainServer();
+         new Server(80);
     }
 }
