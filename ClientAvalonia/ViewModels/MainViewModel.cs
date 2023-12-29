@@ -5,54 +5,68 @@ using System;
 using System.Windows.Input;
 using System.Diagnostics;
 using ClientAvalonia.Models;
+using System.Net.Http;
 
 namespace ClientAvalonia.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
+    TcpClient _client;
+    Connection _connection;
+
     public MainViewModel()
     {
-        //тут будет начата работа клиента
-        StartClient();
-
-        Send = ReactiveCommand.Create(() =>
-        {
-            //тут будет отправка сообщения серверу
-        });
-    }
-
-    private async void StartClient()
-    {
-        //ну порт
+        //порт
         int port = 13400;
-        Console.WriteLine("Запуск клиента....");
-        try
-        {
-            //создаём клиента
-            using TcpClient tcpClient = new TcpClient("127.0.0.1", port);
-            using Connection connection = new Connection(tcpClient);
+        //адрес сервера
+        _client = new TcpClient("127.0.0.1", port); // тут просто локальный сервер
+        //создаём соединение
+        _connection = new Connection(_client);
 
-            Console.WriteLine($"Подключен к серверу: {port}");
-            while (true)
-            {
-                string? input = Console.ReadLine();
-                if (input!.Length == 0)
-                    break;
-                //отправляем серверу сообщение 
-                await connection.SendMessageAsync(input);
-            }
-        }
-        catch (Exception ex)
+        //отправка сообщения
+        Send = ReactiveCommand.Create(async () =>
         {
-            Debug.WriteLine(ex.Message);
+            await _connection.SendMessageAsync(TextMessage);
+        });
+
+
+
+        ManyClientsTests();
+    }
+
+    private async void Tests()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            await _connection.SendMessageAsync(i + " test from point " + _client.Client.LocalEndPoint);
         }
+
+    }
+    private async void ManyClientsTests()
+    {
+        //порт
+        int port = 13400;
+        //адрес сервера
+        _client = new TcpClient("127.0.0.1", port); // тут просто локальный сервер
+        //создаём соединение
+        _connection = new Connection(_client);
+
+        //отправка сообщения
+        Send = ReactiveCommand.Create(async () =>
+        {
+            await _connection.SendMessageAsync(TextMessage);
+        });
+        for (int i = 0; i < 100; i++)
+        {
+            await _connection.SendMessageAsync(i + " test from point " + _client.Client.LocalEndPoint);
+        }
+        Tests();
     }
 
     [Reactive]
-    public string Greeting { get; set; } = "Welcome!";
+    public string TextMessage { get; set; } = ""; // отправляеммое сообщение
+
     [Reactive]
-    public string Text { get; set; } = ""; // отправляеммое сообщение
-    [Reactive]
-    public string Aswer { get; set; } = ""; // ответ от сервера
-    public ICommand Send { get; set; }
+    public string Answer { get; set; } = ""; //сообщение, получаемое от сервера, в данном случае простое "эхо"
+    public ICommand Send { get; set; }       //команда отправки сообщения серверу 
 }

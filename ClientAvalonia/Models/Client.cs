@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ClientAvalonia.Services;
+using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,42 +11,9 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
+
 namespace ClientAvalonia.Models
 {
-}
-
-namespace ClientAvalonia.Models.Client
-{
-    class ProgramClient
-    {
-        public static async Task MainClient(string[] args)
-        {
-            //ну порт
-            int port = 13400;
-            Console.WriteLine("Запуск клиента....");
-            try
-            {
-                //создаём клиента
-                using TcpClient tcpClient = new TcpClient("127.0.0.1", port);
-                using Connection connection = new Connection(tcpClient);
-
-                Console.WriteLine($"Подключен к серверу: {port}");
-                while (true)
-                {
-                    string? input = Console.ReadLine();
-                    if (input!.Length == 0)
-                        break;
-                    //отправляем серверу сообщение 
-                    await connection.SendMessageAsync(input);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-    }
-
     class Connection : IDisposable
     {
         private readonly TcpClient _client;
@@ -74,13 +43,21 @@ namespace ClientAvalonia.Models.Client
         {
             try
             {
+                //в заголовке находится длина отправляемого/принимаемого сообщения....
+                //или нет....а ввообще да
+                //int занимает 4 байта
                 byte[] headerBuffer = new byte[4];
                 while (true)
                 {
+                    //читаем "заголовок", и также пропускаем первые 4 байта
                     int bytesReceived = await _stream.ReadAsync(headerBuffer, 0, headerBuffer.Length);
+                    //если вдруг будет меньше(вот тут я даже не знаю как), то закрываем
                     if (bytesReceived != 4)
                         break;
+                    
+                    //получаем размер сообщения
                     int length = BinaryPrimitives.ReadInt32LittleEndian(headerBuffer);
+                    //буффер для принимаемого сообщения
                     byte[] buffer = new byte[length];
                     int count = 0;
                     while (count < length)
@@ -88,25 +65,25 @@ namespace ClientAvalonia.Models.Client
                         bytesReceived = await _stream.ReadAsync(buffer, count, buffer.Length - count);
                         count += bytesReceived;
                     }
+                    //байты в текст
                     string message = Encoding.UTF8.GetString(buffer);
-                    Console.WriteLine($"<< {_remoteEndPoint}: {message}");
+                    //и отправляем клиенту
+                    Temp.MainViewModel.Answer = message;
                 }
-                Console.WriteLine($"Сервер закрыл соединение.");
                 _stream.Close();
             }
             catch (IOException)
             {
-                Console.WriteLine($"Подключение закрыто.");
+                Debug.WriteLine($"Подключение закрыто.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.GetType().Name + ": " + ex.Message);
+                Debug.WriteLine(ex.GetType().Name + ": " + ex.Message);
             }
         }
         //отправить сообщение
         public async Task SendMessageAsync(string message)
         {
-            Console.WriteLine($">> {_remoteEndPoint}: {message}");
             await _channel.Writer.WriteAsync(message);
         }
 

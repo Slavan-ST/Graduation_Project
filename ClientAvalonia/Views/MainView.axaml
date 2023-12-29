@@ -6,23 +6,46 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ClientAvalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
 
-	<StackPanel>
-		<TextBox MinWidth="200" Text="{Binding Text}"/>
-		<Button Content="Send" Command="{Binding Send}"/>
-		<TextBlock/>
+	<Grid Margin="40">
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="3*"/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition Height="3*"/>
+		</Grid.RowDefinitions>
 
 
-		<ScrollViewer MinWidth="300" MinHeight="200">
-			<TextBox Text="{Binding Answer}"/>
+		<TextBlock Text="Сообщение серверу" 
+				   Grid.Row="0"/>
+		<TextBox MinWidth="200" 
+				 Text="{Binding TextMessage}" 
+				 VerticalAlignment="Stretch" 
+				 HorizontalAlignment="Stretch"
+				 Grid.Row="1"
+				 />
+		<Button Content="Send" 
+				Command="{Binding Send}"
+				Grid.Row="2"/>
+
+
+		<TextBlock Text="Сообщение от сервера"
+				   Grid.Row="3"/>
+		<ScrollViewer MinWidth="300" 
+					  VerticalAlignment="Stretch" 
+					  HorizontalAlignment="Stretch"
+				      Grid.Row="4">
+			<TextBox Text="{Binding Answer}"
+					 VerticalAlignment="Stretch"
+					 HorizontalAlignment="Stretch"/>
 		</ScrollViewer>
-		<StackPanel >
-		</StackPanel>
-	</StackPanel>
-	
+	</Grid>
+
+	<UserControl.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="MinWidth" Value="200"/>
+			<Setter Property="Margin" Value="10"/>
+		</Style>
+	</UserControl.Styles>
 </UserControl>

@@ -6,11 +6,34 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ServerAvalonia.Views.MainView"
              x:DataType="vm:MainViewModel"	>
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="6*"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		
+		
+		<TextBlock Text="Сообщения от клиента"
+				   VerticalAlignment="Center"
+				   HorizontalAlignment="Center"/>
+		<TextBox Text="{Binding Answer}" 
+				 Grid.Row="1"
+				 VerticalAlignment="Stretch"
+				 HorizontalAlignment="Stretch"/>
+		
+		<Button Content="Stop server" 
+				Command="{Binding Stop}"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Row="2"/>
+	</Grid>
+
+<UserControl.Styles>
+	<Style Selector="TextBox">
+		<Setter Property="MinWidth" Value="200"/>
+		<Setter Property="Margin" Value="10"/>
+	</Style>
+</UserControl.Styles>
 </UserControl>
