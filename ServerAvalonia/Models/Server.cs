@@ -103,7 +103,7 @@ namespace ServerAvalonia.Models
     }
     class Connection : IDisposable
     {
-        static int _countReauests = 0;
+        static int _countRequests = 0;
         private readonly TcpClient _client;
         private readonly NetworkStream _stream;
         private readonly EndPoint? _remoteEndPoint;
@@ -169,13 +169,13 @@ namespace ServerAvalonia.Models
                         Environment.NewLine +      
                         $"Point: {_remoteEndPoint}" +   //ip/port
                         Environment.NewLine + 
-                        message + Environment.NewLine +  "_countReauests: " + _countReauests  + Environment.NewLine;  //само сообщение
-                    _countReauests++;
-                    Debug.WriteLine("_countReauests: " + _countReauests);
+                        message + Environment.NewLine +  "_countReauests: " + _countRequests  + Environment.NewLine;  //само сообщение
+                    _countRequests++;
+                    Debug.WriteLine("_countReauests: " + _countRequests);
 
 
-                    //ответное сообщение клиенту
-                    await SendMessageAsync($"Echo: {DataBase.GetTextForMessage()}");
+                    //ответное сообщение клиенту, пока что просто эхо
+                    await SendMessageAsync($"Echo: {message}");
                 }
                 Console.WriteLine($"Клиент {_remoteEndPoint} отключился.");
                 _stream.Close();

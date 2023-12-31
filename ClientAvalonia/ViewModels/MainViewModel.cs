@@ -11,15 +11,18 @@ namespace ClientAvalonia.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    TcpClient _client;
-    Connection _connection;
+    private TcpClient _client;
+    private Connection _connection;
+
+    //порт
+    private static readonly int _port = 13400;
+    //адрес сервера
+    private static readonly string _ip = "127.0.0.1";
 
     public MainViewModel()
     {
-        //порт
-        int port = 13400;
         //адрес сервера
-        _client = new TcpClient("127.0.0.1", port); // тут просто локальный сервер
+        _client = new TcpClient(_ip, _port); // тут просто локальный сервер
         //создаём соединение
         _connection = new Connection(_client);
 
@@ -28,39 +31,6 @@ public class MainViewModel : ViewModelBase
         {
             await _connection.SendMessageAsync(TextMessage);
         });
-
-
-
-        ManyClientsTests();
-    }
-
-    private async void Tests()
-    {
-        for (int i = 0; i < 100; i++)
-        {
-            await _connection.SendMessageAsync(i + " test from point " + _client.Client.LocalEndPoint);
-        }
-
-    }
-    private async void ManyClientsTests()
-    {
-        //порт
-        int port = 13400;
-        //адрес сервера
-        _client = new TcpClient("127.0.0.1", port); // тут просто локальный сервер
-        //создаём соединение
-        _connection = new Connection(_client);
-
-        //отправка сообщения
-        Send = ReactiveCommand.Create(async () =>
-        {
-            await _connection.SendMessageAsync(TextMessage);
-        });
-        for (int i = 0; i < 100; i++)
-        {
-            await _connection.SendMessageAsync(i + " test from point " + _client.Client.LocalEndPoint);
-        }
-        Tests();
     }
 
     [Reactive]
