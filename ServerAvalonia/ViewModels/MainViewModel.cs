@@ -1,6 +1,5 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using ServerAvalonia.Models;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;

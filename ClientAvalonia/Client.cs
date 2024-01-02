@@ -12,7 +12,7 @@ using System.Threading.Channels;
 using System.Threading.Tasks;
 
 
-namespace ClientAvalonia.Models
+namespace ClientAvalonia
 {
     class Connection : IDisposable
     {
@@ -49,14 +49,23 @@ namespace ClientAvalonia.Models
                 byte[] headerBuffer = new byte[4];
                 while (true)
                 {
+
+
+
+                    //тут вполне можно закодировать тип получаемого запроса, т.е. создание, чтение и тд.
                     //читаем "заголовок", и также пропускаем первые 4 байта
                     int bytesReceived = await _stream.ReadAsync(headerBuffer, 0, headerBuffer.Length);
-                    //если вдруг будет меньше(вот тут я даже не знаю как), то закрываем
+                    //если вдруг будет меньше или больше(вот тут я даже не знаю как), то закрываем
                     if (bytesReceived != 4)
                         break;
-                    
                     //получаем размер сообщения
                     int length = BinaryPrimitives.ReadInt32LittleEndian(headerBuffer);
+
+
+
+
+
+
                     //буффер для принимаемого сообщения
                     byte[] buffer = new byte[length];
                     int count = 0;
@@ -67,7 +76,9 @@ namespace ClientAvalonia.Models
                     }
                     //байты в текст
                     string message = Encoding.UTF8.GetString(buffer);
-                    //и отправляем клиенту
+
+
+                    //и отправляем клиенту(тут это просто вывод на экран)
                     Temp.MainViewModel.Answer = message;
                 }
                 _stream.Close();
@@ -90,6 +101,7 @@ namespace ClientAvalonia.Models
         //цкил записи
         private async Task RunWritingLoop()
         {
+            //тут вполне можно закодировать тип получаемого запроса, т.е. создание, чтение и тд.
             //заголовок
             byte[] header = new byte[4];
 

@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace ServerAvalonia.Models
+namespace ServerAvalonia
 {
     class TcpServer : IDisposable
     {
@@ -133,18 +133,34 @@ namespace ServerAvalonia.Models
             try
             {
                 //буфер для заголовка
+                //вообще это зарезервиванное место под длину сообщения и что-то такое есть в TCP протоколе
                 byte[] headerBuffer = new byte[4];
                 while (true)
                 {
+                    //получаем длину сообщения
                     int bytesReceived = await _stream.ReadAsync(headerBuffer, 0, 4);
+                    //если заголовок не равен 4 байтам, то прерываем цикл
                     if (bytesReceived != 4)
                         break;
-                    //длина принимаемого сообщения
+                    //длина принимаемого сообщения, пока что только длина
                     int length = BinaryPrimitives.ReadInt32LittleEndian(headerBuffer);
-                    //буффер для сообщения
-                    byte[] buffer = new byte[length];
+
+
                     //количество пропускаемых байт 
                     int count = 0;
+
+                    //прочитать из полученного сообщения заголовок
+                    byte[] headerQueryBytes = new byte[128];
+                    bytesReceived = await _stream.ReadAsync(headerQueryBytes, count, 128);
+                    //перевести его в текст
+                    string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
+                    //это надо как я понимаю, но потом ещё тестить буду
+                    count += bytesReceived;
+
+
+
+                    //буффер для сообщения
+                    byte[] buffer = new byte[length];
                     //чтение сообщения
                     while (count < length)
                     {
@@ -164,12 +180,12 @@ namespace ServerAvalonia.Models
 
 
                     //сообщение, полученное от клиента
-                    Temp.MainViewModel.Answer += 
+                    Temp.MainViewModel.Answer +=
                         $"Date: {DateTime.Now} " +      //дата
-                        Environment.NewLine +      
+                        Environment.NewLine +
                         $"Point: {_remoteEndPoint}" +   //ip/port
-                        Environment.NewLine + 
-                        message + Environment.NewLine +  "_countReauests: " + _countRequests  + Environment.NewLine;  //само сообщение
+                        Environment.NewLine +
+                        message + Environment.NewLine + "_countReauests: " + _countRequests + Environment.NewLine;  //само сообщение
                     _countRequests++;
                     Debug.WriteLine("_countReauests: " + _countRequests);
 
@@ -204,6 +220,7 @@ namespace ServerAvalonia.Models
         //цикл записи
         private async Task RunWritingLoop()
         {
+            //тут вполне можно закодировать тип получаемого запроса, т.е. создание, чтение и тд.
             //в заголовке будет храниться длина сообщения
             byte[] header = new byte[4];
 

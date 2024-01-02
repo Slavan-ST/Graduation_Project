@@ -4,7 +4,6 @@ using System.Net.Sockets;
 using System;
 using System.Windows.Input;
 using System.Diagnostics;
-using ClientAvalonia.Models;
 using System.Net.Http;
 
 namespace ClientAvalonia.ViewModels;

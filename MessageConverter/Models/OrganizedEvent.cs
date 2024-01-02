@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MessageConverter.Models
 {
-    public class Event
+    //почему не просто event?... ну это не гуд 
+    public class OrganizedEvent
     {
 
     }

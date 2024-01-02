@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		Readme.txt = Readme.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageConverter", "MessageConverter\MessageConverter.csproj", "{5D410FAC-6D3C-441F-AC6B-1A159126D06C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "MessageConverter\Helper.csproj", "{5D410FAC-6D3C-441F-AC6B-1A159126D06C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
