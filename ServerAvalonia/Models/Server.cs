@@ -124,7 +124,7 @@ namespace ServerAvalonia.Models
             _writingTask = RunWritingLoop();
         }
 
-        //цикл  чтения получаемых сообщений
+        //цикл  чтения получаемых сообщений + отправка ответных сообщений
         private async Task RunReadingLoop()
         {
             //тут, как я понял, принуждаем машину вернуть таск,
@@ -191,6 +191,10 @@ namespace ServerAvalonia.Models
             if (!disposed)
                 _disposeCallback(this);
         }
+
+
+
+
         //отправить сообщение
         public async Task SendMessageAsync(string message)
         {
