@@ -111,6 +111,7 @@ namespace ServerAvalonia
         private readonly Task _writingTask;
         private readonly Action<Connection> _disposeCallback;
         private readonly Channel<string> _channel;
+        private readonly Channel<byte[]> _channelForImage;
         bool disposed;
 
         public Connection(TcpClient client, Action<Connection> disposeCallback)
@@ -120,6 +121,7 @@ namespace ServerAvalonia
             _remoteEndPoint = client.Client.RemoteEndPoint;
             _disposeCallback = disposeCallback;
             _channel = Channel.CreateUnbounded<string>();
+            _channelForImage = Channel.CreateUnbounded<byte[]>();
             _readingTask = RunReadingLoop();
             _writingTask = RunWritingLoop();
         }
@@ -134,35 +136,39 @@ namespace ServerAvalonia
             {
                 //буфер для заголовка
                 //вообще это зарезервиванное место под длину сообщения и что-то такое есть в TCP протоколе
-                byte[] headerBuffer = new byte[4];
+                byte[] lengthMessageBytes = new byte[4];
                 while (true)
                 {
                     //получаем длину сообщения
-                    int bytesReceived = await _stream.ReadAsync(headerBuffer, 0, 4);
+                    int bytesReceived = await _stream.ReadAsync(lengthMessageBytes, 0, 4);
                     //если заголовок не равен 4 байтам, то прерываем цикл
                     if (bytesReceived != 4)
                         break;
                     //длина принимаемого сообщения, пока что только длина
-                    int length = BinaryPrimitives.ReadInt32LittleEndian(headerBuffer);
+                    int lengthMessage = BinaryPrimitives.ReadInt32LittleEndian(lengthMessageBytes);
+
+
+                    //длина заголовка запроса
+                    byte[] headerQueryLength = new byte[4];
+                    bytesReceived = await _stream.ReadAsync(headerQueryLength, 0, headerQueryLength.Length);
+                    if (bytesReceived != 4)
+                        break;
+                    //получаем размер сообщения
+                    int lengthHeader = BinaryPrimitives.ReadInt32LittleEndian(headerQueryLength);
+                    //прочитать из полученного сообщения заголовок
+                    byte[] headerQueryBytes = new byte[lengthHeader];
+                    bytesReceived = await _stream.ReadAsync(headerQueryBytes, 0, headerQueryBytes.Length);
+                    //перевести его в текст
+                    string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
+
 
 
                     //количество пропускаемых байт 
                     int count = 0;
-
-                    //прочитать из полученного сообщения заголовок
-                    byte[] headerQueryBytes = new byte[128];
-                    bytesReceived = await _stream.ReadAsync(headerQueryBytes, count, 128);
-                    //перевести его в текст
-                    string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
-                    //это надо как я понимаю, но потом ещё тестить буду
-                    count += bytesReceived;
-
-
-
                     //буффер для сообщения
-                    byte[] buffer = new byte[length];
+                    byte[] buffer = new byte[lengthMessage];
                     //чтение сообщения
-                    while (count < length)
+                    while (count < lengthMessage)
                     {
                         //тут мы считываем сообщение полученное от клиента
                         //и потом добавляем в
@@ -217,19 +223,52 @@ namespace ServerAvalonia
             message = "request from server :  " + message + Environment.NewLine;
             await _channel.Writer.WriteAsync(message);
         }
+        //отправить картинку
+        public async Task SendMessageAsync(byte[] image)
+        {
+            //image = "request from server :  " + message + Environment.NewLine;
+            await _channelForImage.Writer.WriteAsync(image);
+        }
         //цикл записи
         private async Task RunWritingLoop()
         {
-            //тут вполне можно закодировать тип получаемого запроса, т.е. создание, чтение и тд.
-            //в заголовке будет храниться длина сообщения
+            //заголовок
             byte[] header = new byte[4];
+
+            //заголовок запроса
+            byte[] headerQueryLengthBytes = new byte[4];
+            byte[] headerQueryBytes = Encoding.UTF8.GetBytes("Какой-то заголовок");
 
             await foreach (string message in _channel.Reader.ReadAllAsync())
             {
+                //буфер сообщения + его длина
                 byte[] buffer = Encoding.UTF8.GetBytes(message);
                 BinaryPrimitives.WriteInt32LittleEndian(header, buffer.Length);
-                await _stream.WriteAsync(header, 0, header.Length);
-                await _stream.WriteAsync(buffer, 0, buffer.Length);
+                await _stream.WriteAsync(header, 0, header.Length); //длина сообщения
+
+                //записываем длину заголовка, а также сам заголовок
+                BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
+                await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
+                await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем зоголовок
+
+                //записываем само сообщение
+                await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
+            }
+            //тут изменить заголовок
+            await foreach (byte[] image in _channelForImage.Reader.ReadAllAsync())
+            {
+                //буфер сообщения + его длина
+                byte[] buffer = image;
+                BinaryPrimitives.WriteInt32LittleEndian(header, buffer.Length);
+                await _stream.WriteAsync(header, 0, header.Length); //длина сообщения
+
+                //записываем длину заголовка, а также сам заголовок
+                BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
+                await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
+                await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем зоголовок
+
+                //записываем само сообщение
+                await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
             }
         }
 
