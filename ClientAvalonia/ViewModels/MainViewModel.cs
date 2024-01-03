@@ -32,9 +32,9 @@ public class MainViewModel : ViewModelBase
         //отправка сообщения
         Send = ReactiveCommand.Create(async () =>
         {
-            new DataFromServer().AddImageInUser("Guest2", _connection);
+            //new DataFromServer().AddImageInUser("Guest2", _connection);
 
-
+            //await _connection.SendMessageAsync(new Query(new HeaderClient());
         });
 
     }

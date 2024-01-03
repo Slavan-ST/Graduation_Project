@@ -144,16 +144,8 @@ namespace ServerAvalonia
                 byte[] lengthMessageBytes = new byte[4];
                 while (true)
                 {
+                    int bytesReceived = 0;
                     //получаем длину сообщения
-                    int bytesReceived = await _stream.ReadAsync(lengthMessageBytes, 0, 4);
-
-
-                    //если заголовок не равен 4 байтам, то прерываем цикл
-                    if (bytesReceived != 4)
-                        break;
-                    //длина принимаемого сообщения, пока что только длина
-                    int lengthMessage = BinaryPrimitives.ReadInt32LittleEndian(lengthMessageBytes);
-
 
                     //длина заголовка запроса
                     byte[] headerQueryLength = new byte[4];

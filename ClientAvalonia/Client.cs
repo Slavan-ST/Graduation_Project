@@ -124,28 +124,30 @@ namespace ClientAvalonia
         //цикл записи query
         private async Task RunWritingQueryLoop()
         {
-            //заголовок - длина содержимого
-            byte[] lengthContent = new byte[4];
-
-            //заголовок запроса
-            byte[] headerQueryLengthBytes = new byte[4];
-
             //тут изменить заголовок
             await foreach (Query query in _channelForQuery.Reader.ReadAllAsync())
             {
+                //заголовок запроса
+                byte[] headerQueryLengthBytes = new byte[4];
                 byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header.GetText());
-                //буфер сообщения + его длина
-                byte[] buffer = query.Content ?? Encoding.UTF8.GetBytes("");
-                BinaryPrimitives.WriteInt32LittleEndian(lengthContent, buffer.Length);  //длина сообщения
-                await _stream.WriteAsync(lengthContent, 0, lengthContent.Length);       //длина сообщения
 
                 //записываем длину заголовка, а также сам заголовок
                 BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
                 await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
                 await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем зоголовок
 
-                //записываем само содержимое
-                await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
+                //записываем параметры
+                foreach (var p in query.Content.ParametrQueries)
+                {
+                    //длина параметра
+                    byte[] lengthContent = new byte[4];
+                    byte[] buffer = p.Content;
+                    BinaryPrimitives.WriteInt32LittleEndian(lengthContent, buffer.Length);  //длина сообщения
+                    await _stream.WriteAsync(lengthContent, 0, lengthContent.Length);       //длина сообщения
+
+                    //содержимое параметра
+                    await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
+                }
             }
         }
         #endregion

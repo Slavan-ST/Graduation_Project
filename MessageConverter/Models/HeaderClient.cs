@@ -23,21 +23,24 @@ namespace Helper.Models
             TypeQuery = lines[0].Trim();
             ContentType = lines[1].Trim();
             QueryText = lines[2].Trim();
-            
+            ParamsQuery = new List<ParametrQuery>();
             string textParams = lines[3];
-
-            ParamsQuery = new List<string>(textParams.Split(" "));
+            List<string> paramsQueryNoForamt = new List<string>(textParams.Split(" "));
+            foreach (var p in paramsQueryNoForamt)
+            {
+                ParamsQuery.Add(new ParametrQuery(p, "type"));
+            }
         }
         public string TypeQuery { get; set; }
         public string ContentType { get; set; }
         public string QueryText { get; set; }
-        public List<string> ParamsQuery { get; set; } = new List<string>();
+        public List<ParametrQuery> ParamsQuery { get; set; } = new List<ParametrQuery>();
         public string GetText()
         {
             string textParams = "";
             foreach(var p in ParamsQuery)
             {
-                textParams += p + " ";
+                textParams += p + " " + "type";
             }
             //удалить последний пробел
             textParams = textParams.TrimEnd();

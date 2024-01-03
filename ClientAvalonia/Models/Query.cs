@@ -7,23 +7,16 @@ using System.Threading.Tasks;
 namespace Helper.Models
 {
     /// <summary>
-    /// Запрос серверу/ответ клиенту
+    /// Запрос серверу
     /// </summary>
     public class Query
     {
-        public Query(HeaderClient header, byte[] content)
+        public Query(HeaderClient header, Content content)
         {
             Header = header;
             Content = content;
         }
-        public Query(HeaderClient header)
-        {
-            Header = header;
-        }
         public HeaderClient Header { get;}
-        public byte[]? Content { get;}
-
-        public int LengthHeader { get;} = 0;
-        public int LengthContent { get;} = 0;
+        public Content Content { get;}
     }
 }

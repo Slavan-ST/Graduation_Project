@@ -8,13 +8,13 @@ namespace Helper.Models
 {
     public class ParametrQuery
     {
-        public ParametrQuery(string name, object value)
+        public ParametrQuery(string type, byte[] content)
         {
-            Name = name;
-            Value = value;
+            Type = type;
+            Content = content;
         }
 
-        public string Name { get; set; }
-        public object Value { get; set; }
+        public string Type { get;}
+        public byte[] Content { get;}
     }
 }
