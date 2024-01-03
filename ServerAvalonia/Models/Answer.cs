@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helper.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace ServerAvalonia.Models
     /// </summary>
     public class Answer
     {
-        public Answer(string header, byte[] content)
+        public Answer(HeaderServer header, byte[] content)
         {
             Header = header;
             Content = content;
@@ -20,7 +21,7 @@ namespace ServerAvalonia.Models
         //статус ответа
         public string Status { get; set; } = "";     //error? error!
 
-        public string Header { get;} = "";
+        public HeaderServer Header { get;}
         //тип содержимого
         public string ContentType { get; set; } = "";  //whf?!
         public byte[]? Content { get;}//ну.. content!

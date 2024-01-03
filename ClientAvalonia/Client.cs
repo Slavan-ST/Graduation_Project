@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace ClientAvalonia
 {
-    class Connection : IDisposable
+    public class Connection : IDisposable
     {
         #region поля и конструктор
         private readonly TcpClient _client;
@@ -133,7 +133,7 @@ namespace ClientAvalonia
             //тут изменить заголовок
             await foreach (Query query in _channelForQuery.Reader.ReadAllAsync())
             {
-                byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header);
+                byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header.GetText());
                 //буфер сообщения + его длина
                 byte[] buffer = query.Content ?? Encoding.UTF8.GetBytes("");
                 BinaryPrimitives.WriteInt32LittleEndian(lengthContent, buffer.Length);  //длина сообщения

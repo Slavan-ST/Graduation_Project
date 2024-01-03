@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Helper.Models;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,16 +23,16 @@ namespace ServerAvalonia.Data
         {
             return ExecuteNonQuery(query);
         }
-        public static string Update(string query)
+        public static string Update(string query, IEnumerable<ParametrQuery>? parametrs)
         {
-            return ExecuteNonQuery(query);
+            return ExecuteNonQuery(query, parametrs);
         }
-        public static string Create(string query)
+        public static string Create(string query, IEnumerable<ParametrQuery>? parametrs)
         {
-            return ExecuteNonQuery(query);
+            return ExecuteNonQuery(query, parametrs);
         }
 
-        private static string ExecuteNonQuery(string query)
+        private static string ExecuteNonQuery(string query, IEnumerable<ParametrQuery>? parametrs = null)
         {
             Debug.WriteLine("server geting query: " + query);
             string answer = "";
@@ -41,12 +42,30 @@ namespace ServerAvalonia.Data
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
+
+                    if (parametrs != null)
+                    {
+                        foreach (var par in parametrs)
+                        {
+                            Debug.WriteLine(par.Name);
+                            if (par.Value is byte[])
+                            {
+                                command.Parameters.AddWithValue(par.Name, par.Value as byte[]);
+                            }
+                            if (par.Value is string)
+                            {
+                                command.Parameters.AddWithValue(par.Name, par.Value as string);
+                            }
+                        }
+                    }
+
                     command.ExecuteNonQuery();
                 }
                 answer = "OK";
             }
-            catch
+            catch(Exception e)
             {
+                Debug.WriteLine(e);
                 answer = "NO";
             }
             return answer;

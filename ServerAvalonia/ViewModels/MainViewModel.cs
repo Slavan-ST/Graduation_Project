@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using Avalonia.Media.Imaging;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Runtime.CompilerServices;

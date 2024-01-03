@@ -1,4 +1,5 @@
 ﻿
+using Helper.Models;
 using ServerAvalonia.Data;
 using ServerAvalonia.Models;
 using ServerAvalonia.Services;
@@ -165,9 +166,12 @@ namespace ServerAvalonia
                     byte[] headerQueryBytes = new byte[lengthHeader];
                     bytesReceived = await _stream.ReadAsync(headerQueryBytes, 0, headerQueryBytes.Length);
                     //перевести его в текст
-                    string header = Encoding.UTF8.GetString(headerQueryBytes);
 
-
+                    string headerText = Encoding.UTF8.GetString(headerQueryBytes);
+                    HeaderClient header = new HeaderClient(headerText);
+                    Temp.MainViewModel.Answer +=
+                        $"Type: {header.TypeQuery}" + Environment.NewLine + 
+                        $"Query: {header.QueryText}";
 
                     //количество пропускаемых байт 
                     int count = 0;
@@ -176,40 +180,11 @@ namespace ServerAvalonia
                     //чтение сообщения
                     while (count < lengthMessage)
                     {
-                        //тут мы считываем сообщение полученное от клиента
-                        //и потом добавляем в
-                        //"количество пропускаемых байт" длину принимаемого сообщения
-                        //так, если клиент отправит ещё одно сообщение, 
-                        //то считывание начнётся именно с этого сообщения, а не с начала
-                        // или...
-                        //надо тестить......
                         bytesReceived = await _stream.ReadAsync(buffer, count, buffer.Length - count);
                         count += bytesReceived;
                     }
 
-
-                    //преобразуем полученное сообщение в текст
-                    string message = Encoding.UTF8.GetString(buffer);
-                    Debug.WriteLine($"Server!!<< {_remoteEndPoint}: {message}");
-
-                    //сообщение, полученное от клиента
-                    //это просто вывод в логи
-                    Temp.MainViewModel.Answer +=
-                        $"Date: {DateTime.Now} " +      //дата
-                        Environment.NewLine +
-                        $"Point: {_remoteEndPoint}" +   //ip/port
-                        Environment.NewLine +
-                        message + Environment.NewLine + "_countReauests: " + _countRequests + Environment.NewLine;  //само сообщение
-                    _countRequests++;
-                    Debug.WriteLine("_countReauests: " + _countRequests);
-
-
-
-
-                    //ответное сообщение клиенту
-                    string answer = DataBase.Select(header);
-                    byte[] answerByte = Encoding.UTF8.GetBytes(answer);
-                    await SendMessageAsync(new Answer("text", answerByte));
+                    SendAnswer(header, buffer);
                 }
                 Console.WriteLine($"Клиент {_remoteEndPoint} отключился.");
                 _stream.Close();
@@ -224,6 +199,41 @@ namespace ServerAvalonia
             }
             if (!disposed)
                 _disposeCallback(this);
+        }
+        private async void SendAnswer(HeaderClient header, byte[]? buffer = null)
+        {
+
+            List< ParametrQuery> parametrs = new List<ParametrQuery>();
+            foreach (var p in header.ParamsQuery)
+            {
+                parametrs.Add(new ParametrQuery(p, buffer!));
+            }
+
+            string content = "";
+            string status = "OK";
+            string contentType = "text";           //потом поменять
+            if (header.TypeQuery == "SELECT")
+            {
+                content = DataBase.Select(header.QueryText);
+            }
+            if (header.TypeQuery == "UPDATE")
+            {
+                content = DataBase.Update(header.QueryText, parametrs);
+            }
+            if (header.TypeQuery == "DELETE")
+            {
+                content = DataBase.Delete(header.QueryText);
+            }
+            if (header.TypeQuery == "CREATE")
+            {
+                content = DataBase.Create(header.QueryText, parametrs);
+            }
+
+            byte[] contentByte = Encoding.UTF8.GetBytes(content);
+            Answer answer = new Answer(new HeaderServer(status, contentType), contentByte);
+            //ответное сообщение клиенту
+            Debug.WriteLine(content);
+            await SendMessageAsync(answer);
         }
         #endregion
 
@@ -246,9 +256,9 @@ namespace ServerAvalonia
             //тут изменить заголовок
             await foreach (Answer query in _channelForQuery.Reader.ReadAllAsync())
             {
-                byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header);
+                byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header.GetText());
                 //буфер сообщения + его длина
-                byte[] buffer = query.Content;
+                byte[] buffer = query.Content ?? Encoding.UTF8.GetBytes("ERROR"); 
                 BinaryPrimitives.WriteInt32LittleEndian(lengthContent, buffer.Length);  //длина сообщения
                 await _stream.WriteAsync(lengthContent, 0, lengthContent.Length);       //длина сообщения
 

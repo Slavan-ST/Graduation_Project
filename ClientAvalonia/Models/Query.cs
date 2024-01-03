@@ -11,27 +11,16 @@ namespace Helper.Models
     /// </summary>
     public class Query
     {
-        public Query(string header, byte[] content)
+        public Query(HeaderClient header, byte[] content)
         {
             Header = header;
             Content = content;
         }
-        public Query(string header)
+        public Query(HeaderClient header)
         {
             Header = header;
         }
-        public Query()
-        {
-
-        }
-
-        //тип запроса
-        public string TypeQuery { get; set; }
-        //статус ответа
-        public string Status { get; set; }
-        //тип содержимого
-        public string ContentType { get; set; }
-        public string Header { get;} = "";
+        public HeaderClient Header { get;}
         public byte[]? Content { get;}
 
         public int LengthHeader { get;} = 0;

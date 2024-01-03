@@ -6,6 +6,9 @@ using System.Windows.Input;
 using System.Diagnostics;
 using System.Net.Http;
 using Helper.Models;
+using Avalonia.Media.Imaging;
+using System.IO;
+using ClientAvalonia.Data;
 
 namespace ClientAvalonia.ViewModels;
 
@@ -29,13 +32,17 @@ public class MainViewModel : ViewModelBase
         //отправка сообщения
         Send = ReactiveCommand.Create(async () =>
         {
-            Query query = new Query(TextMessage);
-            await _connection.SendMessageAsync(query);
+            new DataFromServer().AddImageInUser("Guest2", _connection);
+
+
         });
+
     }
 
     [Reactive]
     public string TextMessage { get; set; } = ""; // отправляеммое сообщение
+    [Reactive]
+    public Bitmap? Image { get; set; }
 
     [Reactive]
     public string Answer { get; set; } = ""; //сообщение, получаемое от сервера, в данном случае простое "эхо"

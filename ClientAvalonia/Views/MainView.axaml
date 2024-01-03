@@ -14,6 +14,7 @@
 			<RowDefinition/>
 			<RowDefinition/>
 			<RowDefinition Height="3*"/>
+			<RowDefinition/>
 		</Grid.RowDefinitions>
 
 
@@ -40,6 +41,7 @@
 					 VerticalAlignment="Stretch"
 					 HorizontalAlignment="Stretch"/>
 		</ScrollViewer>
+		<Image Grid.Row="4" Source="{Binding Image}"/>
 	</Grid>
 
 	<UserControl.Styles>
