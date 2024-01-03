@@ -20,4 +20,12 @@
     <PackageReference Include="ReactiveUI" Version="19.5.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MessageConverter\Helper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>

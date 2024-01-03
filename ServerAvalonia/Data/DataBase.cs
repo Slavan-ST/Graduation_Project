@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -19,7 +20,11 @@ namespace ServerAvalonia.Data
 
 
         private readonly static string _connectionString = @"Server = 127.0.0.1\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
-        
+
+        public static string Select(string query)
+        {
+            return CommandReturn(query);              //в AttendanceLog 5 столбов
+        }
         /// <summary>
         /// Учет нахождение проживающего в общежитии в ночное время суток; - вывод журнала:
         /// Id, RoomId, StudentId, MarkerId, Date
@@ -29,7 +34,7 @@ namespace ServerAvalonia.Data
         public static string SelectAllAttendanceLog()
         {
             string query = "select * from AttendanceLog;";
-            return CommandReturn(query,5);              //в AttendanceLog 5 столбов
+            return CommandReturn(query);              //в AttendanceLog 5 столбов
         }
         /// <summary>
         /// Вывод информациии о студентах
@@ -39,7 +44,7 @@ namespace ServerAvalonia.Data
         public static string SelectAllStudents()
         {
             string query = "select * from Students;";
-            return CommandReturn(query, 5);              //в Students 5 столбов
+            return CommandReturn(query);              //в Students 5 столбов
         }
         /// <summary>
         /// шаблон команды sql
@@ -48,8 +53,9 @@ namespace ServerAvalonia.Data
         /// <param name="query">запрос</param>
         /// <returns>возращает данные из таблицы в текстовом виде, 
         /// где пробел - разделитель между стобцами, новая строка - разделителб между строками</returns>
-        private static string CommandReturn(string query, int countColumn = 1)
+        private static string CommandReturn(string query)
         {
+            Debug.WriteLine("server geting query: "+ query);
             string answer = "";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -61,7 +67,8 @@ namespace ServerAvalonia.Data
                 {
                     while (reader.Read())
                     {
-                        for (int i = 0; i < countColumn; i++)
+                        Debug.WriteLine("server column count = " + reader.GetColumnSchema());
+                        for (int i = 0; i < reader.GetColumnSchema().Count; i++)
                         {
                             answer += reader.GetValue(i).ToString() + "  ";
                         }

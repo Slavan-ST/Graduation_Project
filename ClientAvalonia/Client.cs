@@ -1,4 +1,5 @@
 ﻿using ClientAvalonia.Services;
+using Helper.Models;
 using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
@@ -16,13 +17,13 @@ namespace ClientAvalonia
 {
     class Connection : IDisposable
     {
+        #region поля и конструктор
         private readonly TcpClient _client;
         private readonly NetworkStream _stream;
         private readonly EndPoint? _remoteEndPoint;
         private readonly Task _readingTask;
-        private readonly Task _writingTask;
-        private readonly Channel<string> _channel;
-        private readonly Channel<byte[]> _channelForImage;
+        private readonly Task _writingQueryTask;
+        private readonly Channel<Query> _channelForQuery;
 
         public Connection(TcpClient client)
         {
@@ -33,13 +34,14 @@ namespace ClientAvalonia
             //удаленная конечная точка
             _remoteEndPoint = client.Client.RemoteEndPoint;
             //канал передачи данных
-            _channel = Channel.CreateUnbounded<string>();
-            _channelForImage = Channel.CreateUnbounded<byte[]>();
+            _channelForQuery = Channel.CreateUnbounded<Query>();
 
             //задачи/циклы чтения/записи
             _readingTask = RunReadingLoop();
-            _writingTask = RunWritingLoop();
+            _writingQueryTask = RunWritingQueryLoop();
         }
+        #endregion
+        #region чтение получаемых сообщений
         //цикл чтения 
         private async Task RunReadingLoop()
         {
@@ -74,12 +76,7 @@ namespace ClientAvalonia
                     string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
 
 
-
-                    //вот тут надо будет добавить что-то для выбора метода записи
-                    //в зависимости от заголовка
-                    //так, будет ясно что считвается, изображение или текст
                     //количество пропускаемых байт 
-                    //з.ы. также и в сервере
                     int count = 0;
                     //буффер для принимаемого сообщения
                     byte[] buffer = new byte[length];
@@ -88,15 +85,23 @@ namespace ClientAvalonia
                         bytesReceived = await _stream.ReadAsync(buffer, count, buffer.Length - count);
                         count += bytesReceived;
                     }
-                    //байты в текст
-                    string message = Encoding.UTF8.GetString(buffer);
+
+
+                    //вот тут надо будет добавить что-то для выбора метода записи
+                    //в зависимости от заголовка
+                    //так, будет ясно что считвается, изображение или текст
+                    //з.ы. также и в сервере
+                    //в зависимости от заголовка конвертить байты из buffer в нужный нам тип
+                    
+                    //байты в текст                    
+                    string message = Encoding.UTF8.GetString(buffer);       //
+                    //и отправляем клиенту(тут это просто вывод на экран)   // и вот это заменить 
+                    Temp.MainViewModel.Answer = message;                    //
 
 
 
 
 
-                    //и отправляем клиенту(тут это просто вывод на экран)
-                    Temp.MainViewModel.Answer = message;
                 }
                 _stream.Close();
             }
@@ -109,62 +114,41 @@ namespace ClientAvalonia
                 Debug.WriteLine(ex.GetType().Name + ": " + ex.Message);
             }
         }
-        //отправить сообщение
-        public async Task SendMessageAsync(string message)
+        #endregion
+        #region запись и отправка сообщений
+        //отправить запрос
+        public async Task SendMessageAsync(Query query)
         {
-            await _channel.Writer.WriteAsync(message);
+            await _channelForQuery.Writer.WriteAsync(query);
         }
-        //отправить картинку
-        public async Task SendMessageAsync(byte[] image)
+        //цикл записи query
+        private async Task RunWritingQueryLoop()
         {
-            //image = "request from server :  " + message + Environment.NewLine;
-            await _channelForImage.Writer.WriteAsync(image);
-        }
-
-        //цкил записи
-        private async Task RunWritingLoop()
-        {
-            //заголовок
-            byte[] header = new byte[4];
+            //заголовок - длина содержимого
+            byte[] lengthContent = new byte[4];
 
             //заголовок запроса
             byte[] headerQueryLengthBytes = new byte[4];
-            byte[] headerQueryBytes = Encoding.UTF8.GetBytes("Какой-то заголовок");
-
-            await foreach (string message in _channel.Reader.ReadAllAsync())
-            {
-                //буфер сообщения + его длина
-                byte[] buffer = Encoding.UTF8.GetBytes(message);
-                BinaryPrimitives.WriteInt32LittleEndian(header, buffer.Length);
-                await _stream.WriteAsync(header, 0, header.Length); //длина сообщения
-
-                //записываем длину заголовка, а также сам заголовок
-                BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
-                await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
-                await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем зоголовок
-
-                //записываем само сообщение
-                await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
-            }
 
             //тут изменить заголовок
-            await foreach (byte[] image in _channelForImage.Reader.ReadAllAsync())
+            await foreach (Query query in _channelForQuery.Reader.ReadAllAsync())
             {
+                byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header);
                 //буфер сообщения + его длина
-                byte[] buffer = image;
-                BinaryPrimitives.WriteInt32LittleEndian(header, buffer.Length);
-                await _stream.WriteAsync(header, 0, header.Length); //длина сообщения
+                byte[] buffer = query.Content ?? Encoding.UTF8.GetBytes("");
+                BinaryPrimitives.WriteInt32LittleEndian(lengthContent, buffer.Length);  //длина сообщения
+                await _stream.WriteAsync(lengthContent, 0, lengthContent.Length);       //длина сообщения
 
                 //записываем длину заголовка, а также сам заголовок
                 BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
                 await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
                 await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем зоголовок
 
-                //записываем само сообщение
+                //записываем само содержимое
                 await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
             }
         }
-
+        #endregion
         #region Dispose
 
         bool disposed;
@@ -181,9 +165,10 @@ namespace ClientAvalonia
             disposed = true;
             if (_client.Connected)
             {
-                _channel.Writer.Complete();
+                _channelForQuery.Writer.Complete();
                 _stream.Close();
-                Task.WaitAll(_readingTask, _writingTask);
+                //ожидаем завершение задач чтения/записи
+                Task.WaitAll(_readingTask, _writingQueryTask);
             }
             if (disposing)
             {

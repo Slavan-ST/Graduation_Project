@@ -5,6 +5,7 @@ using System;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.Net.Http;
+using Helper.Models;
 
 namespace ClientAvalonia.ViewModels;
 
@@ -28,7 +29,8 @@ public class MainViewModel : ViewModelBase
         //отправка сообщения
         Send = ReactiveCommand.Create(async () =>
         {
-            await _connection.SendMessageAsync(TextMessage);
+            Query query = new Query(TextMessage);
+            await _connection.SendMessageAsync(query);
         });
     }
 
