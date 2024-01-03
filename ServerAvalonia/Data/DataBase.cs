@@ -12,48 +12,46 @@ namespace ServerAvalonia.Data
     //test -- всё это просто тестовое простраство --
     public class DataBase
     {
-        //1 - вывод журнала
-        //2 - вывод всех студентов
-        //3 - вывод инфомрациии о мероприятиях
-        //4 - вывод рейтинга
-        //5 - вывод инф. чистоты
-
-
         private readonly static string _connectionString = @"Server = 127.0.0.1\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
         public static string Select(string query)
         {
-            return CommandReturn(query);              //в AttendanceLog 5 столбов
+            return Execute(query);
         }
-        /// <summary>
-        /// Учет нахождение проживающего в общежитии в ночное время суток; - вывод журнала:
-        /// Id, RoomId, StudentId, MarkerId, Date
-        /// </summary>
-        /// <returns>возращает данные из таблицы в текстовом виде, 
-        /// где пробел - разделитель между стобцами, новая строка - разделителб между строками</returns>
-        public static string SelectAllAttendanceLog()
+        public static string Delete(string query)
         {
-            string query = "select * from AttendanceLog;";
-            return CommandReturn(query);              //в AttendanceLog 5 столбов
+            return ExecuteNonQuery(query);
         }
-        /// <summary>
-        /// Вывод информациии о студентах
-        /// Id, Name, Surname, Patronymic, IdRoom
-        /// </summary>
-        /// <returns></returns>
-        public static string SelectAllStudents()
+        public static string Update(string query)
         {
-            string query = "select * from Students;";
-            return CommandReturn(query);              //в Students 5 столбов
+            return ExecuteNonQuery(query);
         }
-        /// <summary>
-        /// шаблон команды sql
-        /// </summary>
-        /// <param name="countColumn">количество столбцов в таблице, по умолчанию = 1 </param>
-        /// <param name="query">запрос</param>
-        /// <returns>возращает данные из таблицы в текстовом виде, 
-        /// где пробел - разделитель между стобцами, новая строка - разделителб между строками</returns>
-        private static string CommandReturn(string query)
+        public static string Create(string query)
+        {
+            return ExecuteNonQuery(query);
+        }
+
+        private static string ExecuteNonQuery(string query)
+        {
+            Debug.WriteLine("server geting query: " + query);
+            string answer = "";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                }
+                answer = "OK";
+            }
+            catch
+            {
+                answer = "NO";
+            }
+            return answer;
+        }
+        private static string Execute(string query)
         {
             Debug.WriteLine("server geting query: "+ query);
             string answer = "";

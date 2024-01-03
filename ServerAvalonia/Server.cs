@@ -1,5 +1,6 @@
-﻿using Helper.Models;
+﻿
 using ServerAvalonia.Data;
+using ServerAvalonia.Models;
 using ServerAvalonia.Services;
 using System;
 using System.Buffers.Binary;
@@ -112,7 +113,7 @@ namespace ServerAvalonia
         private readonly Task _readingTask;
         private readonly Task _writingQueryTask;
         private readonly Action<Connection> _disposeCallback;
-        private readonly Channel<Query> _channelForQuery;
+        private readonly Channel<Answer> _channelForQuery;
         bool disposed;
 
         public Connection(TcpClient client, Action<Connection> disposeCallback)
@@ -122,7 +123,7 @@ namespace ServerAvalonia
             _remoteEndPoint = client.Client.RemoteEndPoint;
             _disposeCallback = disposeCallback;
 
-            _channelForQuery = Channel.CreateUnbounded<Query>();
+            _channelForQuery = Channel.CreateUnbounded<Answer>();
             _readingTask = RunReadingLoop();
             _writingQueryTask = RunWritingQueryLoop();
         }
@@ -203,10 +204,12 @@ namespace ServerAvalonia
                     Debug.WriteLine("_countReauests: " + _countRequests);
 
 
+
+
                     //ответное сообщение клиенту
                     string answer = DataBase.Select(header);
                     byte[] answerByte = Encoding.UTF8.GetBytes(answer);
-                    await SendMessageAsync(new Query("на", answerByte));
+                    await SendMessageAsync(new Answer("text", answerByte));
                 }
                 Console.WriteLine($"Клиент {_remoteEndPoint} отключился.");
                 _stream.Close();
@@ -227,7 +230,7 @@ namespace ServerAvalonia
 
         #region запись и отправка сообщений
         //отправить запрос
-        public async Task SendMessageAsync(Query query)
+        public async Task SendMessageAsync(Answer query)
         {
             await _channelForQuery.Writer.WriteAsync(query);
         }
@@ -241,7 +244,7 @@ namespace ServerAvalonia
             byte[] headerQueryLengthBytes = new byte[4];
 
             //тут изменить заголовок
-            await foreach (Query query in _channelForQuery.Reader.ReadAllAsync())
+            await foreach (Answer query in _channelForQuery.Reader.ReadAllAsync())
             {
                 byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header);
                 //буфер сообщения + его длина

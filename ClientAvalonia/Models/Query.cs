@@ -29,8 +29,6 @@ namespace Helper.Models
         public string TypeQuery { get; set; }
         //статус ответа
         public string Status { get; set; }
-        //дата
-        public string Date { get; set; }
         //тип содержимого
         public string ContentType { get; set; }
         public string Header { get;} = "";
