@@ -54,13 +54,6 @@ public class MainViewModel : ViewModelBase
             */
 
             Header header = new Header("SELECT", "SELECT Image from Users where FIO = @name;");
-            /*
-            header.ParamsQuery.Add(new ParametrQuery(
-                "byte[]", 
-                "@image", 
-                bytes
-                ));*/
-
             header.ParamsQuery.Add(new ParametrQuery(
                 "string",
                 "@name",
