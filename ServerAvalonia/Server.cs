@@ -183,10 +183,10 @@ namespace ServerAvalonia
         private async void SendAnswer(Header header)
         {
 
-            List< ParametrQuery> parametrs = new List<ParametrQuery>();
+            List< ParametrQuery> parametrsClient = new List<ParametrQuery>();
             foreach (var p in header.ParamsQuery)
             {
-                parametrs.Add(new ParametrQuery(p.Type,p.Name, p.Content!));
+                parametrsClient.Add(new ParametrQuery(p.Type,p.Name, p.Content!));
             }
 
             Query? answer = null;
@@ -196,15 +196,16 @@ namespace ServerAvalonia
             {
                 string text = "OK";
                 string type = "params";           //потом поменять
-                var paramentrs = DataBase.Select(header.Text, parametrs);
-                Content content = new Content(parametrs);
+                var parametrs = DataBase.Select(header.Text, parametrsClient);
+                Content content = new Content(parametrs!);
                 answer = new Query(new Header(type, text),content);
+                answer.Header.ParamsQuery = new List<ParametrQuery>(parametrs!);
             }
             else if (header.Type == "UPDATE")
             {
                 string text = "OK";
                 string type = "text";           //потом поменять
-                var s = DataBase.Update(header.Text, parametrs);
+                var s = DataBase.Update(header.Text, parametrsClient);
                 Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("string","text", Encoding.UTF8.GetBytes(s))});
                 answer = new Query(new Header(type, text), content);
             }
@@ -212,7 +213,7 @@ namespace ServerAvalonia
             {
                 string text = "OK";
                 string type = "text";           //потом поменять
-                var s = DataBase.Delete(header.Text, parametrs);
+                var s = DataBase.Delete(header.Text, parametrsClient);
                 Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
                 answer = new Query(new Header(type, text), content);
             }
@@ -220,7 +221,7 @@ namespace ServerAvalonia
             {
                 string text = "OK";
                 string type = "text";           //потом поменять
-                var s = DataBase.Create(header.Text, parametrs);
+                var s = DataBase.Create(header.Text, parametrsClient);
                 Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
                 answer = new Query(new Header(type, text), content);
             }

@@ -32,24 +32,22 @@ namespace ClientAvalonia.Data
                 using var stream = new MemoryStream();
                 bitmap!.Save(stream);
                 byte[] bytes = stream.GetBuffer();
-                List<string> paramsName = new List<string>()
-                {
-                    "@image"
-                };
 
-                HeaderClient header = new HeaderClient("SELECT","SELECT FIO from Users;");
+
+                Header header = new Header("SELECT","SELECT Image from Users where FIO = @name;");
                 /*
                 header.ParamsQuery.Add(new ParametrQuery(
                     "byte[]", 
                     "@image", 
                     bytes
-                    ));
+                    ));*/
+
                 header.ParamsQuery.Add(new ParametrQuery(
                     "string", 
                     "@name", 
                     Encoding.UTF8.GetBytes("Guest2")
                     ));
-                */
+                
 
                 Query query = new Query(header, new Content(header.ParamsQuery));
                 await connection.SendMessageAsync(query);

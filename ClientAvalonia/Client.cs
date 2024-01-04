@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 
 namespace ClientAvalonia
@@ -63,7 +64,8 @@ namespace ClientAvalonia
 
                     //перевести его в текст
                     string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
-                    HeaderClient header = new HeaderClient(headerQuery); //парсим
+                    Debug.WriteLine($"client : header:{headerQuery}");
+                    Header header = new Header(headerQuery); //парсим
 
                     for (int i = 0; i < header.ParamsQuery.Count; i++)
                     {
@@ -73,8 +75,18 @@ namespace ClientAvalonia
                     }                           
                     
                     //и отправляем клиенту(тут это просто вывод на экран)   // и вот это заменить 
-                    Temp.MainViewModel.Answer = header.Text;                    //
-
+                    foreach (var p in header.ParamsQuery)
+                    {
+                        if (p.Type == "String")
+                        {
+                            Temp.MainViewModel.Answer += Encoding.UTF8.GetString(p.Content!);
+                        }
+                        if (p.Type == "Byte[]")
+                        {
+                            using var stream = new MemoryStream(p.Content!);
+                            Temp.MainViewModel.Image = new Avalonia.Media.Imaging.Bitmap(stream);
+                        }
+                    }
                 }
                 _stream.Close();
             }

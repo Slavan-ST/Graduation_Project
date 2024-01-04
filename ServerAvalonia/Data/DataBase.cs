@@ -74,22 +74,23 @@ namespace ServerAvalonia.Data
                 {
                     while (reader.Read())
                     {
-                        Debug.WriteLine("server column count = " + reader.GetColumnSchema());
                         for (int i = 0; i < reader.GetColumnSchema().Count; i++)
                         {
                             var value = reader.GetValue(i);
                             string type = value.GetType().Name;
                             string name = reader.GetName(i);
                             byte[]? content = null;
-                            if (type == "string")
+
+
+                            if (type == "String")
                             {
                                 content = Encoding.UTF8.GetBytes((value as string)!);
                             }
-                            if (type == "byte[]")
+                            if (type == "Byte[]")
                             {
                                 content = (byte[]?)value;
                             }
-                            if (type == "int")
+                            if (type == "Int32")
                             {
                                 content = Encoding.UTF8.GetBytes(((int)value).ToString());
                             }

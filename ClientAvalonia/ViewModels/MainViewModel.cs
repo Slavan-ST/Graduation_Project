@@ -9,6 +9,7 @@ using Helper.Models;
 using Avalonia.Media.Imaging;
 using System.IO;
 using ClientAvalonia.Data;
+using System.Text;
 
 namespace ClientAvalonia.ViewModels;
 
@@ -30,12 +31,46 @@ public class MainViewModel : ViewModelBase
         _connection = new Connection(_client);
 
         //отправка сообщения
-        Send = ReactiveCommand.Create(() =>
+        Send = ReactiveCommand.Create( async() =>
         {
             //Debug.WriteLine($"Test: string:{"".GetType().Name}; int:{12.GetType().Name}; byte[]:{(new byte[6]).GetType().Name}");
-            new DataFromServer().AddImageInUser("Guest2", _connection);
+            //new DataFromServer().AddImageInUser("Guest2", _connection);
 
             //await _connection.SendMessageAsync(new Query(new HeaderClient());
+
+
+
+            /*
+            header.ParamsQuery.Add(new ParametrQuery(
+                "byte[]", 
+                "@image", 
+                bytes
+                ));
+            header.ParamsQuery.Add(new ParametrQuery(
+                "string", 
+                "@name", 
+                Encoding.UTF8.GetBytes("Guest2")
+                ));
+            */
+
+            Header header = new Header("SELECT", "SELECT Image from Users where FIO = @name;");
+            /*
+            header.ParamsQuery.Add(new ParametrQuery(
+                "byte[]", 
+                "@image", 
+                bytes
+                ));*/
+
+            header.ParamsQuery.Add(new ParametrQuery(
+                "string",
+                "@name",
+                Encoding.UTF8.GetBytes("Guest2")
+                ));
+
+
+            Query query = new Query(header, new Content(header.ParamsQuery));
+            await _connection.SendMessageAsync(query);
+
         });
 
     }
