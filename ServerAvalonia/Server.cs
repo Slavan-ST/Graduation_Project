@@ -145,7 +145,7 @@ namespace ServerAvalonia
                 while (true)
                 {
                     int bytesReceived = 0;
-                    //получаем длину сообщения
+
 
                     //длина заголовка запроса
                     byte[] headerQueryLength = new byte[4];
@@ -154,13 +154,14 @@ namespace ServerAvalonia
                         break;
                     //получаем размер сообщения
                     int lengthHeader = BinaryPrimitives.ReadInt32LittleEndian(headerQueryLength);
+
                     //прочитать из полученного сообщения заголовок
                     byte[] headerQueryBytes = new byte[lengthHeader];
                     bytesReceived = await _stream.ReadAsync(headerQueryBytes, 0, headerQueryBytes.Length);
-                    //перевести его в текст
 
+                    //перевести его в текст
                     string headerText = Encoding.UTF8.GetString(headerQueryBytes);
-                    HeaderClient header = new HeaderClient(headerText);
+                    HeaderClient header = new HeaderClient(headerText); //парсим
                     Temp.MainViewModel.Answer +=
                         $"Type: {header.TypeQuery}" + Environment.NewLine + 
                         $"Query: {header.QueryText}";

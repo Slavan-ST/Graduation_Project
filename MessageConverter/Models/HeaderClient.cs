@@ -10,43 +10,54 @@ namespace Helper.Models
 {
     public class HeaderClient
     {
-        public HeaderClient(string type, string contentType, string queryText, IEnumerable<string> paramsQuery)
+        public HeaderClient(string type, string contentType, string queryText)
         {
             TypeQuery = type;
-            ContentType = contentType;
             QueryText = queryText;
-            ParamsQuery.AddRange(paramsQuery);
         }
+
+
+        /// <summary>
+        /// парсим заголовок из строки
+        /// </summary>
+        /// <param name="textHeader"></param>
         public HeaderClient(string textHeader)
         {
             string[] lines = textHeader.Split("\n");
             TypeQuery = lines[0].Trim();
-            ContentType = lines[1].Trim();
-            QueryText = lines[2].Trim();
+            QueryText = lines[1].Trim();
             ParamsQuery = new List<ParametrQuery>();
-            string textParams = lines[3];
-            List<string> paramsQueryNoForamt = new List<string>(textParams.Split(" "));
+            string textParams = lines[2];
+
+            List<string> paramsQueryNoForamt = new List<string>(textParams.Split(";"));
             foreach (var p in paramsQueryNoForamt)
             {
-                ParamsQuery.Add(new ParametrQuery(p, "type"));
+                string[] typeAndLength = p.Split(" ");
+
+                string type = typeAndLength[0];
+                int length = int.Parse(typeAndLength[1]);
+
+                ParamsQuery.Add(new ParametrQuery(type, length));
             }
         }
         public string TypeQuery { get; set; }
-        public string ContentType { get; set; }
         public string QueryText { get; set; }
+        public int LengthHeader { get; set; } = 0;
         public List<ParametrQuery> ParamsQuery { get; set; } = new List<ParametrQuery>();
         public string GetText()
         {
             string textParams = "";
-            foreach(var p in ParamsQuery)
+            for (int i = 0; i < ParamsQuery.Count; i++)
             {
-                textParams += p + " " + "type";
+                ParametrQuery? p = ParamsQuery[i];
+                textParams += p.Type + " " + p.Length;
+                if (i == ParamsQuery.Count - 1)
+                {
+                    textParams += ";";
+                }
             }
-            //удалить последний пробел
-            textParams = textParams.TrimEnd();
 
             return TypeQuery + Environment.NewLine +
-                   ContentType + Environment.NewLine +
                    QueryText + Environment.NewLine + 
                    textParams;
         }
