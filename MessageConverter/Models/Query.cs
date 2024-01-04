@@ -11,12 +11,12 @@ namespace Helper.Models
     /// </summary>
     public class Query
     {
-        public Query(HeaderClient header, Content content)
+        public Query(Header header, Content? content = null)
         {
             Header = header;
             Content = content;
         }
-        public HeaderClient Header { get;}
-        public Content Content { get;}
+        public Header Header { get;}
+        public Content? Content { get;}
     }
 }

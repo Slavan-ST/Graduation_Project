@@ -30,9 +30,10 @@ public class MainViewModel : ViewModelBase
         _connection = new Connection(_client);
 
         //отправка сообщения
-        Send = ReactiveCommand.Create(async () =>
+        Send = ReactiveCommand.Create(() =>
         {
-            //new DataFromServer().AddImageInUser("Guest2", _connection);
+            //Debug.WriteLine($"Test: string:{"".GetType().Name}; int:{12.GetType().Name}; byte[]:{(new byte[6]).GetType().Name}");
+            new DataFromServer().AddImageInUser("Guest2", _connection);
 
             //await _connection.SendMessageAsync(new Query(new HeaderClient());
         });

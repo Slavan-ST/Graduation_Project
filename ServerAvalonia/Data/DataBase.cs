@@ -3,10 +3,13 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ServerAvalonia.Data
 {
@@ -15,13 +18,13 @@ namespace ServerAvalonia.Data
     {
         private readonly static string _connectionString = @"Server = 127.0.0.1\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
-        public static string Select(string query)
+        public static IEnumerable<ParametrQuery>? Select(string query, IEnumerable<ParametrQuery>? parametrs)
         {
-            return Execute(query);
+            return Execute(query, parametrs);
         }
-        public static string Delete(string query)
+        public static string Delete(string query, IEnumerable<ParametrQuery>? parametrs)
         {
-            return ExecuteNonQuery(query);
+            return ExecuteNonQuery(query, parametrs);
         }
         public static string Update(string query, IEnumerable<ParametrQuery>? parametrs)
         {
@@ -34,7 +37,6 @@ namespace ServerAvalonia.Data
 
         private static string ExecuteNonQuery(string query, IEnumerable<ParametrQuery>? parametrs = null)
         {
-            Debug.WriteLine("server geting query: " + query);
             string answer = "";
             try
             {
@@ -42,24 +44,9 @@ namespace ServerAvalonia.Data
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
-
-                    if (parametrs != null)
-                    {
-                        foreach (var par in parametrs)
-                        {
-                            Debug.WriteLine(par.Name);
-                            if (par.Value is byte[])
-                            {
-                                command.Parameters.AddWithValue(par.Name, par.Value as byte[]);
-                            }
-                            if (par.Value is string)
-                            {
-                                command.Parameters.AddWithValue(par.Name, par.Value as string);
-                            }
-                        }
-                    }
-
-                    command.ExecuteNonQuery();
+                    SetParamsCommand(ref command, parametrs);
+                    int changed = command.ExecuteNonQuery();
+                    Debug.WriteLine($"server change line: {changed}");
                 }
                 answer = "OK";
             }
@@ -68,17 +55,20 @@ namespace ServerAvalonia.Data
                 Debug.WriteLine(e);
                 answer = "NO";
             }
+            Debug.WriteLine("EXECUTE TRUE");
             return answer;
         }
-        private static string Execute(string query)
+        private static IEnumerable<ParametrQuery>? Execute(string query, IEnumerable<ParametrQuery>? parametrs)
         {
             Debug.WriteLine("server geting query: "+ query);
-            string answer = "";
+
+            List<ParametrQuery> answer = new List<ParametrQuery>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                SetParamsCommand(ref command, parametrs);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -87,13 +77,50 @@ namespace ServerAvalonia.Data
                         Debug.WriteLine("server column count = " + reader.GetColumnSchema());
                         for (int i = 0; i < reader.GetColumnSchema().Count; i++)
                         {
-                            answer += reader.GetValue(i).ToString() + "  ";
+                            var value = reader.GetValue(i);
+                            string type = value.GetType().Name;
+                            string name = reader.GetName(i);
+                            byte[]? content = null;
+                            if (type == "string")
+                            {
+                                content = Encoding.UTF8.GetBytes((value as string)!);
+                            }
+                            if (type == "byte[]")
+                            {
+                                content = (byte[]?)value;
+                            }
+                            if (type == "int")
+                            {
+                                content = Encoding.UTF8.GetBytes(((int)value).ToString());
+                            }
+
+                            answer.Add(new ParametrQuery(type, name, content!));
+
+
                         }
-                        answer += Environment.NewLine; //
                     }
                 }
             }
             return answer;
+        }
+        private static void SetParamsCommand(ref SqlCommand command, IEnumerable<ParametrQuery>? parametrs = null)
+        {
+            if(parametrs != null)
+            {
+                foreach (var par in parametrs)
+                {
+                    if (par.Type == "byte[]")
+                    {
+                        Debug.WriteLine($"server:  paramName= @{par.Name}@; paramType = @{par.Type}@  ");
+                        command.Parameters.AddWithValue(par.Name, par.Content);
+                    }
+                    else if (par.Type == "string")
+                    {
+                        Debug.WriteLine($"server:  paramName= @{par.Name}@; paramType = @{par.Type}@  ");
+                        command.Parameters.AddWithValue(par.Name, Encoding.UTF8.GetString(par.Content!));
+                    }
+                }
+            }
         }
     }
 

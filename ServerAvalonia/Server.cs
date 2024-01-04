@@ -1,7 +1,6 @@
 ﻿
 using Helper.Models;
 using ServerAvalonia.Data;
-using ServerAvalonia.Models;
 using ServerAvalonia.Services;
 using System;
 using System.Buffers.Binary;
@@ -107,14 +106,13 @@ namespace ServerAvalonia
     class Connection : IDisposable
     {
         #region поля и конструктор
-        static int _countRequests = 0;
         private readonly TcpClient _client;
         private readonly NetworkStream _stream;
         private readonly EndPoint? _remoteEndPoint;
         private readonly Task _readingTask;
         private readonly Task _writingQueryTask;
         private readonly Action<Connection> _disposeCallback;
-        private readonly Channel<Answer> _channelForQuery;
+        private readonly Channel<Query> _channelForQuery;
         bool disposed;
 
         public Connection(TcpClient client, Action<Connection> disposeCallback)
@@ -124,7 +122,7 @@ namespace ServerAvalonia
             _remoteEndPoint = client.Client.RemoteEndPoint;
             _disposeCallback = disposeCallback;
 
-            _channelForQuery = Channel.CreateUnbounded<Answer>();
+            _channelForQuery = Channel.CreateUnbounded<Query>();
             _readingTask = RunReadingLoop();
             _writingQueryTask = RunWritingQueryLoop();
         }
@@ -139,14 +137,9 @@ namespace ServerAvalonia
             await Task.Yield(); // https://ru.stackoverflow.com/a/1422205/373567
             try
             {
-                //буфер для заголовка
-                //вообще это зарезервиванное место под длину сообщения и что-то такое есть в TCP протоколе
-                byte[] lengthMessageBytes = new byte[4];
                 while (true)
                 {
                     int bytesReceived = 0;
-
-
                     //длина заголовка запроса
                     byte[] headerQueryLength = new byte[4];
                     bytesReceived = await _stream.ReadAsync(headerQueryLength, 0, headerQueryLength.Length);
@@ -155,29 +148,23 @@ namespace ServerAvalonia
                     //получаем размер сообщения
                     int lengthHeader = BinaryPrimitives.ReadInt32LittleEndian(headerQueryLength);
 
+
                     //прочитать из полученного сообщения заголовок
                     byte[] headerQueryBytes = new byte[lengthHeader];
                     bytesReceived = await _stream.ReadAsync(headerQueryBytes, 0, headerQueryBytes.Length);
 
                     //перевести его в текст
-                    string headerText = Encoding.UTF8.GetString(headerQueryBytes);
-                    HeaderClient header = new HeaderClient(headerText); //парсим
-                    Temp.MainViewModel.Answer +=
-                        $"Type: {header.TypeQuery}" + Environment.NewLine + 
-                        $"Query: {header.QueryText}";
+                    string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
+                    Header header = new Header(headerQuery); //парсим
 
-                    //количество пропускаемых байт 
-                    int count = 0;
-                    //буффер для сообщения
-                    byte[] buffer = new byte[lengthMessage];
-                    //чтение сообщения
-                    while (count < lengthMessage)
+                    for (int i = 0; i < header.ParamsQuery.Count; i++)
                     {
-                        bytesReceived = await _stream.ReadAsync(buffer, count, buffer.Length - count);
-                        count += bytesReceived;
+                        byte[] buffer = new byte[header.ParamsQuery[i].Length];
+                        bytesReceived = await _stream.ReadAsync(buffer, 0, buffer.Length);
+                        header.ParamsQuery[i].Content = buffer;
                     }
 
-                    SendAnswer(header, buffer);
+                    SendAnswer(header);
                 }
                 Console.WriteLine($"Клиент {_remoteEndPoint} отключился.");
                 _stream.Close();
@@ -193,75 +180,92 @@ namespace ServerAvalonia
             if (!disposed)
                 _disposeCallback(this);
         }
-        private async void SendAnswer(HeaderClient header, byte[]? buffer = null)
+        private async void SendAnswer(Header header)
         {
 
             List< ParametrQuery> parametrs = new List<ParametrQuery>();
             foreach (var p in header.ParamsQuery)
             {
-                parametrs.Add(new ParametrQuery(p, buffer!));
+                parametrs.Add(new ParametrQuery(p.Type,p.Name, p.Content!));
             }
 
-            string content = "";
-            string status = "OK";
-            string contentType = "text";           //потом поменять
-            if (header.TypeQuery == "SELECT")
-            {
-                content = DataBase.Select(header.QueryText);
-            }
-            if (header.TypeQuery == "UPDATE")
-            {
-                content = DataBase.Update(header.QueryText, parametrs);
-            }
-            if (header.TypeQuery == "DELETE")
-            {
-                content = DataBase.Delete(header.QueryText);
-            }
-            if (header.TypeQuery == "CREATE")
-            {
-                content = DataBase.Create(header.QueryText, parametrs);
-            }
+            Query? answer = null;
 
-            byte[] contentByte = Encoding.UTF8.GetBytes(content);
-            Answer answer = new Answer(new HeaderServer(status, contentType), contentByte);
-            //ответное сообщение клиенту
-            Debug.WriteLine(content);
-            await SendMessageAsync(answer);
+
+            if (header.Type == "SELECT")
+            {
+                string text = "OK";
+                string type = "params";           //потом поменять
+                var paramentrs = DataBase.Select(header.Text, parametrs);
+                Content content = new Content(parametrs);
+                answer = new Query(new Header(type, text),content);
+            }
+            else if (header.Type == "UPDATE")
+            {
+                string text = "OK";
+                string type = "text";           //потом поменять
+                var s = DataBase.Update(header.Text, parametrs);
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("string","text", Encoding.UTF8.GetBytes(s))});
+                answer = new Query(new Header(type, text), content);
+            }
+            else if (header.Type == "DELETE")
+            {
+                string text = "OK";
+                string type = "text";           //потом поменять
+                var s = DataBase.Delete(header.Text, parametrs);
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
+                answer = new Query(new Header(type, text), content);
+            }
+            else if (header.Type == "CREATE")
+            {
+                string text = "OK";
+                string type = "text";           //потом поменять
+                var s = DataBase.Create(header.Text, parametrs);
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
+                answer = new Query(new Header(type, text), content);
+            }
+            else
+            {
+                string text = "OK";
+                string type = "text";           //потом поменять
+                var s = "no";
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
+                answer = new Query(new Header(type, text), content);
+            }
+            await SendMessageAsync(answer!);
+
         }
         #endregion
 
 
         #region запись и отправка сообщений
         //отправить запрос
-        public async Task SendMessageAsync(Answer query)
+        public async Task SendMessageAsync(Query query)
         {
             await _channelForQuery.Writer.WriteAsync(query);
         }
         //цикл записи query
         private async Task RunWritingQueryLoop()
         {
-            //заголовок - длина содержимого
-            byte[] lengthContent = new byte[4];
-
-            //заголовок запроса
-            byte[] headerQueryLengthBytes = new byte[4];
-
             //тут изменить заголовок
-            await foreach (Answer query in _channelForQuery.Reader.ReadAllAsync())
+            await foreach (Query query in _channelForQuery.Reader.ReadAllAsync())
             {
+                //заголовок запроса
+                byte[] headerQueryLengthBytes = new byte[4];
                 byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header.GetText());
-                //буфер сообщения + его длина
-                byte[] buffer = query.Content ?? Encoding.UTF8.GetBytes("ERROR"); 
-                BinaryPrimitives.WriteInt32LittleEndian(lengthContent, buffer.Length);  //длина сообщения
-                await _stream.WriteAsync(lengthContent, 0, lengthContent.Length);       //длина сообщения
 
                 //записываем длину заголовка, а также сам заголовок
                 BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
                 await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
                 await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем зоголовок
 
-                //записываем само содержимое
-                await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
+                //записываем параметры
+                foreach (var p in query.Content!.ParametrQueries)
+                {
+                    //содержимое параметра
+                    byte[] buffer = p.Content!;
+                    await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
+                }
             }
         }
         #endregion

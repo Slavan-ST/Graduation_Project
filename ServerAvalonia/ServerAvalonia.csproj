@@ -25,4 +25,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ClientAvalonia\ClientAvalonia.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>
