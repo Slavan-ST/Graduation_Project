@@ -106,12 +106,19 @@ namespace ServerAvalonia
     class Connection : IDisposable
     {
         #region поля и конструктор
+        //клиент
         private readonly TcpClient _client;
+        //получаемый поток
         private readonly NetworkStream _stream;
+        //удаленная точка
         private readonly EndPoint? _remoteEndPoint;
+        //задача чтения
         private readonly Task _readingTask;
+        //задача записи запроса
         private readonly Task _writingQueryTask;
+        //событие избывления/уничтожения..
         private readonly Action<Connection> _disposeCallback;
+        //канал для записи/отправки сообщений
         private readonly Channel<Query> _channelForQuery;
         bool disposed;
 
@@ -129,7 +136,7 @@ namespace ServerAvalonia
         #endregion
 
         #region чтение получаемых сообщений
-        //цикл  чтения получаемых сообщений + отправка ответных сообщений
+        //цикл  чтения получаемых сообщений
         private async Task RunReadingLoop()
         {
             //тут, как я понял, принуждаем машину вернуть таск,
@@ -145,7 +152,7 @@ namespace ServerAvalonia
                     bytesReceived = await _stream.ReadAsync(headerQueryLength, 0, headerQueryLength.Length);
                     if (bytesReceived != 4)
                         break;
-                    //получаем размер сообщения
+                    //получаем размер заголовка
                     int lengthHeader = BinaryPrimitives.ReadInt32LittleEndian(headerQueryLength);
 
 
@@ -155,16 +162,18 @@ namespace ServerAvalonia
 
                     //перевести его в текст
                     string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
-                    Header header = new Header(headerQuery); //парсим
+                    //парсим в заголовок
+                    Header headerClient = new Header(headerQuery); 
 
-                    for (int i = 0; i < header.ParamsQuery.Count; i++)
+                    //считываем параметры (если есть)
+                    for (int i = 0; i < headerClient.ParamsQuery.Count; i++)
                     {
-                        byte[] buffer = new byte[header.ParamsQuery[i].Length];
+                        byte[] buffer = new byte[headerClient.ParamsQuery[i].Length];
                         bytesReceived = await _stream.ReadAsync(buffer, 0, buffer.Length);
-                        header.ParamsQuery[i].Content = buffer;
+                        headerClient.ParamsQuery[i].Content = buffer;
                     }
 
-                    SendAnswer(header);
+                    SendAnswer(headerClient);
                 }
                 Console.WriteLine($"Клиент {_remoteEndPoint} отключился.");
                 _stream.Close();
@@ -180,49 +189,49 @@ namespace ServerAvalonia
             if (!disposed)
                 _disposeCallback(this);
         }
-        private async void SendAnswer(Header header)
+        #endregion
+        #region отправка ответа
+
+        //отправить запрос
+        public async Task SendMessageAsync(Query query)
         {
-
-            List< ParametrQuery> parametrsClient = new List<ParametrQuery>();
-            foreach (var p in header.ParamsQuery)
-            {
-                parametrsClient.Add(new ParametrQuery(p.Type,p.Name, p.Content!));
-            }
-
-            Query? answer = null;
-
-
-            if (header.Type == "SELECT")
+            await _channelForQuery.Writer.WriteAsync(query);
+        }
+        private async void SendAnswer(Header headerClient)
+        {
+            List<ParametrQuery> parametrsClient = headerClient.ParamsQuery;
+            Query? answer;
+            if (headerClient.Type == "SELECT")
             {
                 string text = "OK";
                 string type = "params";           //потом поменять
-                var parametrs = DataBase.Select(header.Text, parametrsClient);
+                var parametrs = DataBase.Select(headerClient.Text, parametrsClient);
                 Content content = new Content(parametrs!);
                 answer = new Query(new Header(type, text),content);
                 answer.Header.ParamsQuery = new List<ParametrQuery>(parametrs!);
             }
-            else if (header.Type == "UPDATE")
+            else if (headerClient.Type == "UPDATE")
             {
                 string text = "OK";
                 string type = "text";           //потом поменять
-                var s = DataBase.Update(header.Text, parametrsClient);
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("string","text", Encoding.UTF8.GetBytes(s))});
+                var s = DataBase.Update(headerClient.Text, parametrsClient);
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String","text", Encoding.UTF8.GetBytes(s))});
                 answer = new Query(new Header(type, text), content);
             }
-            else if (header.Type == "DELETE")
+            else if (headerClient.Type == "DELETE")
             {
                 string text = "OK";
                 string type = "text";           //потом поменять
-                var s = DataBase.Delete(header.Text, parametrsClient);
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
+                var s = DataBase.Delete(headerClient.Text, parametrsClient);
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String", "text", Encoding.UTF8.GetBytes(s)) });
                 answer = new Query(new Header(type, text), content);
             }
-            else if (header.Type == "CREATE")
+            else if (headerClient.Type == "CREATE")
             {
                 string text = "OK";
                 string type = "text";           //потом поменять
-                var s = DataBase.Create(header.Text, parametrsClient);
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
+                var s = DataBase.Create(headerClient.Text, parametrsClient);
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String", "text", Encoding.UTF8.GetBytes(s)) });
                 answer = new Query(new Header(type, text), content);
             }
             else
@@ -230,7 +239,7 @@ namespace ServerAvalonia
                 string text = "OK";
                 string type = "text";           //потом поменять
                 var s = "no";
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("text", "text", Encoding.UTF8.GetBytes(s)) });
+                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String", "text", Encoding.UTF8.GetBytes(s)) });
                 answer = new Query(new Header(type, text), content);
             }
             await SendMessageAsync(answer!);
@@ -239,12 +248,7 @@ namespace ServerAvalonia
         #endregion
 
 
-        #region запись и отправка сообщений
-        //отправить запрос
-        public async Task SendMessageAsync(Query query)
-        {
-            await _channelForQuery.Writer.WriteAsync(query);
-        }
+        #region запись сообщений
         //цикл записи query
         private async Task RunWritingQueryLoop()
         {

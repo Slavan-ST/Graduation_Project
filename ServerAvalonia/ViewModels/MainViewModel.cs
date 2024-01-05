@@ -20,9 +20,7 @@ public class MainViewModel : ViewModelBase
         Server = new TcpServer(port);
         ServerStart();
 
-        Console.WriteLine("Нажмите любую клавишу для выхода...");
-
-
+        //остановка сервера
         Stop = ReactiveCommand.Create(() =>
         {
             Server.Stop();

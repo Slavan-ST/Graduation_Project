@@ -35,21 +35,14 @@ namespace ClientAvalonia.Data
 
 
                 Header header = new Header("SELECT","SELECT Image from Users where FIO = @name;");
-                /*
-                header.ParamsQuery.Add(new ParametrQuery(
-                    "byte[]", 
-                    "@image", 
-                    bytes
-                    ));*/
-
                 header.ParamsQuery.Add(new ParametrQuery(
                     "string", 
                     "@name", 
                     Encoding.UTF8.GetBytes("Guest2")
                     ));
-                
+                Content content = new Content(header.ParamsQuery);
+                Query query = new Query(header, content);
 
-                Query query = new Query(header, new Content(header.ParamsQuery));
                 await connection.SendMessageAsync(query);
 
 
