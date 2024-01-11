@@ -52,19 +52,18 @@ namespace ClientAvalonia
                 {
                     int bytesReceived = 0;
                     //длина заголовка запроса
-                    byte[] headerQueryLength = new byte[4];
-                    bytesReceived = await _stream.ReadAsync(headerQueryLength, 0, headerQueryLength.Length);
+                    byte[] headerQueryLengthBytes  = new byte[4];
+                    bytesReceived = await _stream.ReadAsync(headerQueryLengthBytes , 0, headerQueryLengthBytes .Length);
                     if (bytesReceived != 4)
                         break;
                     //получаем размер сообщения
-                    int lengthHeader = BinaryPrimitives.ReadInt32LittleEndian(headerQueryLength);
+                    int lengthHeader = BinaryPrimitives.ReadInt32LittleEndian(headerQueryLengthBytes );
                     //прочитать из полученного сообщения заголовок
                     byte[] headerQueryBytes = new byte[lengthHeader];
-                    bytesReceived = await _stream.ReadAsync(headerQueryBytes, 0, headerQueryBytes.Length);
+                    bytesReceived = await _stream.ReadAsync(headerQueryBytes, 0, lengthHeader);
 
                     //перевести его в текст
                     string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
-                    Debug.WriteLine($"client : header:{headerQuery}");
                     Header header = new Header(headerQuery); //парсим
 
                     for (int i = 0; i < header.ParamsQuery.Count; i++)
@@ -77,6 +76,7 @@ namespace ClientAvalonia
                     //и отправляем клиенту(тут это просто вывод на экран)   // и вот это заменить 
                     foreach (var p in header.ParamsQuery)
                     {
+                        Debug.WriteLine($"Param:{p.Length}");
                         if (p.Type == "String")
                         {
                             Temp.MainViewModel.Answer += Encoding.UTF8.GetString(p.Content!);

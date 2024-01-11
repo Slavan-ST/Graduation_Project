@@ -262,13 +262,14 @@ namespace ServerAvalonia
                 //записываем длину заголовка, а также сам заголовок
                 BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
                 await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
-                await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем зоголовок
+                await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем заголовок
 
                 //записываем параметры
                 foreach (var p in query.Content!.ParametrQueries)
                 {
                     //содержимое параметра
                     byte[] buffer = p.Content!;
+                    Debug.WriteLine($"Buffer server:{buffer.Length}");
                     await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
                 }
             }

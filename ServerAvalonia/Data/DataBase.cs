@@ -16,7 +16,7 @@ namespace ServerAvalonia.Data
     //test -- всё это просто тестовое простраство --
     public class DataBase
     {
-        private readonly static string _connectionString = @"Server = 127.0.0.1\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
+        private readonly static string _connectionString = @"Server = Slavanst\slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
         public static IEnumerable<ParametrQuery>? Select(string query, IEnumerable<ParametrQuery>? parametrs)
         {
