@@ -1,4 +1,7 @@
-﻿using ClientAvalonia.Services;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Avalonia;
+using ClientAvalonia.Services;
 using Helper.Models;
 using System;
 using System.Buffers.Binary;
@@ -8,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -83,8 +87,29 @@ namespace ClientAvalonia
                         }
                         if (p.Type == "Byte[]")
                         {
-                            using var stream = new MemoryStream(p.Content!);
-                            Temp.MainViewModel.Image = new Avalonia.Media.Imaging.Bitmap(stream);
+
+                            Temp.MainViewModel.Answer += Temp.CountAnswer +" "+ header.Text;
+                            Temp.CountAnswer++;
+                            try
+                            {
+                                Debug.WriteLine("line lox");
+                                if (!File.Exists("C:\\Users\\SlavanST\\Desktop\\test\\test1.png"))
+                                {
+                                    var file = File.Create("C:\\Users\\SlavanST\\Desktop\\test\\test1.png");
+                                    file.Write(p.Content!, 0, p.Content!.Length);
+                                    file.Close();
+                                }
+
+                                using var stream = new MemoryStream(p.Content!);
+                                Temp.MainViewModel.Image = new Bitmap(stream);
+                            }
+                            catch
+                            {
+                                Debug.WriteLine("line lox");
+                                var file = File.Create("C:\\Users\\SlavanST\\Desktop\\test\\test2.png");
+                                file.Write(p.Content!, 0, p.Content!.Length);
+                                file.Close();
+                            }
                         }
                     }
                 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ClientAvalonia.Services
@@ -13,5 +14,6 @@ namespace ClientAvalonia.Services
     {
         //Временное свойство для изменения поля, при получении ответа от сервера
         public static MainViewModel MainViewModel { get; set; } = new MainViewModel();
+        public static int CountAnswer { get; set; } = 0;
     }
 }
