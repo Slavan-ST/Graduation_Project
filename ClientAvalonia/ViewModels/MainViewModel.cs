@@ -33,26 +33,6 @@ public class MainViewModel : ViewModelBase
         //отправка сообщения
         Send = ReactiveCommand.Create( async() =>
         {
-            //Debug.WriteLine($"Test: string:{"".GetType().Name}; int:{12.GetType().Name}; byte[]:{(new byte[6]).GetType().Name}");
-            //new DataFromServer().AddImageInUser("Guest2", _connection);
-
-            //await _connection.SendMessageAsync(new Query(new HeaderClient());
-
-
-
-            /*
-            header.ParamsQuery.Add(new ParametrQuery(
-                "byte[]", 
-                "@image", 
-                bytes
-                ));
-            header.ParamsQuery.Add(new ParametrQuery(
-                "string", 
-                "@name", 
-                Encoding.UTF8.GetBytes("Guest2")
-                ));
-            */
-
             Header header = new Header("SELECT", "SELECT Image from Users where FIO = @name;");
             header.ParamsQuery.Add(new ParametrQuery(
                 "string",
