@@ -8,7 +8,6 @@ using System.Net.Http;
 using Helper.Models;
 using Avalonia.Media.Imaging;
 using System.IO;
-using ClientAvalonia.Data;
 using System.Text;
 
 namespace ClientAvalonia.ViewModels;
