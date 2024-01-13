@@ -92,23 +92,12 @@ namespace ClientAvalonia
                             Temp.CountAnswer++;
                             try
                             {
-                                Debug.WriteLine("line lox");
-                                if (!File.Exists("C:\\Users\\SlavanST\\Desktop\\test\\test1.png"))
-                                {
-                                    var file = File.Create("C:\\Users\\SlavanST\\Desktop\\test\\test1.png");
-                                    file.Write(p.Content!, 0, p.Content!.Length);
-                                    file.Close();
-                                }
-
                                 using var stream = new MemoryStream(p.Content!);
                                 Temp.MainViewModel.Image = new Bitmap(stream);
                             }
                             catch
                             {
-                                Debug.WriteLine("line lox");
-                                var file = File.Create("C:\\Users\\SlavanST\\Desktop\\test\\test2.png");
-                                file.Write(p.Content!, 0, p.Content!.Length);
-                                file.Close();
+                                Debug.WriteLine("don't create image");
                             }
                         }
                     }
