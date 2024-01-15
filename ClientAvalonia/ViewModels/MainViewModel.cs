@@ -14,8 +14,6 @@ namespace ClientAvalonia.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private TcpClient _client;
-    private Connection _connection;
 
     //порт
     private static readonly int _port = 13400;
@@ -24,13 +22,9 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
-        //адрес сервера
-        _client = new TcpClient(_ip, _port); // тут просто локальный сервер
-        //создаём соединение
-        _connection = new Connection(_client);
 
         //отправка сообщения
-        Send = ReactiveCommand.Create( async() =>
+        Send = ReactiveCommand.Create( () =>
         {
             Header header = new Header("SELECT", "SELECT Image from Users where FIO = @name;");
             header.ParamsQuery.Add(new ParametrQuery(
@@ -41,7 +35,6 @@ public class MainViewModel : ViewModelBase
 
 
             Query query = new Query(header, new Content(header.ParamsQuery));
-            await _connection.SendMessageAsync(query);
 
         });
 

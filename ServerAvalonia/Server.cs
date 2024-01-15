@@ -17,292 +17,51 @@ using System.Threading.Tasks;
 
 namespace ServerAvalonia
 {
-    class TcpServer : IDisposable
+    public class Server
     {
-        private readonly TcpListener _listener;
+        static bool _isWorkServer = true;
+        static HttpListener _server = new HttpListener();
+        static string _serverConnection = "http://127.0.0.1:8888/connection/";//коннект по которому будет подключаться клиент
 
-        // это пул подключений,
-        // нужен чтобы нормально отключить всех подключенных
-        // при остановке сервера
-        private readonly List<Connection> _clients;
-
-
-        public TcpServer(int port)
+        public static async void Start()
         {
-            _listener = new TcpListener(IPAddress.Any, port);
-            _clients = new List<Connection>();
-        }
-
-        public async Task ListenAsync()
-        {
-            try
+            _isWorkServer = true;
+            _server = new HttpListener();
+            _server.Prefixes.Add(_serverConnection);
+            _server.Start(); // начинаем прослушивать входящие подключения
+            while (_isWorkServer)
             {
-                _listener.Start();
-                while (true)
+                // получаем контекст
+                var context = await _server.GetContextAsync();
+
+                var request = context.Request;  // получаем данные запроса
+
+                Debug.WriteLine($"адрес приложения: {request.LocalEndPoint}");
+                Debug.WriteLine($"адрес клиента: {request.RemoteEndPoint}");
+                Debug.WriteLine(request.RawUrl);
+                Debug.WriteLine($"Запрошен адрес: {request.Url}");
+                Debug.WriteLine("Заголовки запроса:");
+                foreach (string item in request.Headers.Keys)
                 {
-                    TcpClient client = await _listener.AcceptTcpClientAsync();
-                    //добавляем в пулл новое подключение
-                    lock (_clients)
-                    {
-                        _clients.Add(
-                            new Connection(client, c =>
-                            {
-                                //при закрытии подключения,
-                                //не забываем убрать подключение из пула
-                                lock (_clients)
-                                {
-                                    _clients.Remove(c);
-                                }
-                                c.Dispose();
-                            }));
-                    }
+                    Console.WriteLine($"{item}:{request.Headers[item]}");
                 }
+
+                var response = context.Response;    // получаем объект для установки ответа
+                byte[] buffer = Encoding.UTF8.GetBytes("Hello METANIT");
+                // получаем поток ответа и пишем в него ответ
+                response.ContentLength64 = buffer.Length;
+                using Stream output = response.OutputStream;
+                // отправляем данные
+                await output.WriteAsync(buffer);
+                await output.FlushAsync();
             }
-            catch (SocketException)
-            {
-                Debug.WriteLine("Сервер остановлен.");
-            }
+
         }
-        //остановка сервера
-        public void Stop()
+        public static void Stop()
         {
-            _listener.Stop();
+            _isWorkServer = false;
+            _server.Stop();
         }
-
-        #region Dispose
-        bool disposed;
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposed)
-                throw new ObjectDisposedException(typeof(TcpServer).FullName);
-            disposed = true;
-            _listener.Stop();
-            if (disposing)
-            {
-                lock (_clients)
-                {
-                    if (_clients.Count > 0)
-                    {
-                        Console.WriteLine("Отключаю клиентов...");
-                        foreach (Connection client in _clients)
-                        {
-                            client.Dispose();
-                        }
-                        Console.WriteLine("Клиенты отключены.");
-                    }
-                }
-            }
-        }
-
-        ~TcpServer() => Dispose(false);
-        #endregion
-    }
-    class Connection : IDisposable
-    {
-        #region поля и конструктор
-        //клиент
-        private readonly TcpClient _client;
-        //получаемый поток
-        private readonly NetworkStream _stream;
-        //удаленная точка
-        private readonly EndPoint? _remoteEndPoint;
-        //задача чтения
-        private readonly Task _readingTask;
-        //задача записи запроса
-        private readonly Task _writingQueryTask;
-        //событие избывления/уничтожения..
-        private readonly Action<Connection> _disposeCallback;
-        //канал для записи/отправки сообщений
-        private readonly Channel<Query> _channelForQuery;
-        bool disposed;
-
-        public Connection(TcpClient client, Action<Connection> disposeCallback)
-        {
-            _client = client;
-            _stream = client.GetStream();
-            _remoteEndPoint = client.Client.RemoteEndPoint;
-            _disposeCallback = disposeCallback;
-
-            _channelForQuery = Channel.CreateUnbounded<Query>();
-            _readingTask = RunReadingLoop();
-            _writingQueryTask = RunWritingQueryLoop();
-        }
-        #endregion
-
-        #region чтение получаемых сообщений
-        //цикл  чтения получаемых сообщений
-        private async Task RunReadingLoop()
-        {
-            //тут, как я понял, принуждаем машину вернуть таск,
-            //что фиксит какую-то ошибку, связанную с работой сокетов в дотнете
-            await Task.Yield(); // https://ru.stackoverflow.com/a/1422205/373567
-            try
-            {
-                while (true)
-                {
-                    int bytesReceived = 0;
-                    //длина заголовка запроса
-                    byte[] headerQueryLength = new byte[4];
-                    bytesReceived = await _stream.ReadAsync(headerQueryLength, 0, headerQueryLength.Length);
-                    if (bytesReceived != 4)
-                        break;
-                    //получаем размер заголовка
-                    int lengthHeader = BinaryPrimitives.ReadInt32LittleEndian(headerQueryLength);
-
-
-                    //прочитать из полученного сообщения заголовок
-                    byte[] headerQueryBytes = new byte[lengthHeader];
-                    bytesReceived = await _stream.ReadAsync(headerQueryBytes, 0, headerQueryBytes.Length);
-
-                    //перевести его в текст
-                    string headerQuery = Encoding.UTF8.GetString(headerQueryBytes);
-                    //парсим в заголовок
-                    Header headerClient = new Header(headerQuery); 
-
-                    //считываем параметры (если есть)
-                    for (int i = 0; i < headerClient.ParamsQuery.Count; i++)
-                    {
-                        byte[] buffer = new byte[headerClient.ParamsQuery[i].Length];
-                        bytesReceived = await _stream.ReadAsync(buffer, 0, buffer.Length);
-                        headerClient.ParamsQuery[i].Content = buffer;
-                    }
-
-                    SendAnswer(headerClient);
-                }
-                Console.WriteLine($"Клиент {_remoteEndPoint} отключился.");
-                _stream.Close();
-            }
-            catch (IOException)
-            {
-                Debug.WriteLine($"Подключение к {_remoteEndPoint} закрыто сервером.");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.GetType().Name + ": " + ex.Message);
-            }
-            if (!disposed)
-                _disposeCallback(this);
-        }
-        #endregion
-        #region отправка ответа
-
-        //отправить запрос
-        public async Task SendMessageAsync(Query query)
-        {
-            await _channelForQuery.Writer.WriteAsync(query);
-        }
-        private async void SendAnswer(Header headerClient)
-        {
-            List<ParametrQuery> parametrsClient = headerClient.ParamsQuery;
-            Query? answer;
-            if (headerClient.Type == "SELECT")
-            {
-                string text = "OK";
-                string type = "params";           //потом поменять
-                var parametrs = DataBase.Select(headerClient.Text, parametrsClient);
-                Content content = new Content(parametrs!);
-                answer = new Query(new Header(type, text),content);
-                answer.Header.ParamsQuery = new List<ParametrQuery>(parametrs!);
-            }
-            else if (headerClient.Type == "UPDATE")
-            {
-                string text = "OK";
-                string type = "text";           //потом поменять
-                var s = DataBase.Update(headerClient.Text, parametrsClient);
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String","text", Encoding.UTF8.GetBytes(s))});
-                answer = new Query(new Header(type, text), content);
-            }
-            else if (headerClient.Type == "DELETE")
-            {
-                string text = "OK";
-                string type = "text";           //потом поменять
-                var s = DataBase.Delete(headerClient.Text, parametrsClient);
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String", "text", Encoding.UTF8.GetBytes(s)) });
-                answer = new Query(new Header(type, text), content);
-            }
-            else if (headerClient.Type == "CREATE")
-            {
-                string text = "OK";
-                string type = "text";           //потом поменять
-                var s = DataBase.Create(headerClient.Text, parametrsClient);
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String", "text", Encoding.UTF8.GetBytes(s)) });
-                answer = new Query(new Header(type, text), content);
-            }
-            else
-            {
-                string text = "OK";
-                string type = "text";           //потом поменять
-                var s = "no";
-                Content content = new Content(new List<ParametrQuery>() { new ParametrQuery("String", "text", Encoding.UTF8.GetBytes(s)) });
-                answer = new Query(new Header(type, text), content);
-            }
-            await SendMessageAsync(answer!);
-
-        }
-        #endregion
-
-
-        #region запись сообщений
-        //цикл записи query
-        private async Task RunWritingQueryLoop()
-        {
-            //тут изменить заголовок
-            await foreach (Query query in _channelForQuery.Reader.ReadAllAsync())
-            {
-                //заголовок запроса
-                byte[] headerQueryLengthBytes = new byte[4];
-                byte[] headerQueryBytes = Encoding.UTF8.GetBytes(query.Header.GetText());
-
-                //записываем длину заголовка, а также сам заголовок
-                BinaryPrimitives.WriteInt32LittleEndian(headerQueryLengthBytes, headerQueryBytes.Length);
-                await _stream.WriteAsync(headerQueryLengthBytes, 0, headerQueryLengthBytes.Length); //длина заголовка
-                await _stream.WriteAsync(headerQueryBytes, 0, headerQueryBytes.Length); //пишем заголовок
-
-                //записываем параметры
-                foreach (var p in query.Content!.ParametrQueries)
-                {
-                    //содержимое параметра
-                    byte[] buffer = p.Content!;
-                    Debug.WriteLine($"Buffer server:{buffer.Length}");
-                    await _stream.WriteAsync(buffer, 0, buffer.Length);//содержимое сообщения
-                }
-            }
-        }
-        #endregion
-
-        #region Dispose
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                throw new ObjectDisposedException(GetType().FullName);
-            disposed = true;
-            if (_client.Connected)
-            {
-                _channelForQuery.Writer.Complete();
-                _stream.Close();
-                //ожидаем завершение задач чтения/записи
-                Task.WaitAll(_readingTask,_writingQueryTask);
-            }
-            if (disposing)
-            {
-                _client.Dispose();
-            }
-        }
-
-        ~Connection() => Dispose(false);
-        #endregion
     }
 
 
