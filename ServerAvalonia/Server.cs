@@ -1,4 +1,5 @@
 ﻿
+using ClientAvalonia;
 using Helper.Models;
 using Microsoft.EntityFrameworkCore.Storage.Json;
 using ServerAvalonia.Data;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -53,9 +55,21 @@ namespace ServerAvalonia
                 // получаем контекст
                 var context = await _server.GetContextAsync();
 
-                var request = context.Request;  // получаем данные запроса
+                // получаем данные запроса
+                var request = context.Request;  
+                //считываем
+                using var obj = new StreamReader(request.InputStream, request.ContentEncoding);
+                //конвертим в текст
+                string text = obj.ReadToEnd();
+
+                //десериализация json
+                TestClass? testClass = JsonSerializer.Deserialize<TestClass>(text);
+
                 //var requestContent = context.Response.
-                Debug.WriteLine($"Type:{request.ContentType}");
+                if (testClass != null)
+                {
+                    Debug.WriteLine($"Вывод:{testClass.Name}:{testClass.LName}");
+                }
 
                 var response = context.Response;    // получаем объект для установки ответа
                 byte[] buffer = Encoding.UTF8.GetBytes("Hello METANIT");
