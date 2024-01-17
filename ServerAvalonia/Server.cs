@@ -11,9 +11,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -64,11 +66,13 @@ namespace ServerAvalonia
 
                 //десериализация json
                 TestClass? testClass = JsonSerializer.Deserialize<TestClass>(text);
+                //dynamic stuf = JsonSerializer
 
                 //var requestContent = context.Response.
                 if (testClass != null)
                 {
                     Debug.WriteLine($"Вывод:{testClass.Name}:{testClass.LName}");
+                    Data.DataBase.ExecuteNonQueryTest(testClass.GetImage());
                 }
 
                 var response = context.Response;    // получаем объект для установки ответа

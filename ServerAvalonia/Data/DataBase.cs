@@ -1,4 +1,5 @@
-﻿using Helper.Models;
+﻿using Avalonia.Media.Imaging;
+using Helper.Models;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -50,13 +51,38 @@ namespace ServerAvalonia.Data
                 }
                 answer = "OK";
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine(e);
                 answer = "NO";
             }
-            Debug.WriteLine("EXECUTE TRUE");
             return answer;
+        }
+        public static void ExecuteNonQueryTest(Bitmap? image)
+        {
+            string query = "update Users set Image=@image where FIO=@fio;";
+            using var stream = new MemoryStream();
+            image!.Save(stream);
+            byte[] buffer = stream.ToArray();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@image", buffer);
+                    command.Parameters.AddWithValue("@fio", "Guest2");
+                    int changed = command.ExecuteNonQuery();
+                    Debug.WriteLine($"server change line: {changed}");
+                }
+                Debug.WriteLine("EXECUTE TRUE");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                Debug.WriteLine("EXECUTE False");
+            }
         }
         private static IEnumerable<ParametrQuery>? Execute(string query, IEnumerable<ParametrQuery>? parametrs)
         {

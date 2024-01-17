@@ -22,6 +22,7 @@ public partial class App : Application
             {
                 DataContext = new MainViewModel()
             };
+            Helper.Services.FileDialog.Config(desktop.MainWindow);
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
@@ -29,6 +30,7 @@ public partial class App : Application
             {
                 DataContext = new MainViewModel()
             };
+            Helper.Services.FileDialog.Config(singleViewPlatform.MainView);
         }
 
         base.OnFrameworkInitializationCompleted();

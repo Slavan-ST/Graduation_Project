@@ -21,19 +21,45 @@ using System.Net.Mail;
 using System.Text.Json;
 using System.Net.Http.Json;
 using System.Threading;
+using System.Text.Json.Serialization;
 
 
 namespace ClientAvalonia
 {
     public class TestClass
     {
+        public TestClass(){}
+        [JsonConstructor]
+        public TestClass(string name, string lName, byte[] image)
+        {
+            Name = name;
+            Image = image;
+            LName = lName;
+        }
         public string Name { get; set; } = "not found!";
         public string LName { get; set; } = "not found!";
+        public byte[] Image { get; set; }
+        public Bitmap? GetImage()
+        {
+            using var stream = new MemoryStream(Image);
+            return new Bitmap(stream);
+        }
+        public void ImageToBytes(Bitmap image)
+        {
+            using var stream = new MemoryStream();
+            image.Save(stream);
+            Image = stream.ToArray();
+        }
     }
     public class Client
     {
 
         static HttpClient? _httpClient;
+
+        private static void WriteInDB()
+        {
+
+        }
         public static async void Start()
         {
             var socketsHandler = new SocketsHttpHandler
@@ -41,10 +67,15 @@ namespace ClientAvalonia
                 PooledConnectionLifetime = TimeSpan.FromMinutes(2)
             };
             _httpClient = new HttpClient(socketsHandler);
-            
+
             //сериализуем объект
-            string testJson = JsonSerializer.Serialize(new TestClass() { LName = "Иванович", Name = "Иван" });
-            byte[] buffer  = Encoding.UTF8.GetBytes(testJson);
+            string testJson = JsonSerializer.Serialize(new TestClass()
+            {
+                LName = "Иванович",
+                Name = "Иван",
+                Image = await Helper.Services.FileDialog.OpenImage()
+            });
+            byte[] buffer  = Encoding.ASCII.GetBytes(testJson);
 
 
             // определяем данные запроса
