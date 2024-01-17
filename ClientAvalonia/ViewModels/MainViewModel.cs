@@ -26,22 +26,14 @@ public class MainViewModel : ViewModelBase
         //отправка сообщения
         Send = ReactiveCommand.Create( () =>
         {
-            Header header = new Header("SELECT", "SELECT Image from Users where FIO = @name;");
-            header.ParamsQuery.Add(new ParametrQuery(
-                "string",
-                "@name",
-                Encoding.UTF8.GetBytes("Guest2")
-                ));
-
-
-            Query query = new Query(header, new Content(header.ParamsQuery));
-
+            Client.Start();
+            Debug.WriteLine("it's work!");
         });
 
     }
 
     [Reactive]
-    public string TextMessage { get; set; } = ""; // отправляеммое сообщение
+    public string TextMessage { get; set; } = ""; // отправляемое сообщение
     [Reactive]
     public Bitmap? Image { get; set; }
 

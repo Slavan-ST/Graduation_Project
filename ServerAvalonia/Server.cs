@@ -1,5 +1,6 @@
 ﻿
 using Helper.Models;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 using ServerAvalonia.Data;
 using ServerAvalonia.Services;
 using System;
@@ -20,14 +21,32 @@ namespace ServerAvalonia
     public class Server
     {
         static bool _isWorkServer = true;
-        static HttpListener _server = new HttpListener();
-        static string _serverConnection = "http://127.0.0.1:8888/connection/";//коннект по которому будет подключаться клиент
+        static HttpListener _server;
 
-        public static async void Start()
+        //адреса, обрабатываемые слушителем
+        static List<string> _prefixes = new List<string>() 
+        {
+            "http://127.0.0.1:1111/connection/"  ////коннект по которому будет подключаться клиент, пока тесты
+        };
+
+        static Server()
         {
             _isWorkServer = true;
             _server = new HttpListener();
-            _server.Prefixes.Add(_serverConnection);
+            foreach (var pref in _prefixes)
+            {
+                try
+                {
+                    _server.Prefixes.Add(pref);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);//тут может быть ошибка связанная с регистрацией этого адреса
+                }
+            }
+        }
+        public static async void Start()
+        {
             _server.Start(); // начинаем прослушивать входящие подключения
             while (_isWorkServer)
             {
@@ -35,16 +54,8 @@ namespace ServerAvalonia
                 var context = await _server.GetContextAsync();
 
                 var request = context.Request;  // получаем данные запроса
-
-                Debug.WriteLine($"адрес приложения: {request.LocalEndPoint}");
-                Debug.WriteLine($"адрес клиента: {request.RemoteEndPoint}");
-                Debug.WriteLine(request.RawUrl);
-                Debug.WriteLine($"Запрошен адрес: {request.Url}");
-                Debug.WriteLine("Заголовки запроса:");
-                foreach (string item in request.Headers.Keys)
-                {
-                    Console.WriteLine($"{item}:{request.Headers[item]}");
-                }
+                //var requestContent = context.Response.
+                Debug.WriteLine($"Type:{request.ContentType}");
 
                 var response = context.Response;    // получаем объект для установки ответа
                 byte[] buffer = Encoding.UTF8.GetBytes("Hello METANIT");

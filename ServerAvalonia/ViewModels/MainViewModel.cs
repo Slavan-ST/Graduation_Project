@@ -14,10 +14,8 @@ public class MainViewModel : ViewModelBase
 
     int port = 13400;
 
-    TcpServer Server;
     public MainViewModel()
     {
-        Server = new TcpServer(port);
         ServerStart();
 
         //остановка сервера
@@ -26,10 +24,9 @@ public class MainViewModel : ViewModelBase
             Server.Stop();
         });
     }
-    private async void ServerStart()
+    private void ServerStart()
     {
-        Task serverTask = Server.ListenAsync();
-        await serverTask;
+        Server.Start();
     }
 
     [Reactive]
