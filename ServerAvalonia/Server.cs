@@ -1,24 +1,12 @@
 ﻿
 using ClientAvalonia;
-using Helper.Models;
-using Microsoft.EntityFrameworkCore.Storage.Json;
-using ServerAvalonia.Data;
-using ServerAvalonia.Services;
 using System;
-using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http.Json;
-using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 
 namespace ServerAvalonia
 {
