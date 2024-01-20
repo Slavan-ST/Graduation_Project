@@ -9,6 +9,5 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
-        DataContext = Temp.MainViewModel = new MainViewModel();
     }
 }

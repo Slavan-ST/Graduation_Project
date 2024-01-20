@@ -6,6 +6,7 @@ using System.Text;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ClientAvalonia.Services;
 
 
 namespace ClientAvalonia
@@ -24,12 +25,12 @@ namespace ClientAvalonia
         public string Name { get; set; } = "not found!";
         public string LName { get; set; } = "not found!";
         public byte[]? Image { get; set; }
-        public Bitmap? GetImage()
+        public Bitmap? GetImageBitmap()
         {
             using var stream = new MemoryStream(Image!);
             return new Bitmap(stream);
         }
-        public void ImageToBytes(Bitmap image)
+        public void SetImageBitmap(Bitmap image)
         {
             using var stream = new MemoryStream();
             image.Save(stream);
@@ -53,14 +54,7 @@ namespace ClientAvalonia
             };
             _httpClient = new HttpClient(socketsHandler);
 
-            //сериализуем объект
-            string testJson = JsonSerializer.Serialize(new TestClass()
-            {
-                LName = "Иванович",
-                Name = "Иван",
-                Image = await Helper.Services.FileDialog.OpenImage()
-            });
-            byte[] buffer  = Encoding.ASCII.GetBytes(testJson);
+            byte[] buffer  = Encoding.ASCII.GetBytes("testJson");
 
 
             // определяем данные запроса
@@ -70,8 +64,9 @@ namespace ClientAvalonia
 
             //отправляем сообщение и получаем ответ
             using HttpResponseMessage response = await _httpClient.SendAsync(request);
-
-
+            var responseText = await response.Content.ReadAsStringAsync();
+            TestClass test = (TestClass)JsonSerializer.Deserialize(responseText, new TestClass().GetType())!;
+            Temp.MainViewModel.Image = test.GetImageBitmap();
             // просматриваем данные ответа
             // статус
             Debug.WriteLine($"Status: {response.StatusCode}\n");

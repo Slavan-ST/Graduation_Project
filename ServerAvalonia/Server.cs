@@ -1,4 +1,5 @@
 ﻿
+using Avalonia.Remote.Protocol;
 using ClientAvalonia;
 using System;
 using System.Collections.Generic;
@@ -51,20 +52,19 @@ namespace ServerAvalonia
                 using var obj = new StreamReader(request.InputStream, request.ContentEncoding);
                 //конвертим в текст
                 string text = obj.ReadToEnd();
-
-                //десериализация json
-                TestClass? testClass = JsonSerializer.Deserialize<TestClass>(text);
-                //dynamic stuf = JsonSerializer
-
-                //var requestContent = context.Response.
-                if (testClass != null)
+                Debug.WriteLine(text);
+                var testObj = new TestClass()
                 {
-                    Debug.WriteLine($"Вывод:{testClass.Name}:{testClass.LName}");
-                    Data.DataBase.ExecuteNonQueryTest(testClass.GetImage());
-                }
+                    Name = "noname1",
+                    LName = "lname2"
+                };
+                testObj.SetImageBitmap(Data.DataBase.ExecuteQueryTest()!);
+
+                var content = JsonSerializer.Serialize(testObj);
+
 
                 var response = context.Response;    // получаем объект для установки ответа
-                byte[] buffer = Encoding.UTF8.GetBytes("Hello METANIT");
+                byte[] buffer = Encoding.UTF8.GetBytes(content);
                 // получаем поток ответа и пишем в него ответ
                 response.ContentLength64 = buffer.Length;
                 using Stream output = response.OutputStream;

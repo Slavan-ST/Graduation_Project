@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:ServerAvalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ServerAvalonia.Views.MainView"
-             x:DataType="vm:MainViewModel"	>
+             x:Class="ServerAvalonia.Views.MainView">
 
 	<Grid>
 		<Grid.RowDefinitions>
