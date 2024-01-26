@@ -16,7 +16,11 @@ namespace ServerAvalonia.Models
         #region Таблицы
         //пример
         //public DbSet<Name_Class> Name_Table_in_SQLServer {get;set;}
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<AttendanceLog> AttendanceLog { get; set; }
+
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

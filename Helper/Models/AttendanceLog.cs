@@ -10,7 +10,7 @@ namespace Helper.Models
     {
         public int RoomId { get; set; }
         public int StudentId { get; set; }
-        public int MarkId { get; set; }
+        public int MarkerId { get; set; }
         public DateTime Date { get; set; }
     }
 }

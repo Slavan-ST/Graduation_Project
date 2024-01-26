@@ -7,73 +7,74 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClientAvalonia.Services;
+using Helper.Models;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 
 namespace ClientAvalonia
 {
-    public class TestClass
-    {
-        public TestClass(){}
-
-        [JsonConstructor]
-        public TestClass(string name, string lName, byte[] image)
-        {
-            Name = name;
-            Image = image;
-            LName = lName;
-        }
-        public string Name { get; set; } = "not found!";
-        public string LName { get; set; } = "not found!";
-        public byte[]? Image { get; set; }
-        public Bitmap? GetImageBitmap()
-        {
-            using var stream = new MemoryStream(Image!);
-            return new Bitmap(stream);
-        }
-        public void SetImageBitmap(Bitmap image)
-        {
-            using var stream = new MemoryStream();
-            image.Save(stream);
-            Image = stream.ToArray();
-        }
-    }
     public class Client
     {
-
+        static string _connect = @"https://localhost:7007";
         static HttpClient? _httpClient;
 
-        private static void WriteInDB()
-        {
-
-        }
         public static async void Start()
         {
+            //установить время жизни сокетов в 2 минуты, чтобы не засорять
             var socketsHandler = new SocketsHttpHandler
             {
                 PooledConnectionLifetime = TimeSpan.FromMinutes(2)
             };
             _httpClient = new HttpClient(socketsHandler);
 
-            byte[] buffer  = Encoding.ASCII.GetBytes("testJson");
+
+            var test = (await Get(typeof(string), _connect + "/student/2"))!;
+            Debug.WriteLine("debug test: " + test.GetType());
+        }
 
 
+
+        private static async Task<object?> Get(Type type, string end_point)
+        {
             // определяем данные запроса
-            using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:1111/connection/");
-            request.Content = new ByteArrayContent(buffer); //тут или stream или byte
-
-
+            using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, end_point);
             //отправляем сообщение и получаем ответ
-            using HttpResponseMessage response = await _httpClient.SendAsync(request);
-            var responseText = await response.Content.ReadAsStringAsync();
-            TestClass test = (TestClass)JsonSerializer.Deserialize(responseText, new TestClass().GetType())!;
-            Temp.MainViewModel.Image = test.GetImageBitmap();
-            // просматриваем данные ответа
-            // статус
-            Debug.WriteLine($"Status: {response.StatusCode}\n");
+            var response = await _httpClient!.GetFromJsonAsync(end_point, type);
 
-            // содержимое ответа
-            string content = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine($"Content:{content}");
+            Debug.WriteLine(response!.ToString());
+
+            return response;
+        }
+        private static async Task<object?> Delete(Type type, string end_point)
+        {
+            // определяем данные запроса
+            using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, end_point);
+            //отправляем сообщение и получаем ответ
+            return await _httpClient!.DeleteFromJsonAsync(end_point, type);
+
+        }
+        private static async Task<object?> Post(object obj, string end_point)
+        {
+            // определяем данные запроса
+            using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, end_point);
+            //отправляем сообщение и получаем ответ
+            return await _httpClient!.PostAsJsonAsync(end_point, obj);
+        }
+        private static async Task<object?> Put(object obj, string end_point)
+        {
+            // определяем данные запроса
+            using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, end_point);
+            //отправляем сообщение и получаем ответ
+            return await _httpClient!.PutAsJsonAsync(end_point, obj);
+        }
+
+
+
+        //id будет добавляться в строку подключения 
+        public static async Task<Student?> GetStudent(int id)
+        {
+            return await Get(typeof(Student), "") as Student;
         }
     }
 }

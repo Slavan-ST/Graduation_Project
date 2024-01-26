@@ -45,7 +45,6 @@ namespace ServerAvalonia
             {
                 // получаем контекст
                 var context = await _server.GetContextAsync();
-
                 // получаем данные запроса
                 var request = context.Request;  
                 //считываем
@@ -53,23 +52,12 @@ namespace ServerAvalonia
                 //конвертим в текст
                 string text = obj.ReadToEnd();
                 Debug.WriteLine(text);
-                var testObj = new TestClass()
-                {
-                    Name = "noname1",
-                    LName = "lname2"
-                };
-                testObj.SetImageBitmap(Data.DataBase.ExecuteQueryTest()!);
-
-                var content = JsonSerializer.Serialize(testObj);
 
 
                 var response = context.Response;    // получаем объект для установки ответа
-                byte[] buffer = Encoding.UTF8.GetBytes(content);
                 // получаем поток ответа и пишем в него ответ
-                response.ContentLength64 = buffer.Length;
                 using Stream output = response.OutputStream;
                 // отправляем данные
-                await output.WriteAsync(buffer);
                 await output.FlushAsync();
             }
 
