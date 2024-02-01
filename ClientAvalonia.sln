@@ -9,13 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientAvalonia.Android", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientAvalonia.Desktop", "ClientAvalonia.Desktop\ClientAvalonia.Desktop.csproj", "{07F7DC6A-F3B6-4695-A8D3-7F8A07CCE8E3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerAvalonia", "ServerAvalonia\ServerAvalonia.csproj", "{55AAC868-F283-4FC9-A13A-54DF045E36FA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{ABED2CCA-2415-467B-A876-6FDB54ED544E} = {ABED2CCA-2415-467B-A876-6FDB54ED544E}
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerAvalonia.Desktop", "ServerAvalonia.Desktop\ServerAvalonia.Desktop.csproj", "{6109BF9C-6D39-43A4-B8B9-B87D0E294451}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{3168B8ED-7DCA-4183-9544-DB1A20C4213D}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.txt = Readme.txt
@@ -45,14 +38,6 @@ Global
 		{07F7DC6A-F3B6-4695-A8D3-7F8A07CCE8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07F7DC6A-F3B6-4695-A8D3-7F8A07CCE8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07F7DC6A-F3B6-4695-A8D3-7F8A07CCE8E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55AAC868-F283-4FC9-A13A-54DF045E36FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55AAC868-F283-4FC9-A13A-54DF045E36FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55AAC868-F283-4FC9-A13A-54DF045E36FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55AAC868-F283-4FC9-A13A-54DF045E36FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6109BF9C-6D39-43A4-B8B9-B87D0E294451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6109BF9C-6D39-43A4-B8B9-B87D0E294451}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6109BF9C-6D39-43A4-B8B9-B87D0E294451}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6109BF9C-6D39-43A4-B8B9-B87D0E294451}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D410FAC-6D3C-441F-AC6B-1A159126D06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D410FAC-6D3C-441F-AC6B-1A159126D06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D410FAC-6D3C-441F-AC6B-1A159126D06C}.Release|Any CPU.ActiveCfg = Release|Any CPU

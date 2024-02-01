@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerAvalonia.Models
+namespace Server.Data
 {
     public class ApplicationContext:DbContext
     {
@@ -14,8 +14,7 @@ namespace ServerAvalonia.Models
         static string _connectionString = @"Server = SlavanST\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
         #region Таблицы
-        //пример
-        //public DbSet<Name_Class> Name_Table_in_SQLServer {get;set;}
+
         public DbSet<Room> Rooms { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -27,9 +26,5 @@ namespace ServerAvalonia.Models
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
-    }
-    public class Stud
-    {
-
     }
 }

@@ -1,5 +1,5 @@
 using Helper.Models;
-using ServerAvalonia.Models;
+using Server.Data;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 
@@ -8,8 +8,7 @@ var app = builder.Build();
 
 var db = new ApplicationContext();
 
-#region Конечные точки
-
+#region Конечные точки - фактически это весь API
 
 app.MapGet("/student/{id}", (int id) =>
 {
@@ -61,21 +60,13 @@ app.MapGet("/user/{login}:{password}", (string login, string password) =>
 
 });
 
-
-
-
-
 app.MapDelete("/student/{id}", (int id) =>
 {
     return Results.Json("it's OK");
 });
 
 
-
-
-
-
-
-
 #endregion
+
+
 app.Run();
