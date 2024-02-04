@@ -9,6 +9,5 @@ namespace Helper.Models
     public class Marker : BaseModel
     {
         public string Char { get; set; } = "";
-        public string Description { get; set; } = "";
     }
 }
