@@ -1,5 +1,6 @@
 using Helper.Models;
 using Server.Data;
+using Server.Services;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 
@@ -10,59 +11,100 @@ var db = new ApplicationContext();
 
 #region Конечные точки - фактически это весь API
 
-app.MapGet("/student/{id}", (int id) =>
+app.MapGet("/students/{id}", (int id, User user) =>
 {
+    if (!Authentication.IsAuthentication(user))
+    {
+        return Results.StatusCode(403); //403 нет прав
+    }
     var student = (db.Students.Where(x => x.Id == id).ToList().FirstOrDefault());
     if (student == null)
     {
-        return Results.Json(student);
+        return Results.NotFound(); //404
     }
-    else
-    {
-        return Results.Json(student);
-    }
+    return Results.Json(student);
 });
+app.MapPut("/students", (Student data, User user) =>
+{
+    if (data == null)
+    {
+        return Results.NoContent();
+    }
+    if (!Authentication.IsAuthentication(user))
+    {
+        return Results.StatusCode(403); //403 нет прав
+    }
+
+    if (!db.Students.Contains(data))
+    {
+        return Results.NotFound();
+    }
+    db.Students.Update(data);
+    db.SaveChanges();
+    return Results.Ok();
+});
+app.MapPost("/students", (Student student, User user) =>
+{
+    if (!Authentication.IsAuthentication(user))
+    {
+        return Results.StatusCode(403); //403 нет прав
+    }
+    if (student == null)
+    {
+        return Results.NoContent(); //204
+    }
+    if (db.Students.Contains(student))
+    {
+        return Results.StatusCode(409); //409 - конфликт
+    }
+    db.Students.Add(student);
+    db.SaveChanges();
+    return Results.Ok(); 
+});
+app.MapDelete("/students/{id}", (int id, User user) =>
+{
+    if (!Authentication.IsAuthentication(user))
+    {
+        return Results.StatusCode(403); //403 нет прав
+    }
+    var student = (db.Students.Where(x => x.Id == id).ToList().FirstOrDefault());
+    if (student == null)
+    {
+        return Results.NotFound();
+    }
+    db.Students.Remove(student);
+    db.SaveChanges();
+    return Results.Ok();
+});
+
+
 app.MapGet("/attendanceLog/{id}", (int id) =>
 {
     var attendanceLog = (db.AttendanceLog.Where(x => x.Id == id).ToList().FirstOrDefault());
     if (attendanceLog == null)
     {
-        return Results.Json(attendanceLog);
+        return Results.NotFound();
     }
-    else
-    {
-        return Results.Json(attendanceLog);
-    }
+    return Results.Json(attendanceLog);
 });
 app.MapGet("/room/{id}", (int id) =>
 {
     var room = (db.Rooms.Where(x => x.Id == id).ToList().FirstOrDefault());
     if (room == null)
     {
-        return Results.Json(room);
+        return Results.NotFound();
     }
-    else
-    {
-        return Results.Json(room);
-    }
+    return Results.Json(room);
 });
 app.MapGet("/user/{login}:{password}", (string login, string password) =>
 {
     var user = (db.Users.Where(x => x.Login == login && x.Password == password).ToList().FirstOrDefault());
     if (user == null)
     {
-        return Results.Json(user);
+        return Results.NotFound();
     }
-    else
-    {
-        return Results.Json(user);
-    }
+    return Results.Json(user);
 
-});
-
-app.MapDelete("/student/{id}", (int id) =>
-{
-    return Results.Json("it's OK");
 });
 
 
