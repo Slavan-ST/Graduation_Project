@@ -24,11 +24,6 @@ namespace WebAPI
                 app.UseSwaggerUI();
             }
 
-            app.MapGet("/", () =>
-            {
-                return Results.Json("Hello METANIT.COM!");
-            });
-
             // настраиваем CORS
             app.UseCors(builder => builder.AllowAnyOrigin());
 
