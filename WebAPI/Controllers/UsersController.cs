@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
@@ -5,23 +6,78 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    //http://localhost:5170/users
+    // /users    
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        ApplicationContext db = new ApplicationContext();
-
-        //
+        //получение пользователя
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
+            ApplicationContext db = new ApplicationContext();
             var user = await db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
             }
+            db.Dispose();
             return new JsonResult(user);
+        }
+        //добавление пользователя        
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> Post(User user)
+        {
+            if (user == null)
+            {
+                return NoContent();
+            }
+            ApplicationContext db = new ApplicationContext();
+            if (await db.Users.ContainsAsync(user))
+            {
+                return StatusCode(400);
+            }
+            await db.Users.AddAsync(user);
+            db.Dispose();
+            return StatusCode(201);
+        }
+        //обновление пользователя        
+        [Authorize]
+        [HttpPut]
+        public async Task<ActionResult> Put(User user)
+        {
+            if (user == null)
+            {
+                return NoContent();
+            }
+            ApplicationContext db = new ApplicationContext();
+            if (!await db.Users.ContainsAsync(user))
+            {
+                return StatusCode(404);
+            }
+            db.Users.Update(user);
+            db.Dispose();
+            return StatusCode(202);//принято
+        }
+        //удаление пользователя        
+        [Authorize]
+        [HttpDelete]
+        public async Task<ActionResult> Delete(User user)
+        {
+            if (user == null)
+            {
+                return NoContent();
+            }
+            ApplicationContext db = new ApplicationContext();
+            if (!await db.Users.ContainsAsync(user))
+            {
+                return StatusCode(404);
+            }
+            db.Users.Remove(user);
+            db.Dispose();
+            return StatusCode(202);//принято
         }
     }
 }

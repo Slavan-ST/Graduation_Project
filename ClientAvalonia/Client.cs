@@ -33,8 +33,6 @@ namespace ClientAvalonia
             Debug.WriteLine("debug test: " + test.GetType());
         }
 
-
-
         private static async Task<object?> Get(Type type, string end_point)
         {
             // определяем данные запроса

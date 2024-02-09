@@ -3,6 +3,9 @@ using ReactiveUI.Fody.Helpers;
 using System.Windows.Input;
 using System.Diagnostics;
 using Avalonia.Media.Imaging;
+using System.Net.Http;
+using System.Net;
+using System.Collections.Generic;
 
 namespace ClientAvalonia.ViewModels;
 
@@ -13,10 +16,16 @@ public class MainViewModel : ViewModelBase
     {
 
         //отправка сообщения
-        Send = ReactiveCommand.Create( () =>
+        Send = ReactiveCommand.Create(async () =>
         {
-            Client.Start();
-            Debug.WriteLine("it's work!");
+            HttpClient client = new HttpClient();
+
+
+            //var response = await client.PostAsync("http://localhost:5000/login/", content);
+            var response = await client.GetAsync(string.Format("http://192.168.0.2:5170/login/?login={0}&password={1}","kola","123"));
+
+            //Client.Start();
+            Debug.WriteLine("it's work! " + response.StatusCode);
         });
 
     }
