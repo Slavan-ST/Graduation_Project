@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
-using WebAPI.Models;
+using WebAPI.Models.Data;
 
 namespace WebAPI.Controllers
 {
@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         //получение пользователя
-        [Authorize]
+        [Authorize(Policy = "user")]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {

@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models
+namespace WebAPI.Models.Data
 {
-    public class Student : BaseModel
+    public class Student
     {
+        public int Id { get; set; }
         public string Name { get; set; } = "";
         public string Surname { get; set; } = "";
         public string Patronymic { get; set; } = "";
         public int RoomId { get; set; }
+        public Room? Room { get; set; }
     }
 }

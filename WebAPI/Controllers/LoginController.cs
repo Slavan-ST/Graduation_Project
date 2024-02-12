@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics;
 using System.Security.Claims;
 using WebAPI.Data;
 
@@ -17,21 +18,33 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Login(string login, string password)
         {
+            Debug.WriteLine($"login: {login}; password: {password}");
             ApplicationContext db = new ApplicationContext();
             var user = await db.Users.Where(x => x.Login == login && x.Password == password).FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
             }
+
+            Debug.WriteLine(
+                $"RoleID: {user.RoleId}" + Environment.NewLine +
+                $"Login: {user.Login}" + Environment.NewLine +
+                $"Password: {user.Password}" + Environment.NewLine +
+                $"Name: {user.Name}" + Environment.NewLine +
+                $"Surname: {user.Surname}" + Environment.NewLine +
+                $"Patronymic: {user.Patronymic}" + Environment.NewLine +
+                $"Role: {user.Role??null}");
+
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, login)
+                new Claim(ClaimTypes.Name, login),
+                new Claim(ClaimTypes.Role, user.Role!.Name)
             };
 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-            return Redirect("/users/1");
+            return new JsonResult(user);
         }
     }
 }

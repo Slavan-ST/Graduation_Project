@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebAPI.Models;
+using System.Reflection.Metadata;
+using WebAPI.Models.Data;
 
 namespace WebAPI.Data
 {
@@ -13,12 +9,19 @@ namespace WebAPI.Data
         //коннект к БД
         static string _connectionString = @"Server = SlavanST\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
+        public ApplicationContext()
+        {
+
+        }
+
         #region Таблицы
 
-        public DbSet<Room> Rooms { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<AttendanceLog> AttendanceLog { get; set; }
+        public DbSet<Room> Rooms { get; set; } = null!;
+        public DbSet<Role> Roles { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Marker> Markers { get; set; } = null!;
+        public DbSet<Student> Students { get; set; } = null!;
+        public DbSet<AttendanceLog> AttendanceLog { get; set; } = null!;
 
         #endregion
 

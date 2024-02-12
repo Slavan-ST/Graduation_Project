@@ -1,5 +1,9 @@
 
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using WebAPI.Models.Handlers;
+using WebAPI.Models.Requirements;
 
 namespace WebAPI
 {
@@ -14,12 +18,20 @@ namespace WebAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddAuthorization();
+
+
+            builder.Services.AddAuthorization(options =>
+            {
+                //сюда можно лепить политики доступа
+                options.AddPolicy("user",
+                    policy => policy.Requirements.Add(new AccessRequirement("User")));
+            });
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => options.LoginPath = "/login");
 
             builder.Services.AddCors(); // добавляем сервисы CORS
+            builder.Services.AddSingleton<IAuthorizationHandler, AccessHandler>();
 
             var app = builder.Build();
 
