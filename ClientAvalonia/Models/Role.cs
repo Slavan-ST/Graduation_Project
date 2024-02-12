@@ -5,14 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models.Data
+namespace ClientAvalonia.Models
 {
     public class Role
     {
-        public Role()
-        {
-            Users = new HashSet<User>();
-        }
         public int Id { get; set; }
         public string Name { get; set; } = "";
 
@@ -20,6 +16,6 @@ namespace WebAPI.Models.Data
         public static string User { get; } = "User";
         public static string Guest { get; } = "Guest";
         public static string Moderator { get; } = "Moderator";
-        public virtual ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; } = new List<User>();
     }
 }

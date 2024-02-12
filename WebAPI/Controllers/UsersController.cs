@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = ApplicationContext.GetContext();
             var user = await db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (user == null)
             {
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = ApplicationContext.GetContext();
             if (await db.Users.ContainsAsync(user))
             {
                 return StatusCode(400);
@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = ApplicationContext.GetContext();
             if (!await db.Users.ContainsAsync(user))
             {
                 return StatusCode(404);
@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = ApplicationContext.GetContext();
             if (!await db.Users.ContainsAsync(user))
             {
                 return StatusCode(404);

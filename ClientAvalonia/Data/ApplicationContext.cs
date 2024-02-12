@@ -1,28 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ClientAvalonia.Models;
+using HarfBuzzSharp;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
-using WebAPI.Models.Data;
 
-namespace WebAPI.Data
+namespace ClientAvalonia.Data
 {
     public class ApplicationContext : DbContext
     {
-        private static ApplicationContext _context = new ApplicationContext();
         //коннект к БД
         static string _connectionString = @"Server = SlavanST\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
-        private ApplicationContext()
-        {
-
-        }
-        public static ApplicationContext GetContext() => _context;
-
         //Таблицы
-        public DbSet<Room> Rooms { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Marker> Markers { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<AttendanceLog> AttendanceLog { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,7 +24,8 @@ namespace WebAPI.Data
             modelBuilder.Entity<Role>()
                 .HasMany(e => e.Users)
                 .WithOne(e => e.Role)
-                .HasForeignKey("RoleId");
+                .HasForeignKey(e => e.RoleId)
+                .HasPrincipalKey(e => e.Id);
         }
     }
 }

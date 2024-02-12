@@ -6,6 +6,10 @@ using Avalonia.Media.Imaging;
 using System.Net.Http;
 using System.Net;
 using System.Collections.Generic;
+using System.Linq;
+using Helper.Models;
+using ClientAvalonia.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClientAvalonia.ViewModels;
 
@@ -16,16 +20,22 @@ public class MainViewModel : ViewModelBase
     {
 
         //отправка сообщения
-        Send = ReactiveCommand.Create(async () =>
+        Send = ReactiveCommand.Create( () =>
         {
-            HttpClient client = new HttpClient();
-
-
+            //HttpClient client = new HttpClient();
             //var response = await client.PostAsync("http://localhost:5000/login/", content);
-            var response = await client.GetAsync(string.Format("http://192.168.0.2:5170/login/?login={0}&password={1}","kola","123"));
-
+            //var response = await client.GetAsync(string.Format("http://192.168.0.2:5170/login/?login={0}&password={1}","kola","123"));
             //Client.Start();
-            Debug.WriteLine("it's work! " + response.StatusCode);
+            //Debug.WriteLine("it's work! " + response.StatusCode);
+
+            ApplicationContext db = new ApplicationContext();
+            var firstUser = db.Users.Include(c => c.Role).First();
+            if (firstUser == null)
+            {
+                return;
+            }
+            string result = (firstUser.Role != null)? firstUser.Role.Name : "null";
+            Debug.WriteLine($"Role:{result}");  //null
         });
 
     }

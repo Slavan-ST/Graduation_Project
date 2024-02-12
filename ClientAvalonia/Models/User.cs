@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebAPI.Data;
 
-namespace WebAPI.Models.Data
+namespace ClientAvalonia.Models    
 {
     public class User
     {
@@ -19,6 +18,6 @@ namespace WebAPI.Models.Data
         public string Password { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
     }
 }
