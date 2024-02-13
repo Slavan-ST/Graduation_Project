@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.Handlers;
 using WebAPI.Models.Requirements;
 
@@ -23,8 +24,9 @@ namespace WebAPI
             builder.Services.AddAuthorization(options =>
             {
                 //сюда можно лепить политики доступа
-                options.AddPolicy("user",
-                    policy => policy.Requirements.Add(new AccessRequirement("User")));
+                options.AddPolicy("user", policy => policy.Requirements.Add(new AccessRequirement("User")));
+                options.AddPolicy("admin", policy => policy.Requirements.Add(new AccessRequirement("Admin")));
+                options.AddPolicy("moderator", policy => policy.Requirements.Add(new AccessRequirement("Moderator")));
             });
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -51,6 +53,7 @@ namespace WebAPI
 
 
             app.MapControllers();
+
 
             app.Run();
         }

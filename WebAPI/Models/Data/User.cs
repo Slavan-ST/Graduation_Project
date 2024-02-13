@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WebAPI.Data;
 
@@ -19,6 +20,7 @@ namespace WebAPI.Models.Data
         public string Password { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
-        public Role Role { get; set; }
+        [JsonIgnore]
+        public Role? Role { get; set; }
     }
 }

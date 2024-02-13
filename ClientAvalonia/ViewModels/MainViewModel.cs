@@ -10,6 +10,7 @@ using System.Linq;
 using Helper.Models;
 using ClientAvalonia.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Json;
 
 namespace ClientAvalonia.ViewModels;
 
@@ -20,11 +21,12 @@ public class MainViewModel : ViewModelBase
     {
 
         //отправка сообщения
-        Send = ReactiveCommand.Create( () =>
+        Send = ReactiveCommand.Create( async() =>
         {
-            //HttpClient client = new HttpClient();
+            HttpClient client = new HttpClient();
+
             //var response = await client.PostAsync("http://localhost:5000/login/", content);
-            //var response = await client.GetAsync(string.Format("http://192.168.0.2:5170/login/?login={0}&password={1}","kola","123"));
+            var response = await client.PostAsJsonAsync("http://192.168.0.2:5170/users/1", new User());
             //Client.Start();
             //Debug.WriteLine("it's work! " + response.StatusCode);
 

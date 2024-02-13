@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WebAPI.Models.Data
@@ -13,6 +14,7 @@ namespace WebAPI.Models.Data
         public string Surname { get; set; } = "";
         public string Patronymic { get; set; } = "";
         public int RoomId { get; set; }
+        [JsonIgnore]
         public Room? Room { get; set; }
     }
 }

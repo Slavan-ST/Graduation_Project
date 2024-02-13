@@ -6,15 +6,13 @@ namespace WebAPI.Data
 {
     public class ApplicationContext : DbContext
     {
-        private static ApplicationContext _context = new ApplicationContext();
         //коннект к БД
         static string _connectionString = @"Server = SlavanST\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
-        private ApplicationContext()
+        public ApplicationContext()
         {
 
         }
-        public static ApplicationContext GetContext() => _context;
 
         //Таблицы
         public DbSet<Room> Rooms { get; set; }

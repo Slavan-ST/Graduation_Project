@@ -19,21 +19,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Login(string login, string password)
         {
             Debug.WriteLine($"login: {login}; password: {password}");
-            ApplicationContext db = ApplicationContext.GetContext();
-            var user = await db.Users.Where(x => x.Login == login && x.Password == password).FirstOrDefaultAsync();
+            ApplicationContext db = new ApplicationContext();
+            var user = await db.Users.Include(c => c.Role).Where(x => x.Login == login && x.Password == password).FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
             }
 
-            Debug.WriteLine(
-                $"RoleID: {user.RoleId}" + Environment.NewLine +
-                $"Login: {user.Login}" + Environment.NewLine +
-                $"Password: {user.Password}" + Environment.NewLine +
-                $"Name: {user.Name}" + Environment.NewLine +
-                $"Surname: {user.Surname}" + Environment.NewLine +
-                $"Patronymic: {user.Patronymic}" + Environment.NewLine +
-                $"Role: {user.Role??null}");
 
             var claims = new List<Claim>()
             {
