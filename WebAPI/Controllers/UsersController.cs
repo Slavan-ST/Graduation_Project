@@ -7,7 +7,6 @@ using WebAPI.Models.Data;
 
 namespace WebAPI.Controllers
 {
-    // /users    
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
