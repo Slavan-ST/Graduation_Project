@@ -25,7 +25,10 @@ namespace WebAPI
             {
                 //сюда можно лепить политики доступа
                 options.AddPolicy("user", policy => policy.Requirements.Add(new AccessRequirement("User")));
-                options.AddPolicy("admin", policy => policy.Requirements.Add(new AccessRequirement("Admin")));
+                options.AddPolicy("admin", policy =>
+                {
+                    policy.Requirements.Add(new AccessRequirement("Admin"));
+                });
                 options.AddPolicy("moderator", policy => policy.Requirements.Add(new AccessRequirement("Moderator")));
             });
 

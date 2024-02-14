@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
+using WebAPI.Models;
 using WebAPI.Models.Data;
 
 namespace WebAPI.Controllers
@@ -12,9 +13,9 @@ namespace WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         //получение пользователя
-        [Authorize(Policy = "user")]
+        [MultiPolicyAuthorize("admin")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var user = await db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -25,8 +26,9 @@ namespace WebAPI.Controllers
             db.Dispose();
             return new JsonResult(user);
         }
-        //добавление пользователя        
-        [Authorize]
+
+        //добавление пользователя       
+        [MultiPolicyAuthorize("admin")]
         [HttpPost]
         public async Task<ActionResult> Post(User user)
         {
@@ -44,7 +46,7 @@ namespace WebAPI.Controllers
             return StatusCode(201);
         }
         //обновление пользователя        
-        [Authorize]
+        [MultiPolicyAuthorize("admin")]
         [HttpPut]
         public async Task<ActionResult> Put(User user)
         {
@@ -61,8 +63,8 @@ namespace WebAPI.Controllers
             db.Dispose();
             return StatusCode(202);//принято
         }
-        //удаление пользователя        
-        [Authorize]
+        //удаление пользователя     
+        [MultiPolicyAuthorize("admin")]
         [HttpDelete]
         public async Task<ActionResult> Delete(User user)
         {

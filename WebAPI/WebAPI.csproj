@@ -22,8 +22,4 @@
     <ProjectReference Include="..\Helper\Helper.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\DTO\" />
-  </ItemGroup>
-
 </Project>

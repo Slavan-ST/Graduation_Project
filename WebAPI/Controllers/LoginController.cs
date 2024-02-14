@@ -18,7 +18,6 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Login(string login, string password)
         {
-            Debug.WriteLine($"login: {login}; password: {password}");
             ApplicationContext db = new ApplicationContext();
             var user = await db.Users.Include(c => c.Role).Where(x => x.Login == login && x.Password == password).FirstOrDefaultAsync();
             if (user == null)

@@ -27,12 +27,5 @@ namespace WebAPI.Data
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Role>()
-                .HasMany(e => e.Users)
-                .WithOne(e => e.Role)
-                .HasForeignKey("RoleId");
-        }
     }
 }
