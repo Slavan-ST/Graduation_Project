@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models.Handlers;
-using WebAPI.Models.Requirements;
+using WebAPI.Authentication.Handlers;
+using WebAPI.Authentication.Requirements;
 
 namespace WebAPI
 {

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Authentication;
 using WebAPI.Data;
-using WebAPI.Models.Data;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -22,13 +24,13 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<AttendanceLog>> GetAttendanceLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
-            var AttendanceLog = await db.AttendanceLog.Where(x => x.Id == id).FirstOrDefaultAsync();
-            if (AttendanceLog == null)
+            var attendanceLog = await db.AttendanceLog.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (attendanceLog == null)
             {
                 return NotFound();
             }
             db.Dispose();
-            return new JsonResult(AttendanceLog);
+            return new JsonResult(attendanceLog);
         }
 
         [HttpPost]

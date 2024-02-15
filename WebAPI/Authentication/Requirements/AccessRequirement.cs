@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using WebAPI.Models.Data;
 
-namespace WebAPI.Models.Requirements
+namespace WebAPI.Authentication.Requirements
 {
-    public class AccessRequirement: IAuthorizationRequirement
+    public class AccessRequirement : IAuthorizationRequirement
     {
         public AccessRequirement(string role)
         {

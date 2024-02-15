@@ -7,9 +7,9 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClientAvalonia.Services;
-using Helper.Models;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using ClientAvalonia.Models;
 
 
 namespace ClientAvalonia

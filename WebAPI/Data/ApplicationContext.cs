@@ -1,26 +1,27 @@
-﻿using Helper.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
+using WebAPI.Models;
 
-namespace Server.Data
+namespace WebAPI.Data
 {
-    public class ApplicationContext:DbContext
+    public class ApplicationContext : DbContext
     {
         //коннект к БД
         static string _connectionString = @"Server = SlavanST\Slavan; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
-        #region Таблицы
+        public ApplicationContext()
+        {
 
+        }
+
+        //Таблицы
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Marker> Markers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<AttendanceLog> AttendanceLog { get; set; }
 
-        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Authentication;
 using WebAPI.Data;
 using WebAPI.Models;
-using WebAPI.Models.Data;
 
 namespace WebAPI.Controllers
 {
@@ -29,54 +29,57 @@ namespace WebAPI.Controllers
         //добавление пользователя       
         [MultiPolicyAuthorize("admin")]
         [HttpPost]
-        public async Task<ActionResult> Post(User user)
+        public async Task<ActionResult> PostUser(User userFromClient)
         {
-            if (user == null)
+            if (userFromClient == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (await db.Users.ContainsAsync(user))
+            if (await db.Users.ContainsAsync(userFromClient))
             {
                 return StatusCode(400);
             }
-            await db.Users.AddAsync(user);
+            await db.Users.AddAsync(userFromClient);
+            await db.SaveChangesAsync();
             db.Dispose();
             return StatusCode(201);
         }
         //обновление пользователя        
         [MultiPolicyAuthorize("admin")]
         [HttpPut]
-        public async Task<ActionResult> Put(User user)
+        public async Task<ActionResult> PutUser(User userFromClient)
         {
-            if (user == null)
+            if (userFromClient == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Users.ContainsAsync(user))
+            if (!await db.Users.ContainsAsync(userFromClient))
             {
                 return StatusCode(404);
             }
-            db.Users.Update(user);
+            db.Users.Update(userFromClient);
+            await db.SaveChangesAsync();
             db.Dispose();
             return StatusCode(202);//принято
         }
         //удаление пользователя     
         [MultiPolicyAuthorize("admin")]
         [HttpDelete]
-        public async Task<ActionResult> Delete(User user)
+        public async Task<ActionResult> DeleteUser(User userFromClient)
         {
-            if (user == null)
+            if (userFromClient == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Users.ContainsAsync(user))
+            if (!await db.Users.ContainsAsync(userFromClient))
             {
                 return StatusCode(404);
             }
-            db.Users.Remove(user);
+            db.Users.Remove(userFromClient);
+            await db.SaveChangesAsync();
             db.Dispose();
             return StatusCode(202);//принято
         }

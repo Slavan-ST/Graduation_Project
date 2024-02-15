@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace ClientAvalonia.Models    
+namespace ClientAvalonia.Models
 {
     public class User
     {
@@ -18,6 +19,7 @@ namespace ClientAvalonia.Models
         public string Password { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
+        [JsonIgnore]
         public Role? Role { get; set; }
     }
 }

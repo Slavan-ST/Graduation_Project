@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WebAPI.Data;
 
-namespace WebAPI.Models.Data
+namespace WebAPI.Models
 {
     public class User
     {

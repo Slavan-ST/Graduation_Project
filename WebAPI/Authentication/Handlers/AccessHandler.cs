@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using WebAPI.Models.Data;
-using WebAPI.Models.Requirements;
+using WebAPI.Authentication.Requirements;
 
-namespace WebAPI.Models.Handlers
+namespace WebAPI.Authentication.Handlers
 {
     public class AccessHandler : AuthorizationHandler<AccessRequirement>
     {
@@ -13,14 +12,14 @@ namespace WebAPI.Models.Handlers
         }
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AccessRequirement requirement)
         {
-            bool hasClaim = context.User.HasClaim(c => c.Type == ClaimTypes.Role); 
+            bool hasClaim = context.User.HasClaim(c => c.Type == ClaimTypes.Role);
             if (!hasClaim)
             {
                 context.Fail();
                 return Task.CompletedTask;
             }
             string claimValue = context.User.FindFirst(c => c.Type == ClaimTypes.Role)!.Value;
-            if(claimValue == requirement.Role)
+            if (claimValue == requirement.Role)
             {
                 context.Succeed(requirement);
             }

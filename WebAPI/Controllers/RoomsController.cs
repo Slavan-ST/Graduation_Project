@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using WebAPI.Data;
 using WebAPI.Models;
 
@@ -8,78 +7,78 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StudentsController : ControllerBase
+    public class RoomsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
             ApplicationContext db = new ApplicationContext();
-            var students = await db.Students.ToListAsync();
-            return new JsonResult(students);
+            var rooms = await db.Rooms.ToListAsync();
+            return new JsonResult(rooms);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> GetStudent(int id)
+        public async Task<ActionResult<Room>> GetRoom(int id)
         {
             ApplicationContext db = new ApplicationContext();
-            var student = await db.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
-            if (student == null)
+            var room = await db.Rooms.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (room == null)
             {
                 return NotFound();
             }
             db.Dispose();
-            return new JsonResult(student);
+            return new JsonResult(room);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Student studentFromClient)
+        public async Task<ActionResult> PostRoom(Room roomFromClient)
         {
-            if (studentFromClient == null)
+            if (roomFromClient == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (await db.Students.ContainsAsync(studentFromClient))
+            if (await db.Rooms.ContainsAsync(roomFromClient))
             {
                 return StatusCode(400);
             }
-            await db.Students.AddAsync(studentFromClient);
+            await db.Rooms.AddAsync(roomFromClient);
             await db.SaveChangesAsync();
             db.Dispose();
             return StatusCode(201);
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(Student studentFromClient)
+        public async Task<ActionResult> PutRoom(Room room)
         {
-            if (studentFromClient == null)
+            if (room == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Students.ContainsAsync(studentFromClient))
+            if (!await db.Rooms.ContainsAsync(room))
             {
                 return StatusCode(404);
             }
-            db.Students.Update(studentFromClient);
+            db.Rooms.Update(room);
             await db.SaveChangesAsync();
             db.Dispose();
             return StatusCode(202);//принято
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(Student studentFromClient)
+        public async Task<ActionResult> DeleteRoom(Room roomFromClient)
         {
-            if (studentFromClient == null)
+            if (roomFromClient == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Students.ContainsAsync(studentFromClient))
+            if (!await db.Rooms.ContainsAsync(roomFromClient))
             {
                 return StatusCode(404);
             }
-            db.Students.Remove(studentFromClient);
+            db.Rooms.Remove(roomFromClient);
             await db.SaveChangesAsync();
             db.Dispose();
             return StatusCode(202);//принято
