@@ -14,7 +14,12 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
             ApplicationContext db = new ApplicationContext();
-            var students = await db.Students.ToListAsync();
+            var students = await db.Students.ToListAsync(); 
+            if (students == null)
+            {
+                return NotFound();
+            }
+            db.Dispose();
             return new JsonResult(students);
         }
 

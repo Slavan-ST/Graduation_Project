@@ -11,8 +11,6 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        //получение пользователя
-        [MultiPolicyAuthorize("admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -25,9 +23,19 @@ namespace WebAPI.Controllers
             db.Dispose();
             return new JsonResult(user);
         }
+        [HttpGet]
+        public async Task<ActionResult<List<User>>> GetUsers()
+        {
+            ApplicationContext db = new ApplicationContext();
+            var users = await db.Users.ToListAsync();
+            if (users == null)
+            {
+                return NotFound();
+            }
+            db.Dispose();
+            return new JsonResult(users);
+        }
 
-        //добавление пользователя       
-        [MultiPolicyAuthorize("admin")]
         [HttpPost]
         public async Task<ActionResult> PostUser(User userFromClient)
         {
@@ -45,8 +53,7 @@ namespace WebAPI.Controllers
             db.Dispose();
             return StatusCode(201);
         }
-        //обновление пользователя        
-        [MultiPolicyAuthorize("admin")]
+
         [HttpPut]
         public async Task<ActionResult> PutUser(User userFromClient)
         {
@@ -64,8 +71,7 @@ namespace WebAPI.Controllers
             db.Dispose();
             return StatusCode(202);//принято
         }
-        //удаление пользователя     
-        [MultiPolicyAuthorize("admin")]
+
         [HttpDelete]
         public async Task<ActionResult> DeleteUser(User userFromClient)
         {

@@ -14,6 +14,11 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var rooms = await db.Rooms.ToListAsync();
+            if (rooms == null)
+            {
+                return NotFound();
+            }
+            db.Dispose();
             return new JsonResult(rooms);
         }
 

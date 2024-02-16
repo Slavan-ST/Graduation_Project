@@ -16,7 +16,12 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogs()
         {
             ApplicationContext db = new ApplicationContext();
-            var attendanceLogs = await db.AttendanceLog.ToListAsync();
+            var attendanceLogs = await db.AttendanceLog.ToListAsync(); 
+            if (attendanceLogs == null)
+            {
+                return NotFound();
+            }
+            db.Dispose();
             return new JsonResult(attendanceLogs);
         }
 
