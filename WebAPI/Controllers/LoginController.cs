@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.Security.Claims;
+using WebAPI.Authentication;
 using WebAPI.Data;
 
 namespace WebAPI.Controllers
@@ -19,10 +20,19 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Login(string login, string password)
         {
             ApplicationContext db = new ApplicationContext();
-            var user = await db.Users.Include(c => c.Role).Where(x => x.Login == login && x.Password == password).FirstOrDefaultAsync();
+
+            var user = await db.Users
+                .Include(c => c.Role)
+                .Where(x => x.Login == login)
+                .FirstOrDefaultAsync();
+
             if (user == null)
             {
                 return NotFound();
+            }
+            if(!SecretHasher.Verify(password, user.Password))
+            {
+                return BadRequest();
             }
 
 

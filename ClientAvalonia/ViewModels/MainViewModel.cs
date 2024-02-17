@@ -22,7 +22,7 @@ public class MainViewModel : ViewModelBase
     {
 
         //отправка сообщения
-        Send = ReactiveCommand.Create( async() =>
+        Send = ReactiveCommand.Create( () =>
         {
             HttpClient client = new HttpClient();
 

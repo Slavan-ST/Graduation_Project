@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using WebAPI.Authentication;
 using WebAPI.Data;
 using WebAPI.Models;
@@ -37,7 +38,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostUser(User userFromClient)
+        public async Task<ActionResult> PostUser(User userFromClient) //новый юзверь
         {
             if (userFromClient == null)
             {
@@ -48,6 +49,9 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(400);
             }
+            userFromClient.Password = SecretHasher.Hash(userFromClient.Password);
+            Debug.WriteLine(userFromClient.Password);
+            Debug.WriteLine(userFromClient.Password.Length);
             await db.Users.AddAsync(userFromClient);
             await db.SaveChangesAsync();
             db.Dispose();

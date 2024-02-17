@@ -20,6 +20,7 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //!!  не забыть бы вынести контекст в сервисы
 
             builder.Services.AddAuthorization(options =>
             {
