@@ -7,15 +7,10 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models
+namespace WebAPI.Models.DTO
 {
-    public class Room
+    public class RoomDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Number { get; set; } = "";
-        [JsonIgnore]
-        public List<Student> Students { get; set; } = new();
     }
 }

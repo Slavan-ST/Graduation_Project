@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models
+namespace WebAPI.Models.Main
 {
     public class Role
     {
@@ -15,11 +15,6 @@ namespace WebAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; } = "";
-
-        public static string Admin { get; } = "Admin";
-        public static string User { get; } = "User";
-        public static string Guest { get; } = "Guest";
-        public static string Moderator { get; } = "Moderator";
         [JsonIgnore]
         public virtual ICollection<User>? Users { get; set; }
     }

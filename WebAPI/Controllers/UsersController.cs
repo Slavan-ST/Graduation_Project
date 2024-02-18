@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebAPI.Authentication;
 using WebAPI.Data;
-using WebAPI.Models;
+using WebAPI.Models.Main;
 
 namespace WebAPI.Controllers
 {
@@ -25,16 +25,27 @@ namespace WebAPI.Controllers
             return new JsonResult(user);
         }
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetUsers()
+        public async Task<ActionResult<List<User>>> GetUsers(params string[] search)
         {
+            List<User> users = new List<User>();
             ApplicationContext db = new ApplicationContext();
-            var users = await db.Users.ToListAsync();
-            if (users == null)
+
+            foreach (var parameter in search)
             {
-                return NotFound();
+                var usersSearch = await db.Users.Where(x => x.Login.Contains(parameter)).ToListAsync();
+                if (usersSearch != null)
+                {
+                    users.AddRange(usersSearch);
+                }
             }
+
             db.Dispose();
-            return new JsonResult(users);
+            if (users.Count > 0)
+            {
+                return new JsonResult(users);
+            }
+
+            return NotFound();
         }
 
         [HttpPost]
@@ -45,16 +56,22 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (await db.Users.ContainsAsync(userFromClient))
+
+            bool existUser = await db.Users
+                .Where(x => x.Login == userFromClient.Login)
+                .FirstOrDefaultAsync() != null;
+
+            if (existUser)
             {
-                return StatusCode(400);
+                return StatusCode(409, "объект уже существует");
             }
+
             userFromClient.Password = SecretHasher.Hash(userFromClient.Password);
-            Debug.WriteLine(userFromClient.Password);
-            Debug.WriteLine(userFromClient.Password.Length);
+
             await db.Users.AddAsync(userFromClient);
             await db.SaveChangesAsync();
             db.Dispose();
+
             return StatusCode(201);
         }
 

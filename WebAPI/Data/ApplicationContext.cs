@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
-using WebAPI.Models;
+using WebAPI.Models.Main;
 
 namespace WebAPI.Data
 {

@@ -7,20 +7,18 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models
+namespace WebAPI.Models.Main
 {
-    public class AttendanceLog
+    public class Student
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int StudentId { get; set; }
-        public int MarkerId { get; set; }
-        public DateTime Date { get; set; }
-
+        public string Name { get; set; } = "";
+        public string Surname { get; set; } = "";
+        public string Patronymic { get; set; } = "";
+        public int RoomId { get; set; }
         [JsonIgnore]
-        public Student? Student { get; set; }
-        [JsonIgnore]
-        public Marker? Marker { get; set; }
+        public Room? Room { get; set; }
     }
 }

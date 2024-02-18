@@ -8,21 +8,15 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WebAPI.Data;
 
-namespace WebAPI.Models
+namespace WebAPI.Models.DTO
 {
-    public class User
+    public class UserDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string? Name { get; set; } = "";
         public string? Surname { get; set; } = "";
         public string? Patronymic { get; set; } = "";
         public string Login { get; set; } = "";
-        public string Password { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
-        [JsonIgnore]
-        public Role? Role { get; set; }
     }
 }
