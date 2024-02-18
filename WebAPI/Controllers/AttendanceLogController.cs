@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Authentication;
+using WebAPI.Security;
 using WebAPI.Data;
 using WebAPI.Models.Main;
 

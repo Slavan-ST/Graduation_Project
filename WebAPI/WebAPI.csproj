@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Helper\Helper.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\MappingProfiles\" />
+  </ItemGroup>
+
 </Project>

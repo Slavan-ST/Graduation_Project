@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using WebAPI.Authentication;
+using WebAPI.Security;
 using WebAPI.Data;
 using WebAPI.Models.Main;
 

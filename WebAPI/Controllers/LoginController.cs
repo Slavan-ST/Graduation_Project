@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.Security.Claims;
-using WebAPI.Authentication;
+using WebAPI.Security;
 using WebAPI.Data;
 
 namespace WebAPI.Controllers
