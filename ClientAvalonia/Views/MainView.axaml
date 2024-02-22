@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:ClientAvalonia.ViewModels"
+			 xmlns:capthc="using:Captcha"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ClientAvalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -17,6 +18,10 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 
+		<capthc:Captcha MinWidth="300"
+					  VerticalAlignment="Stretch"
+					  HorizontalAlignment="Stretch"
+				      Grid.Row="4"/>
 
 		<TextBlock Text="Сообщение серверу" 
 				   Grid.Row="0"/>
@@ -31,16 +36,6 @@
 				Grid.Row="2"/>
 
 
-		<TextBlock Text="Сообщение от сервера"
-				   Grid.Row="3"/>
-		<ScrollViewer MinWidth="300" 
-					  VerticalAlignment="Stretch" 
-					  HorizontalAlignment="Stretch"
-				      Grid.Row="4">
-			<TextBox Text="{Binding Answer}"
-					 VerticalAlignment="Stretch"
-					 HorizontalAlignment="Stretch"/>
-		</ScrollViewer>
 		<Image Grid.Row="4" Source="{Binding Image}"/>
 	</Grid>
 
