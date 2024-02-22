@@ -27,5 +27,9 @@ namespace WebAPI.Data
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => u.Login).IsUnique();
+        }
     }
 }

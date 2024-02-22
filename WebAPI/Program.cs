@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Models.MappingProfiles;
 using WebAPI.Security.Handlers;
 using WebAPI.Security.Requirements;
 
@@ -16,12 +17,10 @@ namespace WebAPI
 
             // Add services to the container.
 
+            builder.Services.AddCors(); // добавляем сервисы CORS
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
-            //!!  не забыть бы вынести контекст в сервисы
-
             builder.Services.AddAuthorization(options =>
             {
                 //сюда можно лепить политики доступа
@@ -31,13 +30,10 @@ namespace WebAPI
                     policy.Requirements.Add(new AccessRequirement("Admin"));
                 });
                 options.AddPolicy("moderator", policy => policy.Requirements.Add(new AccessRequirement("Moderator")));
-            });
-
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => options.LoginPath = "/login");
-
-            builder.Services.AddCors(); // добавляем сервисы CORS
+            }); //авторизация, добавление политик доступа
             builder.Services.AddSingleton<IAuthorizationHandler, AccessHandler>();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/login");
+
 
             var app = builder.Build();
 
@@ -50,7 +46,6 @@ namespace WebAPI
 
             // настраиваем CORS
             app.UseCors(builder => builder.AllowAnyOrigin());
-
 
             app.UseAuthentication();   // добавление middleware аутентификации 
             app.UseAuthorization();   // добавление middleware авторизации 
