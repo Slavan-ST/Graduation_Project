@@ -1,4 +1,5 @@
 ﻿using Client.Models;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Client.ViewModels
         [Reactive]
         public ObservableCollection<Node>? Nodes { get; set; }
 
-        public FaqViewModel() 
+        public FaqViewModel(IScreen screen) : base(screen)
         {
             QuestAnswer = new ObservableCollection<Node>
             {

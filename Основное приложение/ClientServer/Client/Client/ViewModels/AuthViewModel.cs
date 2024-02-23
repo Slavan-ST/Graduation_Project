@@ -15,7 +15,7 @@ namespace Client.ViewModels
         /// <summary>
         /// Конструктор AuthViewModel
         /// </summary>
-        public AuthViewModel()
+        public AuthViewModel(IScreen screen) : base(screen)
         {
             Auth = ReactiveCommand.Create(() =>
             {

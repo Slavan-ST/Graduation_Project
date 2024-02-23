@@ -10,5 +10,5 @@
         Title="Client"
 		Width="{Binding MainWinWidth}">
 	
-        <views:AuthView/>
+        <views:MainMenuView/>
 </Window>

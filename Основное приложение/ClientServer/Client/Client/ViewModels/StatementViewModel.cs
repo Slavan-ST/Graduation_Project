@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,6 @@ namespace Client.ViewModels
 {
     public class StatementViewModel : ViewModelBase
     {
-        public StatementViewModel() 
-        {
-
-        }
+        public StatementViewModel(IScreen screen) : base(screen) {}
     }
 }

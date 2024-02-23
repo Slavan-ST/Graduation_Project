@@ -18,7 +18,7 @@ namespace Client.ViewModels
 {
     public class MainMenuViewModel : ViewModelBase
     {
-        public MainMenuViewModel()
+        public MainMenuViewModel(IScreen screen) : base(screen)
         {
             HideSideBar = ReactiveCommand.Create(() =>
             {
@@ -28,7 +28,7 @@ namespace Client.ViewModels
 
             OpenSideBar = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = new NewsViewModel();
+                Navigation.WorkPlace = new NewsViewModel(HostScreen);
                 IsOpenSideBar =  true;
                 if (Navigation.MainWindow?.Bounds.Width > 600)
                 {
@@ -38,52 +38,52 @@ namespace Client.ViewModels
 
             ToMain = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.News;
+
             });
 
             ToDutyChart = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.DutyChart;
+
             });
 
             ToEvents = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.Events;
+
             });
 
             ToEventsList = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.EventsList;
+
             });
 
             ToFaq = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.Faq;
+
             });
 
             ToListStudents = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.ListStudents;
+
             });
 
             ToPurityChart = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.PurityChart;
+
             });
 
             ToStatement = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.Statement;
+
             });
 
             ToProfile = ReactiveCommand.Create(() =>
             {
-                Navigation.WorkPlace = Navigation.Profile;
+
             });
 
             Exit = ReactiveCommand.Create(() =>
             {
-                Navigation.MainWindow.Content = Navigation.Authification;
+
             });
         }
 
@@ -162,7 +162,7 @@ namespace Client.ViewModels
         /// Рабочее простарнство на интерфейсе
         /// </summary>
         [Reactive]
-        public ViewModelBase WorkPlace { get; set; } = Navigation.News = new NewsViewModel();
+        public ViewModelBase? WorkPlace { get; set; }
         /// <summary>
         /// Свойство определяющие открыт или закрыт SideBar
         /// </summary>

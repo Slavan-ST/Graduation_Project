@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Client.ViewModels
 {
     public class NewsViewModel : ViewModelBase
     {
-        public NewsViewModel() 
+        public NewsViewModel(IScreen screen) : base(screen)
         {
 
         }

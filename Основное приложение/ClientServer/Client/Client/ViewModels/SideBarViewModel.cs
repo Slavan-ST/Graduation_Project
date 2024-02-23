@@ -17,7 +17,7 @@ namespace Client.ViewModels
 
         #endregion
 
-        public SideBarViewModel() 
+        public SideBarViewModel(IScreen screen) : base(screen)
         {
             Faq = ReactiveCommand.Create(() =>
             {
