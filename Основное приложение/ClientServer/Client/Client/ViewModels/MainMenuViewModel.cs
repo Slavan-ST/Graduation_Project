@@ -17,42 +17,75 @@ using ReactiveUI.Fody.Helpers;
 
 namespace Client.ViewModels
 {
-    public class MainMenuViewModel : ReactiveObject, IScreen
+    public class MainMenuViewModel : ViewModelBase, IScreen
     {
         //роутер на котором завязана навигация
         public RoutingState Router { get; } = new RoutingState();
 
         // Пример команды перехода
-        public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
+        //public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
 
-        public MainMenuViewModel()
+        public MainMenuViewModel(IScreen screen):base(screen)
         {
 
-            GoNext = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            HideSideBar = ReactiveCommand.Create(() => { Router.Navigate.Execute(new NewsViewModel(this)); });//эээ...да..эт не то :))
 
-            HideSideBar = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            OpenSideBar = ReactiveCommand.Create(() => { Router.Navigate.Execute(new NewsViewModel(this)); });//эээ...да..эт не то :))
 
-            OpenSideBar = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToMain = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToMain = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new NewsViewModel(this));
+            });
 
-            ToDutyChart = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToEvents = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToEventsList = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToDutyChart = ReactiveCommand.Create(() => 
+            { 
+                Router.Navigate.Execute(new DutyChartViewModel(this));
+            });
+            ToEvents = ReactiveCommand.Create(() => 
+            {
+                Router.Navigate.Execute(new EventsViewModel(this));
+            });
 
-            ToFaq = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToEventsList = ReactiveCommand.Create(() => 
+            {
+                Router.Navigate.Execute(new EventsListViewModel(this)); 
+            });
 
-            ToListStudents = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToFaq = ReactiveCommand.Create(() => 
+            { 
+                Router.Navigate.Execute(new FaqViewModel(this));
+            });
 
-            ToPurityChart = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToListStudents = ReactiveCommand.Create(() => 
+            { 
+                Router.Navigate.Execute(new ListStudentsViewModel(this)); 
+            });
 
-            ToStatement = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToPurityChart = ReactiveCommand.Create(() =>
+            { 
+                Router.Navigate.Execute(new PurityChartViewModel(this)); 
+            });
 
-            ToProfile = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToStatement = ReactiveCommand.Create(() => 
+            { 
+                Router.Navigate.Execute(new StatementViewModel(this)); 
+            });
 
-            Exit = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
+            ToProfile = ReactiveCommand.Create(() => 
+            { 
+                Router.Navigate.Execute(new ProfileViewModel(this));
+            });
+
+
+
+            Exit = ReactiveCommand.Create(() => 
+            { 
+                // + сюда добавить выход из учётной записи
+                Router.Navigate.Execute(new AuthViewModel(this)); 
+            });
         }
 
         #region Commands
