@@ -3,22 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{3168B8ED-7DCA-4183-9544-DB1A20C4213D}"
-	ProjectSection(SolutionItems) = preProject
-		Readme.txt = Readme.txt
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{5D410FAC-6D3C-441F-AC6B-1A159126D06C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{6BE7362C-DC52-4200-8E79-527C935DD9FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client\Client.csproj", "{068EF0AF-59C4-4249-887D-5CF6B99D73AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client\Client.csproj", "{068EF0AF-59C4-4249-887D-5CF6B99D73AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Android", "Client\Client.Android\Client.Android.csproj", "{38452797-7397-4EC5-B1AF-98179BDFEB0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Android", "Client\Client.Android\Client.Android.csproj", "{38452797-7397-4EC5-B1AF-98179BDFEB0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Desktop", "Client\Client.Desktop\Client.Desktop.csproj", "{74CC1B60-0B94-462E-B8E7-1FA8804D7FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Desktop", "Client\Client.Desktop\Client.Desktop.csproj", "{74CC1B60-0B94-462E-B8E7-1FA8804D7FBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Browser", "Client\Client.Browser\Client.Browser.csproj", "{2836FD37-294B-4FBB-90E8-D621352F39F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Browser", "Client\Client.Browser\Client.Browser.csproj", "{2836FD37-294B-4FBB-90E8-D621352F39F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MainClient", "MainClient", "{A23ABB34-0AE5-4BB1-91E9-5B897B1C2C83}"
 EndProject
