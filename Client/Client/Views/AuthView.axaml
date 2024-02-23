@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="250"
+             x:Class="Client.Views.AuthView">
+	<StackPanel Margin="15">
+		<TextBlock Text="Авторизация" HorizontalAlignment="Center" Margin="0,20"></TextBlock>
+		<TextBlock Text="Логин"></TextBlock>
+		<TextBox Text="{Binding Login}"></TextBox>
+
+		<DockPanel LastChildFill="True">
+			<TextBlock DockPanel.Dock="Top" Text="Пароль"></TextBlock>
+			<Button Content="👁" DockPanel.Dock="Right" Margin="5,0,0,0"/>
+			<TextBox DockPanel.Dock="Right" Text="{Binding Password}"></TextBox>
+		</DockPanel>
+		
+		<Button Margin="0,15" HorizontalAlignment="Stretch" 
+				HorizontalContentAlignment="Center" Content="Войти"
+				Command="{Binding Auth}"/>
+	</StackPanel>
+</UserControl>

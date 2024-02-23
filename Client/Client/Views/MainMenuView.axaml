@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ir="clr-namespace:Avalonia.Xaml.Interactions.Responsive;assembly=Avalonia.Xaml.Interactions.Responsive"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+			 xmlns:vm="clr-namespace:Client.ViewModels"
+			 xmlns:views="clr-namespace:Client.Views;assembly=Client"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             x:Class="Client.Views.MainMenuView">
+
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/Button.axaml"/>
+	</UserControl.Styles>
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainMenuViewModel />
+	</Design.DataContext>
+	
+	<Grid ShowGridLines="True">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="250"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Background="Gray" Grid.ColumnSpan="2" Name="TitlePlace">
+			<TextBlock Text="Новости" HorizontalAlignment="Right"
+					   VerticalAlignment="Center"
+					   Margin="5"/>
+			<Button Width="40" Height="40" Margin="5" Command="{Binding OpenSideBar}"/>
+		</Grid>
+
+
+		<UserControl Content="{Binding WorkPlace}"
+					 DockPanel.Dock="Bottom" Grid.ColumnSpan="2"
+					 Grid.Column="{Binding NumColumn}"
+					 Grid.Row="1" x:Name="UCworkPlace" >			
+		</UserControl>
+		
+		
+		
+		<Grid Background="LightGray" Grid.RowSpan="2" IsVisible="{Binding IsOpenSideBar}" Name="SideBar">
+			<StackPanel>
+				<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding ToMain}" Classes="center"/>
+				<StackPanel IsVisible="{Binding IsStudents}">
+					<Button Content="Профиль" Command="{Binding ToProfile}" Classes="center"/>
+					<Button Content="Заявление" Command="{Binding ToStatement}" Classes="center"/>
+					<Button Content="Мероприятия" Command="{Binding ToEvents}" Classes="center"/>
+				</StackPanel>
+				<StackPanel IsVisible="{Binding IsWorker}">
+					<Button Content="План меропритий" Command="{Binding ToEventsList}" Classes="center"/>
+					<Button Content="График дежурств" Command="{Binding ToDutyChart}" Classes="center"/>
+					<Button Content="Списки студентов" Command="{Binding ToListStudents}" Classes="center"/>
+					<Button Content="Экран чистоты" Command="{Binding ToPurityChart}" Classes="center"/>
+				</StackPanel>
+				<Button Content="Вопрос-ответ" Command="{Binding ToFaq}" Classes="center"/>
+				<Button Content="Выход" Command="{Binding Exit}" Classes="center"/>
+			</StackPanel>
+			<Button Content="◄" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
+		</Grid>
+	</Grid>
+</UserControl>
