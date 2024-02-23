@@ -1,6 +1,6 @@
 ﻿using Client.ViewModels;
 
-namespace maket.ViewModels;
+namespace Client.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {

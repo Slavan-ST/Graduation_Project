@@ -1,14 +1,16 @@
-using Avalonia.Controls;
-using Client.Services;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Client.ViewModels;
+using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class AuthView : UserControl
+    public partial class AuthView : ReactiveUserControl<AuthViewModel>
     {
         public AuthView()
         {
-            InitializeComponent();
-            DataContext = Navigation.Authification;
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

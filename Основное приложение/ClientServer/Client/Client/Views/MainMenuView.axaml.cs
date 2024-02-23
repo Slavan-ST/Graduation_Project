@@ -1,16 +1,16 @@
-using Avalonia.Controls;
-using Client.Services;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
 using Client.ViewModels;
-using System.Diagnostics;
+using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class MainMenuView : UserControl
+    public partial class MainMenuView : ReactiveUserControl<MainMenuViewModel>
     {
         public MainMenuView()
         {
-            InitializeComponent();
-            DataContext = Navigation.MainMenu; 
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

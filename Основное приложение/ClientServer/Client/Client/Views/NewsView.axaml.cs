@@ -1,14 +1,16 @@
-using Avalonia.Controls;
-using Client.Services;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Client.ViewModels;
+using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class NewsView : UserControl
+    public partial class NewsView : ReactiveUserControl<NewsViewModel>
     {
         public NewsView()
         {
-            InitializeComponent();
-            DataContext = Navigation.News;
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

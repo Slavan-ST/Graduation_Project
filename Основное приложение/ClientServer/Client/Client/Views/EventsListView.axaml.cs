@@ -1,14 +1,16 @@
-using Avalonia.Controls;
-using Client.Services;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Client.ViewModels;
+using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class EventsListView : UserControl
+    public partial class EventsListView : ReactiveUserControl<EventsListViewModel>
     {
         public EventsListView()
         {
-            InitializeComponent();
-            DataContext = Navigation.EventsList;
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

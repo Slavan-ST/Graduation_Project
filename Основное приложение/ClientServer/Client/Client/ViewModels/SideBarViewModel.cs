@@ -7,7 +7,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace maket.ViewModels
+namespace Client.ViewModels
 {
     public class SideBarViewModel : ViewModelBase
     {

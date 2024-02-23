@@ -1,14 +1,17 @@
 using Avalonia.Controls;
-using maket.ViewModels;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Client.ViewModels;
+using ReactiveUI;
 
-namespace maket.Views
+namespace Client.Views
 {
-    public partial class SideBarView : UserControl
+    public partial class SideBarView : ReactiveUserControl<SideBarViewModel>
     {
         public SideBarView()
         {
-            InitializeComponent();
-            DataContext = new SideBarViewModel();
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

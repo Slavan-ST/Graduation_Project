@@ -1,14 +1,16 @@
-using Avalonia.Controls;
-using Client.Services;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Client.ViewModels;
+using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class DutyChartView : UserControl
+    public partial class DutyChartView : ReactiveUserControl<DutyChartViewModel>
     {
         public DutyChartView()
         {
-            InitializeComponent();
-            DataContext = Navigation.DutyChart;
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

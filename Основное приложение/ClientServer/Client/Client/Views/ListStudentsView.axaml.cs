@@ -1,14 +1,16 @@
-using Avalonia.Controls;
-using Client.Services;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Client.ViewModels;
+using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class ListStudentsView : UserControl
+    public partial class ListStudentsView : ReactiveUserControl<ListStudentsViewModel>
     {
         public ListStudentsView()
         {
-            InitializeComponent();
-            DataContext = Navigation.ListStudents;
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }
