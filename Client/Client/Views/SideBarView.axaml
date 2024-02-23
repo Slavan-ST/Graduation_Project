@@ -1,0 +1,26 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="maket.Views.SideBarView">
+	<Grid>
+		<StackPanel>
+			<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}"
+					HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+			<StackPanel IsVisible="{Binding IsStudents}">
+				<Button Content="Профиль" Command="{Binding Profile}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+				<Button Content="Заявление" Command="{Binding Statement}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+				<Button Content="Мероприятия" Command="{Binding Events}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+			</StackPanel>
+			<StackPanel IsVisible="{Binding IsWorker}">
+				<Button Content="План меропритий" Command="{Binding EventsList}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+				<Button Content="График дежурств" Command="{Binding DutyChart}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+				<Button Content="Списки студентов" Command="{Binding ListStudents}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+				<Button Content="Экран чистоты" Command="{Binding PurityChart}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+			</StackPanel>
+			<Button Content="Вопрос-ответ" Command="{Binding Faq}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+		</StackPanel>
+		<Button Content="◄" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
+	</Grid>
+</UserControl>
