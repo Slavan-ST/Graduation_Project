@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Controls;
 using Client.Models;
 using Client.Services;
@@ -16,75 +17,42 @@ using ReactiveUI.Fody.Helpers;
 
 namespace Client.ViewModels
 {
-    public class MainMenuViewModel : ViewModelBase
+    public class MainMenuViewModel : ReactiveObject, IScreen
     {
-        public MainMenuViewModel(IScreen screen) : base(screen)
+        //роутер на котором завязана навигация
+        public RoutingState Router { get; } = new RoutingState();
+
+        // Пример команды перехода
+        public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
+
+        public MainMenuViewModel()
         {
-            HideSideBar = ReactiveCommand.Create(() =>
-            {
-                IsOpenSideBar =  false;
-                NumColumn = 0;
-            });
 
-            OpenSideBar = ReactiveCommand.Create(() =>
-            {
-                Navigation.WorkPlace = new NewsViewModel(HostScreen);
-                IsOpenSideBar =  true;
-                if (Navigation.MainWindow?.Bounds.Width > 600)
-                {
-                    NumColumn = 1;
-                }
-            });
+            GoNext = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToMain = ReactiveCommand.Create(() =>
-            {
+            HideSideBar = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            });
+            OpenSideBar = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToDutyChart = ReactiveCommand.Create(() =>
-            {
+            ToMain = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            });
+            ToDutyChart = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToEvents = ReactiveCommand.Create(() =>
-            {
+            ToEvents = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            });
+            ToEventsList = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToEventsList = ReactiveCommand.Create(() =>
-            {
+            ToFaq = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            });
+            ToListStudents = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToFaq = ReactiveCommand.Create(() =>
-            {
+            ToPurityChart = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            });
+            ToStatement = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            ToListStudents = ReactiveCommand.Create(() =>
-            {
+            ToProfile = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
 
-            });
-
-            ToPurityChart = ReactiveCommand.Create(() =>
-            {
-
-            });
-
-            ToStatement = ReactiveCommand.Create(() =>
-            {
-
-            });
-
-            ToProfile = ReactiveCommand.Create(() =>
-            {
-
-            });
-
-            Exit = ReactiveCommand.Create(() =>
-            {
-
-            });
+            Exit = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new NewsViewModel(this)));
         }
 
         #region Commands
@@ -92,65 +60,65 @@ namespace Client.ViewModels
         /// <summary>
         /// Комманда для сокрытия SideBar'a
         /// </summary>
-        public ReactiveCommand<Unit, Unit> HideSideBar { get; set; }
+        public ICommand HideSideBar { get; set; }
         /// <summary>
         /// Комманда для открытия SideBar'a
         /// </summary>
-        public ReactiveCommand<Unit, Unit> OpenSideBar { get; set; }
+        public ICommand OpenSideBar { get; set; }
 
-            #region SideBar Commands
+        #region SideBar Commands
 
-            /// <summary>
-            /// Команда перехода на главную 
-            /// </summary>
-            public ReactiveCommand<Unit, Unit> ToMain { get; set; }
+        /// <summary>
+        /// Команда перехода на главную 
+        /// </summary>
+        public ICommand ToMain { get; set; }
 
-                #region Commands Students
+        #region Commands Students
 
-                /// <summary>
-                /// Команда перехода на окно профиля
-                /// </summary>
-                public ReactiveCommand<Unit, Unit> ToProfile { get; set; }
-                /// <summary>
-                /// Комманда перехода на окно составления заявления
-                /// </summary>
-                public ReactiveCommand<Unit, Unit> ToStatement { get; set; }
-                /// <summary>
-                /// Комманда перехода на окно расписания мероприятий
-                /// </summary>
-                public ReactiveCommand<Unit, Unit> ToEvents { get; set; }
+        /// <summary>
+        /// Команда перехода на окно профиля
+        /// </summary>
+        public ICommand ToProfile { get; set; }
+        /// <summary>
+        /// Комманда перехода на окно составления заявления
+        /// </summary>
+        public ICommand ToStatement { get; set; }
+        /// <summary>
+        /// Комманда перехода на окно расписания мероприятий
+        /// </summary>
+        public ICommand ToEvents { get; set; }
 
-            #endregion
+        #endregion
 
-                #region Commands Workers
+        #region Commands Workers
 
-                /// <summary>
-                /// Комманда перехода на окно графика мероприятий (для сотрудников)
-                /// </summary>
-                public ReactiveCommand<Unit, Unit> ToEventsList { get; set; }
-                /// <summary>
-                /// Комманда перехода на окно графика дежурств
-                /// </summary>
-                public ReactiveCommand<Unit, Unit> ToDutyChart { get; set; }
-                /// <summary>
-                /// Комманда перехода на окно со списком студентов
-                /// </summary>
-                public ReactiveCommand<Unit, Unit> ToListStudents { get; set; }
-                /// <summary>
-                /// Комманда перехода на окно экрана чистоты
-                /// </summary>
-                public ReactiveCommand<Unit, Unit> ToPurityChart { get; set; }
+        /// <summary>
+        /// Комманда перехода на окно графика мероприятий (для сотрудников)
+        /// </summary>
+        public ICommand ToEventsList { get; set; }
+        /// <summary>
+        /// Комманда перехода на окно графика дежурств
+        /// </summary>
+        public ICommand ToDutyChart { get; set; }
+        /// <summary>
+        /// Комманда перехода на окно со списком студентов
+        /// </summary>
+        public ICommand ToListStudents { get; set; }
+        /// <summary>
+        /// Комманда перехода на окно экрана чистоты
+        /// </summary>
+        public ICommand ToPurityChart { get; set; }
 
-                #endregion
+        #endregion
 
-            /// <summary>
-            /// Комманда перехода на окно справки (FAQ)
-            /// </summary>
-            public ReactiveCommand<Unit, Unit> ToFaq { get; set; }
-            /// <summary>
-            /// Комманда выхода из учетной записи и переход на окно авторизации
-            /// </summary>
-            public ReactiveCommand<Unit, Unit> Exit { get; set; }
+        /// <summary>
+        /// Комманда перехода на окно справки (FAQ)
+        /// </summary>
+        public ICommand ToFaq { get; set; }
+        /// <summary>
+        /// Комманда выхода из учетной записи и переход на окно авторизации
+        /// </summary>
+        public ICommand Exit { get; set; }
 
         #endregion
 
