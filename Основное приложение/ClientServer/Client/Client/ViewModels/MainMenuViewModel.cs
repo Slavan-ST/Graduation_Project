@@ -17,11 +17,8 @@ using ReactiveUI.Fody.Helpers;
 
 namespace Client.ViewModels
 {
-    public class MainMenuViewModel : ViewModelBase, IScreen
+    public class MainMenuViewModel : ViewModelBaseNavigator
     {
-        //роутер на котором завязана навигация
-        public RoutingState Router { get; } = new RoutingState();
-
         // Пример команды перехода
         //public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
 

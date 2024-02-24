@@ -5,11 +5,8 @@ using System.Reactive;
 
 namespace Client.ViewModels;
 
-public class MainViewModel : ViewModelBase, IScreen
+public class MainViewModel : ViewModelBaseNavigator
 {
-    //роутер на котором завязана навигация
-    public RoutingState Router { get; } = new RoutingState();
-
     // Пример команды перехода
     public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
 
