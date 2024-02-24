@@ -169,7 +169,7 @@ namespace Client.ViewModels
         /// <para>false = Закрыт</para>
         /// </value>
         [Reactive]
-        public bool IsOpenSideBar { get; set; } = false;
+        public bool IsOpenSideBar { get; set; } = true;
         /// <summary>
         /// Свойство определяющие столбец WorkPlace
         /// </summary>

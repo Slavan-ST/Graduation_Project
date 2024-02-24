@@ -1,31 +1,35 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Client.ViewModels;
+using ReactiveUI;
 using System;
+using System.Diagnostics;
 
 namespace Client
 {
-    public class ViewLocator : IDataTemplate
+    public class ViewLocator : IViewLocator
     {
-        public Control? Build(object? data)
+        public IViewFor? ResolveView<T>(T? viewModel, string? contract = null)
         {
-            if (data is null)
-                return null;
+            // Find view's by chopping of the 'Model' on the view model name
+            // MyApp.ShellViewModel => MyApp.ShellView
+            var viewModelName = viewModel!.GetType().FullName;
+            var viewTypeName = viewModelName!.Replace("ViewModel", "View");
 
-            var name = data.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-            var type = Type.GetType(name);
-
-            if (type != null)
+            try
             {
-                return (Control)Activator.CreateInstance(type)!;
+                Debug.WriteLine(viewTypeName);
+                var viewType = Type.GetType(viewTypeName);
+                if (viewType == null)
+                {
+                    return null;
+                }
+                return Activator.CreateInstance(viewType) as IViewFor;
             }
-
-            return new TextBlock { Text = "Not Found: " + name };
-        }
-
-        public bool Match(object? data)
-        {
-            return data is ViewModelBase;
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
