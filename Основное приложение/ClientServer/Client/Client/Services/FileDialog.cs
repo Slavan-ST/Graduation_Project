@@ -1,12 +1,14 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using System.IO;
+using System.Threading.Tasks;
 
-namespace Helper.Services
+namespace Client.Services
 {
     public class FileDialog
     {
         static Visual? _visual;
-        public static void Config(Visual? visual)
+        public FileDialog(Visual? visual)
         {
             _visual = visual;
         }

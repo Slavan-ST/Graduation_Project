@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.Security.Claims;
-using WebAPI.Security;
-using WebAPI.Data;
+using Helper.Security;
+using Helper.Data;
 
-namespace WebAPI.Controllers
+namespace Helper.Controllers
 {
     [ApiController]
     [Route("[controller]")]

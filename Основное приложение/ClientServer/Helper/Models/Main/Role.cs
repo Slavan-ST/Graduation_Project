@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace WebAPI.Models.Main
+namespace Helper.Models.Main
 {
-    public class Marker
+    public class Role
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Char { get; set; } = "";
+        public string Name { get; set; } = "";
         [JsonIgnore]
-        public List<AttendanceLog> AttendanceLogs { get; set; } = new();
+        public virtual ICollection<User>? Users { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Helper.DTO
+namespace Helper.Models.DTO
 {
     public class UserDTO
     {

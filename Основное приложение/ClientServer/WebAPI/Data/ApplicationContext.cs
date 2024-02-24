@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
-using WebAPI.Models.Main;
+using Helper.Models.Main;
 
-namespace WebAPI.Data
+namespace Helper.Data
 {
     public class ApplicationContext : DbContext
     {

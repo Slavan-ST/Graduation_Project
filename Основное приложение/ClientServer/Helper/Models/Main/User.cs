@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using WebAPI.Data;
+using Helper.Data;
 
-namespace WebAPI.Models.Main
+namespace Helper.Models.Main
 {
     public class User
     {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Data;
-using WebAPI.Models.Main;
+using Helper.Data;
+using Helper.Models.Main;
 
-namespace WebAPI.Controllers
+namespace Helper.Controllers
 {
     [ApiController]
     [Route("[controller]")]
