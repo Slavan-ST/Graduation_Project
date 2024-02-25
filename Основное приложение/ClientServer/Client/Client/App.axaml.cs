@@ -56,6 +56,7 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new SideBarView(), typeof(IViewFor<SideBarViewModel>));
         Locator.CurrentMutable.Register(() => new StatementView(), typeof(IViewFor<StatementViewModel>));
 
+        Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
         Services = services.BuildServiceProvider();
         base.OnFrameworkInitializationCompleted();
     }

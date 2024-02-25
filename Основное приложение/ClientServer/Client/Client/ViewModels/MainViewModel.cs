@@ -10,10 +10,10 @@ public class MainViewModel : ViewModelBaseNavigator
     // Пример команды перехода
     public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
 
-    public MainViewModel(IScreen screen) : base(screen)
+    public MainViewModel(IScreen? screen = null) : base(screen)
     {
         GoNext = ReactiveCommand.CreateFromObservable(
-            () => Router.Navigate.Execute(new MainMenuViewModel(this))
+            () => this.Router.Navigate.Execute(new MainMenuViewModel(this))
             );
     }
 }
