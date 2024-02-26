@@ -9,7 +9,7 @@ namespace Client.ViewModels
 {
     public class PurityChartViewModel : ViewModelBase
     {
-        public PurityChartViewModel(IScreen screen) : base(screen)
+        public PurityChartViewModel(IScreen? screen = null) : base(screen)
         {
         
         }

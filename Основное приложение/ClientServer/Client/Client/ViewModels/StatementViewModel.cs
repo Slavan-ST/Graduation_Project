@@ -9,6 +9,6 @@ namespace Client.ViewModels
 {
     public class StatementViewModel : ViewModelBase
     {
-        public StatementViewModel(IScreen screen) : base(screen) {}
+        public StatementViewModel(IScreen? screen = null) : base(screen) {}
     }
 }

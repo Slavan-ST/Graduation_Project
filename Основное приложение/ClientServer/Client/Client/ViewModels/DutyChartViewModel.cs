@@ -9,7 +9,7 @@ namespace Client.ViewModels
 {
     public class DutyChartViewModel : ViewModelBase
     {
-        public DutyChartViewModel(IScreen screen) : base(screen)
+        public DutyChartViewModel(IScreen? screen = null) : base(screen)
         {
         
         }

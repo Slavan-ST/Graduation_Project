@@ -14,6 +14,7 @@ using Client.Services;
 using Client.Views;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Splat;
 
 namespace Client.ViewModels
 {
@@ -22,8 +23,9 @@ namespace Client.ViewModels
         // Пример команды перехода
         //public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
 
-        public MainMenuViewModel(IScreen screen):base(screen)
+        public MainMenuViewModel(IScreen? screen = null):base(screen)
         {
+            HostScreen = screen!;            
 
             HideSideBar = ReactiveCommand.Create(() => { Router.Navigate.Execute(new NewsViewModel(this)); });//эээ...да..эт не то :))
 
@@ -81,7 +83,7 @@ namespace Client.ViewModels
             Exit = ReactiveCommand.Create(() => 
             { 
                 // + сюда добавить выход из учётной записи
-                Router.Navigate.Execute(new AuthViewModel(this)); 
+                HostScreen.Router.Navigate.Execute(new AuthViewModel()); 
             });
         }
 

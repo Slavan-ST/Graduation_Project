@@ -9,7 +9,7 @@ namespace Client.ViewModels
 {
     public class EventsListViewModel : ViewModelBase
     {
-        public EventsListViewModel(IScreen screen) : base(screen)
+        public EventsListViewModel(IScreen? screen = null) : base(screen)
         {
         
         }

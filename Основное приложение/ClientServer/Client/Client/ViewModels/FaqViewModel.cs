@@ -18,7 +18,7 @@ namespace Client.ViewModels
         [Reactive]
         public ObservableCollection<Node>? Nodes { get; set; }
 
-        public FaqViewModel(IScreen screen) : base(screen)
+        public FaqViewModel(IScreen? screen = null) : base(screen)
         {
             QuestAnswer = new ObservableCollection<Node>
             {

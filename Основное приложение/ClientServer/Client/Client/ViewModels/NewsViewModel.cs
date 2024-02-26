@@ -9,7 +9,7 @@ namespace Client.ViewModels
 {
     public class NewsViewModel : ViewModelBase
     {
-        public NewsViewModel(IScreen screen) : base(screen)
+        public NewsViewModel(IScreen? screen = null) : base(screen)
         {
 
         }

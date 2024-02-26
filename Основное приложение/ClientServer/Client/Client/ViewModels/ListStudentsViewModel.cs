@@ -9,7 +9,7 @@ namespace Client.ViewModels
 {
     public class ListStudentsViewModel : ViewModelBase
     {
-        public ListStudentsViewModel(IScreen screen) : base(screen)
+        public ListStudentsViewModel(IScreen? screen = null) : base(screen)
         { 
         
         }

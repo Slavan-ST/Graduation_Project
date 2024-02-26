@@ -9,7 +9,7 @@ namespace Client.ViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
-        public ProfileViewModel(IScreen screen) : base(screen)
+        public ProfileViewModel(IScreen? screen = null) : base(screen)
         {
 
         }
