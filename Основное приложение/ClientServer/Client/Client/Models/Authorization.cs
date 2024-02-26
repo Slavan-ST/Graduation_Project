@@ -25,7 +25,7 @@ namespace Client.Models
             }
             HttpClient client = new HttpClient();
             //var response = await client.GetFromJsonAsync<User>(Connect.Connection + $"login?login={login}?password={password}");
-            var response = await client.GetFromJsonAsync<User>("http://localhost:5170/login?login=testUser&password=pasw");
+            var response = await client.GetFromJsonAsync<User>($"http://localhost:5170/login?login={login}&password={password}");
             return response;
         }
     }

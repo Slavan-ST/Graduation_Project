@@ -24,8 +24,7 @@ namespace Client.ViewModels
         //public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
 
         public MainMenuViewModel(IScreen? screen = null):base(screen)
-        {
-            HostScreen = screen!;            
+        {     
 
             HideSideBar = ReactiveCommand.Create(() => { Router.Navigate.Execute(new NewsViewModel(this)); });//эээ...да..эт не то :))
 
@@ -81,9 +80,10 @@ namespace Client.ViewModels
 
 
             Exit = ReactiveCommand.Create(() => 
-            { 
+            {
+
                 // + сюда добавить выход из учётной записи
-                HostScreen.Router.Navigate.Execute(new AuthViewModel()); 
+                HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen)); 
             });
         }
 

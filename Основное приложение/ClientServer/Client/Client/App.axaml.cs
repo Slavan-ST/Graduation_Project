@@ -57,6 +57,10 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new StatementView(), typeof(IViewFor<StatementViewModel>));
 
         Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
+
+        // so that our override runs last
+        Locator.CurrentMutable.RegisterLazySingleton(() => new ViewLocator(), typeof(IViewLocator));
+
         Services = services.BuildServiceProvider();
         base.OnFrameworkInitializationCompleted();
     }

@@ -18,7 +18,6 @@ namespace Client
 
             try
             {
-                Debug.WriteLine(viewTypeName);
                 var viewType = Type.GetType(viewTypeName);
                 if (viewType == null)
                 {
@@ -28,6 +27,7 @@ namespace Client
             }
             catch (Exception)
             {
+                Debug.WriteLine("Error in locator: " + viewTypeName);
                 throw;
             }
         }

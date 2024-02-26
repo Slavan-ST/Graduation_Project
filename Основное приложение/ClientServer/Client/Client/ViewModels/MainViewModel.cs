@@ -12,8 +12,6 @@ public class MainViewModel : ViewModelBaseNavigator
 
     public MainViewModel(IScreen? screen = null) : base(screen)
     {
-        GoNext = ReactiveCommand.CreateFromObservable(
-            () => this.Router.Navigate.Execute(new MainMenuViewModel(this))
-            );
+        GoNext = ReactiveCommand.CreateFromObservable(() => this.Router.Navigate.Execute(new MainMenuViewModel(this)) );
     }
 }
