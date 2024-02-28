@@ -18,11 +18,6 @@ namespace Client.Models
     {
         public static async Task<User?> AuthorizationUser(string? login, string? password)
         {
-            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
-            {
-                Message.Show("Error", "Заполните все поля!");
-                return null;
-            }
             HttpClient client = new HttpClient();
             //var response = await client.GetFromJsonAsync<User>(Connect.Connection + $"login?login={login}?password={password}");
             var response = await client.GetFromJsonAsync<User>($"http://localhost:5170/login?login={login}&password={password}");

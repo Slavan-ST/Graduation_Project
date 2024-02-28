@@ -24,6 +24,11 @@ namespace Client.ViewModels
             Debug.WriteLine("test");
             Auth = ReactiveCommand.Create(async () =>
             {
+                if (string.IsNullOrWhiteSpace(Login) || string.IsNullOrWhiteSpace(Password))
+                {
+                    Message.Show("Error", "Заполните все поля!");
+                    return;
+                }
                 User? user = await Authorization.AuthorizationUser(Login, Password);
                 if (user != null)
                 {
