@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using Helper.Security;
 using Helper.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Helper.Controllers
 {
@@ -17,7 +18,7 @@ namespace Helper.Controllers
     {
 
         [HttpGet]
-        public async Task<IActionResult> Login(string login, string password)
+        public async Task<IActionResult> SignInAsync(string login, string password)
         {
             ApplicationContext db = new ApplicationContext();
 
@@ -30,7 +31,7 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            if(!SecretHasher.Verify(password, user.Password))
+            if (!SecretHasher.Verify(password, user.Password))
             {
                 return BadRequest();
             }
