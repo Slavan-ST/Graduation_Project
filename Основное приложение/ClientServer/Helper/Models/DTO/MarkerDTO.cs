@@ -14,7 +14,12 @@ namespace Helper.Models.DTO
     {
         public int Id { get; set; }
         public string Char { get; set; } = "";
-        [JsonIgnore]
-        public List<AttendanceLog> AttendanceLogs { get; set; } = new();
+
+        public MarkerDTO() { }
+        public MarkerDTO(Marker marker)
+        {
+            this.Id = marker.Id;
+            this.Char = marker.Char;
+        }
     }
 }

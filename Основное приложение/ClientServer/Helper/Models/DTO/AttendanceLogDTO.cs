@@ -21,5 +21,16 @@ namespace Helper.Models.DTO
         public Student? Student { get; set; }
         [JsonIgnore]
         public Marker? Marker { get; set; }
+        public AttendanceLogDTO() { }
+        public AttendanceLogDTO(AttendanceLog log)
+        {
+            this.Id = log.Id;
+            this.StudentId = log.StudentId;
+            this.MarkerId = log.MarkerId;
+            this.Date = log.Date;
+
+            this.Student = log.Student;
+            this.Marker = log.Marker;
+        }
     }
 }

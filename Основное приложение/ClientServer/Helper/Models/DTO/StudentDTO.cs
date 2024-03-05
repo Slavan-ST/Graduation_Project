@@ -19,5 +19,15 @@ namespace Helper.Models.DTO
         public int RoomId { get; set; }
         [JsonIgnore]
         public Room? Room { get; set; }
+        public StudentDTO() { }
+        public StudentDTO(Student student)
+        {
+            this.Id = student.Id;
+            this.Name = student.Name;
+            this.Surname = student.Surname;
+            this.Patronymic = student.Patronymic;
+            this.RoomId = student.RoomId;
+            this.Room = student.Room;
+        }
     }
 }

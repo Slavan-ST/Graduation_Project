@@ -14,7 +14,11 @@ namespace Helper.Models.DTO
     {
         public int Id { get; set; }
         public string Number { get; set; } = "";
-        [JsonIgnore]
-        public List<Student> Students { get; set; } = new();
+        public RoomDTO() { }
+        public RoomDTO(Room room)
+        {
+            this.Id = room.Id;
+            this.Number = room.Number;
+        }
     }
 }
