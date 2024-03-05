@@ -26,16 +26,15 @@ namespace Client.ViewModels
         public MainMenuViewModel(IScreen? screen = null):base(screen)
         {     
 
-            HideSideBar = ReactiveCommand.Create(() => { Router.Navigate.Execute(new NewsViewModel(this)); });//эээ...да..эт не то :))
+            HideSideBar = ReactiveCommand.Create(() => { });//эээ...да..эт не то :))
 
-            OpenSideBar = ReactiveCommand.Create(() => { Router.Navigate.Execute(new NewsViewModel(this)); });//эээ...да..эт не то :))
+            OpenSideBar = ReactiveCommand.Create(() => { });//эээ...да..эт не то :))
 
 
             ToMain = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new NewsViewModel(this));
             });
-
 
 
             ToDutyChart = ReactiveCommand.Create(() => 
@@ -98,14 +97,12 @@ namespace Client.ViewModels
         /// </summary>
         public ICommand OpenSideBar { get; set; }
 
-        #region SideBar Commands
 
         /// <summary>
         /// Команда перехода на главную 
         /// </summary>
         public ICommand ToMain { get; set; }
 
-        #region Commands Students
 
         /// <summary>
         /// Команда перехода на окно профиля
@@ -120,9 +117,7 @@ namespace Client.ViewModels
         /// </summary>
         public ICommand ToEvents { get; set; }
 
-        #endregion
 
-        #region Commands Workers
 
         /// <summary>
         /// Комманда перехода на окно графика мероприятий (для сотрудников)
@@ -141,7 +136,8 @@ namespace Client.ViewModels
         /// </summary>
         public ICommand ToPurityChart { get; set; }
 
-        #endregion
+
+
 
         /// <summary>
         /// Комманда перехода на окно справки (FAQ)
@@ -151,9 +147,6 @@ namespace Client.ViewModels
         /// Комманда выхода из учетной записи и переход на окно авторизации
         /// </summary>
         public ICommand Exit { get; set; }
-
-        #endregion
-
         #endregion
 
         #region Propertyes
