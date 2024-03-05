@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Helper.Models.Main;
+using System.Text.Json.Serialization;
 
 namespace Helper.Models.DTO
 {
@@ -13,6 +14,8 @@ namespace Helper.Models.DTO
         public string Login { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
+        [JsonIgnore]
+        public Role? Role { get; set; }
 
         public UserDTO() {}
         public UserDTO(User user)
