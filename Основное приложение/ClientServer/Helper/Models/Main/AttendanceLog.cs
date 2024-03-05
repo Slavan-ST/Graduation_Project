@@ -22,5 +22,7 @@ namespace Helper.Models.Main
         public Student? Student { get; set; }
         [JsonIgnore]
         public Marker? Marker { get; set; }
+
+
     }
 }

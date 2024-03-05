@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Helper.Security;
 using Helper.Data;
 using Helper.Models.Main;
+using Helper.Models.DTO;
 
 namespace Helper.Controllers
 {
@@ -13,7 +14,7 @@ namespace Helper.Controllers
     public class UsersController : ControllerBase
     {
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var user = await db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -22,10 +23,10 @@ namespace Helper.Controllers
                 return NotFound();
             }
             db.Dispose();
-            return new JsonResult(user);
+            return new JsonResult(new UserDTO(user));
         }
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetUsers(params string[] search)
+        public async Task<ActionResult<List<UserDTO>>> GetUsers(params string[] search)
         {
             List<User> users = new List<User>();
             ApplicationContext db = new ApplicationContext();
@@ -40,12 +41,18 @@ namespace Helper.Controllers
             }
 
             db.Dispose();
-            if (users.Count > 0)
+            if (users.Count <= 0)
             {
-                return new JsonResult(users);
+                return NotFound();
             }
 
-            return NotFound();
+            List<UserDTO> usersDTO = new List<UserDTO>();
+            foreach (var user in  users)
+            {
+                usersDTO.Add(new UserDTO(user));
+            }
+
+            return new JsonResult(usersDTO);
         }
 
         [HttpPost]
