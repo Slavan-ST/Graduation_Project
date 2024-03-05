@@ -24,15 +24,22 @@ namespace Client.ViewModels
             Debug.WriteLine("test");
             Auth = ReactiveCommand.Create(async () =>
             {
+                //поля не заполнены? заполни!
                 if (string.IsNullOrWhiteSpace(Login) || string.IsNullOrWhiteSpace(Password))
                 {
                     Message.Show("Error", "Заполните все поля!");
                     return;
                 }
+                //получаем пользователя
                 User? user = await Authorization.AuthorizationUser(Login, Password);
+                //если пользователя получили, то переходим на главную
                 if (user != null)
                 {
                     HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen));
+                }
+                else
+                {
+                    Message.Show("Error", "Пользователь не найден!");
                 }
             });
         }

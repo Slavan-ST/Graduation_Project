@@ -11,8 +11,6 @@ namespace Client
     {
         public IViewFor? ResolveView<T>(T? viewModel, string? contract = null)
         {
-            // Find view's by chopping of the 'Model' on the view model name
-            // MyApp.ShellViewModel => MyApp.ShellView
             var viewModelName = viewModel!.GetType().FullName;
             var viewTypeName = viewModelName!.Replace("ViewModel", "View");
 

@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Client.Models
 {
-    public class Node
+    public class TreeViewItem
     {
-        public ObservableCollection<Node>? Answers { get; set; }
+        public ObservableCollection<TreeViewItem>? Answers { get; set; }
         public string Title { get; set; }
 
-        public Node(string title)
+        public TreeViewItem(string title)
         {
             Title = title;
         }
 
-        public Node(string title, ObservableCollection<Node> subNodes)
+        public TreeViewItem(string title, ObservableCollection<TreeViewItem> subNodes)
         {
             Title = title;
             Answers = subNodes;
