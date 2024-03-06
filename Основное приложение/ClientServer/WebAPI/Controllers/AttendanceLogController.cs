@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Helper.Security;
 using Helper.Data;
 using Helper.Models.Main;
+using Helper.Models.DTO;
 
 namespace Helper.Controllers
 {
@@ -13,7 +14,7 @@ namespace Helper.Controllers
     public class AttendanceLogController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogs()
+        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogs()
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog.ToListAsync(); 
@@ -22,11 +23,18 @@ namespace Helper.Controllers
                 return NotFound();
             }
             db.Dispose();
-            return new JsonResult(attendanceLogs);
+
+            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
+            foreach (var log in attendanceLogs)
+            {
+                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
+            }
+
+            return new JsonResult(attendanceLogDTOs);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AttendanceLog>> GetAttendanceLog(int id)
+        public async Task<ActionResult<AttendanceLogDTO>> GetAttendanceLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLog = await db.AttendanceLog.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -35,12 +43,16 @@ namespace Helper.Controllers
                 return NotFound();
             }
             db.Dispose();
-            return new JsonResult(attendanceLog);
+
+            AttendanceLogDTO attendanceLogDTO = new AttendanceLogDTO(attendanceLog);
+
+            return new JsonResult(attendanceLogDTO);
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostAttendanceLog(AttendanceLog attendanceLog)
+        public async Task<ActionResult> PostAttendanceLog(AttendanceLogDTO attendanceLogDTO)
         {
+
             if (attendanceLog == null)
             {
                 return NoContent();

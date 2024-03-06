@@ -14,18 +14,22 @@ namespace Helper.Models.DTO
         public string Login { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
-        [JsonIgnore]
-        public Role? Role { get; set; }
+        public RoleDTO? Role { get; set; }
 
         public UserDTO() {}
-        public UserDTO(User user)
+        public UserDTO(User? user)
         {
+            if (user == null)
+            {
+                return;
+            }
             this.Id = user.Id;
             this.Name = user.Name;
             this.Surname = user.Surname;
             this.Login = user.Login;
             this.Image = user.Image;
             this.RoleId = user.RoleId;
+            this.Role = new RoleDTO(user.Role);
         }
     }
 }

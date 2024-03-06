@@ -15,8 +15,12 @@ namespace Helper.Models.DTO
         public int Id { get; set; }
         public string Name { get; set; } = "";
         public RoleDTO() { }
-        public RoleDTO(Role role)
+        public RoleDTO(Role? role)
         {
+            if (role == null)
+            {
+                return;
+            }
             this.Id = role.Id;
             this.Name = role.Name;
         }

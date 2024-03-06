@@ -15,8 +15,12 @@ namespace Helper.Models.DTO
         public int Id { get; set; }
         public string Number { get; set; } = "";
         public RoomDTO() { }
-        public RoomDTO(Room room)
+        public RoomDTO(Room? room)
         {
+            if (room == null)
+            {
+                return;
+            }
             this.Id = room.Id;
             this.Number = room.Number;
         }

@@ -16,8 +16,12 @@ namespace Helper.Models.DTO
         public string Char { get; set; } = "";
 
         public MarkerDTO() { }
-        public MarkerDTO(Marker marker)
+        public MarkerDTO(Marker? marker)
         {
+            if (marker == null)
+            {
+                return;
+            }
             this.Id = marker.Id;
             this.Char = marker.Char;
         }

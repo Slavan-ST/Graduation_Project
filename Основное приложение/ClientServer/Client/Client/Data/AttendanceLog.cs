@@ -18,7 +18,6 @@ namespace Client.Data
 
         //Test
         //вариант 1 сделать каждый класс по отдельности
-        //вариант 2 сделать универсальный через параметры(мб не очень надёжно)
 
         public static async Task<AttendanceLogDTO?> GetAttendanceLog(params (string name, string value)[] pars)//id и прочее
         {

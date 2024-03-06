@@ -17,10 +17,9 @@ namespace Helper.Models.DTO
         public int MarkerId { get; set; }
         public DateTime Date { get; set; }
 
-        [JsonIgnore]
-        public Student? Student { get; set; }
-        [JsonIgnore]
-        public Marker? Marker { get; set; }
+        public StudentDTO? Student { get; set; }
+        public MarkerDTO? Marker { get; set; }
+
         public AttendanceLogDTO() { }
         public AttendanceLogDTO(AttendanceLog log)
         {
@@ -29,8 +28,8 @@ namespace Helper.Models.DTO
             this.MarkerId = log.MarkerId;
             this.Date = log.Date;
 
-            this.Student = log.Student;
-            this.Marker = log.Marker;
+            this.Student = new StudentDTO(log.Student);
+            this.Marker = new MarkerDTO(log.Marker);
         }
     }
 }
