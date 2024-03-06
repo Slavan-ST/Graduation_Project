@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Helper.Data;
 using Helper.Models.Main;
+using Helper.Models.DTO;
+using Helper.Converters;
 
 namespace Helper.Controllers
 {
@@ -10,7 +12,7 @@ namespace Helper.Controllers
     public class RoomsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
             ApplicationContext db = new ApplicationContext();
             var rooms = await db.Rooms.ToListAsync();
@@ -19,11 +21,18 @@ namespace Helper.Controllers
                 return NotFound();
             }
             db.Dispose();
-            return new JsonResult(rooms);
+
+            List<RoomDTO> roomDTOs = new List<RoomDTO>();
+            foreach (var room in rooms)
+            {
+                roomDTOs.Add(new RoomDTO(room));
+            }
+
+            return new JsonResult(roomDTOs);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var room = await db.Rooms.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -32,60 +41,78 @@ namespace Helper.Controllers
                 return NotFound();
             }
             db.Dispose();
-            return new JsonResult(room);
+
+            RoomDTO roomDTO = new RoomDTO(room);
+
+            return new JsonResult(roomDTO);
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostRoom(Room roomFromClient)
+        public async Task<ActionResult> PostRoom(RoomDTO? roomDTO)
         {
-            if (roomFromClient == null)
+            if (roomDTO == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (await db.Rooms.ContainsAsync(roomFromClient))
+            
+            //проверка на существование такой записи в БД
+            Room? room = await db.Rooms.Where(x => x.Id == roomDTO.Id).FirstOrDefaultAsync();            
+            if (room != null)
             {
                 return StatusCode(400);
             }
-            await db.Rooms.AddAsync(roomFromClient);
+
+            room = ConverterDTO.RoomFromDTO(roomDTO);
+
+            await db.Rooms.AddAsync(room!);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(201);
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutRoom(Room room)
+        public async Task<ActionResult> PutRoom(RoomDTO? roomDTO)
         {
-            if (room == null)
+            if (roomDTO == null)
             {
                 return NoContent();
             }
+
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Rooms.ContainsAsync(room))
+            //проверка на существование такой записи в БД
+            Room? room = await db.Rooms.Where(x => x.Id == roomDTO.Id).FirstOrDefaultAsync();
+            if (room == null)
             {
                 return StatusCode(404);
             }
-            db.Rooms.Update(room);
+
+            room = ConverterDTO.RoomFromDTO(roomDTO);
+
+            db.Rooms.Update(room!);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteRoom(Room roomFromClient)
+        public async Task<ActionResult> DeleteRoom(int id)
         {
-            if (roomFromClient == null)
-            {
-                return NoContent();
-            }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Rooms.ContainsAsync(roomFromClient))
+
+            var room = await db.Rooms.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (room == null)
             {
                 return StatusCode(404);
             }
-            db.Rooms.Remove(roomFromClient);
+
+            db.Rooms.Remove(room);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
     }
