@@ -6,6 +6,7 @@ using Helper.Security;
 using Helper.Data;
 using Helper.Models.Main;
 using Helper.Models.DTO;
+using Helper.Converters;
 
 namespace Helper.Controllers
 {
@@ -52,7 +53,7 @@ namespace Helper.Controllers
         [HttpPost]
         public async Task<ActionResult> PostAttendanceLog(AttendanceLogDTO attendanceLogDTO)
         {
-
+            AttendanceLog attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
             if (attendanceLog == null)
             {
                 return NoContent();
@@ -68,8 +69,9 @@ namespace Helper.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutAttendanceLog(AttendanceLog attendanceLog)
+        public async Task<ActionResult> PutAttendanceLog(AttendanceLogDTO attendanceLogDTO)
         {
+            AttendanceLog attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
             if (attendanceLog == null)
             {
                 return NoContent();
@@ -85,14 +87,12 @@ namespace Helper.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteAttendanceLog(AttendanceLog attendanceLog)
+        public async Task<ActionResult> DeleteAttendanceLog(int id)
         {
-            if (attendanceLog == null)
-            {
-                return NoContent();
-            }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.AttendanceLog.ContainsAsync(attendanceLog))
+
+            var attendanceLog = await db.AttendanceLog.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (attendanceLog == null)
             {
                 return StatusCode(404);
             }
