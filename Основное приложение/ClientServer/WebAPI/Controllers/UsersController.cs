@@ -6,6 +6,7 @@ using Helper.Security;
 using Helper.Data;
 using Helper.Models.Main;
 using Helper.Models.DTO;
+using Helper.Converters;
 
 namespace Helper.Controllers
 {
@@ -22,25 +23,20 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            db.Dispose();
-            return new JsonResult(new UserDTO(user));
+            await db.DisposeAsync();
+
+            UserDTO userDTO = new UserDTO(user);
+
+            return new JsonResult(userDTO);
         }
         [HttpGet]
-        public async Task<ActionResult<List<UserDTO>>> GetUsers(params string[] search)
+        public async Task<ActionResult<List<UserDTO>>> GetUsers()
         {
-            List<User> users = new List<User>();
             ApplicationContext db = new ApplicationContext();
+            var users = await db.Users.ToListAsync();
 
-            foreach (var parameter in search)
-            {
-                var usersSearch = await db.Users.Where(x => x.Login.Contains(parameter)).ToListAsync();
-                if (usersSearch != null)
-                {
-                    users.AddRange(usersSearch);
-                }
-            }
+            await db.DisposeAsync();
 
-            db.Dispose();
             if (users.Count <= 0)
             {
                 return NotFound();
@@ -56,65 +52,80 @@ namespace Helper.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostUser(User userFromClient) //новый юзверь
+        public async Task<ActionResult> PostUser(UserDTO? userDTO, string password) //новый юзверь
         {
-            if (userFromClient == null)
+            if (userDTO == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
 
-            bool existUser = await db.Users
-                .Where(x => x.Login == userFromClient.Login)
-                .FirstOrDefaultAsync() != null;
+            bool existUser = await db.Users.Where(x => x.Login == userDTO.Login).FirstOrDefaultAsync() != null;
 
             if (existUser)
             {
                 return StatusCode(409, "объект уже существует");
             }
+            User user = ConverterDTO.UserFromDTO(userDTO, password);
+            user.Password = SecretHasher.Hash(user.Password);
 
-            userFromClient.Password = SecretHasher.Hash(userFromClient.Password);
-
-            await db.Users.AddAsync(userFromClient);
+            await db.Users.AddAsync(user);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
 
             return StatusCode(201);
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutUser(User userFromClient)
+        public async Task<ActionResult> PutUser(UserDTO userDTO, string? password = null)
         {
-            if (userFromClient == null)
+            if (userDTO == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Users.ContainsAsync(userFromClient))
+
+
+            //проверка на существование такой записи в БД
+            User? user = await db.Users.Where(x => x.Id == userDTO.Id).FirstOrDefaultAsync();
+            if (user == null)
             {
                 return StatusCode(404);
             }
-            db.Users.Update(userFromClient);
+            if (password == null)
+            {
+                password = user.Password;
+            }
+
+            user = ConverterDTO.UserFromDTO(userDTO, password)!;
+
+            db.Users.Update(user);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteUser(User userFromClient)
+        public async Task<ActionResult> DeleteUser(User userDTO)
         {
-            if (userFromClient == null)
+            if (userDTO == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Users.ContainsAsync(userFromClient))
+
+            //проверка на существование такой записи в БД
+            User? user = await db.Users.Where(x => x.Id == userDTO.Id).FirstOrDefaultAsync();
+            if (user == null)
             {
                 return StatusCode(404);
             }
-            db.Users.Remove(userFromClient);
+
+            db.Users.Remove(user);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
     }
