@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Data
+namespace Client.API
 {
-    internal static class User
+    internal static class Role
     {
         //тут будет получение и отправка на сервер
     }

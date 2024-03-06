@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Data
+namespace Client.API
 {
-    internal static class Student
+    internal static class Marker
     {
         //тут будет получение и отправка на сервер
     }
