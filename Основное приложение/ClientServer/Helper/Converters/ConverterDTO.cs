@@ -78,7 +78,7 @@ namespace Helper.Converters
                 Room = ConverterDTO.RoomFromDTO(studentDTO.Room)
             };
         }
-        public static User UserFromDTO(UserDTO userDTO)
+        public static User UserFromDTO(UserDTO userDTO, string password)
         {
             return new User()
             {
@@ -88,7 +88,8 @@ namespace Helper.Converters
                 Patronymic = userDTO.Patronymic,
                 Login = userDTO.Login,
                 Image = userDTO.Image,
-                Role = ConverterDTO.RoleFromDTO(userDTO.Role)
+                Role = ConverterDTO.RoleFromDTO(userDTO.Role),
+                Password = password
             };
         }
 
