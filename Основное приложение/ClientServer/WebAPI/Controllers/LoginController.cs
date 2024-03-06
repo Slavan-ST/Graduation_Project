@@ -49,6 +49,7 @@ namespace Helper.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
             UserDTO userDTO = new UserDTO(user);
+
             return new JsonResult(userDTO);
         }
     }

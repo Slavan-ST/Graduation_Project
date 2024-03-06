@@ -19,7 +19,8 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            db.Dispose();
+            await db.DisposeAsync();
+
             return new JsonResult(students);
         }
 
@@ -32,7 +33,8 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            db.Dispose();
+            await db.DisposeAsync();
+
             return new JsonResult(student);
         }
 
@@ -50,7 +52,8 @@ namespace Helper.Controllers
             }
             await db.Students.AddAsync(studentFromClient);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(201);
         }
 
@@ -68,7 +71,8 @@ namespace Helper.Controllers
             }
             db.Students.Update(studentFromClient);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
 
@@ -86,7 +90,8 @@ namespace Helper.Controllers
             }
             db.Students.Remove(studentFromClient);
             await db.SaveChangesAsync();
-            db.Dispose();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
     }
