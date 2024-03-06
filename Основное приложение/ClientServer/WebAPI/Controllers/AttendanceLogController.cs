@@ -23,7 +23,7 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            db.Dispose();
+            await db.DisposeAsync();
 
             List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
             foreach (var log in attendanceLogs)
@@ -43,7 +43,7 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            db.Dispose();
+            await db.DisposeAsync();
 
             AttendanceLogDTO attendanceLogDTO = new AttendanceLogDTO(attendanceLog);
 
@@ -64,7 +64,9 @@ namespace Helper.Controllers
                 return StatusCode(400);
             }
             await db.AttendanceLog.AddAsync(attendanceLog);
-            db.Dispose();
+            await db.SaveChangesAsync();
+            await db.DisposeAsync();
+
             return StatusCode(201);
         }
 
@@ -82,7 +84,9 @@ namespace Helper.Controllers
                 return StatusCode(404);
             }
             db.AttendanceLog.Update(attendanceLog);
-            db.Dispose();
+            await db.SaveChangesAsync();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
 
@@ -97,7 +101,9 @@ namespace Helper.Controllers
                 return StatusCode(404);
             }
             db.AttendanceLog.Remove(attendanceLog);
-            db.Dispose();
+            await db.SaveChangesAsync();
+            await db.DisposeAsync();
+
             return StatusCode(202);//принято
         }
     }
