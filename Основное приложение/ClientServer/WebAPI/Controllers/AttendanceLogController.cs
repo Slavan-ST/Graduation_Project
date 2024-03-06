@@ -53,12 +53,22 @@ namespace Helper.Controllers
         [HttpPost]
         public async Task<ActionResult> PostAttendanceLog(AttendanceLogDTO attendanceLogDTO)
         {
-            AttendanceLog attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
-            if (attendanceLog == null)
+            if (attendanceLogDTO == null)
             {
                 return NoContent();
             }
+
             ApplicationContext db = new ApplicationContext();
+
+            //проверка на существование такой записи в БД
+            AttendanceLog? attendanceLog = await db.AttendanceLog.Where(x => x.Id == attendanceLogDTO.Id).FirstOrDefaultAsync();
+            if (attendanceLog != null)
+            {
+                return StatusCode(400);
+            }
+
+            attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
+
             if (await db.AttendanceLog.ContainsAsync(attendanceLog))
             {
                 return StatusCode(400);

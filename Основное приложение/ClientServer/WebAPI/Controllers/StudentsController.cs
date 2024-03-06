@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Helper.Data;
 using Helper.Models.Main;
+using Helper.Models.DTO;
+using Helper.Converters;
 
 namespace Helper.Controllers
 {
@@ -11,7 +13,7 @@ namespace Helper.Controllers
     public class StudentsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents()
         {
             ApplicationContext db = new ApplicationContext();
             var students = await db.Students.ToListAsync(); 
@@ -21,11 +23,17 @@ namespace Helper.Controllers
             }
             await db.DisposeAsync();
 
-            return new JsonResult(students);
+            List<StudentDTO> studentDTOs = new List<StudentDTO>();
+            foreach (var student in students)
+            {
+                studentDTOs.Add(new StudentDTO(student));
+            }
+
+            return new JsonResult(studentDTOs);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> GetStudent(int id)
+        public async Task<ActionResult<StudentDTO>> GetStudent(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var student = await db.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -35,22 +43,31 @@ namespace Helper.Controllers
             }
             await db.DisposeAsync();
 
-            return new JsonResult(student);
+            StudentDTO studentDTO = new StudentDTO(student);
+            
+            return new JsonResult(studentDTO);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Student studentFromClient)
+        public async Task<ActionResult> Post(StudentDTO studentDTO)
         {
-            if (studentFromClient == null)
+            if (studentDTO == null)
             {
                 return NoContent();
             }
+
             ApplicationContext db = new ApplicationContext();
-            if (await db.Students.ContainsAsync(studentFromClient))
+
+            //проверка на существование такой записи в БД
+            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).FirstOrDefaultAsync();
+            if (student != null)
             {
                 return StatusCode(400);
             }
-            await db.Students.AddAsync(studentFromClient);
+
+            student = ConverterDTO.StudentFromDTO(studentDTO)!;
+
+            await db.Students.AddAsync(student);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
@@ -58,18 +75,25 @@ namespace Helper.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(Student studentFromClient)
+        public async Task<ActionResult> Put(StudentDTO studentDTO)
         {
-            if (studentFromClient == null)
+            if (studentDTO == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Students.ContainsAsync(studentFromClient))
+
+            //проверка на существование такой записи в БД
+            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).FirstOrDefaultAsync();
+            if (student != null)
             {
-                return StatusCode(404);
+                return StatusCode(400);
             }
-            db.Students.Update(studentFromClient);
+
+            student = ConverterDTO.StudentFromDTO(studentDTO)!;
+
+            db.Students.Update(student);
+
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
@@ -77,18 +101,23 @@ namespace Helper.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(Student studentFromClient)
+        public async Task<ActionResult> Delete(StudentDTO studentDTO)
         {
-            if (studentFromClient == null)
+            if (studentDTO == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.Students.ContainsAsync(studentFromClient))
+
+            //проверка на существование такой записи в БД
+            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).FirstOrDefaultAsync();
+            if (student != null)
             {
-                return StatusCode(404);
+                return StatusCode(400);
             }
-            db.Students.Remove(studentFromClient);
+            student = ConverterDTO.StudentFromDTO(studentDTO)!;
+
+            db.Students.Remove(student);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
