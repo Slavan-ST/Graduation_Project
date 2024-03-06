@@ -10,60 +10,85 @@ namespace Helper.Converters
 {
     public static class ConverterDTO
     {
-        public static AttendanceLog AttendanceLogFromDTO(AttendanceLogDTO logDTO)
+        public static AttendanceLog? AttendanceLogFromDTO(AttendanceLogDTO? logDTO)
         {
+            if (logDTO == null)
+            {
+                return null;
+            }
             return new AttendanceLog()
             {
                 Id = logDTO.Id,
                 StudentId = logDTO.StudentId,
                 MarkerId = logDTO.StudentId,
                 Date = logDTO.Date,
-                Student = logDTO.Student,
-                Marker = logDTO.Marker
+                Student = ConverterDTO.StudentFromDTO(logDTO.Student),
+                Marker = ConverterDTO.MarkerFromDTO(logDTO.Marker)
             };
         }
-        public static Marker MarkerFromDTO(MarkerDTO markerDTO)
+        public static Marker? MarkerFromDTO(MarkerDTO? markerDTO)
         {
+            if (markerDTO == null)
+            {
+                return null;
+            }
             return new Marker()
             {
                 Id = markerDTO.Id,
                 Char = markerDTO.Char
             };
         }
-        public static Role RoleFromDTO(RoleDTO roleDTO)
+        public static Role? RoleFromDTO(RoleDTO? roleDTO)
         {
+            if (roleDTO == null)
+            {
+                return null;
+            }
             return new Role()
             {
                 Id = roleDTO.Id,
                 Name = roleDTO.Name
             };
         }
-        public static Room RoomFromDTO(RoomDTO roomDTO) 
+        public static Room? RoomFromDTO(RoomDTO? roomDTO) 
         {
+            if (roomDTO == null)
+            {
+                return null;
+            }
             return new Room()
             {
                 Id = roomDTO.Id,
                 Number = roomDTO.Number
             };
         }
-        public static Student StudentFromDTO(StudentDTO studentDTO)
+        public static Student? StudentFromDTO(StudentDTO? studentDTO)
         {
+            if (studentDTO == null)
+            {
+                return null;
+            }
             return new Student()
             {
                 Id = studentDTO.Id,
                 Name = studentDTO.Name,
                 Surname = studentDTO.Surname,
-                Patronymic  = studentDTO.Patronymic,
+                Patronymic = studentDTO.Patronymic,
                 RoomId = studentDTO.RoomId,
-                Room = studentDTO.Room
+                Room = ConverterDTO.RoomFromDTO(studentDTO.Room)
             };
         }
-
         public static User UserFromDTO(UserDTO userDTO)
         {
             return new User()
             {
-
+                Id = userDTO.Id,
+                Name = userDTO.Name,
+                Surname = userDTO.Surname,
+                Patronymic = userDTO.Patronymic,
+                Login = userDTO.Login,
+                Image = userDTO.Image,
+                Role = ConverterDTO.RoleFromDTO(userDTO.Role)
             };
         }
 
