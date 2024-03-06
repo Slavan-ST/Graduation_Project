@@ -9,6 +9,7 @@ using System.Security.Claims;
 using Helper.Security;
 using Helper.Data;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Helper.Models.DTO;
 
 namespace Helper.Controllers
 {
@@ -18,7 +19,7 @@ namespace Helper.Controllers
     {
 
         [HttpGet]
-        public async Task<IActionResult> SignInAsync(string login, string password)
+        public async Task<ActionResult<UserDTO>> SignInAsync(string login, string password)
         {
             ApplicationContext db = new ApplicationContext();
 
@@ -46,7 +47,9 @@ namespace Helper.Controllers
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-            return new JsonResult(user);
+
+            UserDTO userDTO = new UserDTO(user);
+            return new JsonResult(userDTO);
         }
     }
 }
