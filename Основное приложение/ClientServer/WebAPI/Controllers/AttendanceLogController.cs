@@ -18,7 +18,11 @@ namespace Helper.Controllers
         public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogs()
         {
             ApplicationContext db = new ApplicationContext();
-            var attendanceLogs = await db.AttendanceLog.ToListAsync(); 
+            var attendanceLogs = await db.AttendanceLog
+                .Include(c => c.Student)
+                .Include(c => c.Marker)
+                .ToListAsync(); 
+
             if (attendanceLogs == null)
             {
                 return NotFound();
@@ -38,7 +42,12 @@ namespace Helper.Controllers
         public async Task<ActionResult<AttendanceLogDTO>> GetAttendanceLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
-            var attendanceLog = await db.AttendanceLog.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var attendanceLog = await db.AttendanceLog
+                .Include(c => c.Student)
+                .Include(c => c.Marker)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
             if (attendanceLog == null)
             {
                 return NotFound();
@@ -83,16 +92,23 @@ namespace Helper.Controllers
         [HttpPut]
         public async Task<ActionResult> PutAttendanceLog(AttendanceLogDTO attendanceLogDTO)
         {
-            AttendanceLog attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
-            if (attendanceLog == null)
+            if (attendanceLogDTO == null)
             {
                 return NoContent();
             }
             ApplicationContext db = new ApplicationContext();
-            if (!await db.AttendanceLog.ContainsAsync(attendanceLog))
+
+            var attendanceLog = await db.AttendanceLog
+                .Where(x => x.Id == attendanceLogDTO.Id)
+                .FirstOrDefaultAsync();
+
+            if(attendanceLog == null)
             {
                 return StatusCode(404);
             }
+
+            attendanceLog = attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
+
             db.AttendanceLog.Update(attendanceLog);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
@@ -105,7 +121,10 @@ namespace Helper.Controllers
         {
             ApplicationContext db = new ApplicationContext();
 
-            var attendanceLog = await db.AttendanceLog.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var attendanceLog = await db.AttendanceLog
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
             if (attendanceLog == null)
             {
                 return StatusCode(404);
