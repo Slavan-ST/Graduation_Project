@@ -82,7 +82,11 @@ namespace Helper.Controllers
 
             ApplicationContext db = new ApplicationContext();
             //проверка на существование такой записи в БД
-            Room? room = await db.Rooms.Where(x => x.Id == roomDTO.Id).FirstOrDefaultAsync();
+            Room? room = await db.Rooms
+                .Where(x => x.Id == roomDTO.Id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
             if (room == null)
             {
                 return StatusCode(404);
@@ -97,7 +101,7 @@ namespace Helper.Controllers
             return StatusCode(202);//принято
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteRoom(int id)
         {
             ApplicationContext db = new ApplicationContext();
