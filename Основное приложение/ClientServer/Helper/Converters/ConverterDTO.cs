@@ -20,7 +20,7 @@ namespace Helper.Converters
             {
                 Id = logDTO.Id,
                 StudentId = logDTO.StudentId,
-                MarkerId = logDTO.StudentId,
+                MarkerId = logDTO.MarkerId,
                 Date = logDTO.Date,
                 Student = ConverterDTO.StudentFromDTO(logDTO.Student),
                 Marker = ConverterDTO.MarkerFromDTO(logDTO.Marker)

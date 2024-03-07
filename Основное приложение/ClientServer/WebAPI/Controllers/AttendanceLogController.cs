@@ -21,6 +21,7 @@ namespace Helper.Controllers
             var attendanceLogs = await db.AttendanceLog
                 .Include(c => c.Student)
                 .Include(c => c.Marker)
+                .Include(c => c.Student!.Room)
                 .ToListAsync(); 
 
             if (attendanceLogs == null)
@@ -45,6 +46,7 @@ namespace Helper.Controllers
             var attendanceLog = await db.AttendanceLog
                 .Include(c => c.Student)
                 .Include(c => c.Marker)
+                .Include(c => c.Student!.Room)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
@@ -100,6 +102,7 @@ namespace Helper.Controllers
 
             var attendanceLog = await db.AttendanceLog
                 .Where(x => x.Id == attendanceLogDTO.Id)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
 
             if(attendanceLog == null)
@@ -107,16 +110,16 @@ namespace Helper.Controllers
                 return StatusCode(404);
             }
 
-            attendanceLog = attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
+            attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
 
-            db.AttendanceLog.Update(attendanceLog);
+            db.Update(attendanceLog);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
             return StatusCode(202);//принято
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAttendanceLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
