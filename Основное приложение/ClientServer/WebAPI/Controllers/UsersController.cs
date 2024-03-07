@@ -18,7 +18,10 @@ namespace Helper.Controllers
         public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
             ApplicationContext db = new ApplicationContext();
-            var user = await db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var user = await db.Users
+                .Include(c => c.Role)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
@@ -33,7 +36,9 @@ namespace Helper.Controllers
         public async Task<ActionResult<List<UserDTO>>> GetUsers()
         {
             ApplicationContext db = new ApplicationContext();
-            var users = await db.Users.ToListAsync();
+            var users = await db.Users
+                .Include(c => c.Role)
+                .ToListAsync();
 
             await db.DisposeAsync();
 
@@ -52,7 +57,7 @@ namespace Helper.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostUser(UserDTO? userDTO, string password) //новый юзверь
+        public async Task<ActionResult> PostUser(UserChangedDTO? userDTO) //новый юзверь
         {
             if (userDTO == null)
             {
@@ -60,13 +65,17 @@ namespace Helper.Controllers
             }
             ApplicationContext db = new ApplicationContext();
 
-            bool existUser = await db.Users.Where(x => x.Login == userDTO.Login).FirstOrDefaultAsync() != null;
+            var user = await db.Users
+                .Include(c => c.Role)
+                .Where(x => x.Login == userDTO.Login)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
 
-            if (existUser)
+            if (user != null)
             {
                 return StatusCode(409, "объект уже существует");
             }
-            User user = ConverterDTO.UserFromDTO(userDTO, password);
+            user = ConverterDTO.UserFromChangedDTO(userDTO);
             user.Password = SecretHasher.Hash(user.Password);
 
             await db.Users.AddAsync(user);
@@ -77,7 +86,7 @@ namespace Helper.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutUser(UserDTO userDTO, string? password = null)
+        public async Task<ActionResult> PutUser(UserChangedDTO userDTO)
         {
             if (userDTO == null)
             {
@@ -87,17 +96,19 @@ namespace Helper.Controllers
 
 
             //проверка на существование такой записи в БД
-            User? user = await db.Users.Where(x => x.Id == userDTO.Id).FirstOrDefaultAsync();
+            User? user = await db.Users
+                .Include(c => c.Role)
+                .Where(x => x.Id == userDTO.Id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
             if (user == null)
             {
                 return StatusCode(404);
             }
-            if (password == null)
-            {
-                password = user.Password;
-            }
 
-            user = ConverterDTO.UserFromDTO(userDTO, password)!;
+            user = ConverterDTO.UserFromChangedDTO(userDTO)!;
+            user.Password = SecretHasher.Hash(user.Password);
 
             db.Users.Update(user);
             await db.SaveChangesAsync();
@@ -106,17 +117,17 @@ namespace Helper.Controllers
             return StatusCode(202);//принято
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> DeleteUser(User userDTO)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
         {
-            if (userDTO == null)
-            {
-                return NoContent();
-            }
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            User? user = await db.Users.Where(x => x.Id == userDTO.Id).FirstOrDefaultAsync();
+            User? user = await db.Users
+                .Include(c => c.Role)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
             if (user == null)
             {
                 return StatusCode(404);
@@ -126,7 +137,7 @@ namespace Helper.Controllers
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
-            return StatusCode(202);//принято
+            return StatusCode(202, "пользователь удалён");//принято
         }
     }
 }

@@ -88,8 +88,24 @@ namespace Helper.Converters
                 Patronymic = userDTO.Patronymic,
                 Login = userDTO.Login,
                 Image = userDTO.Image,
+                RoleId = userDTO.RoleId,
                 Role = ConverterDTO.RoleFromDTO(userDTO.Role),
                 Password = password
+            };
+        }
+        public static User UserFromChangedDTO(UserChangedDTO userDTO)
+        {
+            return new User()
+            {
+                Id = userDTO.Id,
+                Name = userDTO.Name,
+                Surname = userDTO.Surname,
+                Patronymic = userDTO.Patronymic,
+                Login = userDTO.Login,
+                Image = userDTO.Image,
+                RoleId = userDTO.RoleId,
+                Role = ConverterDTO.RoleFromDTO(userDTO.Role),
+                Password = userDTO.Password
             };
         }
 
