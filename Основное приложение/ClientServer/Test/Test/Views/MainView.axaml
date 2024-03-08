@@ -6,4 +6,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Test.Views.MainView"
              x:DataType="vm:MainViewModel">
+	<Button Content="Test" Command="{Binding Click}" 
+			VerticalAlignment="Center" HorizontalAlignment="Center"/>
 </UserControl>
