@@ -51,7 +51,7 @@ namespace Client.API
             return null;
         }
         //удаление лога
-        public static async Task<HttpStatusCode?> DeleteAttendanceLogs(int id)
+        public static async Task<HttpStatusCode?> DeleteAttendanceLog(int id)
         {
             HttpClient client = new HttpClient();
             try
@@ -66,7 +66,7 @@ namespace Client.API
             return null;
         }
         //создание лога
-        public static async Task<HttpStatusCode?> PostAttendanceLogs(AttendanceLogDTO attendanceLogDTO)
+        public static async Task<HttpStatusCode?> PostAttendanceLog(AttendanceLogDTO attendanceLogDTO)
         {
             HttpClient client = new HttpClient();
             try
@@ -81,7 +81,7 @@ namespace Client.API
             return null;
         }
         //обновление лога
-        public static async Task<HttpStatusCode?> PutAttendanceLogs(AttendanceLogDTO attendanceLogDTO)
+        public static async Task<HttpStatusCode?> PutAttendanceLog(AttendanceLogDTO attendanceLogDTO)
         {
             HttpClient client = new HttpClient();
             try

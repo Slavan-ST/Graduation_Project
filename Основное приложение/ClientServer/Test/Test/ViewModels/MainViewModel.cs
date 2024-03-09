@@ -60,6 +60,45 @@ namespace Test.ViewModels
 
             Debug.WriteLine("Test stop: end");
         }
+        private async void DeleteAttendanceLog_Test(int id)
+        {
+            Debug.WriteLine("Test start");
+            var statusCode = await Client.API.AttendanceLog.DeleteAttendanceLog(id);
+            if (statusCode == null)
+            {
+                Debug.WriteLine("Test stop: null");
+                return;
+            }
+            Debug.WriteLine("Status: " + statusCode.Value);
+
+            Debug.WriteLine("Test stop: end");
+        }
+        private async void PostAttendanceLog_Test(AttendanceLogDTO attendanceLog)
+        {
+            Debug.WriteLine("Test start");
+            var statusCode = await Client.API.AttendanceLog.PostAttendanceLog(attendanceLog);
+            if (statusCode == null)
+            {
+                Debug.WriteLine("Test stop: null");
+                return;
+            }
+            Debug.WriteLine("Status: " + statusCode.Value);
+
+            Debug.WriteLine("Test stop: end");
+        }
+        private async void PutAttendanceLog_Test(AttendanceLogDTO attendanceLog)
+        {
+            Debug.WriteLine("Test start");
+            var statusCode = await Client.API.AttendanceLog.PutAttendanceLog(attendanceLog);
+            if (statusCode == null)
+            {
+                Debug.WriteLine("Test stop: null");
+                return;
+            }
+            Debug.WriteLine("Status: " + statusCode.Value);
+
+            Debug.WriteLine("Test stop: end");
+        }
 
         #endregion
     }
