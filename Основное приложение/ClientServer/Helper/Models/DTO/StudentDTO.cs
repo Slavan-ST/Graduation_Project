@@ -16,7 +16,6 @@ namespace Helper.Models.DTO
         public string Name { get; set; } = "";
         public string Surname { get; set; } = "";
         public string Patronymic { get; set; } = "";
-        public int RoomId { get; set; }
         public RoomDTO? Room { get; set; }
 
         public StudentDTO() { }
@@ -31,7 +30,6 @@ namespace Helper.Models.DTO
             this.Name = student.Name;
             this.Surname = student.Surname;
             this.Patronymic = student.Patronymic;
-            this.RoomId = student.RoomId;
             this.Room = new RoomDTO(student.Room);
         }
     }

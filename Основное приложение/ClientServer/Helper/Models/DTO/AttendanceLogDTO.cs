@@ -13,8 +13,6 @@ namespace Helper.Models.DTO
     public class AttendanceLogDTO
     {
         public int Id { get; set; }
-        public int StudentId { get; set; }
-        public int MarkerId { get; set; }
         public DateTime Date { get; set; }
 
         public StudentDTO? Student { get; set; }
@@ -24,8 +22,6 @@ namespace Helper.Models.DTO
         public AttendanceLogDTO(AttendanceLog log)
         {
             this.Id = log.Id;
-            this.StudentId = log.StudentId;
-            this.MarkerId = log.MarkerId;
             this.Date = log.Date;
 
             this.Student = new StudentDTO(log.Student);

@@ -10,6 +10,59 @@ namespace Test.ViewModels
     {
         public MainViewModel()
         {
+            // проверить нужен ли ID
+            RoleDTO roleDTO = new RoleDTO()
+            {
+                Id = 0,
+                Name = "Admin"
+            };
+            RoomDTO roomDTO = new RoomDTO()
+            {
+                Id = 0,
+                Number = "309"
+            };
+            UserDTO userDTO = new UserDTO()
+            {
+                Id = 0,
+                Name = "test",
+                Surname = "test",
+                Patronymic = "test",
+                Login = "test",
+                Image = null,
+                Role = roleDTO
+            };
+            MarkerDTO markerDTO = new MarkerDTO()
+            {
+                Id = 0,
+                Char = "+"
+            };
+            StudentDTO studentDTO = new StudentDTO()
+            {
+                Id = 0,
+                Name = "test",
+                Surname = "test",
+                Patronymic = "test",
+                Room = roomDTO
+            };
+            UserChangedDTO userChangedDTO = new UserChangedDTO()
+            {
+                Id = 0,
+                Name = "test",
+                Surname = "test",
+                Patronymic = "test",
+                Login = "test",
+                Password ="test",
+                Image = null,
+                Role = roleDTO
+            };
+            AttendanceLogDTO attendanceLogDTO = new AttendanceLogDTO()
+            {
+                Id = 0,
+                Date = System.DateTime.Now,
+                Student = studentDTO,
+                Marker = markerDTO
+            };
+
             Click = ReactiveCommand.Create(() =>
             {
                 GetAttendanceLogs_Test();
