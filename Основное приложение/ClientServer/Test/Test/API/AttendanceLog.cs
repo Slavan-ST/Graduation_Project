@@ -56,7 +56,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"AttendanceLog");
+                var response = await client.DeleteAsync(Connect.Connection + $"AttendanceLog/{id}");
                 return response.StatusCode;
             }
             catch (Exception e)
