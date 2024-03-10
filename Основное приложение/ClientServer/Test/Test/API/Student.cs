@@ -23,7 +23,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<StudentDTO>(Connect.Connection + $"Student/{id}");
+                var response = await client.GetFromJsonAsync<StudentDTO>(Connect.Connection + $"Students/{id}");
                 return response;
             }
             catch (Exception e)
@@ -38,7 +38,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<StudentDTO>>(Connect.Connection + $"Student");
+                var response = await client.GetFromJsonAsync<IEnumerable<StudentDTO>>(Connect.Connection + $"Students");
                 return response;
             }
             catch (Exception e)
@@ -53,7 +53,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"Student/{id}");
+                var response = await client.DeleteAsync(Connect.Connection + $"Students/{id}");
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -68,7 +68,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.PostAsJsonAsync(Connect.Connection + $"Student", studentDTO);
+                var response = await client.PostAsJsonAsync(Connect.Connection + $"Students", studentDTO);
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -83,7 +83,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.PutAsJsonAsync(Connect.Connection + $"Student", studentDTO);
+                var response = await client.PutAsJsonAsync(Connect.Connection + $"Students", studentDTO);
                 return response.StatusCode;
             }
             catch (Exception e)
