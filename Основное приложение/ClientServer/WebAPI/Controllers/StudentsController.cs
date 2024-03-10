@@ -16,7 +16,7 @@ namespace Helper.Controllers
         public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents()
         {
             ApplicationContext db = new ApplicationContext();
-            var students = await db.Students.ToListAsync(); 
+            var students = await db.Students.Include(c => c.Room).ToListAsync();
             if (students == null)
             {
                 return NotFound();
@@ -36,7 +36,7 @@ namespace Helper.Controllers
         public async Task<ActionResult<StudentDTO>> GetStudent(int id)
         {
             ApplicationContext db = new ApplicationContext();
-            var student = await db.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var student = await db.Students.Include(c => c.Room).Where(x => x.Id == id).FirstOrDefaultAsync();
             if (student == null)
             {
                 return NotFound();
@@ -44,7 +44,7 @@ namespace Helper.Controllers
             await db.DisposeAsync();
 
             StudentDTO studentDTO = new StudentDTO(student);
-            
+
             return new JsonResult(studentDTO);
         }
 
@@ -59,7 +59,7 @@ namespace Helper.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).FirstOrDefaultAsync();
+            Student? student = await db.Students.Include(c => c.Room).Where(x => x.Id == studentDTO.Id).AsNoTracking().FirstOrDefaultAsync();
             if (student != null)
             {
                 return StatusCode(400);
@@ -84,10 +84,10 @@ namespace Helper.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).FirstOrDefaultAsync();
-            if (student != null)
+            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).AsNoTracking().FirstOrDefaultAsync();
+            if (student == null)
             {
-                return StatusCode(400);
+                return StatusCode(404);
             }
 
             student = ConverterDTO.StudentFromDTO(studentDTO)!;
@@ -100,22 +100,17 @@ namespace Helper.Controllers
             return StatusCode(202);//принято
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> Delete(StudentDTO studentDTO)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            if (studentDTO == null)
-            {
-                return NoContent();
-            }
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).FirstOrDefaultAsync();
-            if (student != null)
+            Student? student = await db.Students.Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            if (student == null)
             {
-                return StatusCode(400);
+                return StatusCode(404);
             }
-            student = ConverterDTO.StudentFromDTO(studentDTO)!;
 
             db.Students.Remove(student);
             await db.SaveChangesAsync();

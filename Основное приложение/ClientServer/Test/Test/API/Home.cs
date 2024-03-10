@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 
-namespace Test.API
+namespace Client.API
 {
     internal class Home
     {

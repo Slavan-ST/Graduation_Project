@@ -19,8 +19,6 @@ namespace Helper.Converters
             return new AttendanceLog()
             {
                 Id = logDTO.Id,
-                StudentId = logDTO.StudentId,
-                MarkerId = logDTO.MarkerId,
                 Date = logDTO.Date,
                 Student = ConverterDTO.StudentFromDTO(logDTO.Student),
                 Marker = ConverterDTO.MarkerFromDTO(logDTO.Marker)
@@ -74,7 +72,6 @@ namespace Helper.Converters
                 Name = studentDTO.Name,
                 Surname = studentDTO.Surname,
                 Patronymic = studentDTO.Patronymic,
-                RoomId = studentDTO.RoomId,
                 Room = ConverterDTO.RoomFromDTO(studentDTO.Room)
             };
         }
@@ -88,7 +85,6 @@ namespace Helper.Converters
                 Patronymic = userDTO.Patronymic,
                 Login = userDTO.Login,
                 Image = userDTO.Image,
-                RoleId = userDTO.RoleId,
                 Role = ConverterDTO.RoleFromDTO(userDTO.Role),
                 Password = password
             };
@@ -103,7 +99,6 @@ namespace Helper.Converters
                 Patronymic = userDTO.Patronymic,
                 Login = userDTO.Login,
                 Image = userDTO.Image,
-                RoleId = userDTO.RoleId,
                 Role = ConverterDTO.RoleFromDTO(userDTO.Role),
                 Password = userDTO.Password
             };

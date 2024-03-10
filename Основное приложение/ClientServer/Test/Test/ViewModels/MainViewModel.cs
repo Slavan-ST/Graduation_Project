@@ -153,6 +153,37 @@ namespace Test.ViewModels
             Debug.WriteLine("Test stop: end");
         }
 
+        private async void SignIn_Test(string login, string password)
+        {
+            Debug.WriteLine("Test start");
+            var userDTO = await Client.API.Home.SignIn(login, password);
+            if (userDTO == null)
+            {
+                Debug.WriteLine("Test stop: null");
+                return;
+            }
+            Debug.WriteLine(userDTO.Name);
+            Debug.WriteLine(userDTO.Login);
+            Debug.WriteLine(userDTO.Role?.Name);
+
+            Debug.WriteLine("Test stop: end");
+        }
+        private async void SignOut_Test()
+        {
+            Debug.WriteLine("Test start");
+            var code = await Client.API.Home.SignOut();
+            if (code == null)
+            {
+                Debug.WriteLine("Test stop: null");
+                return;
+            }
+            Debug.WriteLine(code.Value);
+
+            Debug.WriteLine("Test stop: end");
+        }
+
+
+
         #endregion
     }
 }
