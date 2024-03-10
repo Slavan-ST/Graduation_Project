@@ -48,7 +48,7 @@ namespace Client.API
             return null;
         }
         //удаление лога
-        public static async Task<HttpStatusCode?> DeleteGetStudentAsync(int id)
+        public static async Task<HttpStatusCode?> DeleteStudentAsync(int id)
         {
             HttpClient client = new HttpClient();
             try
@@ -63,7 +63,7 @@ namespace Client.API
             return null;
         }
         //создание лога
-        public static async Task<HttpStatusCode?> PostGetStudentAsync(StudentDTO studentDTO)
+        public static async Task<HttpStatusCode?> PostStudentAsync(StudentDTO studentDTO)
         {
             HttpClient client = new HttpClient();
             try
@@ -78,7 +78,7 @@ namespace Client.API
             return null;
         }
         //обновление лога
-        public static async Task<HttpStatusCode?> PutGetStudentAsync(StudentDTO studentDTO)
+        public static async Task<HttpStatusCode?> PutPutStudentAsync(StudentDTO studentDTO)
         {
             HttpClient client = new HttpClient();
             try
