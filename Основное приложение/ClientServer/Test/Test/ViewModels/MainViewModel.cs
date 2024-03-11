@@ -1,6 +1,7 @@
 ﻿using Helper.API;
 using Helper.Models.DTO;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System.Diagnostics;
 using System.Windows.Input;
 
@@ -65,12 +66,40 @@ namespace Test.ViewModels
 
             Click = ReactiveCommand.Create(() =>
             {
-                GetAttendanceLogs_Test();
-            }); 
+                //GetAttendanceLogs_Test();
+                GetAttendanceLog_Test(1004);
+            });
         }
-        public ICommand Click { get; set; }
 
+        //Get
+        public ICommand ClickLogs { get; set; }
+        public ICommand ClickLog { get; set; }
+        public ICommand ClickStudents { get; set; }
+        public ICommand ClickStudent { get; set; }
+        public ICommand ClickUsers { get; set; }
+        public ICommand ClickUser { get; set; }
+        public ICommand ClickSignIn { get; set; }
+        public ICommand ClickSignOut { get; set; }
 
+        //Post
+        public ICommand ClickUserPost { get; set; }
+        public ICommand ClickLogPost { get; set; }
+        public ICommand ClickStudentPost { get; set; }
+
+        //Put
+        public ICommand ClickUserPut { get; set; }
+        public ICommand ClickLogPut { get; set; }
+        public ICommand ClickStudentPut { get; set; }
+
+        //Delete
+        public ICommand ClickUserDel { get; set; }
+        public ICommand ClickLogDel { get; set; }
+        public ICommand ClickStudentDel { get; set; }
+
+        [Reactive]
+        public string? TestData { get; set; } = "";
+        [Reactive]
+        public string? Response { get; set; } = "";
 
 
 
