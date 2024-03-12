@@ -74,87 +74,87 @@ namespace Test.ViewModels
             ClickLog = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                GetAttendanceLog_Test(100);
             });
             ClickStudents = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                GetStudents_Test();
             });
             ClickStudent = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                GetStudent_Test(100);
             });
             ClickUsers = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                GetUsers_Test();
             });
             ClickUser = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                GetUser_Test(100);
             });
 
             ClickSignIn = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                SignIn_Test("login","password");
             });
             ClickSignOut = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                SignOut_Test();
             });
 
 
             ClickLogPost = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                PostAttendanceLog_Test(attendanceLogDTO);
             });
             ClickLogPut = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                PutAttendanceLog_Test(attendanceLogDTO);
             });
             ClickUserPost = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                PostUser_Test(userDTO);
             });
             ClickUserPut = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                PutUser_Test(userDTO);
             });
             ClickStudentPost = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                PostStudent_Test(studentDTO);
             });
             ClickStudentPut = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                PutStudent_Test(studentDTO);
             });
 
 
             ClickStudentDel = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                DeleteStudent_Test(100);
             });
             ClickUserDel = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                DeleteUser_Test(100);
             });
             ClickLogDel = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetAttendanceLogs_Test();
+                DeleteAttendanceLog_Test(100);
             });
 
         }
