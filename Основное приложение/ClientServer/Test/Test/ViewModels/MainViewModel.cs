@@ -1,5 +1,4 @@
-﻿using Helper.API;
-using Helper.Models.DTO;
+﻿using Helper.Models.DTO;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
