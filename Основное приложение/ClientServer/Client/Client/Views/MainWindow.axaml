@@ -10,7 +10,8 @@
         x:Class="Client.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Client"
-		Width="{Binding MainWinWidth}">
+		Width="{Binding MainWinWidth}"
+		MinHeight="600" MinWidth="800">
 	
 		<rxui:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
 			<rxui:RoutedViewHost.DefaultContent>

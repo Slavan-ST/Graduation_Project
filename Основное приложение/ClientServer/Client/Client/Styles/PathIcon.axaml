@@ -1,0 +1,14 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="25">
+			<TextBox Classes="revealPasswordButton" Text="123454545542452dfgdfgdfgdfgdf45245245" VerticalContentAlignment="Center" PasswordChar="*" Height="80"/>
+        </Border>
+    </Design.PreviewWith>
+
+	<Style Selector="TextBox.revealPasswordButton[AcceptsReturn=False][IsReadOnly=False]:not(TextBox:empty) PathIcon">
+		<Setter Property="MinHeight" Value="50"/>
+		<Setter Property="MinWidth" Value="50"/>
+		<Setter Property="Background" Value="Red"/>
+	</Style>
+</Styles>

@@ -2,21 +2,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="250"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="250"
              x:Class="Client.Views.AuthView">
-	<StackPanel Margin="15">
-		<TextBlock Text="Авторизация" HorizontalAlignment="Center" Margin="0,20"></TextBlock>
-		<TextBlock Text="Логин"></TextBlock>
-		<TextBox Text="{Binding Login}"></TextBox>
-
-		<DockPanel LastChildFill="True">
-			<TextBlock DockPanel.Dock="Top" Text="Пароль"></TextBlock>
-			<Button Content="👁" DockPanel.Dock="Right" Margin="5,0,0,0"/>
-			<TextBox DockPanel.Dock="Right" Text="{Binding Password}"></TextBox>
-		</DockPanel>
-		
-		<Button Margin="0,15" HorizontalAlignment="Stretch" 
-				HorizontalContentAlignment="Center" Content="Войти"
-				Command="{Binding Auth}"/>
-	</StackPanel>
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/PathIcon.axaml"/>
+		<StyleInclude Source="/Styles/TextBlock.axaml"/>
+	</UserControl.Styles>
+	<Grid>
+		<Image Source="{SvgImage /Assets/light/foneAuth.svg}" Stretch="UniformToFill"/>
+		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+				    Margin="0,250,0,0">
+			<TextBlock Text="Добро пожаловать!"
+					   HorizontalAlignment="Center" FontSize="32"
+					   Margin="0,5,0,5" FontWeight="Regular"/>
+			<TextBlock Text="Чтобы продолжить, авторизируйтесь"
+					   HorizontalAlignment="Center" FontSize="30"
+					   Margin="0,5,0,5" FontWeight="Regular"/>
+			<TextBox Watermark="Логин" FontSize="26"
+					 Margin="0,5,0,5" Height="65"
+					 Width="500" Text="{Binding Login}"
+					 VerticalContentAlignment="Center"/>
+			<TextBox Classes="revealPasswordButton" PasswordChar="•"
+					 Watermark="Пароль" FontSize="26"
+					 Margin="0,5,0,5" Height="65"
+					 Width="500" Text="{Binding Password}"
+					 VerticalContentAlignment="Center"/>
+			<Button HorizontalAlignment="Stretch" Content="Войти"
+					HorizontalContentAlignment="Center" FontSize="26"
+					Margin="0,5,0,5" Height="65"
+					VerticalContentAlignment="Center"
+					Background="#08F1EA" FontFamily="Inter"
+					Width="500" Command="{Binding Auth}"/>
+		</StackPanel>
+	</Grid>
 </UserControl>

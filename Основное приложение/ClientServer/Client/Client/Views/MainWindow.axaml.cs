@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Client.Services;
@@ -11,6 +12,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     public MainWindow()
     {
+        this.AttachDevTools();
         this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);
     }

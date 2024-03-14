@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Android" Version="11.0.9" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.14" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="11.0.10" />
     <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.1" />
   </ItemGroup>
 
