@@ -6,9 +6,19 @@
         </Border>
     </Design.PreviewWith>
 
-	<Style Selector="TextBox.revealPasswordButton[AcceptsReturn=False][IsReadOnly=False]:not(TextBox:empty) PathIcon">
-		<Setter Property="MinHeight" Value="50"/>
-		<Setter Property="MinWidth" Value="50"/>
-		<Setter Property="Background" Value="Red"/>
+	<Style Selector="TextBox.revealPasswordButton PathIcon">
+		<Style.Animations>
+			<Animation Duration="0:0:01"
+					   IterationCount="Infinite">
+				<KeyFrame Cue="0%">
+					<Setter Property="Height" Value="50"/>
+					<Setter Property="Width" Value="50"/>
+				</KeyFrame>
+				<KeyFrame Cue="100%">
+					<Setter Property="Height" Value="50"/>
+					<Setter Property="Width" Value="50"/>
+				</KeyFrame>
+			</Animation>
+		</Style.Animations>
 	</Style>
 </Styles>
