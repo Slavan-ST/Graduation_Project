@@ -16,7 +16,7 @@
 			<StackPanel Spacing="3">
 				<TextBlock Text="Get" FontSize="20"/>
 
-				<Button Content="Test Logs" Command="{Binding Clicklogs}" />
+				<Button Content="Test Logs" Command="{Binding ClickLogs}" />
 				<Button Content="Test Students" Command="{Binding ClickStudents}" />
 				<Button Content="Test Users" Command="{Binding ClickUsers}" />
 

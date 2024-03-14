@@ -209,11 +209,11 @@ namespace Test.ViewModels
         //вывод списка Журнала чистоты
         private async void GetAttendanceLogs_Test()
         {
-            Output("Test start");
+            
             var attendanceLogDTOs = await Client.API.AttendanceLog.GetAttendanceLogs();
             if (attendanceLogDTOs == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             foreach (var attendanceLogDTO in attendanceLogDTOs)
@@ -222,100 +222,100 @@ namespace Test.ViewModels
                 Output(attendanceLogDTO.Date.ToString());
                 Output(attendanceLogDTO.Marker!.Char);
             }
-            Output("Test stop: end");
+            
         }
         private async void GetAttendanceLog_Test(int id)
         {
-            Output("Test start");
+            
             var attendanceLogDTO = await Client.API.AttendanceLog.GetAttendanceLog(id);
             if (attendanceLogDTO == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             Output(attendanceLogDTO.Student!.Name);
             Output(attendanceLogDTO.Date.ToString());
             Output(attendanceLogDTO.Marker!.Char);
 
-            Output("Test stop: end");
+            
         }
         private async void DeleteAttendanceLog_Test(int id)
         {
-            Output("Test start");
+            
             var statusCode = await Client.API.AttendanceLog.DeleteAttendanceLog(id);
             if (statusCode == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             Output("Status: " + statusCode.Value);
 
-            Output("Test stop: end");
+            
         }
         private async void PostAttendanceLog_Test(AttendanceLogDTO attendanceLog)
         {
-            Output("Test start");
+            
             var statusCode = await Client.API.AttendanceLog.PostAttendanceLog(attendanceLog);
             if (statusCode == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             Output("Status: " + statusCode.Value);
 
-            Output("Test stop: end");
+            
         }
         private async void PutAttendanceLog_Test(AttendanceLogDTO attendanceLog)
         {
-            Output("Test start");
+            
             var statusCode = await Client.API.AttendanceLog.PutAttendanceLog(attendanceLog);
             if (statusCode == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             Output("Status: " + statusCode.Value);
 
-            Output("Test stop: end");
+            
         }
 
         private async void SignIn_Test(string login, string password)
         {
-            Output("Test start");
+            
             var userDTO = await Client.API.Home.SignIn(login, password);
             if (userDTO == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             Output(userDTO.Name);
             Output(userDTO.Login);
             Output(userDTO.Role?.Name);
 
-            Output("Test stop: end");
+            
         }
         private async void SignOut_Test()
         {
-            Output("Test start");
+            
             var code = await Client.API.Home.SignOut();
             if (code == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             Output(code.Value.ToString());
 
-            Output("Test stop: end");
+            
         }
 
 
         private async void GetStudents_Test()
         {
-            Output("Test start");
+            
             var studentDTOs = await Client.API.Student.GetStudentsAsync();
             if (studentDTOs == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             foreach (var studentDTO in studentDTOs)
@@ -323,74 +323,74 @@ namespace Test.ViewModels
                 Output(studentDTO.Name);
                 Output(studentDTO.Room?.Number);
             }
-            Output("Test stop: end");
+            
         }
         private async void GetStudent_Test(int id)
         {
-            Output("Test start");
+            
             var studentDTO = await Client.API.Student.GetStudentAsync(id);
             if (studentDTO == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
 
             Output(studentDTO.Name);
             Output(studentDTO.Room?.Number);
 
-            Output("Test stop: end");
+            
         }
         private async void DeleteStudent_Test(int id)
         {
-            Output("Test start");
+            
             var code = await Client.API.Student.DeleteStudentAsync(id);
             if (code == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
 
             Output(code.Value.ToString());
 
-            Output("Test stop: end");
+            
         }
         private async void PostStudent_Test(StudentDTO studentDTO)
         {
-            Output("Test start");
+            
             var code = await Client.API.Student.PostStudentAsync(studentDTO);
             if (code == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
 
             Output(code.Value.ToString());
 
-            Output("Test stop: end");
+            
         }
         private async void PutStudent_Test(StudentDTO studentDTO)
         {
-            Output("Test start");
+            
             var code = await Client.API.Student.PutPutStudentAsync(studentDTO);
             if (code == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
 
             Output(code.Value.ToString());
 
-            Output("Test stop: end");
+            
         }
 
 
         private async void GetUsers_Test()
         {
-            Output("Test start");
+            
             var userDTOS = await Client.API.User.GetUsersAsync();
             if (userDTOS == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             foreach (var userDTO in userDTOS)
@@ -398,63 +398,63 @@ namespace Test.ViewModels
                 Output(userDTO.Name);
                 Output(userDTO.Login);
             }
-            Output("Test stop: end");
+            
         }
         private async void GetUser_Test(int id)
         {
-            Output("Test start");
+            
             var userDTO = await Client.API.User.GetUserAsync(id);
             if (userDTO == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
             Output(userDTO.Login);
             Output(userDTO.Name);
 
-            Output("Test stop: end");
+            
         }
         private async void DeleteUser_Test(int id)
         {
-            Output("Test start");
+            
             var code = await Client.API.User.DeleteUserAsync(id);
             if (code == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
 
             Output(code.Value.ToString());
 
-            Output("Test stop: end");
+            
         }
         private async void PostUser_Test(UserDTO userDTO)
         {
-            Output("Test start");
+            
             var code = await Client.API.User.PostUserAsync(userDTO);
             if (code == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
 
             Output(code.Value.ToString());
 
-            Output("Test stop: end");
+            
         }
         private async void PutUser_Test(UserDTO userDTO)
         {
-            Output("Test start");
+            
             var code = await Client.API.User.PutUserAsync(userDTO);
             if (code == null)
             {
-                Output("Test stop: null");
+                
                 return;
             }
 
             Output(code.Value.ToString());
 
-            Output("Test stop: end");
+            
         }
 
 
