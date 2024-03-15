@@ -5,6 +5,7 @@ using Helper.Data;
 using Helper.Models.Main;
 using Helper.Models.DTO;
 using Helper.Converters;
+using WebAPI.Models;
 
 namespace Helper.Controllers
 {
@@ -31,18 +32,43 @@ namespace Helper.Controllers
 
             return new JsonResult(studentDTOs);
         }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<StudentDTO>> GetStudent(int id)
+        [HttpGet("{room}")]
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentsFromRoom(string room)
         {
+            ApplicationContext db = new ApplicationContext();
+            var students = await db.Students.Include(c => c.Room).Where(x => x.Room!.Number == room).ToListAsync();
+            if (students == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            List<StudentDTO> studentDTOs = new List<StudentDTO>();
+            foreach (var student in students)
+            {
+                studentDTOs.Add(new StudentDTO(student));
+            }
+
+            return new JsonResult(studentDTOs);
+        }
+
+        [HttpGet("{room}/{fio}")]
+        public async Task<ActionResult<StudentDTO>> GetStudent(string room, string fio)
+        {
+            room = room.Trim();
+            fio = fio.Trim();
+
+            (string surname, string name, string? patronymic) = FIOConverter.GetSurnameNamePatronymicFromFIO(fio);
+            
             ApplicationContext db = new ApplicationContext();
             var student = await db.Students
                 .Include(c => c.Room)
-                .Where(x => x.Id == id)
+                .Where(x => x.Room!.Number == room && x.Surname == surname && x.Name == name && x.Patronymic == patronymic)
                 .FirstOrDefaultAsync();
 
             if (student == null)
             {
+                Debug.WriteLine($"{room}/{fio}");
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -113,15 +139,18 @@ namespace Helper.Controllers
             return StatusCode(202);//принято
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{room}/{fio}")]
+        public async Task<ActionResult> Delete(string room, string fio)
         {
-            ApplicationContext db = new ApplicationContext();
+            room = room.Trim();
+            fio = fio.Trim();
 
-            //проверка на существование такой записи в БД
-            Student? student = await db.Students
-                .Where(x => x.Id == id)
-                .AsNoTracking()
+            (string surname, string name, string? patronymic) = FIOConverter.GetSurnameNamePatronymicFromFIO(fio);
+
+            ApplicationContext db = new ApplicationContext();
+            var student = await db.Students
+                .Include(c => c.Room)
+                .Where(x => x.Room!.Number == room && x.Surname == surname && x.Name == name && x.Patronymic == patronymic)
                 .FirstOrDefaultAsync();
 
             if (student == null)

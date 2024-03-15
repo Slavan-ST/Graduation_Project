@@ -19,12 +19,12 @@ namespace Client.API
 
 
         //получение одного лога по id
-        public static async Task<UserDTO?> GetUserAsync(int id)
+        public static async Task<UserDTO?> GetUserAsync(string login)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Users/{id}");
+                var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Users/{login}");
                 return response;
             }
             catch (Exception e)
@@ -49,12 +49,12 @@ namespace Client.API
             return null;
         }
         //удаление лога
-        public static async Task<HttpStatusCode?> DeleteUserAsync(int id)
+        public static async Task<HttpStatusCode?> DeleteUserAsync(string login)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"Users/{id}");
+                var response = await client.DeleteAsync(Connect.Connection + $"Users/{login}");
                 return response.StatusCode;
             }
             catch (Exception e)
