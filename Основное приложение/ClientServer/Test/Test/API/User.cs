@@ -14,11 +14,6 @@ namespace Client.API
 {
     internal static class User
     {
-        //тут будет получение и отправка на сервер
-
-
-
-        //получение одного лога по id
         public static async Task<UserDTO?> GetUserAsync(string login)
         {
             HttpClient client = new HttpClient();
@@ -33,7 +28,6 @@ namespace Client.API
             }
             return null;
         }
-        //получение всех логов с БД
         public static async Task<IEnumerable<UserDTO>?> GetUsersAsync()
         {
             HttpClient client = new HttpClient();
@@ -48,7 +42,6 @@ namespace Client.API
             }
             return null;
         }
-        //удаление лога
         public static async Task<HttpStatusCode?> DeleteUserAsync(string login)
         {
             HttpClient client = new HttpClient();
@@ -63,7 +56,6 @@ namespace Client.API
             }
             return null;
         }
-        //создание лога
         public static async Task<HttpStatusCode?> PostUserAsync(UserDTO userDTO)
         {
             HttpClient client = new HttpClient();
@@ -78,7 +70,6 @@ namespace Client.API
             }
             return null;
         }
-        //обновление лога
         public static async Task<HttpStatusCode?> PutUserAsync(UserDTO userDTO)
         {
             HttpClient client = new HttpClient();

@@ -14,13 +14,6 @@ namespace Client.API
 {
     internal static class AttendanceLog
     {
-        //тут будет получение и отправка на сервер get, post,put,delete
-        //AttendanceLog
-
-        //Test
-        //вариант 1 сделать каждый класс по отдельности
-
-        //получение одного лога по id
         public static async Task<AttendanceLogDTO?> GetAttendanceLog(int id)
         {
             HttpClient client = new HttpClient();
@@ -35,7 +28,14 @@ namespace Client.API
             }
             return null;
         }
+
+
+
         //получение всех логов с БД
+
+
+        //добавить по датам
+
         public static async Task<IEnumerable<AttendanceLogDTO>?> GetAttendanceLogs()
         {
             HttpClient client = new HttpClient();
