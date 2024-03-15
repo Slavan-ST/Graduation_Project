@@ -7,6 +7,7 @@ using Helper.Data;
 using Helper.Models.Main;
 using Helper.Models.DTO;
 using Helper.Converters;
+using System.Diagnostics;
 
 namespace Helper.Controllers
 {
@@ -22,7 +23,82 @@ namespace Helper.Controllers
                 .Include(c => c.Student)
                 .Include(c => c.Marker)
                 .Include(c => c.Student!.Room)
-                .ToListAsync(); 
+                .ToListAsync();
+
+            if (attendanceLogs == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
+            foreach (var log in attendanceLogs)
+            {
+                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
+            }
+
+            return new JsonResult(attendanceLogDTOs);
+        }
+        [HttpGet("day:{day}.{month}.{year}")]
+        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogsDay(int day, int month, int year)
+        {
+            ApplicationContext db = new ApplicationContext();
+            var attendanceLogs = await db.AttendanceLog
+                .Include(c => c.Student)
+                .Include(c => c.Marker)
+                .Include(c => c.Student!.Room)
+                .Where(c => c.Date.Year == year && c.Date.Month == month && c.Date.Day == day)
+                .ToListAsync();
+
+            if (attendanceLogs == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
+            foreach (var log in attendanceLogs)
+            {
+                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
+            }
+
+            return new JsonResult(attendanceLogDTOs);
+        }
+        [HttpGet("month:{month}.{year}")]
+        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogsMonth(int month, int year)
+        {
+            ApplicationContext db = new ApplicationContext();
+            var attendanceLogs = await db.AttendanceLog
+                .Include(c => c.Student)
+                .Include(c => c.Marker)
+                .Include(c => c.Student!.Room)
+                .Where(c => c.Date.Year == year && c.Date.Month == month)
+                .ToListAsync();
+
+            if (attendanceLogs == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
+            foreach (var log in attendanceLogs)
+            {
+                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
+            }
+
+            return new JsonResult(attendanceLogDTOs);
+        }
+        [HttpGet("year:{year}")]
+        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogsYear(int year)
+        {
+            ApplicationContext db = new ApplicationContext();
+            var attendanceLogs = await db.AttendanceLog
+                .Include(c => c.Student)
+                .Include(c => c.Marker)
+                .Include(c => c.Student!.Room)
+                .Where(c => c.Date.Year == year)
+                .ToListAsync();
 
             if (attendanceLogs == null)
             {
