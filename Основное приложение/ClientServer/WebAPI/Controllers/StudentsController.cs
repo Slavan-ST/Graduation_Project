@@ -36,7 +36,11 @@ namespace Helper.Controllers
         public async Task<ActionResult<StudentDTO>> GetStudent(int id)
         {
             ApplicationContext db = new ApplicationContext();
-            var student = await db.Students.Include(c => c.Room).Where(x => x.Id == id).FirstOrDefaultAsync();
+            var student = await db.Students
+                .Include(c => c.Room)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
             if (student == null)
             {
                 return NotFound();
@@ -59,7 +63,12 @@ namespace Helper.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            Student? student = await db.Students.Include(c => c.Room).Where(x => x.Id == studentDTO.Id).AsNoTracking().FirstOrDefaultAsync();
+            Student? student = await db.Students
+                .Include(c => c.Room)
+                .Where(x => x.Id == studentDTO.Id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
             if (student != null)
             {
                 return StatusCode(400);
@@ -84,7 +93,11 @@ namespace Helper.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            Student? student = await db.Students.Where(x => x.Id == studentDTO.Id).AsNoTracking().FirstOrDefaultAsync();
+            Student? student = await db.Students
+                .Where(x => x.Id == studentDTO.Id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
             if (student == null)
             {
                 return StatusCode(404);
@@ -106,7 +119,11 @@ namespace Helper.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            Student? student = await db.Students.Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            Student? student = await db.Students
+                .Where(x => x.Id == id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
             if (student == null)
             {
                 return StatusCode(404);

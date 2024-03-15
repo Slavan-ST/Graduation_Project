@@ -18,7 +18,7 @@ namespace Client.API
 
 
         //получение одного лога по id
-        public static async Task<StudentDTO?> GetStudentAsync(int id)
+        public static async Task<StudentDTO?> GetStudentAsync(string login)
         {
             HttpClient client = new HttpClient();
             try
@@ -48,12 +48,12 @@ namespace Client.API
             return null;
         }
         //удаление лога
-        public static async Task<HttpStatusCode?> DeleteStudentAsync(int id)
+        public static async Task<HttpStatusCode?> DeleteStudentAsync(string login)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"Students/{id}");
+                var response = await client.DeleteAsync(Connect.Connection + $"Students/{login}");
                 return response.StatusCode;
             }
             catch (Exception e)
