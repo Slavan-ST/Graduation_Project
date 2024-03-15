@@ -14,13 +14,13 @@ namespace Helper.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> GetUser(int id)
+        [HttpGet("{login}")]
+        public async Task<ActionResult<UserDTO>> GetUser(string login)
         {
             ApplicationContext db = new ApplicationContext();
             var user = await db.Users
                 .Include(c => c.Role)
-                .Where(x => x.Id == id)
+                .Where(x => x.Login == login)
                 .FirstOrDefaultAsync();
             if (user == null)
             {
@@ -32,6 +32,8 @@ namespace Helper.Controllers
 
             return new JsonResult(userDTO);
         }
+
+
         [HttpGet]
         public async Task<ActionResult<List<UserDTO>>> GetUsers()
         {
@@ -117,15 +119,15 @@ namespace Helper.Controllers
             return StatusCode(202);//принято
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUser(int id)
+        [HttpDelete("{login}")]
+        public async Task<ActionResult> DeleteUser(string login)
         {
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
             User? user = await db.Users
                 .Include(c => c.Role)
-                .Where(x => x.Id == id)
+                .Where(x => x.Login == login)
                 .FirstOrDefaultAsync();
 
             if (user == null)

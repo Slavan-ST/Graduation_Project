@@ -30,11 +30,11 @@ namespace Helper.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return StatusCode(403, "Неверный логин или пароль!");
             }
             if (!SecretHasher.Verify(password, user.Password))
             {
-                return BadRequest();
+                return StatusCode(403, "Неверный логин или пароль!");
             }
 
 

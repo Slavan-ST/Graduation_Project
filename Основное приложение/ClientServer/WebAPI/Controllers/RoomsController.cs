@@ -31,11 +31,14 @@ namespace Helper.Controllers
             return new JsonResult(roomDTOs);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<RoomDTO>> GetRoom(int id)
+        [HttpGet("{number}")]
+        public async Task<ActionResult<RoomDTO>> GetRoom(string number)
         {
             ApplicationContext db = new ApplicationContext();
-            var room = await db.Rooms.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var room = await db.Rooms
+                .Where(x => x.Number == number)
+                .FirstOrDefaultAsync();
+
             if (room == null)
             {
                 return NotFound();
@@ -57,7 +60,10 @@ namespace Helper.Controllers
             ApplicationContext db = new ApplicationContext();
             
             //проверка на существование такой записи в БД
-            Room? room = await db.Rooms.Where(x => x.Id == roomDTO.Id).FirstOrDefaultAsync();            
+            Room? room = await db.Rooms
+                .Where(x => x.Id == roomDTO.Id)
+                .FirstOrDefaultAsync();
+            
             if (room != null)
             {
                 return StatusCode(400);
@@ -101,12 +107,14 @@ namespace Helper.Controllers
             return StatusCode(202);//принято
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteRoom(int id)
+        [HttpDelete("{number}")]
+        public async Task<ActionResult> DeleteRoom(string number)
         {
             ApplicationContext db = new ApplicationContext();
 
-            var room = await db.Rooms.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var room = await db.Rooms
+                .Where(x => x.Number == number)
+                .FirstOrDefaultAsync();
 
             if (room == null)
             {
