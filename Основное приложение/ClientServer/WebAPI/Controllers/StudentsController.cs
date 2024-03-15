@@ -91,7 +91,7 @@ namespace Helper.Controllers
             //проверка на существование такой записи в БД
             Student? student = await db.Students
                 .Include(c => c.Room)
-                .Where(x => x.Id == studentDTO.Id)
+                .Where(x => x.Surname == studentDTO.Surname && x.Name == studentDTO.Name && x.Patronymic == studentDTO.Patronymic)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
@@ -120,7 +120,7 @@ namespace Helper.Controllers
 
             //проверка на существование такой записи в БД
             Student? student = await db.Students
-                .Where(x => x.Id == studentDTO.Id)
+                .Where(x => x.Surname == studentDTO.Surname && x.Name == studentDTO.Name && x.Patronymic == studentDTO.Patronymic)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 

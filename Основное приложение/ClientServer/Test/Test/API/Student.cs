@@ -53,7 +53,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"Students/{room} /fio");
+                var response = await client.DeleteAsync(Connect.Connection + $"Students/{room}/fio");
                 return response.StatusCode;
             }
             catch (Exception e)

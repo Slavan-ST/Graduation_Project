@@ -68,7 +68,6 @@ namespace Helper.Converters
             }
             return new Student()
             {
-                Id = studentDTO.Id,
                 Name = studentDTO.Name,
                 Surname = studentDTO.Surname,
                 Patronymic = studentDTO.Patronymic,
