@@ -12,6 +12,7 @@ namespace Helper.Models.DTO
 {
     public class StudentDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; } = "";
         public string Surname { get; set; } = "";
         public string Patronymic { get; set; } = "";
@@ -25,6 +26,7 @@ namespace Helper.Models.DTO
                 return;
             }
 
+            this.Id = student.Id;
             this.Name = student.Name;
             this.Surname = student.Surname;
             this.Patronymic = student.Patronymic;
