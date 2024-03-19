@@ -34,7 +34,7 @@ namespace Client.API
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"SignOut");
+                var response = await client.GetAsync(Connect.Connection + $"SignOut");
                 return response.StatusCode;
             }
             catch (Exception e)

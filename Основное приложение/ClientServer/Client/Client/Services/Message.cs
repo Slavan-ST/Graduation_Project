@@ -19,7 +19,8 @@ namespace Client.Services
         }
         public async void ShowMessageAsync(string title, string message)
         {
-            var result = await MessageBoxManager.GetMessageBoxStandard(title, message).ShowAsPopupAsync(_content);
+            var messageBox = MessageBoxManager.GetMessageBoxStandard(title, message);
+            var result = await messageBox.ShowAsPopupAsync(_content);
         }
         public static void Show(string title, string message)
         {

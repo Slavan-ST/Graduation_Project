@@ -64,6 +64,12 @@ namespace Test.ViewModels
                 Marker = markerDTO
             };
 
+            string loginUser = "1";
+            string password = "1";
+
+            string fio = "1";
+            string roomForTest = "1";
+
             ClickLogs = ReactiveCommand.Create(() =>
             {
                 Response = "";
@@ -83,7 +89,7 @@ namespace Test.ViewModels
             ClickStudent = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetStudent_Test(100);
+                GetStudent_Test(fio, roomForTest);
             });
             ClickUsers = ReactiveCommand.Create(() =>
             {
@@ -93,13 +99,13 @@ namespace Test.ViewModels
             ClickUser = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                GetUser_Test(100);
+                GetUser_Test(loginUser);
             });
 
             ClickSignIn = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                SignIn_Test("login","password");
+                SignIn_Test(loginUser,password);
             });
             ClickSignOut = ReactiveCommand.Create(() =>
             {
@@ -143,12 +149,12 @@ namespace Test.ViewModels
             ClickStudentDel = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                DeleteStudent_Test(100);
+                DeleteStudent_Test(fio, roomForTest);
             });
             ClickUserDel = ReactiveCommand.Create(() =>
             {
                 Response = "";
-                DeleteUser_Test(100);
+                DeleteUser_Test(loginUser);
             });
             ClickLogDel = ReactiveCommand.Create(() =>
             {
@@ -299,7 +305,6 @@ namespace Test.ViewModels
             var code = await Client.API.Home.SignOut();
             if (code == null)
             {
-                
                 return;
             }
             Output(code.Value.ToString());
@@ -324,10 +329,10 @@ namespace Test.ViewModels
             }
             
         }
-        private async void GetStudent_Test(int id)
+        private async void GetStudent_Test(string fio, string room)
         {
             
-            var studentDTO = await Client.API.Student.GetStudentAsync(id);
+            var studentDTO = await Client.API.Student.GetStudentAsync(fio, room);
             if (studentDTO == null)
             {
                 
@@ -339,10 +344,10 @@ namespace Test.ViewModels
 
             
         }
-        private async void DeleteStudent_Test(int id)
+        private async void DeleteStudent_Test(string fio, string room)
         {
             
-            var code = await Client.API.Student.DeleteStudentAsync(id);
+            var code = await Client.API.Student.DeleteStudentAsync(fio, room);
             if (code == null)
             {
                 
@@ -399,10 +404,10 @@ namespace Test.ViewModels
             }
             
         }
-        private async void GetUser_Test(int id)
+        private async void GetUser_Test(string login)
         {
             
-            var userDTO = await Client.API.User.GetUserAsync(id);
+            var userDTO = await Client.API.User.GetUserAsync(login);
             if (userDTO == null)
             {
                 
@@ -413,10 +418,10 @@ namespace Test.ViewModels
 
             
         }
-        private async void DeleteUser_Test(int id)
+        private async void DeleteUser_Test(string login)
         {
             
-            var code = await Client.API.User.DeleteUserAsync(id);
+            var code = await Client.API.User.DeleteUserAsync(login);
             if (code == null)
             {
                 
