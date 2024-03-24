@@ -15,19 +15,14 @@
 		<DataGrid
 					  VerticalAlignment="Stretch"
 					  HorizontalAlignment="Stretch"
-					  Background="Gray"
 					  Margin="15"
-					  IsReadOnly="True"
-					  CanUserReorderColumns="True"
-					  CanUserResizeColumns="True"
+					  IsReadOnly="False"
+					  CanUserReorderColumns="False"
+					  CanUserResizeColumns="False"
 					  CanUserSortColumns="False"
 					  GridLinesVisibility="All"
 					  BorderThickness="1" BorderBrush="Gray"
-					  MinWidth="200"
-					  MinHeight="100"
-					  ItemsSource="{Binding People}"
-					 
-				   >
+					  ItemsSource="{Binding People}">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="ÔÈÎ" Binding="{Binding Line[0]}"/>
 				<DataGridTextColumn Header="1" Binding="{Binding Line[1]}"/>
