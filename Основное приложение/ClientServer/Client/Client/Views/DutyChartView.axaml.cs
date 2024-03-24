@@ -1,3 +1,4 @@
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Client.ViewModels;
@@ -17,7 +18,6 @@ namespace Client.Views
         private void Calendar_PointerWheelChanged(object? sender, Avalonia.Input.PointerWheelEventArgs e)
         {
             e.Handled = true;
-            base.OnPointerWheelChanged(e);
-        }
+        }     
     }
 }

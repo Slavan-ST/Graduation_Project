@@ -7,7 +7,7 @@
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<Calendar SelectionMode="SingleDate" HorizontalAlignment="Center" Background="Transparent" 
-				  PointerWheelChanged="Calendar_PointerWheelChanged" >
+				  x:Name="calendar" PointerWheelChanged="Calendar_PointerWheelChanged">
 			<Calendar.Styles>
 				<Style Selector="CalendarDayButton">
 					<Setter Property="Template">
@@ -15,12 +15,16 @@
 							<ControlTemplate>
 								<Border BorderBrush="#08F0E9"
 										BorderThickness="2"
-										Background="#FFFFFF" Height="150" Width="150" >
-									<StackPanel Margin="5">
+										Background="#FFFFFF" Height="150" Width="150"
+										PointerWheelChanged="Calendar_PointerWheelChanged">
+									<StackPanel Margin="5" PointerWheelChanged="Calendar_PointerWheelChanged">
 										<ContentControl Content="{TemplateBinding Content}"
-														HorizontalAlignment="Left"/>
-										<TextBlock Text="{Binding Room}"/>
-										<TextBlock Text="{Binding Student}"/>
+														HorizontalAlignment="Left"
+														PointerWheelChanged="Calendar_PointerWheelChanged"/>
+										<TextBlock Text="{Binding Room}"
+												   PointerWheelChanged="Calendar_PointerWheelChanged"/>
+										<TextBlock Text="{Binding Student}"
+												   PointerWheelChanged="Calendar_PointerWheelChanged"/>
 
 									</StackPanel>
 								</Border>
