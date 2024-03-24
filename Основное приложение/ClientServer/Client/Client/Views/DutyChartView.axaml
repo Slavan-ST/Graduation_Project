@@ -3,6 +3,121 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Client.Views.DutyChartView">
-  Welcome to Duty!
+			 x:Class="Client.Views.DutyChartView">
+	<Grid>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<Calendar SelectionMode="SingleDate" HorizontalAlignment="Center" Background="Transparent" 
+				  PointerWheelChanged="Calendar_PointerWheelChanged" >
+			<Calendar.Styles>
+				<Style Selector="CalendarDayButton">
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate>
+								<Border BorderBrush="#08F0E9"
+										BorderThickness="2"
+										Background="#FFFFFF" Height="150" Width="150" >
+									<StackPanel Margin="5">
+										<ContentControl Content="{TemplateBinding Content}"
+														HorizontalAlignment="Left"/>
+										<TextBlock Text="{Binding Room}"/>
+										<TextBlock Text="{Binding Student}"/>
+
+									</StackPanel>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+				<Style Selector="Grid#PART_MonthView > TextBlock">
+					<Setter Property="IsVisible" Value="False"/>
+					<Setter Property="Height" Value="0"/>
+				</Style>
+				
+				<Style Selector="CalendarDayButton:inactive">
+					<Setter Property="Background" Value="Transparent"/>
+					<Setter Property="IsVisible" Value="False"/>
+				</Style>
+				<Style Selector="Button#PART_PreviousButton">
+					<Setter Property="HorizontalAlignment" Value="Right"/>
+					<Setter Property="RenderTransform" Value="rotate(-90deg)"/>
+					<Style.Animations>
+						<Animation Duration="0:0:01"
+								   IterationCount="Infinite">
+							<KeyFrame Cue="0%">
+								<Setter Property="Grid.Column" Value="0"/>
+							</KeyFrame>
+							<KeyFrame Cue="100%">
+								<Setter Property="Grid.Column" Value="0"/>
+							</KeyFrame>
+						</Animation>
+					</Style.Animations>
+				</Style>
+				<Style Selector="Button#PART_NextButton">
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="RenderTransform" Value="rotate(-90deg)"/>
+					<Style.Animations>
+						<Animation Duration="0:0:01"
+								   IterationCount="Infinite">
+							<KeyFrame Cue="0%">
+								<Setter Property="Grid.Column" Value="2"/>
+							</KeyFrame>
+							<KeyFrame Cue="100%">
+								<Setter Property="Grid.Column" Value="2"/>
+							</KeyFrame>
+						</Animation>
+					</Style.Animations>
+				</Style>
+				<Style Selector="Button#PART_HeaderButton">
+					<Setter Property="Grid.Column" Value="1"/>
+					<Setter Property="HorizontalAlignment" Value="Center"/>
+					<Setter Property="HorizontalContentAlignment" Value="Center"/>
+					<Setter Property="FontSize" Value="24"/>
+					<Style.Animations>
+						<Animation Duration="0:0:01"
+								   IterationCount="Infinite">
+							<KeyFrame Cue="0%">
+								<Setter Property="IsEnabled" Value="False"/>
+							</KeyFrame>
+							<KeyFrame Cue="100%">
+								<Setter Property="IsEnabled" Value="False"/>
+							</KeyFrame>
+						</Animation>
+					</Style.Animations>
+				</Style>
+
+				<Style Selector="Calendar /template/ CalendarItem#PART_CalendarItem /template/ Grid > Grid:not(#PART_MonthView)">
+					<Setter Property="HorizontalAlignment" Value="Center"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+				</Style>
+				<Style Selector="Calendar /template/ CalendarItem#PART_CalendarItem /template/ Grid > Border">
+					<Style.Animations>
+						<Animation Duration="0:0:01"
+								   IterationCount="Infinite">
+							<KeyFrame Cue="0%">
+								<Setter Property="Background" Value="Transparent"/>
+							</KeyFrame>
+							<KeyFrame Cue="100%">
+								<Setter Property="Background" Value="Transparent"/>
+							</KeyFrame>
+						</Animation>
+					</Style.Animations>
+				</Style>
+
+				<Style Selector="Calendar /template/ CalendarItem#PART_CalendarItem">
+					<Style.Animations>
+						<Animation Duration="0:0:01"
+								   IterationCount="Infinite">
+							<KeyFrame Cue="0%">
+								<Setter Property="BorderThickness" Value="0"/>
+							</KeyFrame>
+							<KeyFrame Cue="100%">
+								<Setter Property="BorderThickness" Value="0"/>
+							</KeyFrame>
+						</Animation>
+					</Style.Animations>
+				</Style>
+
+			</Calendar.Styles>
+		</Calendar>
+	</Grid>
 </UserControl>
