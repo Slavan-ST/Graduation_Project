@@ -1,6 +1,7 @@
 ﻿using Client.API;
 using Helper.Models.DTO;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,23 +14,12 @@ using System.Windows.Input;
 
 namespace Client.ViewModels
 {
-    public class Person
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public bool IsFictitious { get; set; }
-
-        public Person(string firstName, string lastName, bool isFictitious)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            IsFictitious = isFictitious;
-        }
-    }
 
     public class RecordStudentsViewModel : ViewModelBase
-    { 
-        public DataTable People { get; set; }
+    {
+        [Reactive]
+        public DataView People { get; set; }
+        public DataTable PeopleTable { get; set; }
 
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
@@ -38,7 +28,8 @@ namespace Client.ViewModels
 
         async void TestPeoples()
         {
-            People = await MakeTable();
+            PeopleTable = await MakeTable();
+            People = PeopleTable.DefaultView;
         }
 
         async Task<DataTable> MakeTable()
@@ -47,13 +38,11 @@ namespace Client.ViewModels
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("FIO");
 
-            var prevDate = DateTime.MinValue;
             foreach (var item in logDTOs)
             {
-                if (item.Date != prevDate)
+                if (!dataTable.Columns.Contains(item.Date.Day.ToString()))
                 {
                     dataTable.Columns.Add(new DataColumn(item.Date.Day.ToString()));
-                    prevDate = item.Date;
                 }
             }
             string prevFullName = string.Empty;
@@ -70,8 +59,12 @@ namespace Client.ViewModels
                     row[day] = item.Marker?.Char;
                     prevFullName = fullName;
                 }
-                day = item.Date.Day.ToString();
-                row[day] = item.Marker?.Char;
+                else
+                {
+                    day = item.Date.Day.ToString();
+                    row[day] = item.Marker?.Char;
+                }
+                dataTable.Rows.Add(row);
             }
 
             return dataTable;

@@ -78,6 +78,7 @@ namespace Client.ViewModels
             Record = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new RecordStudentsViewModel(this));
+                IsOpenSideBar = false;
             });
 
 

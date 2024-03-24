@@ -6,19 +6,11 @@
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.RecordStudentsView">
 
-	<StackPanel>
-		<StackPanel Orientation="Horizontal">
-			<Button Content="28" Command="{Binding Cmd28}"/>
-			<Button Content="29" Command="{Binding Cmd29}"/>
-			<Button Content="30" Command="{Binding Cmd30}"/>
-			<Button Content="31" Command="{Binding Cmd31}"/>
-		</StackPanel>
-		<DataGrid Margin="20"
-				  BorderThickness="1" BorderBrush="Gray"
-				  GridLinesVisibility="All"
-				  ItemsSource="{Binding People}"
-				  AutoGenerateColumns="True">
-		</DataGrid>
-	</StackPanel>
+	<DataGrid Margin="20" Name="ExampleDatagrid"
+			  AutoGenerateColumns="True"
+			  BorderThickness="1" BorderBrush="Gray"
+			  GridLinesVisibility="All"
+			  ItemsSource="{Binding People}">
+	</DataGrid>
 	
 </UserControl>
