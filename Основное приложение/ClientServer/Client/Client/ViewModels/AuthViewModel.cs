@@ -1,5 +1,6 @@
 ﻿using Client.Models;
 using Client.Services;
+using Helper.Models.DTO;
 using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -31,7 +32,7 @@ namespace Client.ViewModels
                     return;
                 }
                 //получаем пользователя
-                User? user = await Authorization.AuthorizationUser(Login, Password);
+                UserDTO? user = await API.Home.SignIn(Login, Password);
                 //если пользователя получили, то переходим на главную
                 if (user != null)
                 {
