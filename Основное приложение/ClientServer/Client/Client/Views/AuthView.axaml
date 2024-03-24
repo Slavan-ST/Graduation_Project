@@ -9,6 +9,7 @@
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/PathIcon.axaml"/>
 		<StyleInclude Source="/Styles/TextBlock.axaml"/>
+		<StyleInclude Source="/Styles/Buttons/AuthJoin.axaml"/>
 	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneAuth.svg}" Stretch="UniformToFill"/>
@@ -29,12 +30,7 @@
 					 Margin="0,5,0,5" Height="65"
 					 Width="500" Text="{Binding Password}"
 					 VerticalContentAlignment="Center"/>
-			<Button HorizontalAlignment="Stretch" Content="Войти"
-					HorizontalContentAlignment="Center" FontSize="26"
-					Margin="0,5,0,5" Height="65"
-					VerticalContentAlignment="Center"
-					Background="#08F1EA" FontFamily="Inter"
-					Width="500" Command="{Binding Auth}"/>
+			<Button Content="Войти" Command="{Binding Auth}"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

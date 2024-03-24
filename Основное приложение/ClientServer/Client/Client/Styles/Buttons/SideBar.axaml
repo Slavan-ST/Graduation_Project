@@ -1,0 +1,16 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<Button Content="Профиль"/>
+        </Border>
+    </Design.PreviewWith>
+
+	<Style Selector="Button">
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="Margin" Value="5"/>
+		<Setter Property="Background" Value="#08F1EA"/>
+		<Setter Property="CornerRadius" Value="12"/>
+	</Style>
+</Styles>

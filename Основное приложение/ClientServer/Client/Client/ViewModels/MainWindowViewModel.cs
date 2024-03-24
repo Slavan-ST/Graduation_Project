@@ -13,7 +13,7 @@ namespace Client.ViewModels
     {
         public MainWindowViewModel()
         {
-            Router.Navigate.Execute(new AuthViewModel(this));
+            Router.Navigate.Execute(new RecordStudentsViewModel(this));
         }
         public RoutingState Router { get; } = new RoutingState();
     }

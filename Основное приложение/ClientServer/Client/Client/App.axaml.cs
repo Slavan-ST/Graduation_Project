@@ -55,6 +55,7 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new PurityChartView(), typeof(IViewFor<PurityChartViewModel>));
         Locator.CurrentMutable.Register(() => new SideBarView(), typeof(IViewFor<SideBarViewModel>));
         Locator.CurrentMutable.Register(() => new StatementView(), typeof(IViewFor<StatementViewModel>));
+        Locator.CurrentMutable.Register(() => new RecordStudentsView(), typeof(IViewFor<RecordStudentsViewModel>));
 
         Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
 

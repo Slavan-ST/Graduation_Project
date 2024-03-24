@@ -4,23 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.SideBarView">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/Buttons/SideBar.axaml"/>
+		<StyleInclude Source="/Styles/Buttons/BackButton.axaml"/>
+	</UserControl.Styles>
 	<Grid>
-		<StackPanel>
-			<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}"
-					HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+		<StackPanel Margin="25">
+			<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}"/>
 			<StackPanel IsVisible="{Binding IsStudents}">
-				<Button Content="Профиль" Command="{Binding Profile}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
-				<Button Content="Заявление" Command="{Binding Statement}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
-				<Button Content="Мероприятия" Command="{Binding Events}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+				<Button Content="Профиль" Command="{Binding Profile}"/>
+				<Button Content="Заявление" Command="{Binding Statement}"/>
+				<Button Content="Мероприятия" Command="{Binding Events}"/>
 			</StackPanel>
 			<StackPanel IsVisible="{Binding IsWorker}">
-				<Button Content="План меропритий" Command="{Binding EventsList}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
-				<Button Content="График дежурств" Command="{Binding DutyChart}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
-				<Button Content="Списки студентов" Command="{Binding ListStudents}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
-				<Button Content="Экран чистоты" Command="{Binding PurityChart}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+				<Button Content="План меропритий" Command="{Binding EventsList}"/>
+				<Button Content="График дежурств" Command="{Binding DutyChart}"/>
+				<Button Content="Списки студентов" Command="{Binding ListStudents}"/>
+				<Button Content="Экран чистоты" Command="{Binding PurityChart}"/>
 			</StackPanel>
-			<Button Content="Вопрос-ответ" Command="{Binding Faq}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="5"/>
+			<Button Content="Вопрос-ответ" Command="{Binding Faq}"/>
 		</StackPanel>
-		<Button Content="◄" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
+		<Button Classes="back" Command="{Binding HideSideBar}"/>
 	</Grid>
 </UserControl>

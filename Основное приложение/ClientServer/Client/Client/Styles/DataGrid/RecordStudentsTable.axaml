@@ -1,0 +1,32 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<DataGrid Classes.day28="false"
+					  Classes.day29="false"
+					  Classes.day32="true"
+					  Classes.day31="false">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="First Name"/>
+					<DataGridTextColumn Header="Last Name"/>
+				</DataGrid.Columns>
+			</DataGrid>
+		</Border>
+    </Design.PreviewWith>
+
+	<Style Selector="DataGrid.day28">
+		<Setter Property="Background" Value="Red"/>
+	</Style>
+
+	<Style Selector="DataGrid.day29">
+		<Setter Property="Background" Value="Blue"/>
+	</Style>
+
+	<Style Selector="DataGrid.day30">
+		<Setter Property="Background" Value="Green"/>
+	</Style>
+
+	<Style Selector="DataGrid.day31">
+		<Setter Property="Background" Value="Black"/>
+	</Style>
+</Styles>

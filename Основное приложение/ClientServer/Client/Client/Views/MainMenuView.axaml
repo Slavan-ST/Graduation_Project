@@ -13,10 +13,10 @@
              x:Class="Client.Views.MainMenuView">
 
 	<UserControl.Styles>
-		<StyleInclude Source="/Styles/Button.axaml"/>
+		
 	</UserControl.Styles>
 
-	<Grid ShowGridLines="True">
+	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="250"/>
 			<ColumnDefinition Width="*"/>
@@ -48,24 +48,27 @@
 		
 		
 		
-		<Grid Background="LightGray" Grid.RowSpan="2" IsVisible="{Binding IsOpenSideBar}" Name="SideBar">
-			<StackPanel>
-				<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding ToMain}" Classes="center"/>
+		<Grid Grid.RowSpan="2" IsVisible="{Binding IsOpenSideBar}" Background="White">
+			<Grid.Styles>
+				<StyleInclude Source="/Styles/Buttons/SideBar.axaml"/>
+				<StyleInclude Source="/Styles/Buttons/BackButton.axaml"/>
+			</Grid.Styles>
+			<StackPanel Margin="25">
+				<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}"/>
 				<StackPanel IsVisible="{Binding IsStudents}">
-					<Button Content="Профиль" Command="{Binding ToProfile}" Classes="center"/>
-					<Button Content="Заявление" Command="{Binding ToStatement}" Classes="center"/>
-					<Button Content="Мероприятия" Command="{Binding ToEvents}" Classes="center"/>
+					<Button Content="Профиль" Command="{Binding Profile}"/>
+					<Button Content="Заявление" Command="{Binding Statement}"/>
+					<Button Content="Мероприятия" Command="{Binding Events}"/>
 				</StackPanel>
 				<StackPanel IsVisible="{Binding IsWorker}">
-					<Button Content="План меропритий" Command="{Binding ToEventsList}" Classes="center"/>
-					<Button Content="График дежурств" Command="{Binding ToDutyChart}" Classes="center"/>
-					<Button Content="Списки студентов" Command="{Binding ToListStudents}" Classes="center"/>
-					<Button Content="Экран чистоты" Command="{Binding ToPurityChart}" Classes="center"/>
+					<Button Content="План меропритий" Command="{Binding EventsList}"/>
+					<Button Content="График дежурств" Command="{Binding DutyChart}"/>
+					<Button Content="Списки студентов" Command="{Binding ListStudents}"/>
+					<Button Content="Экран чистоты" Command="{Binding PurityChart}"/>
 				</StackPanel>
-				<Button Content="Вопрос-ответ" Command="{Binding ToFaq}" Classes="center"/>
-				<Button Content="Выход" Command="{Binding Exit}" Classes="center"/>
+				<Button Content="Вопрос-ответ" Command="{Binding Faq}"/>
 			</StackPanel>
-			<Button Content="◄" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
+			<Button Classes="back" Command="{Binding HideSideBar}"/>
 		</Grid>
 	</Grid>
 </UserControl>
