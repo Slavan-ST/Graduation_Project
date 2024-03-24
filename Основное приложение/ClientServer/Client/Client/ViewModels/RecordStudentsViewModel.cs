@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using Client.API;
+using Helper.Models.DTO;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,30 +29,47 @@ namespace Client.ViewModels
 
     public class RecordStudentsViewModel : ViewModelBase
     { 
-        public ObservableCollection<Person> People { get; }
+        public DataTable People { get; set; }
 
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            var people = new List<Person>
-            {
-                new Person("Neil", "Armstrong", false),
-                new Person("Buzz", "Lightyear", true),
-                new Person("James", "Kirk", true)
-            };
-
-            People  = new ObservableCollection<Person>(people);
+            People = MakeTable().Result;
         }
 
-        void MakeTable()
+        async Task<DataTable> MakeTable()
         {
+            IEnumerable<AttendanceLogDTO>? logDTOs = await API.AttendanceLog.GetAttendanceLogs();
             DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("FIO");
 
-            DataColumn dataColumn = new DataColumn();
-            for (int i = 0; i < ; i++)
+            foreach (var item in logDTOs)
             {
-                dataColumn.ColumnName = 
+                var prevDate = DateTime.MinValue;
+                if (item.Date != prevDate)
+                {
+                    dataTable.Columns.Add(new DataColumn(item.Date.Day.ToString()));
+                    prevDate = item.Date;
+                }
+            }
+            string prevFullName = string.Empty;
+            string day;
+            DataRow? row = null;
+            foreach (var item in logDTOs) 
+            {
+                string fullName = item.Student?.Name + " " + item.Student?.Surname + " " + item.Student?.Patronymic;
+                if (fullName != prevFullName)
+                {
+                    row = dataTable.NewRow();
+                    row["FIO"] = fullName;
+                    day = item.Date.Day.ToString();
+                    row[day] = item.Marker?.Char;
+                    prevFullName = fullName;
+                }
+                day = item.Date.Day.ToString();
+                row[day] = item.Marker?.Char;
             }
 
+            return dataTable;
         }
     }
 }
