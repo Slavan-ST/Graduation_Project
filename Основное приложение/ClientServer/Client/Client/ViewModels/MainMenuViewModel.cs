@@ -31,49 +31,53 @@ namespace Client.ViewModels
             OpenSideBar = ReactiveCommand.Create(() => { });//эээ...да..эт не то :))
 
 
-            ToMain = ReactiveCommand.Create(() =>
+            Main = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new NewsViewModel(this));
             });
 
 
-            ToDutyChart = ReactiveCommand.Create(() => 
+            DutyChart = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new DutyChartViewModel(this));
             });
-            ToEvents = ReactiveCommand.Create(() => 
+            Events = ReactiveCommand.Create(() => 
             {
                 Router.Navigate.Execute(new EventsViewModel(this));
             });
 
-            ToEventsList = ReactiveCommand.Create(() => 
+            EventsList = ReactiveCommand.Create(() => 
             {
                 Router.Navigate.Execute(new EventsListViewModel(this)); 
             });
 
-            ToFaq = ReactiveCommand.Create(() => 
+            Faq = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new FaqViewModel(this));
             });
 
-            ToListStudents = ReactiveCommand.Create(() => 
+            ListStudents = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new ListStudentsViewModel(this)); 
             });
 
-            ToPurityChart = ReactiveCommand.Create(() =>
+            PurityChart = ReactiveCommand.Create(() =>
             { 
                 Router.Navigate.Execute(new PurityChartViewModel(this)); 
             });
 
-            ToStatement = ReactiveCommand.Create(() => 
+            Statement = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new StatementViewModel(this)); 
             });
 
-            ToProfile = ReactiveCommand.Create(() => 
-            { 
+            Profile = ReactiveCommand.Create(() =>
+            {
                 Router.Navigate.Execute(new ProfileViewModel(this));
+            });
+            Record = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new RecordStudentsViewModel(this));
             });
 
 
@@ -101,40 +105,44 @@ namespace Client.ViewModels
         /// <summary>
         /// Команда перехода на главную 
         /// </summary>
-        public ICommand ToMain { get; set; }
+        public ICommand Main { get; set; }
 
 
         /// <summary>
         /// Команда перехода на окно профиля
         /// </summary>
-        public ICommand ToProfile { get; set; }
+        public ICommand Profile { get; set; }
+        /// <summary>
+        /// Команда перехода на журнал
+        /// </summary>
+        public ICommand Record { get; set; }
         /// <summary>
         /// Комманда перехода на окно составления заявления
         /// </summary>
-        public ICommand ToStatement { get; set; }
+        public ICommand Statement { get; set; }
         /// <summary>
         /// Комманда перехода на окно расписания мероприятий
         /// </summary>
-        public ICommand ToEvents { get; set; }
+        public ICommand Events { get; set; }
 
 
 
         /// <summary>
         /// Комманда перехода на окно графика мероприятий (для сотрудников)
         /// </summary>
-        public ICommand ToEventsList { get; set; }
+        public ICommand EventsList { get; set; }
         /// <summary>
         /// Комманда перехода на окно графика дежурств
         /// </summary>
-        public ICommand ToDutyChart { get; set; }
+        public ICommand DutyChart { get; set; }
         /// <summary>
         /// Комманда перехода на окно со списком студентов
         /// </summary>
-        public ICommand ToListStudents { get; set; }
+        public ICommand ListStudents { get; set; }
         /// <summary>
         /// Комманда перехода на окно экрана чистоты
         /// </summary>
-        public ICommand ToPurityChart { get; set; }
+        public ICommand PurityChart { get; set; }
 
 
 
@@ -142,7 +150,7 @@ namespace Client.ViewModels
         /// <summary>
         /// Комманда перехода на окно справки (FAQ)
         /// </summary>
-        public ICommand ToFaq { get; set; }
+        public ICommand Faq { get; set; }
         /// <summary>
         /// Комманда выхода из учетной записи и переход на окно авторизации
         /// </summary>

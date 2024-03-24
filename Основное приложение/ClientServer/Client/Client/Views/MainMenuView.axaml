@@ -65,6 +65,7 @@
 					<Button Content="График дежурств" Command="{Binding DutyChart}"/>
 					<Button Content="Списки студентов" Command="{Binding ListStudents}"/>
 					<Button Content="Экран чистоты" Command="{Binding PurityChart}"/>
+					<Button Content="Журнал" Command="{Binding Record}"/>
 				</StackPanel>
 				<Button Content="Вопрос-ответ" Command="{Binding Faq}"/>
 			</StackPanel>

@@ -33,7 +33,12 @@ namespace Client.ViewModels
 
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            People = MakeTable().Result;
+            TestPeoples();
+        }
+
+        async void TestPeoples()
+        {
+            People = await MakeTable();
         }
 
         async Task<DataTable> MakeTable()
