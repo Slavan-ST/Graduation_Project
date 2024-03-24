@@ -47,9 +47,9 @@ namespace Client.ViewModels
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("FIO");
 
+            var prevDate = DateTime.MinValue;
             foreach (var item in logDTOs)
             {
-                var prevDate = DateTime.MinValue;
                 if (item.Date != prevDate)
                 {
                     dataTable.Columns.Add(new DataColumn(item.Date.Day.ToString()));
