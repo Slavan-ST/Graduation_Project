@@ -26,9 +26,15 @@ namespace Client.ViewModels
         public MainMenuViewModel(IScreen? screen = null):base(screen)
         {     
 
-            HideSideBar = ReactiveCommand.Create(() => { });//эээ...да..эт не то :))
+            HideSideBar = ReactiveCommand.Create(() =>
+            {
+                IsOpenSideBar = false;
+            });
 
-            OpenSideBar = ReactiveCommand.Create(() => { });//эээ...да..эт не то :))
+            OpenSideBar = ReactiveCommand.Create(() =>
+            {
+                IsOpenSideBar = true;
+            });
 
 
             Main = ReactiveCommand.Create(() =>

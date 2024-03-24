@@ -3,14 +3,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Client.ViewModels;assembly=Client"
+			 xmlns:models="clr-namespace:Client.Models;assembly=Client"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.RecordStudentsView">
 
-	<DataGrid Margin="20" Name="ExampleDatagrid"
-			  AutoGenerateColumns="True"
-			  BorderThickness="1" BorderBrush="Gray"
-			  GridLinesVisibility="All"
-			  ItemsSource="{Binding People}">
-	</DataGrid>
+
+	<models:HackPanel>
+
+
+
+		<DataGrid
+					  VerticalAlignment="Stretch"
+					  HorizontalAlignment="Stretch"
+					  Background="Gray"
+					  Margin="15"
+					  IsReadOnly="True"
+					  CanUserReorderColumns="True"
+					  CanUserResizeColumns="True"
+					  CanUserSortColumns="False"
+					  GridLinesVisibility="All"
+					  BorderThickness="1" BorderBrush="Gray"
+					  MinWidth="200"
+					  MinHeight="100"
+					  ItemsSource="{Binding People}"
+					 
+				   >
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="ÔÈÎ" Binding="{Binding Line[0]}"/>
+				<DataGridTextColumn Header="1" Binding="{Binding Line[1]}"/>
+				<DataGridTextColumn Header="2" Binding="{Binding Line[2]}"/>
+				<DataGridTextColumn Header="3" Binding="{Binding Line[3]}"/>
+				<DataGridTextColumn Header="4" Binding="{Binding Line[4]}"/>
+			</DataGrid.Columns>
+
+
+
+
+		</DataGrid>
+
+	</models:HackPanel>
 	
 </UserControl>

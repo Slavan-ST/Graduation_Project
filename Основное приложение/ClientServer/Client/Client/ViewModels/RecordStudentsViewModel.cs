@@ -16,10 +16,15 @@ using System.Windows.Input;
 namespace Client.ViewModels
 {
 
+    public class People
+    {
+        public List<string> Line { get; set; } = new List<string>();
+    }
+
     public class RecordStudentsViewModel : ViewModelBase
     {
         [Reactive]
-        public DataTable People { get; set; } = null!;
+        public List<People>? People { get; set; } = null!;
 
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
@@ -31,70 +36,43 @@ namespace Client.ViewModels
             People = await MeVariant(2023, 11);
         }
 
-        async Task<DataTable> MakeTable()
+        async Task<List<People>?> MeVariant(int year, int month)
         {
             IEnumerable<AttendanceLogDTO>? logDTOs = await API.AttendanceLog.GetAttendanceLogs();
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("FIO");
+            var logs = logDTOs!.Where(x => x.Date.Year == year && x.Date.Month == month).OrderBy(x => x.Date).ToList(); //логи текущего месяца, отсортированные 
 
-            var prevDate = DateTime.MinValue;
-            foreach (var item in logDTOs!)
+            List<People> lines = new List<People>();
+
+            var students = await API.Student.GetStudentsAsync();
+
+            if (students == null)
             {
-                if (!dataTable.Columns.Contains(item.Date.Day.ToString()))
+                Debug.WriteLine("null");
+                return null;
+            }
+            Debug.WriteLine(students.ToList().Count);
+
+            foreach (var student in students)
+            {
+                List<string> line = new List<string>();
+                var logsStudent = logs.Where(x => x.Student!.Id == student.Id).ToList();
+                line.Add(student.Name);
+                Debug.WriteLine(student.Name);
+                foreach (var log in logsStudent)
                 {
-                    dataTable.Columns.Add(new DataColumn(item.Date.Day.ToString()));
+                    line.Add(log.Marker!.Char);
+                    Debug.WriteLine(log.Marker!.Char);
                 }
-            }
-            string prevFullName = string.Empty;
-            string day;
-            DataRow? row = null;
-            foreach (var item in logDTOs) 
-            {
-                string fullName = item.Student?.Name + " " + item.Student?.Surname + " " + item.Student?.Patronymic;
-                if (fullName != prevFullName)
-                {
-                    row = dataTable.NewRow();
-                    row["FIO"] = fullName;
-                    day = item.Date.Day.ToString();
-                    row[day] = item.Marker?.Char;
-                    prevFullName = fullName;
-                }
-                day = item.Date.Day.ToString();
-                row![day] = item.Marker?.Char;
-            }
+                People people = new People() { Line = line };
+                lines.Add(people);
 
-            return dataTable;
-        }
-        async Task<DataTable> MeVariant(int year, int month)
-        {
-            IEnumerable<AttendanceLogDTO>? logDTOs = await API.AttendanceLog.GetAttendanceLogs();
-            DataTable dataTable = new DataTable();
-
-
-            dataTable.Columns.Add("FIO");
-            for (int i = 0; i < month; i++)
-            {
-                dataTable.Columns.Add(new DataColumn((i + 1).ToString()));
-            }
-
-            if (logDTOs != null)
-            {
-                var logs = logDTOs.Where(x => x.Date.Year == year && x.Date.Month == month).OrderBy(x => x.Date).ToList(); //логи текущего месяца, отсортированные 
-
-                DataRow? row = dataTable.NewRow();
-
-                for (int i = 1; i < dataTable.Columns.Count; i++)
-                {
-                    row[dataTable.Columns[i].ColumnName] = logs.Where(x => x.Student!.Surname + " " + x.Student!.Name + " " + x.Student!.Patronymic == row["FIO"].ToString() && x.Date.Day.ToString() == dataTable.Columns[i].ColumnName).FirstOrDefault();
-                }
-                dataTable.Rows.Add(row);
 
             }
 
-            
+
+            return lines;
 
 
-            return dataTable;
         }
     }
 }
