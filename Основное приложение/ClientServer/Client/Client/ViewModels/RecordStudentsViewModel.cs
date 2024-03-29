@@ -1,4 +1,5 @@
 ﻿using Client.API;
+using Client.ViewModels.Base;
 using Helper.Models.DTO;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;

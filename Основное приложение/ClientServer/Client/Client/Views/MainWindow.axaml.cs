@@ -8,12 +8,12 @@ using ReactiveUI;
 
 namespace Client.Views;
 
-public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
+public partial class MainWindow:Window
 {
     public MainWindow()
     {
         this.AttachDevTools();
-        this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);
+        DataContext = new MainWindowViewModel();
     }
 }

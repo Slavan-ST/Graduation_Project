@@ -28,10 +28,7 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow()
-            {
-                DataContext = new MainWindowViewModel()
-            };
+            desktop.MainWindow = new MainWindow();
             services.AddSingleton<Message>(new Message(desktop.MainWindow));
             services.AddSingleton<Services.FileDialog>(new Services.FileDialog(desktop.MainWindow));
         }

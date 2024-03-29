@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Avalonia.Controls;
 using Client.Models;
 using Client.Services;
+using Client.ViewModels.Base;
 using Client.Views;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;

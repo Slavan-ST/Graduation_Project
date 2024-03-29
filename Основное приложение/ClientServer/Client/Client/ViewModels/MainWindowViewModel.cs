@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Client.ViewModels.Base;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -9,12 +10,11 @@ using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
-    public class MainWindowViewModel: ReactiveObject, IScreen
+    public class MainWindowViewModel: ReactiveObject
     {
         public MainWindowViewModel()
         {
-            Router.Navigate.Execute(new DutyChartViewModel(this));
+
         }
-        public RoutingState Router { get; } = new RoutingState();
     }
 }

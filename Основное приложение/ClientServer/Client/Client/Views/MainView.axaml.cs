@@ -12,5 +12,6 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
     {
         this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);
+        DataContext = new MainViewModel();
     }
 }

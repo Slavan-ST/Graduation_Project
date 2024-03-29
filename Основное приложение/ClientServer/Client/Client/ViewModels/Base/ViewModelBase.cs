@@ -2,8 +2,9 @@
 using ReactiveUI.Fody.Helpers;
 using Splat;
 using System;
+using System.Diagnostics;
 
-namespace Client.ViewModels;
+namespace Client.ViewModels.Base;
 
 public class ViewModelBase : ReactiveObject, IRoutableViewModel
 {
@@ -19,6 +20,14 @@ public class ViewModelBase : ReactiveObject, IRoutableViewModel
     public ViewModelBase(IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+
+        this.WhenAnyValue(x => x.HostScreen).Subscribe(x =>
+        {
+            if (HostScreen != null)
+            {
+                Debug.WriteLine("TYPE: " + HostScreen.GetType());
+            }
+        });
     }
 
 }

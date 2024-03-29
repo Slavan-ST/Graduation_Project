@@ -1,5 +1,6 @@
 ﻿using Client.Models;
 using Client.Services;
+using Client.ViewModels.Base;
 using Helper.Models.DTO;
 using Helper.Models.Main;
 using ReactiveUI;

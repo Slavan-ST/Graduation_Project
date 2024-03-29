@@ -1,4 +1,5 @@
 ﻿using Client.Models;
+using Client.ViewModels.Base;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;

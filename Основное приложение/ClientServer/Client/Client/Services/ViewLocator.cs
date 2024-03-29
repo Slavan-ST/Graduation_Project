@@ -1,12 +1,12 @@
 ﻿using Avalonia.Controls.Templates;
 using Avalonia.Controls;
-using Client.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media;
+using Client.ViewModels.Base;
 
 namespace Client.Services
 {
