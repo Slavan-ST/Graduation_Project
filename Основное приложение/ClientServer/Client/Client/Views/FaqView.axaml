@@ -4,18 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.FaqView">
-	<StackPanel>
-		<TreeView ItemsSource="{Binding QuestAnswer}">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TreeViews/TreeViewItem.axaml"/>
+	</UserControl.Styles>
+	<Grid>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<TreeView ItemsSource="{Binding QuestAnswer}" >
 			<TreeView.ItemTemplate>
 				<TreeDataTemplate ItemsSource="{Binding Answers}">
-					<TextBlock Text="{Binding Title}"/>
+					<TextBlock Text="{Binding Title}" Classes="plain"/>
 				</TreeDataTemplate>
 			</TreeView.ItemTemplate>
 		</TreeView>
-		<TreeView>
-			<TreeViewItem>
-				<TextBlock Text="123"></TextBlock>
-			</TreeViewItem>
-		</TreeView>
-	</StackPanel>
+	</Grid>
 </UserControl>

@@ -14,7 +14,7 @@ namespace Client.ViewModels
     {
         public MainWindowViewModel()
         {
-            Router.Navigate.Execute(new EventsViewModel(this));
+            Router.Navigate.Execute(new FaqViewModel(this));
         }
         public RoutingState Router { get; } = new RoutingState();
     }
