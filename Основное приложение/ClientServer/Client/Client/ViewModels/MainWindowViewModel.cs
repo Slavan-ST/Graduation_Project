@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
-    public class MainWindowViewModel: ReactiveObject
+    public class MainWindowViewModel: ReactiveObject, IScreen
     {
         public MainWindowViewModel()
         {
-
+            Router.Navigate.Execute(new EventsViewModel(this));
         }
+        public RoutingState Router { get; } = new RoutingState();
     }
 }

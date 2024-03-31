@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="Client.Views.DutyChartView">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
+	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<Calendar SelectionMode="SingleDate" HorizontalAlignment="Center" Background="Transparent" 
@@ -75,7 +78,7 @@
 					<Setter Property="Grid.Column" Value="1"/>
 					<Setter Property="HorizontalAlignment" Value="Center"/>
 					<Setter Property="HorizontalContentAlignment" Value="Center"/>
-					<Setter Property="FontSize" Value="24"/>
+					<Setter Property="FontSize" Value="22"/>
 					<Style.Animations>
 						<Animation Duration="0:0:01"
 								   IterationCount="Infinite">

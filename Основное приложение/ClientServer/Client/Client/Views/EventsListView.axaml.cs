@@ -1,3 +1,4 @@
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Client.ViewModels;
@@ -11,6 +12,11 @@ namespace Client.Views
         {
             this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);
+        }
+
+        private void Calendar_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

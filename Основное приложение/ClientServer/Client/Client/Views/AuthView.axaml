@@ -8,7 +8,7 @@
              x:Class="Client.Views.AuthView">
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/PathIcon.axaml"/>
-		<StyleInclude Source="/Styles/TextBlock.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
 		<StyleInclude Source="/Styles/Buttons/AuthJoin.axaml"/>
 	</UserControl.Styles>
 	<Grid>

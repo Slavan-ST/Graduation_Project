@@ -1,0 +1,32 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" Width="550">
+			<StackPanel>
+				<TextBlock Text="Event #1" Classes="header"/>
+				<Label Classes="plainText">Description</Label>
+			</StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+	<Style Selector="TextBlock.header">
+		<Setter Property="FontSize" Value="48"/>
+	</Style>
+
+	<Style Selector="Label.plainText">
+		<Setter Property="FontSize" Value="36"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="MinHeight" Value="45"/>
+		<Setter Property="Margin" Value="5"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Border CornerRadius="25" BorderThickness="4"
+							BorderBrush="#A378EB" Background="White">
+						<TextBlock Text="{TemplateBinding Content}" Margin="5"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</Styles>
