@@ -15,14 +15,14 @@ using System.Threading.Tasks;
 
 namespace Client.Models
 {
-    public static class Authorization
+    internal static class Authorization
     {
-        public static async Task<User?> AuthorizationUser(string? login, string? password)
+        internal static async Task<Helper.Models.Main.User?> AuthorizationUser(string? login, string? password)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<User>(Connect.Connection + $"login?login={login}&password={password}");
+                var response = await client.GetFromJsonAsync<Helper.Models.Main.User?>(Connect.Connection + $"login?login={login}&password={password}");
                 return response;
             }
             catch(Exception e)
