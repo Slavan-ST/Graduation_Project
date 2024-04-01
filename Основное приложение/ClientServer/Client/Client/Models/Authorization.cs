@@ -1,7 +1,7 @@
 ﻿using Avalonia;
+using Client.API;
 using Client.Services;
-using WebAPI;
-using WebAPI.Models.Main;
+using Helper;
 using Microsoft.Extensions.DependencyInjection;
 using MsBox.Avalonia;
 using System;

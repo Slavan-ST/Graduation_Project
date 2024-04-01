@@ -1,6 +1,4 @@
-﻿using WebAPI.Models.DTO;
-using WebAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,6 +7,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
+using Helper.Models.DTO;
+using Helper;
 
 namespace Client.API
 {

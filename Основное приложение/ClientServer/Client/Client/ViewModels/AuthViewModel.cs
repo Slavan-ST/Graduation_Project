@@ -1,8 +1,7 @@
 ﻿using Client.Models;
 using Client.Services;
 using Client.ViewModels.Base;
-using WebAPI.Models.DTO;
-using WebAPI.Models.Main;
+using Helper.Models.DTO;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
