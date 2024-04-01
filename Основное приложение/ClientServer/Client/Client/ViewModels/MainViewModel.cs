@@ -8,12 +8,12 @@ public class MainViewModel : ViewModelBaseNavigator
 {
     public MainViewModel(IScreen? screen = null) : base(screen)
     {
-        Router.Navigate.Execute(new FaqViewModel(this));
+        Router.Navigate.Execute(new ListStudentsViewModel(this));
     }
 
     public MainViewModel() : base()
     {
-        Router.Navigate.Execute(new FaqViewModel(this));
+        Router.Navigate.Execute(new ListStudentsViewModel(this));
     }
 
 }
