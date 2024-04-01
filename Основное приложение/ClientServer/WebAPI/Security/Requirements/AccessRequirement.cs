@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Helper.Security.Requirements
+namespace WebAPI.Security.Requirements
 {
     public class AccessRequirement : IAuthorizationRequirement
     {

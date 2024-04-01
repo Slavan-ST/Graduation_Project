@@ -1,4 +1,4 @@
-﻿using Helper.Models.DTO;
+﻿using WebAPI.Models.DTO;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;

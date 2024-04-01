@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Helper.Security.Requirements;
+using WebAPI.Security.Requirements;
 
-namespace Helper.Security.Handlers
+namespace WebAPI.Security.Handlers
 {
     public class AccessHandler : AuthorizationHandler<AccessRequirement>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Helper.Security
+namespace WebAPI.Security
 {
     public class SecretHasher
     {

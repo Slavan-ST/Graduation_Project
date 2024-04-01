@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Helper.Security.Handlers;
-using Helper.Security.Requirements;
+using WebAPI.Security.Handlers;
+using WebAPI.Security.Requirements;
 
-namespace Helper
+namespace WebAPI
 {
     public class Program
     {

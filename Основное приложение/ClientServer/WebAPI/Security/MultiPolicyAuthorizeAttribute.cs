@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Helper.Security
+namespace WebAPI.Security
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class MultiPolicyAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
