@@ -7,7 +7,7 @@ namespace Helper.Data
     public class ApplicationContext : DbContext
     {
         //коннект к БД
-        static string _connectionString = @"Server = 192.168.0.2\SLAVANST\127.0.0.1,54163; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
+        static string _connectionString = @"Server = SLAVANST\127.0.0.1,54163; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
 
         public ApplicationContext()
         {

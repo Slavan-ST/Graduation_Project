@@ -20,7 +20,7 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            db.Dispose();
+            await db.DisposeAsync();
 
             List<RoomDTO> roomDTOs = new List<RoomDTO>();
             foreach (var room in rooms)
@@ -43,7 +43,7 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            db.Dispose();
+            await db.DisposeAsync();
 
             RoomDTO roomDTO = new RoomDTO(room);
 
