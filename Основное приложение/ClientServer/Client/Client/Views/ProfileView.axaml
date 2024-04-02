@@ -2,38 +2,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.ProfileView">
-	<StackPanel>
-		<StackPanel Orientation="Horizontal" Margin="50">
-			<Image Source="{Binding PhotoUser}" Stretch="Fill" Width="150" Height="150"></Image>
-			<StackPanel Margin="15">
-				<TextBlock Text="{Binding Fio}"/>
-				<TextBlock Text="{Binding NumberRoom}"/>
-				<TextBlock Text="{Binding MarkClear}"/>
-				<TextBlock Text="{Binding StatusUser}"/>
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/ProfileTitles.axaml"/>
+	</UserControl.Styles>
+	<Grid>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="50">
+				<Border BorderBrush="rgba(8, 240, 233, 0.8)"
+						BorderThickness="10"
+						Background="White">
+					<Image Source="{Binding PhotoUser}"
+						   Stretch="UniformToFill"
+						   Width="290" Height="310"/>
+				</Border>
+				<StackPanel Margin="15">
+					<TextBlock Text="{Binding Fio}"/>
+					<TextBlock Text="{Binding NumberRoom}"/>
+					<TextBlock Text="{Binding MarkClear}"/>
+					<TextBlock Text="{Binding StatusUser}"/>
+				</StackPanel>
+			</StackPanel>
+			<StackPanel Margin="50">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="*"/>
+					<TextBlock Text="{Binding TestText}"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="*"/>
+					<TextBlock Text="{Binding TestText}"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="*"/>
+					<TextBlock Text="{Binding TestText}"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="*"/>
+					<TextBlock Text="{Binding TestText}"/>
+				</StackPanel>
 			</StackPanel>
 		</StackPanel>
-		<StackPanel Margin="25">
-			<TextBlock Text="Доп. информация"></TextBlock>
-			<StackPanel Margin="15">
-				<TextBlock>
-					<Run>* </Run>
-					<Run> Text</Run>
-				</TextBlock>
-				<TextBlock>
-					<Run>* </Run>
-					<Run> Text</Run>
-				</TextBlock>
-				<TextBlock>
-					<Run>* </Run>
-					<Run> Text</Run>
-				</TextBlock>
-				<TextBlock>
-					<Run>* </Run>
-					<Run> Text</Run>
-				</TextBlock>
-			</StackPanel>
-		</StackPanel>
-	</StackPanel>
+	</Grid>
 </UserControl>

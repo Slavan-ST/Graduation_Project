@@ -22,10 +22,18 @@ namespace Client.ViewModels
 
         async void Test()
         {
-            Students = new List<StudentDTO>(await GetStudents());
+            var students = await GetStudents();
+            if (students != null)
+            {
+                Students = new List<StudentDTO>(students);
+            }
+            else
+            {
+                Students = new List<StudentDTO>();
+            }
         }
 
-        private async Task<IEnumerable<StudentDTO>> GetStudents()
+        private async Task<IEnumerable<StudentDTO>?> GetStudents()
         {
             return await API.Student.GetStudentsAsync();
         }

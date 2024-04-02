@@ -5,8 +5,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.NewsView">
 	<Grid>
-		<ListBox ItemsSource="{Binding ListNews}">
-			<ListBox.ItemTemplate>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<ItemsControl ItemsSource="{Binding ListNews}">
+			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					
 					<StackPanel>
@@ -14,20 +15,25 @@
 						<StackPanel Orientation="Horizontal">
 							<Button Content="◄" Command="{Binding BackPhoto}"/>
 							
-							<ListBox ItemsSource="{Binding PhotosNews}">
-								<ListBox.ItemsPanel>
+							<ItemsControl ItemsSource="{Binding PhotosNews}">
+								<ItemsControl.ItemsPanel>
 									<ItemsPanelTemplate>
 										<StackPanel Orientation="Horizontal"></StackPanel>
 									</ItemsPanelTemplate>
-								</ListBox.ItemsPanel>
-							</ListBox>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Image Source="{Binding ImgNews}"/>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
 							
 							<Button Content="►" Command="{Binding NextPhoto}"/>
 						</StackPanel>
 					</StackPanel>
 					
 				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</Grid>
 </UserControl>
