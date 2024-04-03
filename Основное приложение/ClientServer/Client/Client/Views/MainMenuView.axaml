@@ -16,7 +16,7 @@
 		
 	</UserControl.Styles>
 
-	<Grid>
+	<Grid PointerPressed="Grid_PointerPressed">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="250"/>
 			<ColumnDefinition Width="*"/>

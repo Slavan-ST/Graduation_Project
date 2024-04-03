@@ -12,5 +12,14 @@ namespace Client.Views
             this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);
         }
+
+        private void Grid_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+        {
+            var model = (this.DataContext as MainMenuViewModel);
+            if (model != null)
+            {
+                model.IsOpenSideBar = false;
+            }
+        }
     }
 }

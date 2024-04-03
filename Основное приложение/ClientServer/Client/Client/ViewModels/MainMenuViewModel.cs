@@ -116,6 +116,8 @@ namespace Client.ViewModels
         public ICommand Main { get; set; }
 
 
+
+
         /// <summary>
         /// Команда перехода на окно профиля
         /// </summary>
