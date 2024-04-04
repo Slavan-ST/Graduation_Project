@@ -20,29 +20,38 @@
 						   Width="290" Height="310"/>
 				</Border>
 				<StackPanel Margin="15">
-					<TextBlock Text="{Binding Fio}"/>
-					<TextBlock Text="{Binding NumberRoom}"/>
-					<TextBlock Text="{Binding MarkClear}"/>
-					<TextBlock Text="{Binding StatusUser}"/>
+					<TextBlock Text="{Binding Fio}" Classes="dataStudents"/>
+					<TextBlock Text="{Binding NumberRoom}" Classes="dataStudents"/>
+					<TextBlock Text="{Binding MarkClear}" Classes="dataStudents"/>
+					<TextBlock Text="{Binding StatusUser}" Classes="dataStudents"/>
 				</StackPanel>
 			</StackPanel>
-			<StackPanel Margin="50">
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="*"/>
-					<TextBlock Text="{Binding TestText}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="*"/>
-					<TextBlock Text="{Binding TestText}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="*"/>
-					<TextBlock Text="{Binding TestText}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="*"/>
-					<TextBlock Text="{Binding TestText}"/>
-				</StackPanel>
+			<Label Content="Дополнительная информация" Classes="header"/>
+			<StackPanel Margin="50" HorizontalAlignment="Stretch">
+				<Border Classes="up">
+					<StackPanel Orientation="Horizontal">
+						<Label Content="Контакты" Classes="textElement"/>
+						<TextBox Classes="h3" Text="{Binding TestText}"/>
+					</StackPanel>
+				</Border>
+				<Border Classes="up">
+					<StackPanel Orientation="Horizontal">
+						<Label Content="Домашний адрес" Classes="textElement"/>
+						<TextBox Classes="h3" Text="{Binding TestText}"/>
+					</StackPanel>
+				</Border>
+				<Border Classes="up">
+					<StackPanel Orientation="Horizontal">
+						<Label Content="Группа" Classes="textElement"/>
+						<TextBox Classes="h3" Text="{Binding TestText}"/>
+					</StackPanel>
+				</Border>
+				<Border Classes="up">
+					<StackPanel Orientation="Horizontal">
+						<Label Content="Информация о законных предствителях" Classes="textElement"/>
+						<TextBox Classes="h3" Text="{Binding TestText}"/>
+					</StackPanel>
+				</Border>
 			</StackPanel>
 		</StackPanel>
 	</Grid>
