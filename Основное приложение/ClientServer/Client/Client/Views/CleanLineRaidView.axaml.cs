@@ -6,9 +6,9 @@ using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class SideBarView : ReactiveUserControl<SideBarViewModel>
+    public partial class CleanLineRaidView : ReactiveUserControl<CleanLineRaidViewModel>
     {
-        public SideBarView()
+        public CleanLineRaidView()
         {
             this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);

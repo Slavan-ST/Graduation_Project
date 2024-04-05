@@ -9,11 +9,11 @@
 			 xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
 			 xmlns:vm="clr-namespace:Client.ViewModels"
 			 xmlns:views="clr-namespace:Client.Views;assembly=Client"
-			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
              x:Class="Client.Views.MainMenuView">
 
 	<UserControl.Styles>
-		
+		<StyleInclude Source="/Styles/Buttons/SideBar.axaml"/>
 	</UserControl.Styles>
 
 	<Grid PointerPressed="Grid_PointerPressed">
@@ -66,6 +66,9 @@
 					<Button Content="Списки студентов" Command="{Binding ListStudents}"/>
 					<Button Content="Экран чистоты" Command="{Binding PurityChart}"/>
 					<Button Content="Журнал" Command="{Binding Record}"/>
+					<StackPanel IsVisible="{Binding IsList}">
+						<Button Content="Фильтры" Command="{Binding Record}"/>
+					</StackPanel>
 				</StackPanel>
 				<Button Content="Вопрос-ответ" Command="{Binding Faq}"/>
 			</StackPanel>

@@ -1,0 +1,14 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<Button Content="-"/>
+		</Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
+
+	<Style Selector="Button.mark">
+		<Setter Property="FontSize" Value="36"/>
+	</Style>
+</Styles>

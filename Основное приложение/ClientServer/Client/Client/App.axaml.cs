@@ -50,9 +50,9 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new NewsView(), typeof(IViewFor<NewsViewModel>));
         Locator.CurrentMutable.Register(() => new ProfileView(), typeof(IViewFor<ProfileViewModel>));
         Locator.CurrentMutable.Register(() => new PurityChartView(), typeof(IViewFor<PurityChartViewModel>));
-        Locator.CurrentMutable.Register(() => new SideBarView(), typeof(IViewFor<SideBarViewModel>));
         Locator.CurrentMutable.Register(() => new StatementView(), typeof(IViewFor<StatementViewModel>));
         Locator.CurrentMutable.Register(() => new RecordStudentsView(), typeof(IViewFor<RecordStudentsViewModel>));
+        Locator.CurrentMutable.Register(() => new CleanLineRaidView(), typeof(IViewFor<CleanLineRaidViewModel>));
 
         Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
 

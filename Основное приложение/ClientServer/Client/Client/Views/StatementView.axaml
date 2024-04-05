@@ -2,16 +2,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.StatementView">
-	<WrapPanel Margin="15">
-		<StackPanel>
-			<TextBlock Text="Информация о студенте"></TextBlock>
-			<TextBlock Text="Фамилия"/>
-			<TextBox Text="{Binding Family}"/>
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
+		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
+	</UserControl.Styles>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="150"/>
+		</Grid.RowDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
+		<WrapPanel HorizontalAlignment="Center" Margin="0,20,0,0">
+				<StackPanel Margin="0,0,100,0">
+					<TextBlock Text="Cтудент" Classes="header"></TextBlock>
+					<TextBlock Text="Фамилия" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="Имя" Classes="title"/> 
+					<TextBox Text=""/>
+					<TextBlock Text="Отчество" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="№ комнаты" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="Номер телефона" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="Дата выезда" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="Дата заезда" Classes="title"/>
+					<TextBox Text=""/>
+				</StackPanel>
+				<StackPanel Margin="100,0,0,0">
+					<TextBlock Text="Законый представитель" Classes="header"/>
+					<TextBlock Text="Фамилия" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="Имя" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="Отчество" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="№ комнаты" Classes="title"/>
+					<TextBox Text=""/>
+					<TextBlock Text="Номер телефона" Classes="title"/>
+					<TextBox Text=""/>
+				</StackPanel>
+			</WrapPanel>
+		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+			<Button Content="Получить пустой бланк" Classes="mainBtn"/>
+			<Button Content="Составить" Classes="mainBtn"/>
 		</StackPanel>
-		<StackPanel>
-			
-		</StackPanel>
-	</WrapPanel>
+	</Grid>
 </UserControl>

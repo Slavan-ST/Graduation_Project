@@ -3,7 +3,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Client.ViewModels;
 using ReactiveUI;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Client.Views
 {
