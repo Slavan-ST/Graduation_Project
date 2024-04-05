@@ -10,5 +10,7 @@
 
 	<Style Selector="Button.mark">
 		<Setter Property="FontSize" Value="36"/>
+		<Setter Property="Height" Value="60"/>
+		<Setter Property="Width" Value="60"/>
 	</Style>
 </Styles>

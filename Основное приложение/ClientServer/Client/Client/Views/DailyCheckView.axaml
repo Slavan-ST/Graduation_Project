@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             x:Class="Client.Views.DailyCheckView">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
+		<StyleInclude Source="/Styles/Buttons/MarkElement.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/ProfileTitles.axaml"/>
+	</UserControl.Styles>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="150"/>
+		</Grid.RowDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
+		
+		<StackPanel Orientation="Horizontal" Margin="15">
+			<TextBlock Text="Комната - " Classes="header"/>
+			<TextBlock Text="{Binding StudentsInRoom.NumberRoom}" Classes="header"/>
+		</StackPanel>
+		<ItemsControl ItemsSource="{Binding StudentsInRoom}" Margin="10,100,0,0">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" MaxHeight="60"/>
+							<RowDefinition Height="*" MaxHeight="60"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" MaxWidth="650"/>
+							<ColumnDefinition Width="9*" MaxWidth="650"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Студент:" Classes="title"/>
+						<Label Content="{Binding Name}" Grid.Row="1" Classes="plain"/>
+						<Button Content="+" Grid.Column="1" Grid.Row="1" Classes="mark"/>
+					</Grid>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+		
+		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+			<Button Content="Следующая комната" Classes="mainBtn"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

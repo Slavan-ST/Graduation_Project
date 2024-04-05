@@ -17,13 +17,13 @@
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel HorizontalAlignment="Left" Margin="50">
-			<TextBlock Text="{Binding Room.Number}"/>
-			<StackPanel Orientation="Horizontal">
+			<TextBlock Text="{Binding Room.Number}" Classes="header"/>
+			<StackPanel Orientation="Horizontal" Margin="0,55,0,5">
 				<TextBlock Text="Чистота" Classes="title"/>
 				<Button Content="-" VerticalAlignment="Bottom" Margin="5"/> 
 			</StackPanel>
-			<TextBlock Text="Примечание" Classes="title" Margin="0,5,0,5"/>
-			<TextBox TextWrapping="Wrap" MaxWidth="600" Width="600" Text="TEST_TEXT" MinHeight="350"/>
+			<TextBlock Text="Примечание" Classes="title" Margin="0,55,0,5"/>
+			<TextBox TextWrapping="Wrap" MaxWidth="1000" Width="1000" Text="TEST_TEXT" MinHeight="500"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
 			<Button Content="Следующая комната" Classes="mainBtn"/>

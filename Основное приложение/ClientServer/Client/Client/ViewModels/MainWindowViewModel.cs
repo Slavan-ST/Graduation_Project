@@ -14,7 +14,7 @@ namespace Client.ViewModels
     {
         public MainWindowViewModel()
         {
-            Router.Navigate.Execute(new CleanLineRaidViewModel(this));
+            Router.Navigate.Execute(new DailyCheckViewModel(this));
         }
         public RoutingState Router { get; } = new RoutingState();
     }
