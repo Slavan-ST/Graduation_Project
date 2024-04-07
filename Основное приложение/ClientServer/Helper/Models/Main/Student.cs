@@ -21,7 +21,9 @@ namespace Helper.Models.Main
 
         public string Phone { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
-        public string FIORepresentative { get; set; } = string.Empty;
+        public string RepresentativeName { get; set; } = string.Empty;
+        public string RepresentativeSurname { get; set; } = string.Empty;
+        public string RepresentativePatronymic { get; set; } = string.Empty;
         public string PhoneRepresentative { get; set; } = string.Empty;
 
         public string Gender { get; set; } = string.Empty; //1 символ
