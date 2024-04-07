@@ -16,7 +16,7 @@ namespace Helper.Models.DTO
         public DateTime Date { get; set; }
 
         public StudentDTO? Student { get; set; }
-        public MarkerDTO? Marker { get; set; }
+        public string Marker { get; set; } = string.Empty;
 
         public AttendanceLogDTO() { }
         public AttendanceLogDTO(AttendanceLog log)
@@ -25,7 +25,7 @@ namespace Helper.Models.DTO
             this.Date = log.Date;
 
             this.Student = new StudentDTO(log.Student);
-            this.Marker = new MarkerDTO(log.Marker);
+            this.Marker = log.Marker;
         }
     }
 }

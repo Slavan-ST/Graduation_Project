@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Helper.Models.Main
 {
-    public class AttendanceLog
+    public class PurityRaidLog
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int StudentId { get; set; }
+        public int RoomId { get; set; }
         public DateTime Date { get; set; }
         public string Marker { get; set; } = string.Empty;
+        public string? Description { get; set; }
 
         [JsonIgnore]
-        public Student? Student { get; set; }
-
-
+        public Room? Student { get; set; }
     }
 }

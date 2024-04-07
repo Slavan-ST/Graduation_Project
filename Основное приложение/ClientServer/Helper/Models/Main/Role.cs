@@ -14,8 +14,6 @@ namespace Helper.Models.Main
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; } = "";
-        [JsonIgnore]
-        public virtual ICollection<User>? Users { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

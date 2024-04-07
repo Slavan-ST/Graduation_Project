@@ -107,9 +107,9 @@ namespace Client.ViewModels
 
     public class MountStats
     {
-        public string Mount { get; set; } = string.Empty;
-        public int CountAll { get; set; }
-        public int CountNS {  get; set; }
-        public int CountNotFound { get; set; }
+        public string Mount { get; set; } = string.Empty; //месяц
+        public int CountAll { get; set; } //человек
+        public int CountNS {  get; set; } //несовершеннолетних
+        public int CountNotFound { get; set; } //статусных
     }
 }

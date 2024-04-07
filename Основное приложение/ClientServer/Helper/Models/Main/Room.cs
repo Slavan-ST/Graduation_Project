@@ -15,7 +15,5 @@ namespace Helper.Models.Main
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Number { get; set; } = "";
-        [JsonIgnore]
-        public List<Student> Students { get; set; } = new();
     }
 }

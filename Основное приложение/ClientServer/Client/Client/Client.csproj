@@ -31,4 +31,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Helper\Helper.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
 </Project>

@@ -21,19 +21,7 @@ namespace Helper.Converters
                 Id = logDTO.Id,
                 Date = logDTO.Date,
                 Student = ConverterDTO.StudentFromDTO(logDTO.Student),
-                Marker = ConverterDTO.MarkerFromDTO(logDTO.Marker)
-            };
-        }
-        public static Marker? MarkerFromDTO(MarkerDTO? markerDTO)
-        {
-            if (markerDTO == null)
-            {
-                return null;
-            }
-            return new Marker()
-            {
-                Id = markerDTO.Id,
-                Char = markerDTO.Char
+                Marker = logDTO.Marker
             };
         }
         public static Role? RoleFromDTO(RoleDTO? roleDTO)

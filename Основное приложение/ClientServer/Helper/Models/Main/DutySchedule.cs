@@ -4,18 +4,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Helper.Models.Main
 {
-    public class Marker
+    public class DutySchedule
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Char { get; set; } = "";
+        public int StudentId { get; set; }
+        public DateTime Date { get; set; }
+
         [JsonIgnore]
-        public List<AttendanceLog> AttendanceLogs { get; set; } = new();
+        public Student? Student { get; set; }
+
     }
 }
