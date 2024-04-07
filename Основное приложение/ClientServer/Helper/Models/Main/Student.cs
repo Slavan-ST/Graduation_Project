@@ -14,11 +14,26 @@ namespace Helper.Models.Main
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; } = "";
-        public string Surname { get; set; } = "";
-        public string Patronymic { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
+        public string Patronymic { get; set; } = string.Empty;
+
+
+        public string Phone { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string FIORepresentative { get; set; } = string.Empty;
+        public string PhoneRepresentative { get; set; } = string.Empty;
+
+        public string Gender { get; set; } = string.Empty; //1 символ
+
+
         public int RoomId { get; set; }
-        [JsonIgnore]
+        public int GroupId { get; set; }
+        public int StatusId { get; set; }
+
+
         public Room? Room { get; set; }
+        public Group? Group { get; set; }
+        public Status? Status { get; set; }
     }
 }
