@@ -17,7 +17,7 @@ namespace Helper.Models.DTO
         public string Password { get; set; } = "";
         public string Login { get; set; } = "";
         public byte[]? Image { get; set; }
-        public RoleDTO? Role { get; set; }
+        public Role? Role { get; set; }
 
         public UserChangedDTO() { }
         public UserChangedDTO(User? user)
@@ -31,7 +31,7 @@ namespace Helper.Models.DTO
             this.Surname = user.Surname;
             this.Login = user.Login;
             this.Image = user.Image;
-            this.Role = new RoleDTO(user.Role);
+            this.Role = user.Role;
             this.Password = user.Password;
         }
     }

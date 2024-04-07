@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
     public class AttendanceLogController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogs()
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogs()
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -31,16 +31,10 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
-            foreach (var log in attendanceLogs)
-            {
-                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
-            }
-
-            return new JsonResult(attendanceLogDTOs);
+            return new JsonResult(attendanceLogs);
         }
         [HttpGet("day:{day}.{month}.{year}")]
-        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogsDay(int day, int month, int year)
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsDay(int day, int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -56,16 +50,10 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
-            foreach (var log in attendanceLogs)
-            {
-                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
-            }
-
-            return new JsonResult(attendanceLogDTOs);
+            return new JsonResult(attendanceLogs);
         }
         [HttpGet("month:{month}.{year}")]
-        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogsMonth(int month, int year)
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsMonth(int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -81,16 +69,10 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
-            foreach (var log in attendanceLogs)
-            {
-                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
-            }
-
-            return new JsonResult(attendanceLogDTOs);
+            return new JsonResult(attendanceLogs);
         }
         [HttpGet("year:{year}")]
-        public async Task<ActionResult<IEnumerable<AttendanceLogDTO>>> GetAttendanceLogsYear(int year)
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsYear(int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -106,17 +88,11 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            List<AttendanceLogDTO> attendanceLogDTOs = new List<AttendanceLogDTO>();
-            foreach (var log in attendanceLogs)
-            {
-                attendanceLogDTOs.Add(new AttendanceLogDTO(log));
-            }
-
-            return new JsonResult(attendanceLogDTOs);
+            return new JsonResult(attendanceLogs);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AttendanceLogDTO>> GetAttendanceLog(int id)
+        public async Task<ActionResult<AttendanceLog>> GetAttendanceLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLog = await db.AttendanceLog
@@ -132,13 +108,11 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            AttendanceLogDTO attendanceLogDTO = new AttendanceLogDTO(attendanceLog);
-
-            return new JsonResult(attendanceLogDTO);
+            return new JsonResult(attendanceLog);
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostAttendanceLog(AttendanceLogDTO attendanceLogDTO)
+        public async Task<ActionResult> PostAttendanceLog(AttendanceLog attendanceLogDTO)
         {
             if (attendanceLogDTO == null)
             {
@@ -154,13 +128,11 @@ namespace WebAPI.Controllers
                 return StatusCode(400);
             }
 
-            attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
-
             if (await db.AttendanceLog.ContainsAsync(attendanceLog))
             {
                 return StatusCode(400);
             }
-            await db.AttendanceLog.AddAsync(attendanceLog);
+            await db.AttendanceLog.AddAsync(attendanceLogDTO);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
@@ -168,7 +140,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutAttendanceLog(AttendanceLogDTO attendanceLogDTO)
+        public async Task<ActionResult> PutAttendanceLog(AttendanceLog attendanceLogDTO)
         {
             if (attendanceLogDTO == null)
             {
@@ -186,7 +158,7 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
-            attendanceLog = ConverterDTO.AttendanceLogFromDTO(attendanceLogDTO)!;
+            attendanceLog = attendanceLogDTO!;
 
             db.Update(attendanceLog);
             await db.SaveChangesAsync();
