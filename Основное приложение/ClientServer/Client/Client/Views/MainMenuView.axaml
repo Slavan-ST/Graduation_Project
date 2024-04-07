@@ -72,7 +72,7 @@
 				</StackPanel>
 				<Button Content="Вопрос-ответ" Command="{Binding Faq}"/>
 			</StackPanel>
-			<Button Classes="back" Command="{Binding HideSideBar}"/>
+			<Button Content="◄" Classes="back" Command="{Binding HideSideBar}"/>
 		</Grid>
 	</Grid>
 </UserControl>

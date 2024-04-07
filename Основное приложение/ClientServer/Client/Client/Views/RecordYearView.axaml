@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             x:Class="Client.Views.RecordYearView"
+			 x:Name="UC">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/Buttons/BackButton.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/YearItems.axaml"/>
+	</UserControl.Styles>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Image Grid.RowSpan="2" Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button Content="←" Classes="back"/>
+			<TextBlock Text="Year" Classes="title"/>
+			<Button Content="→" Classes="back"/>
+		</StackPanel>
+		<ScrollViewer Grid.Row="1" HorizontalAlignment="Center">
+			<ItemsControl Margin="25" ItemsSource="{Binding YearStats}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border BorderBrush="#08F0E9" BorderThickness="3" Background="White">
+							<StackPanel Height="280" Width="280">
+								<TextBlock Text="{Binding Mount}" Classes="title"/>
+								<Border Classes="plain">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="Всего " Classes="titleInItems"/>
+										<TextBlock Text="{Binding CountAll}" Classes="titleInItems"/>
+									</StackPanel>
+								</Border>
+								<Border Classes="plain">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="Всего " Classes="titleInItems"/>
+										<TextBlock Text="{Binding CountNS}" Classes="titleInItems"/>
+									</StackPanel>
+								</Border>
+								<Border Classes="plain">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="Всего " Classes="titleInItems"/>
+										<TextBlock Text="{Binding CountNotFound}" Classes="titleInItems"/>
+									</StackPanel>
+								</Border>
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+	</Grid>
+</UserControl>
