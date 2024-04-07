@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     public class StudentsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
             ApplicationContext db = new ApplicationContext();
             var students = await db.Students.Include(c => c.Room).ToListAsync();
@@ -24,16 +24,10 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            List<StudentDTO> studentDTOs = new List<StudentDTO>();
-            foreach (var student in students)
-            {
-                studentDTOs.Add(new StudentDTO(student));
-            }
-
-            return new JsonResult(studentDTOs);
+            return new JsonResult(students);
         }
         [HttpGet("{room}")]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentsFromRoom(string room)
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudentsFromRoom(string room)
         {
             ApplicationContext db = new ApplicationContext();
             var students = await db.Students.Include(c => c.Room).Where(x => x.Room!.Number == room).ToListAsync();
@@ -43,17 +37,11 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            List<StudentDTO> studentDTOs = new List<StudentDTO>();
-            foreach (var student in students)
-            {
-                studentDTOs.Add(new StudentDTO(student));
-            }
-
-            return new JsonResult(studentDTOs);
+            return new JsonResult(students);
         }
 
         [HttpGet("{room}/{fio}")]
-        public async Task<ActionResult<StudentDTO>> GetStudent(string room, string fio)
+        public async Task<ActionResult<Student>> GetStudent(string room, string fio)
         {
             room = room.Trim();
             fio = fio.Trim();
@@ -73,13 +61,11 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            StudentDTO studentDTO = new StudentDTO(student);
-
-            return new JsonResult(studentDTO);
+            return new JsonResult(student);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(StudentDTO studentDTO)
+        public async Task<ActionResult> Post(Student studentDTO)
         {
             if (studentDTO == null)
             {
@@ -100,7 +86,7 @@ namespace WebAPI.Controllers
                 return StatusCode(400);
             }
 
-            student = ConverterDTO.StudentFromDTO(studentDTO)!;
+            student = studentDTO!;
 
             await db.Students.AddAsync(student);
             await db.SaveChangesAsync();
@@ -110,7 +96,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(StudentDTO studentDTO)
+        public async Task<ActionResult> Put(Student studentDTO)
         {
             if (studentDTO == null)
             {
@@ -129,7 +115,7 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
-            student = ConverterDTO.StudentFromDTO(studentDTO)!;
+            student = studentDTO!;
 
             db.Students.Update(student);
 
