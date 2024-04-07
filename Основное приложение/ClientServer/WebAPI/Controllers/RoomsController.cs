@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     public class RoomsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
             ApplicationContext db = new ApplicationContext();
             var rooms = await db.Rooms.ToListAsync();
@@ -22,17 +22,11 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            List<RoomDTO> roomDTOs = new List<RoomDTO>();
-            foreach (var room in rooms)
-            {
-                roomDTOs.Add(new RoomDTO(room));
-            }
-
-            return new JsonResult(roomDTOs);
+            return new JsonResult(rooms);
         }
 
         [HttpGet("{number}")]
-        public async Task<ActionResult<RoomDTO>> GetRoom(string number)
+        public async Task<ActionResult<Room>> GetRoom(string number)
         {
             ApplicationContext db = new ApplicationContext();
             var room = await db.Rooms
@@ -45,13 +39,12 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            RoomDTO roomDTO = new RoomDTO(room);
 
-            return new JsonResult(roomDTO);
+            return new JsonResult(room);
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostRoom(RoomDTO? roomDTO)
+        public async Task<ActionResult> PostRoom(Room? roomDTO)
         {
             if (roomDTO == null)
             {
@@ -69,7 +62,7 @@ namespace WebAPI.Controllers
                 return StatusCode(400);
             }
 
-            room = ConverterDTO.RoomFromDTO(roomDTO);
+            room = roomDTO;
 
             await db.Rooms.AddAsync(room!);
             await db.SaveChangesAsync();
@@ -79,7 +72,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutRoom(RoomDTO? roomDTO)
+        public async Task<ActionResult> PutRoom(Room? roomDTO)
         {
             if (roomDTO == null)
             {
@@ -98,7 +91,7 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
-            room = ConverterDTO.RoomFromDTO(roomDTO);
+            room = roomDTO;
 
             db.Rooms.Update(room!);
             await db.SaveChangesAsync();
