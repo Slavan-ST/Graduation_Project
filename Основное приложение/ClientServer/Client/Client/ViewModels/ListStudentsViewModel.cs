@@ -1,5 +1,6 @@
 ﻿using Client.ViewModels.Base;
 using Helper.Models.DTO;
+using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -25,19 +26,19 @@ namespace Client.ViewModels
             var students = await GetStudents();
             if (students != null)
             {
-                Students = new List<StudentDTO>(students);
+                Students = new List<Student>(students);
             }
             else
             {
-                Students = new List<StudentDTO>();
+                Students = new List<Student>();
             }
         }
 
-        private async Task<IEnumerable<StudentDTO>?> GetStudents()
+        private async Task<IEnumerable<Student>?> GetStudents()
         {
-            return await API.Student.GetStudentsAsync();
+            return await API.StudentAPI.GetStudentsAsync();
         }
         [Reactive]
-        public List<StudentDTO>? Students { get; set; } 
+        public List<Student>? Students { get; set; } 
     }
 }

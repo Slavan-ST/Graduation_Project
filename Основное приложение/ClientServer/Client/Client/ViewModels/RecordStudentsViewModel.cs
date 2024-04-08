@@ -1,6 +1,7 @@
 ﻿using Client.API;
 using Client.ViewModels.Base;
 using Helper.Models.DTO;
+using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -39,12 +40,12 @@ namespace Client.ViewModels
 
         async Task<List<People>?> MeVariant(int year, int month)
         {
-            IEnumerable<AttendanceLogDTO>? logDTOs = await API.AttendanceLog.GetAttendanceLogs();
+            IEnumerable<AttendanceLog>? logDTOs = await API.AttendanceLogAPI.GetAttendanceLogs();
             var logs = logDTOs!.Where(x => x.Date.Year == year && x.Date.Month == month).OrderBy(x => x.Date).ToList(); //логи текущего месяца, отсортированные 
 
             List<People> lines = new List<People>();
 
-            var students = await API.Student.GetStudentsAsync();
+            var students = await API.StudentAPI.GetStudentsAsync();
 
             if (students == null)
             {
@@ -61,8 +62,8 @@ namespace Client.ViewModels
                 Debug.WriteLine(student.Name);
                 foreach (var log in logsStudent)
                 {
-                    line.Add(log.Marker!.Char);
-                    Debug.WriteLine(log.Marker!.Char);
+                    line.Add(log.Marker);
+                    Debug.WriteLine(log.Marker);
                 }
                 People people = new People() { Line = line };
                 lines.Add(people);

@@ -20,8 +20,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)
-                .Include(c => c.Marker)
+                .Include(c => c.Student)               
                 .Include(c => c.Student!.Room)
                 .ToListAsync();
 
@@ -38,8 +37,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)
-                .Include(c => c.Marker)
+                .Include(c => c.Student)             
                 .Include(c => c.Student!.Room)
                 .Where(c => c.Date.Year == year && c.Date.Month == month && c.Date.Day == day)
                 .ToListAsync();
@@ -57,8 +55,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)
-                .Include(c => c.Marker)
+                .Include(c => c.Student)              
                 .Include(c => c.Student!.Room)
                 .Where(c => c.Date.Year == year && c.Date.Month == month)
                 .ToListAsync();
@@ -76,8 +73,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)
-                .Include(c => c.Marker)
+                .Include(c => c.Student)              
                 .Include(c => c.Student!.Room)
                 .Where(c => c.Date.Year == year)
                 .ToListAsync();
@@ -96,8 +92,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLog = await db.AttendanceLog
-                .Include(c => c.Student)
-                .Include(c => c.Marker)
+                .Include(c => c.Student)  
                 .Include(c => c.Student!.Room)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();

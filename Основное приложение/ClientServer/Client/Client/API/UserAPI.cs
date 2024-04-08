@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Helper;
+using System.Net.Http.Json;
 using Helper.Models.DTO;
+using Helper;
 
 namespace Client.API
 {
-    internal static class AttendanceLog
+    internal static class UserAPI
     {
-        public static async Task<AttendanceLogDTO?> GetAttendanceLog(int id)
+        public static async Task<UserDTO?> GetUserAsync(string login)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<AttendanceLogDTO>(Connect.Connection + $"AttendanceLog/{id}");
+                var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Users/{login}");
                 return response;
             }
             catch (Exception e)
@@ -28,20 +28,12 @@ namespace Client.API
             }
             return null;
         }
-
-
-
-        //получение всех логов с БД
-
-
-        //добавить по датам
-
-        public static async Task<IEnumerable<AttendanceLogDTO>?> GetAttendanceLogs()
+        public static async Task<IEnumerable<UserDTO>?> GetUsersAsync()
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLogDTO>>(Connect.Connection + $"AttendanceLog");
+                var response = await client.GetFromJsonAsync<IEnumerable<UserDTO>>(Connect.Connection + $"Users");
                 return response;
             }
             catch (Exception e)
@@ -50,13 +42,12 @@ namespace Client.API
             }
             return null;
         }
-        //удаление лога
-        public static async Task<HttpStatusCode?> DeleteAttendanceLog(int id)
+        public static async Task<HttpStatusCode?> DeleteUserAsync(string login)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"AttendanceLog/{id}");
+                var response = await client.DeleteAsync(Connect.Connection + $"Users/{login}");
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -65,13 +56,12 @@ namespace Client.API
             }
             return null;
         }
-        //создание лога
-        public static async Task<HttpStatusCode?> PostAttendanceLog(AttendanceLogDTO attendanceLogDTO)
+        public static async Task<HttpStatusCode?> PostUserAsync(UserDTO userDTO)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.PostAsJsonAsync(Connect.Connection + $"AttendanceLog", attendanceLogDTO);
+                var response = await client.PostAsJsonAsync(Connect.Connection + $"Users", userDTO);
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -80,13 +70,12 @@ namespace Client.API
             }
             return null;
         }
-        //обновление лога
-        public static async Task<HttpStatusCode?> PutAttendanceLog(AttendanceLogDTO attendanceLogDTO)
+        public static async Task<HttpStatusCode?> PutUserAsync(UserDTO userDTO)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.PutAsJsonAsync(Connect.Connection + $"AttendanceLog", attendanceLogDTO);
+                var response = await client.PutAsJsonAsync(Connect.Connection + $"Users", userDTO);
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -95,5 +84,6 @@ namespace Client.API
             }
             return null;
         }
+
     }
 }

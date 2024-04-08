@@ -9,74 +9,19 @@ using System.Threading.Tasks;
 using System.Net.Http.Json;
 using Helper.Models.DTO;
 using Helper;
+using Helper.Models.Main;
 
 namespace Client.API
 {
-    internal static class User
+    internal static class StudentAPI
     {
-        public static async Task<UserDTO?> GetUserAsync(string login)
+        public static async Task<Student?> GetStudentAsync(string fio, string room)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Users/{login}");
+                var response = await client.GetFromJsonAsync<Student>(Connect.Connection + $"Students/{room}/{fio}");
                 return response;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-            return null;
-        }
-        public static async Task<IEnumerable<UserDTO>?> GetUsersAsync()
-        {
-            HttpClient client = new HttpClient();
-            try
-            {
-                var response = await client.GetFromJsonAsync<IEnumerable<UserDTO>>(Connect.Connection + $"Users");
-                return response;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-            return null;
-        }
-        public static async Task<HttpStatusCode?> DeleteUserAsync(string login)
-        {
-            HttpClient client = new HttpClient();
-            try
-            {
-                var response = await client.DeleteAsync(Connect.Connection + $"Users/{login}");
-                return response.StatusCode;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-            return null;
-        }
-        public static async Task<HttpStatusCode?> PostUserAsync(UserDTO userDTO)
-        {
-            HttpClient client = new HttpClient();
-            try
-            {
-                var response = await client.PostAsJsonAsync(Connect.Connection + $"Users", userDTO);
-                return response.StatusCode;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-            return null;
-        }
-        public static async Task<HttpStatusCode?> PutUserAsync(UserDTO userDTO)
-        {
-            HttpClient client = new HttpClient();
-            try
-            {
-                var response = await client.PutAsJsonAsync(Connect.Connection + $"Users", userDTO);
-                return response.StatusCode;
             }
             catch (Exception e)
             {
@@ -85,5 +30,63 @@ namespace Client.API
             return null;
         }
 
+
+        //добавить из обновы
+        public static async Task<IEnumerable<Student>?> GetStudentsAsync()
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.GetFromJsonAsync<IEnumerable<Student>>(Connect.Connection + $"Students");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> DeleteStudentAsync(string fio, string room)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.DeleteAsync(Connect.Connection + $"Students/{room}/{fio}");
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> PostStudentAsync(Student studentDTO)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.PostAsJsonAsync(Connect.Connection + $"Students", studentDTO);
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> PutPutStudentAsync(Student studentDTO)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.PutAsJsonAsync(Connect.Connection + $"Students", studentDTO);
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace Helper.Models.Main
         public string RepresentativeName { get; set; } = string.Empty;
         public string RepresentativeSurname { get; set; } = string.Empty;
         public string RepresentativePatronymic { get; set; } = string.Empty;
-        public string PhoneRepresentative { get; set; } = string.Empty;
+        public string RepresentativePhone { get; set; } = string.Empty;
 
         public string Gender { get; set; } = string.Empty; //1 символ
 
