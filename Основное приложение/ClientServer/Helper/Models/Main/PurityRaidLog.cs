@@ -21,6 +21,6 @@ namespace Helper.Models.Main
         public string? Description { get; set; }
 
         [JsonIgnore]
-        public Room? Student { get; set; }
+        public Room? Room { get; set; }
     }
 }
