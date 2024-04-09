@@ -10,10 +10,68 @@ namespace WebAPI.Controllers
     public class DutyScheduleController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutySchedule()
+        public async Task<ActionResult> GetDutySchedule()
         {
             ApplicationContext db = new ApplicationContext();
-            var dutySchedules = await db.DutySchedule.ToListAsync();
+            var dutySchedules = await db.DutySchedule
+                .Include(c => c.Student)
+                .Include(c => c.Student!.Room)
+                .ToListAsync();
+
+            if (dutySchedules == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            return new JsonResult(dutySchedules);
+        }
+        [HttpGet("day:{day}.{month}.{year}")]
+        public async Task<ActionResult> GetDutyScheduleDay(int day, int month, int year)
+        {
+            ApplicationContext db = new ApplicationContext();
+            var dutySchedules = await db.DutySchedule
+                .Include(c => c.Student)
+                .Include(c => c.Student!.Room)
+                .Where(c => c.Date.Year == year && c.Date.Month == month && c.Date.Day == day)
+                .ToListAsync();
+
+            if (dutySchedules == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            return new JsonResult(dutySchedules);
+        }
+        [HttpGet("month:{month}.{year}")]
+        public async Task<ActionResult> GetDutyScheduleMonth(int month, int year)
+        {
+            ApplicationContext db = new ApplicationContext();
+            var dutySchedules = await db.DutySchedule
+                .Include(c => c.Student)
+                .Include(c => c.Student!.Room)
+                .Where(c => c.Date.Year == year && c.Date.Month == month)
+                .ToListAsync();
+
+            if (dutySchedules == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            return new JsonResult(dutySchedules);
+        }
+        [HttpGet("year:{year}")]
+        public async Task<ActionResult> GetDutyScheduleYear(int year)
+        {
+            ApplicationContext db = new ApplicationContext();
+            var dutySchedules = await db.DutySchedule
+                .Include(c => c.Student)
+                .Include(c => c.Student!.Room)
+                .Where(c => c.Date.Year == year)
+                .ToListAsync();
+
             if (dutySchedules == null)
             {
                 return NotFound();
@@ -23,29 +81,47 @@ namespace WebAPI.Controllers
             return new JsonResult(dutySchedules);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetDutySchedule(int id)
+        {
+            ApplicationContext db = new ApplicationContext();
+            var dutySchedule = await db.DutySchedule
+                .Include(c => c.Student)
+                .Include(c => c.Student!.Room)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (dutySchedule == null)
+            {
+                return NotFound();
+            }
+            await db.DisposeAsync();
+
+            return new JsonResult(dutySchedule);
+        }
 
         [HttpPost]
-        public async Task<ActionResult> PostDutySchedule(DutySchedule? dutyScheduleDTO)
+        public async Task<ActionResult> PostDutySchedule(DutySchedule dutyScheduleDTO)
         {
             if (dutyScheduleDTO == null)
             {
                 return NoContent();
             }
+
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            DutySchedule? dutySchedule = await db.DutySchedule
-                .Where(x => x.Id == dutyScheduleDTO.Id)
-                .FirstOrDefaultAsync();
-
+            DutySchedule? dutySchedule = await db.DutySchedule.Where(x => x.Id == dutyScheduleDTO.Id).FirstOrDefaultAsync();
             if (dutySchedule != null)
             {
                 return StatusCode(400);
             }
 
-            dutySchedule = dutyScheduleDTO;
-
-            await db.DutySchedule.AddAsync(dutySchedule!);
+            if (await db.DutySchedule.ContainsAsync(dutySchedule))
+            {
+                return StatusCode(400);
+            }
+            await db.DutySchedule.AddAsync(dutyScheduleDTO);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
@@ -53,16 +129,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutDutySchedule(DutySchedule? dutyScheduleDTO)
+        public async Task<ActionResult> PutDutySchedule(DutySchedule dutyScheduleDTO)
         {
             if (dutyScheduleDTO == null)
             {
                 return NoContent();
             }
-
             ApplicationContext db = new ApplicationContext();
-            //проверка на существование такой записи в БД
-            DutySchedule? dutySchedule = await db.DutySchedule
+
+            var dutySchedule = await db.DutySchedule
                 .Where(x => x.Id == dutyScheduleDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -72,9 +147,9 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
-            dutySchedule = dutyScheduleDTO;
+            dutySchedule = dutyScheduleDTO!;
 
-            db.DutySchedule.Update(dutySchedule!);
+            db.Update(dutySchedule);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
@@ -94,7 +169,6 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(404);
             }
-
             db.DutySchedule.Remove(dutySchedule);
             await db.SaveChangesAsync();
             await db.DisposeAsync();

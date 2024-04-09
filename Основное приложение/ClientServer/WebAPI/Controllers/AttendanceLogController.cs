@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
     public class AttendanceLogController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogs()
+        public async Task<ActionResult> GetAttendanceLogs()
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return new JsonResult(attendanceLogs);
         }
         [HttpGet("day:{day}.{month}.{year}")]
-        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsDay(int day, int month, int year)
+        public async Task<ActionResult> GetAttendanceLogsDay(int day, int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
             return new JsonResult(attendanceLogs);
         }
         [HttpGet("month:{month}.{year}")]
-        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsMonth(int month, int year)
+        public async Task<ActionResult> GetAttendanceLogsMonth(int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
             return new JsonResult(attendanceLogs);
         }
         [HttpGet("year:{year}")]
-        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsYear(int year)
+        public async Task<ActionResult> GetAttendanceLogsYear(int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -88,7 +88,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AttendanceLog>> GetAttendanceLog(int id)
+        public async Task<ActionResult> GetAttendanceLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLog = await db.AttendanceLog

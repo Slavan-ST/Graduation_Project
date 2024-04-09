@@ -1,12 +1,72 @@
-﻿using System;
+﻿using Helper;
+using Helper.Models.Main;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Client.API
 {
     internal class GroupAPI
     {
+        public static async Task<IEnumerable<Group>?> GetGroupsAsync()
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.GetFromJsonAsync<IEnumerable<Group>>(Connect.Connection + $"Groups");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> DeleteGroupAsync(int id)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.DeleteAsync(Connect.Connection + $"Groups/{id}");
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> PostGroupAsync(Group group)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.PostAsJsonAsync(Connect.Connection + $"Groups", group);
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> PutPutGroupAsync(Group group)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.PutAsJsonAsync(Connect.Connection + $"Groups", group);
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
     }
 }
