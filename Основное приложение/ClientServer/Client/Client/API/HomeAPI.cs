@@ -12,7 +12,7 @@ using Helper;
 
 namespace Client.API
 {
-    internal class Home
+    internal class HomeAPI
     {
         public static async Task<UserDTO?> SignIn(string login, string password)
         {

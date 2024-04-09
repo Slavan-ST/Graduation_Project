@@ -32,7 +32,7 @@ namespace Client.ViewModels
                     return;
                 }
                 //получаем пользователя
-                UserDTO? user = await API.Home.SignIn(Login, Password);
+                UserDTO? user = await API.HomeAPI.SignIn(Login, Password);
                 //если пользователя получили, то переходим на главную
                 if (user != null)
                 {
