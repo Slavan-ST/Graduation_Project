@@ -9,7 +9,7 @@ namespace WebAPI.Controllers
     {
 
         [HttpGet]
-        public async Task<IActionResult> SignInAsync()
+        public async Task<IActionResult> SignOutAsync()
         {
             await HttpContext.SignOutAsync();
             return Ok();
