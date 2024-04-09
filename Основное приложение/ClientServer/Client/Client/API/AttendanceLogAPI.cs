@@ -30,13 +30,6 @@ namespace Client.API
             return null;
         }
 
-
-
-        //получение всех логов с БД
-
-
-        //добавить по датам
-
         public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogs()
         {
             HttpClient client = new HttpClient();
@@ -51,7 +44,53 @@ namespace Client.API
             }
             return null;
         }
-        //удаление лога
+
+        public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogsYear(int year)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog/year:{year}");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+
+        public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogsMonth(int year, int month)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog/month:{month}.{year}");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+
+        public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogsDay(int year, int month, int day)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog/day:{day}.{month}.{year}");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+
+
         public static async Task<HttpStatusCode?> DeleteAttendanceLog(int id)
         {
             HttpClient client = new HttpClient();
