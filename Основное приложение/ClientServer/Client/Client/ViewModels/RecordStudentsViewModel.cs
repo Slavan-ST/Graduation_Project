@@ -1,4 +1,6 @@
-﻿using Client.API;
+﻿using Avalonia.Controls;
+using Avalonia.Controls.Models.TreeDataGrid;
+using Client.API;
 using Client.ViewModels.Base;
 using Helper.Models.DTO;
 using Helper.Models.Main;
@@ -17,64 +19,37 @@ using System.Windows.Input;
 
 namespace Client.ViewModels
 {
-
-    public class People
+    public class Person
     {
-        public List<string> Line { get; set; } = new List<string>();
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public int Age { get; set; }
     }
 
     public class RecordStudentsViewModel : ViewModelBase
     {
-        [Reactive]
-        public List<People>? People { get; set; } = null!;
+        private ObservableCollection<Person> _people = new()
+        {
+            new Person { FirstName = "Eleanor", LastName = "Pope", Age = 32 },
+            new Person { FirstName = "Jeremy", LastName = "Navarro", Age = 74 },
+            new Person { FirstName = "Lailah ", LastName = "Velazquez", Age = 16 },
+            new Person { FirstName = "Jazmine", LastName = "Schroeder", Age = 52 },
+        };
 
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            TestPeoples();
-        }
-
-        async void TestPeoples()
-        {
-            People = await MeVariant(2023, 11);
-        }
-
-        async Task<List<People>?> MeVariant(int year, int month)
-        {
-            IEnumerable<AttendanceLog>? logDTOs = await API.AttendanceLogAPI.GetAttendanceLogs();
-            var logs = logDTOs!.Where(x => x.Date.Year == year && x.Date.Month == month).OrderBy(x => x.Date).ToList(); //логи текущего месяца, отсортированные 
-
-            List<People> lines = new List<People>();
-
-            var students = await API.StudentAPI.GetStudentsAsync();
-
-            if (students == null)
+            Source = new FlatTreeDataGridSource<Person>(_people)
             {
-                Debug.WriteLine("null");
-                return null;
-            }
-            Debug.WriteLine(students.ToList().Count);
-
-            foreach (var student in students)
-            {
-                List<string> line = new List<string>();
-                var logsStudent = logs.Where(x => x.Student!.Id == student.Id).ToList();
-                line.Add(student.Name);
-                Debug.WriteLine(student.Name);
-                foreach (var log in logsStudent)
+                Columns =
                 {
-                    line.Add(log.Marker);
-                    Debug.WriteLine(log.Marker);
-                }
-                People people = new People() { Line = line };
-                lines.Add(people);
-
-
-            }
-
-
-            return lines;
-
-
+                    new TextColumn<Person, string>("First Name", x => x.FirstName),
+                    new TextColumn<Person, string>("Last Name", x => x.LastName),
+                    new TextColumn<Person, int>("Age", x => x.Age),
+                },
+            };
         }
+
+        public FlatTreeDataGridSource<Person> Source { get; }
+
     }
 }

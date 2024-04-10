@@ -6,63 +6,34 @@
 			 xmlns:models="clr-namespace:Client.Models;assembly=Client"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.RecordStudentsView">
+	<Grid>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<StackPanel>
+			<TreeView>
+				<TreeViewItem Header="Фильтры">
+					<StackPanel Orientation="Horizontal">
+						<StackPanel>
+							<TextBlock Text="Студент"/>
+							<AutoCompleteBox/>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Text="Комната"/>
+							<AutoCompleteBox/>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Text="Статус"/>
+							<AutoCompleteBox/>
+						</StackPanel>
+						<Button Content="Применить"/>
+					</StackPanel>
+				</TreeViewItem>
+			</TreeView>
 
+			<TreeDataGrid Source="{Binding PeopleSource}"
+						  Background="Red" Height="200"/>
 
-	<models:HackPanel>
-
-
-
-		<DataGrid
-					  VerticalAlignment="Stretch"
-					  HorizontalAlignment="Stretch"
-					  Margin="15"
-					  IsReadOnly="False"
-					  CanUserReorderColumns="False"
-					  CanUserResizeColumns="False"
-					  CanUserSortColumns="False"
-					  GridLinesVisibility="All"
-					  BorderThickness="1" BorderBrush="Gray"
-					  ItemsSource="{Binding People}">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="ФИО" Binding="{Binding Line[0]}"/>
-				<DataGridTextColumn Header="1" Binding="{Binding Line[1]}"/>
-				<DataGridTextColumn Header="2" Binding="{Binding Line[2]}"/>
-				<DataGridTextColumn Header="3" Binding="{Binding Line[3]}"/>
-				<DataGridTextColumn Header="4" Binding="{Binding Line[4]}"/>
-				<DataGridTextColumn Header="5" Binding="{Binding Line[5]}"/>
-				<DataGridTextColumn Header="6" Binding="{Binding Line[6]}"/>
-				<DataGridTextColumn Header="7" Binding="{Binding Line[7]}"/>
-				<DataGridTextColumn Header="8" Binding="{Binding Line[8]}"/>
-				<DataGridTextColumn Header="9" Binding="{Binding Line[9]}"/>
-				<DataGridTextColumn Header="10" Binding="{Binding Line[10]}"/>
-				<DataGridTextColumn Header="11" Binding="{Binding Line[11]}"/>
-				<DataGridTextColumn Header="12" Binding="{Binding Line[12]}"/>
-				<DataGridTextColumn Header="13" Binding="{Binding Line[13]}"/>
-				<DataGridTextColumn Header="14" Binding="{Binding Line[14]}"/>
-				<DataGridTextColumn Header="15" Binding="{Binding Line[15]}"/>
-				<DataGridTextColumn Header="16" Binding="{Binding Line[16]}"/>
-				<DataGridTextColumn Header="17" Binding="{Binding Line[17]}"/>
-				<DataGridTextColumn Header="18" Binding="{Binding Line[18]}"/>
-				<DataGridTextColumn Header="19" Binding="{Binding Line[19]}"/>
-				<DataGridTextColumn Header="20" Binding="{Binding Line[20]}"/>
-				<DataGridTextColumn Header="21" Binding="{Binding Line[21]}"/>
-				<DataGridTextColumn Header="22" Binding="{Binding Line[22]}"/>
-				<DataGridTextColumn Header="23" Binding="{Binding Line[23]}"/>
-				<DataGridTextColumn Header="24" Binding="{Binding Line[24]}"/>
-				<DataGridTextColumn Header="25" Binding="{Binding Line[25]}"/>
-				<DataGridTextColumn Header="26" Binding="{Binding Line[26]}"/>
-				<DataGridTextColumn Header="27" Binding="{Binding Line[27]}"/>
-				<DataGridTextColumn Header="28" Binding="{Binding Line[28]}"/>
-				<DataGridTextColumn Header="29" Binding="{Binding Line[29]}"/>
-				<DataGridTextColumn Header="30" Binding="{Binding Line[30]}"/>
-				<DataGridTextColumn Header="31" Binding="{Binding Line[31]}"/>
-			</DataGrid.Columns>
-
-
-
-
-		</DataGrid>
-
-	</models:HackPanel>
+		</StackPanel>
+		
+	</Grid>
 	
 </UserControl>
