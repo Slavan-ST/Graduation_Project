@@ -19,8 +19,6 @@ namespace Helper.Models.Main
         public DateTime Date { get; set; }
         public int Marker { get; set; }
         public string? Description { get; set; }
-
-        [JsonIgnore]
         public Room? Room { get; set; }
     }
 }

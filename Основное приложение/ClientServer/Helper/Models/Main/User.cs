@@ -21,7 +21,6 @@ namespace Helper.Models.Main
         public string Password { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
-        [JsonIgnore]
         public Role? Role { get; set; }
     }
 }

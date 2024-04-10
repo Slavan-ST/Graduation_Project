@@ -14,8 +14,6 @@ namespace Helper.Models.Main
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [JsonIgnore]
         public int StudentId { get; set; }
         public DateTime Date { get; set; }
         public string Marker { get; set; } = string.Empty;
