@@ -29,7 +29,8 @@
 				</TreeViewItem>
 			</TreeView>
 
-			<TreeDataGrid Source="{Binding PeopleSource}"
+
+			<TreeDataGrid Source="{Binding Source}"
 						  Background="Red" Height="200"/>
 
 		</StackPanel>

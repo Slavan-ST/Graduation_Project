@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Client.ViewModels;
 using ReactiveUI;
+using System.Diagnostics;
 
 namespace Client.Views
 {
@@ -14,5 +15,6 @@ namespace Client.Views
             this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);
         }
+
     }
 }

@@ -19,37 +19,33 @@ using System.Windows.Input;
 
 namespace Client.ViewModels
 {
-    public class Person
-    {
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public int Age { get; set; }
-    }
-
     public class RecordStudentsViewModel : ViewModelBase
     {
-        private ObservableCollection<Person> _people = new()
-        {
-            new Person { FirstName = "Eleanor", LastName = "Pope", Age = 32 },
-            new Person { FirstName = "Jeremy", LastName = "Navarro", Age = 74 },
-            new Person { FirstName = "Lailah ", LastName = "Velazquez", Age = 16 },
-            new Person { FirstName = "Jazmine", LastName = "Schroeder", Age = 52 },
-        };
-
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            Source = new FlatTreeDataGridSource<Person>(_people)
+            Source = new FlatTreeDataGridSource<AttendanceLog>(new List<AttendanceLog>());
+            TestGet();
+        }
+
+
+        public async void TestGet()
+        {
+            var listLogs = await AttendanceLogAPI.GetAttendanceLogsMonth(2023, 6);
+            Source.Items = listLogs;
+            Source = new FlatTreeDataGridSource<AttendanceLog>(listLogs)
             {
                 Columns =
                 {
-                    new TextColumn<Person, string>("First Name", x => x.FirstName),
-                    new TextColumn<Person, string>("Last Name", x => x.LastName),
-                    new TextColumn<Person, int>("Age", x => x.Age),
-                },
+                    new TextColumn<AttendanceLog, string>("id", x => x.Marker, (r,v) => r.Marker = v, new GridLength(6, GridUnitType.Star), new()
+                    {
+                        IsTextSearchEnabled = true,
+                    })
+                }
             };
         }
 
-        public FlatTreeDataGridSource<Person> Source { get; }
+        [Reactive]
+        public FlatTreeDataGridSource<AttendanceLog> Source { get; set; }
 
     }
 }
