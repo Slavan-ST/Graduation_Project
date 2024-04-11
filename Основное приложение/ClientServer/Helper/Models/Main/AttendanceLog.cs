@@ -19,7 +19,5 @@ namespace Helper.Models.Main
         public string Marker { get; set; } = string.Empty;
 
         public Student? Student { get; set; }
-
-
     }
 }
