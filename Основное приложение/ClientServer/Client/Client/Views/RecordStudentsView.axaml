@@ -24,6 +24,8 @@
 							<TextBlock Text="Статус"/>
 							<AutoCompleteBox/>
 						</StackPanel>
+						<DatePicker DayVisible="False">
+						</DatePicker>
 						<Button Content="Применить"/>
 					</StackPanel>
 				</TreeViewItem>

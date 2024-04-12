@@ -6,124 +6,35 @@
              x:Class="Client.Views.EventsListView">
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
+		<StyleInclude Source="/Styles/Buttons/BackButton.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
 	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<Calendar SelectionMode="SingleDate" HorizontalAlignment="Center" Background="Transparent"
-				  x:Name="calendar" PointerWheelChanged="Calendar_PointerWheelChanged"
-				  CalendarItem.DataContext="{Binding EventsList}">
-			<Calendar.Styles>
-				<Style Selector="CalendarDayButton">
-					<Setter Property="Template">
-						<Setter.Value>
-							<ControlTemplate>
-								<Border BorderBrush="#08F0E9"
-										BorderThickness="2"
-										Background="#FFFFFF" Height="150" Width="150"
-										PointerWheelChanged="Calendar_PointerWheelChanged">
-									<StackPanel Margin="5" PointerWheelChanged="Calendar_PointerWheelChanged">
-										<ContentControl Content="{TemplateBinding Content}"
-														HorizontalAlignment="Left"
-														PointerWheelChanged="Calendar_PointerWheelChanged"/>
-										<TextBlock Text="{Binding Event}"
-												   PointerWheelChanged="Calendar_PointerWheelChanged"/>
-
-									</StackPanel>
-								</Border>
-							</ControlTemplate>
-						</Setter.Value>
-					</Setter>
-				</Style>
-				<Style Selector="Grid#PART_MonthView > TextBlock">
-					<Setter Property="IsVisible" Value="False"/>
-					<Setter Property="Height" Value="0"/>
-				</Style>
-
-				<Style Selector="CalendarDayButton:inactive">
-					<Setter Property="Background" Value="Transparent"/>
-					<Setter Property="IsVisible" Value="False"/>
-				</Style>
-				<Style Selector="Button#PART_PreviousButton">
-					<Setter Property="HorizontalAlignment" Value="Right"/>
-					<Setter Property="RenderTransform" Value="rotate(-90deg)"/>
-					<Style.Animations>
-						<Animation Duration="0:0:01"
-								   IterationCount="Infinite">
-							<KeyFrame Cue="0%">
-								<Setter Property="Grid.Column" Value="0"/>
-							</KeyFrame>
-							<KeyFrame Cue="100%">
-								<Setter Property="Grid.Column" Value="0"/>
-							</KeyFrame>
-						</Animation>
-					</Style.Animations>
-				</Style>
-				<Style Selector="Button#PART_NextButton">
-					<Setter Property="HorizontalAlignment" Value="Left"/>
-					<Setter Property="RenderTransform" Value="rotate(-90deg)"/>
-					<Style.Animations>
-						<Animation Duration="0:0:01"
-								   IterationCount="Infinite">
-							<KeyFrame Cue="0%">
-								<Setter Property="Grid.Column" Value="2"/>
-							</KeyFrame>
-							<KeyFrame Cue="100%">
-								<Setter Property="Grid.Column" Value="2"/>
-							</KeyFrame>
-						</Animation>
-					</Style.Animations>
-				</Style>
-				<Style Selector="Button#PART_HeaderButton">
-					<Setter Property="Grid.Column" Value="1"/>
-					<Setter Property="HorizontalAlignment" Value="Center"/>
-					<Setter Property="HorizontalContentAlignment" Value="Center"/>
-					<Setter Property="FontSize" Value="22"/>
-					<Style.Animations>
-						<Animation Duration="0:0:01"
-								   IterationCount="Infinite">
-							<KeyFrame Cue="0%">
-								<Setter Property="IsEnabled" Value="False"/>
-							</KeyFrame>
-							<KeyFrame Cue="100%">
-								<Setter Property="IsEnabled" Value="False"/>
-							</KeyFrame>
-						</Animation>
-					</Style.Animations>
-				</Style>
-
-				<Style Selector="Calendar /template/ CalendarItem#PART_CalendarItem /template/ Grid > Grid:not(#PART_MonthView)">
-					<Setter Property="HorizontalAlignment" Value="Center"/>
-					<Setter Property="VerticalAlignment" Value="Center"/>
-				</Style>
-				<Style Selector="Calendar /template/ CalendarItem#PART_CalendarItem /template/ Grid > Border">
-					<Style.Animations>
-						<Animation Duration="0:0:01"
-								   IterationCount="Infinite">
-							<KeyFrame Cue="0%">
-								<Setter Property="Background" Value="Transparent"/>
-							</KeyFrame>
-							<KeyFrame Cue="100%">
-								<Setter Property="Background" Value="Transparent"/>
-							</KeyFrame>
-						</Animation>
-					</Style.Animations>
-				</Style>
-
-				<Style Selector="Calendar /template/ CalendarItem#PART_CalendarItem">
-					<Style.Animations>
-						<Animation Duration="0:0:01"
-								   IterationCount="Infinite">
-							<KeyFrame Cue="0%">
-								<Setter Property="BorderThickness" Value="0"/>
-							</KeyFrame>
-							<KeyFrame Cue="100%">
-								<Setter Property="BorderThickness" Value="0"/>
-							</KeyFrame>
-						</Animation>
-					</Style.Animations>
-				</Style>
-
-			</Calendar.Styles>
-		</Calendar>
+		<StackPanel>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+				<Button Content="◄" Classes="back"/>
+				<TextBlock Text="Месяц" Classes="header"/>
+				<Button Content="►" Classes="back"/>
+			</StackPanel>
+			<ItemsControl>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border BorderBrush="#08F0E9"
+								BorderThickness="2"
+								Background="White" Height="150" Width="150">
+							<StackPanel Margin="5">
+								<TextBlock Text="{Binding EventName}"/>
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
 	</Grid>
 </UserControl>

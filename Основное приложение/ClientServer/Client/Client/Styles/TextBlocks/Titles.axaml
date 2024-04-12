@@ -38,7 +38,7 @@
     </Design.PreviewWith>
 
 	<Style Selector="TextBlock.header">
-		<Setter Property="FontSize" Value="44"/>
+		<Setter Property="FontSize" Value="42"/>
 	</Style>
 
 	<Style Selector="TextBlock.title">
