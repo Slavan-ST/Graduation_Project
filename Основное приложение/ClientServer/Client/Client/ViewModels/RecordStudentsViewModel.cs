@@ -37,23 +37,38 @@ namespace Client.ViewModels
         public async void TestGet()
         {
             var listLogs = await AttendanceLogAPI.GetAttendanceLogsMonth(2023, 6);
+
+            if (listLogs == null)
+            {
+                return;
+            }
             var students = await StudentAPI.GetStudentsAsync();
 
-            //List<MarksOfStudents> marksOfStudents = new List<MarksOfStudents>();
+
+            if (students == null)
+            {
+                return;
+            }
+
 
             Dictionary<string, Dictionary<int,string>> marksOfStudents = new Dictionary<string, Dictionary<int, string>>();
 
-            foreach(var student in students)
+            foreach (var student in students)
             {
-                if (!marksOfStudents.ContainsKey($"{student.Name} {student.Surname} {student.Patronymic}"))
+                if (!marksOfStudents.ContainsKey(student.FIO))
                 {
-                    marksOfStudents.Add($"{student.Name} {student.Surname} {student.Patronymic}", new Dictionary<int, string>());
+                    marksOfStudents.Add(student.FIO, new Dictionary<int, string>());
                 }
             }
 
             foreach (var log in listLogs)
             {
-                var studentInDictionary = marksOfStudents[$"{log.Student.Name} {log.Student.Surname} {log.Student.Patronymic}"];
+                if (log.Student == null)
+                {
+                    continue;
+                }
+
+                var studentInDictionary = marksOfStudents[log.Student.FIO];
 
                 if (studentInDictionary.ContainsKey(log.Date.Day))
                 {
@@ -70,7 +85,7 @@ namespace Client.ViewModels
                 Debug.WriteLine(student.Key);
                 foreach( var mark in student.Value)
                 {
-                    Debug.Write($"{mark.Key} {mark.Value}");
+                    Debug.Write($" {mark.Key} {mark.Value}");
                 }
             }
 

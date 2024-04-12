@@ -37,5 +37,10 @@ namespace Helper.Models.Main
         public Room? Room { get; set; }
         public Group? Group { get; set; }
         public Status? Status { get; set; }
+
+        public string FIO
+        {
+            get => $"{Surname} {Name} {Patronymic}";
+        }
     }
 }
