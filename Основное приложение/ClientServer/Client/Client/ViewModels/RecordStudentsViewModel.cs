@@ -2,6 +2,7 @@
 using Avalonia.Controls.Models.TreeDataGrid;
 using Client.API;
 using Client.ViewModels.Base;
+using DynamicData;
 using Helper.Models.DTO;
 using Helper.Models.Main;
 using ReactiveUI;
@@ -21,89 +22,82 @@ namespace Client.ViewModels
 {
     public class MarksOfStudents
     {
-        public string FullName { get; set; } = string.Empty;
-        public Dictionary<string, string>? Marks { get; set; }
+        public Student Student { get; set; } = new Student();
+        public List<AttendanceLog> Logs { get; set; } = new List<AttendanceLog>();
     }
 
     public class RecordStudentsViewModel : ViewModelBase
     {
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            Source = new FlatTreeDataGridSource<AttendanceLog>(new List<AttendanceLog>());
-            TestGet();
+            Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
+            TestStudent(2023,6);
         }
-
-
-        public async void TestGet()
+        public async void TestStudent(int year, int month)
         {
-            var listLogs = await AttendanceLogAPI.GetAttendanceLogsMonth(2023, 6);
+            //получаем кол-во дней в текущем месяце
+            int countDay = DateTime.DaysInMonth(year, month);
 
-            if (listLogs == null)
-            {
-                return;
-            }
+            //тут будет храниться строка
+            List<MarksOfStudents> marksOfStudentsList = new List<MarksOfStudents>();
+
+            //получаем студентов из БД
             var students = await StudentAPI.GetStudentsAsync();
-
 
             if (students == null)
             {
                 return;
             }
 
-
-            Dictionary<string, Dictionary<int,string>> marksOfStudents = new Dictionary<string, Dictionary<int, string>>();
-
             foreach (var student in students)
             {
-                if (!marksOfStudents.ContainsKey(student.FIO))
+                if (student.AttendanceLogs == null)
                 {
-                    marksOfStudents.Add(student.FIO, new Dictionary<int, string>());
+                    return;
                 }
+
+                //получаем логи за текущий месяц
+                var studLogs = student.AttendanceLogs.Where(x => x.Date.Year == year && x.Date.Month == month).ToList();
+
+                //добавляем новую строку
+                MarksOfStudents marksOfStudents = new MarksOfStudents()
+                {
+                    Student = student,
+                    Logs = studLogs
+                };
+                marksOfStudentsList.Add(marksOfStudents);
+                Debug.WriteLine("list count =      " + marksOfStudents.Logs.Count);
             }
 
-            foreach (var log in listLogs)
+            //массив столбцов
+            ColumnList<MarksOfStudents> columns = new Avalonia.Controls.Models.TreeDataGrid.ColumnList<MarksOfStudents>();
+            
+            //столбец ФИО студента
+            columns.Add(new TextColumn<MarksOfStudents, string>("Студент", x => $"{x.Student.Name} {x.Student.Surname} {x.Student.Patronymic}"));
+            
+            //тестовый столбец с маркерами - так работает
+            columns.Add(new TextColumn<MarksOfStudents, string>(11, x => $"{x.Logs[1].Marker}"));
+
+            //а вот через цикл заполняться не хотят
+            for (int i = 1; i <= countDay; i++)
             {
-                if (log.Student == null)
-                {
-                    continue;
-                }
-
-                var studentInDictionary = marksOfStudents[log.Student.FIO];
-
-                if (studentInDictionary.ContainsKey(log.Date.Day))
-                {
-                    studentInDictionary[log.Date.Day] = log.Marker;
-                }
-                else
-                {
-                    studentInDictionary.Add(log.Date.Day, log.Marker);
-                }
+                columns.Add(new TextColumn<MarksOfStudents, string>(i, x => $"{x.Logs[i-1].Marker}"));
             }
 
-            foreach( var student in marksOfStudents)
-            {
-                Debug.WriteLine(student.Key);
-                foreach( var mark in student.Value)
-                {
-                    Debug.Write($" {mark.Key} {mark.Value}");
-                }
-            }
-
-
-            /*
-            Source.Items = listLogs;
-            Source = new FlatTreeDataGridSource<AttendanceLog>(listLogs)
+            //присваиваем датасоурсе
+            Source = new FlatTreeDataGridSource<MarksOfStudents>(marksOfStudentsList)
             {
                 Columns =
                 {
-                    new TextColumn<AttendanceLog, string>("Студент", x => $"{x.Student.Name} {x.Student.Surname} {x.Student.Patronymic}")
+                    columns
                 }
             };
-            */
+            Source.Items = marksOfStudentsList;
+
         }
 
         [Reactive]
-        public FlatTreeDataGridSource<AttendanceLog> Source { get; set; }
+        public FlatTreeDataGridSource<MarksOfStudents> Source { get; set; }
 
     }
 }

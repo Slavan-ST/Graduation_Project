@@ -17,7 +17,11 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
             ApplicationContext db = new ApplicationContext();
-            var students = await db.Students.Include(c => c.Room).ToListAsync();
+            var students = await db.Students
+                .Include(c => c.Room)
+                .Include(c => c.AttendanceLogs)
+                .ToListAsync();
+
             if (students == null)
             {
                 return NotFound();
@@ -30,7 +34,13 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Student>>> GetStudentsFromRoom(string room)
         {
             ApplicationContext db = new ApplicationContext();
-            var students = await db.Students.Include(c => c.Room).Where(x => x.Room!.Number == room).ToListAsync();
+
+            var students = await db.Students
+                .Include(c => c.Room)
+                .Include(c => c.AttendanceLogs)
+                .Where(x => x.Room!.Number == room)
+                .ToListAsync();
+
             if (students == null)
             {
                 return NotFound();
@@ -51,6 +61,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
             var student = await db.Students
                 .Include(c => c.Room)
+                .Include(c => c.AttendanceLogs)
                 .Where(x => x.Room!.Number == room && x.Surname == surname && x.Name == name && x.Patronymic == patronymic)
                 .FirstOrDefaultAsync();
 

@@ -38,6 +38,7 @@ namespace Helper.Models.Main
         public Group? Group { get; set; }
         public Status? Status { get; set; }
 
+        public IEnumerable<AttendanceLog>? AttendanceLogs { get; set; }
         public string FIO
         {
             get => $"{Surname} {Name} {Patronymic}";
