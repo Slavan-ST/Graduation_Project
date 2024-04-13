@@ -12,13 +12,6 @@
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="50">
-				<Border BorderBrush="rgba(8, 240, 233, 0.8)"
-						BorderThickness="10"
-						Background="White">
-					<Image Source="{Binding PhotoUser}"
-						   Stretch="UniformToFill"
-						   Width="290" Height="310"/>
-				</Border>
 				<StackPanel Margin="15">
 					<TextBlock Text="{Binding Fio}" Classes="dataStudents"/>
 					<TextBlock Text="{Binding NumberRoom}" Classes="dataStudents"/>

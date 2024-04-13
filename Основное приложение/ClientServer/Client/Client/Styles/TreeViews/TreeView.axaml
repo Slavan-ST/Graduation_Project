@@ -1,0 +1,37 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" Width="800" Height="500">
+			<TreeView>
+				<TreeViewItem Header="Фильтры">
+					<StackPanel>
+						<StackPanel>
+							<TextBlock Text="Студент" Classes="titleFilter"/>
+							<AutoCompleteBox/>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Text="Комната" Classes="titleFilter"/>
+							<AutoCompleteBox/>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Text="Статус" Classes="titleFilter"/>
+							<AutoCompleteBox/>
+						</StackPanel>
+						<DatePicker DayVisible="False"/>
+						<Button Content="Применить"/>
+					</StackPanel>
+				</TreeViewItem>
+			</TreeView>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
+
+	<Style Selector="Border#PART_LayoutRoot:pointerover">
+		<Setter Property="Background" Value="Transparent"/>
+	</Style>
+
+	<Style Selector="TreeViewItem:selected Border#PART_LayoutRoot">
+		<Setter Property="Background" Value="Transparent"/>
+	</Style>
+</Styles>

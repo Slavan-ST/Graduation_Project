@@ -6,37 +6,39 @@
 			 xmlns:models="clr-namespace:Client.Models;assembly=Client"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.RecordStudentsView">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
+		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
+		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
+		<StyleInclude Source="/Styles/TreeViews/TreeView.axaml"/>
+		<StyleInclude Source="/Styles/DatePicker/DatePicker.axaml"/>
+	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<StackPanel>
-			<TreeView>
+		<DockPanel LastChildFill="True">
+			<TreeView DockPanel.Dock="Top">
 				<TreeViewItem Header="Фильтры">
-					<StackPanel Orientation="Horizontal">
+					<StackPanel>
 						<StackPanel>
-							<TextBlock Text="Студент"/>
+							<TextBlock Text="Студент" Classes="titleFilter"/>
 							<AutoCompleteBox/>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Комната"/>
+							<TextBlock Text="Комната" Classes="titleFilter"/>
 							<AutoCompleteBox/>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Статус"/>
+							<TextBlock Text="Статус" Classes="titleFilter"/>
 							<AutoCompleteBox/>
 						</StackPanel>
-						<DatePicker DayVisible="False">
-						</DatePicker>
-						<Button Content="Применить"/>
+						<DatePicker/>
+						<Button Content="Применить" Margin="0,5"/>
 					</StackPanel>
 				</TreeViewItem>
 			</TreeView>
-
-			<models:HackPanel>
-				<TreeDataGrid Source="{Binding Source}" Background="White"/>
-			</models:HackPanel>
-			
-		</StackPanel>
-		
+			<TreeDataGrid Source="{Binding Source}" Background="White" DockPanel.Dock="Bottom"
+						  Margin="15" CornerRadius="25" Padding="10"/>
+		</DockPanel>
 	</Grid>
 	
 </UserControl>

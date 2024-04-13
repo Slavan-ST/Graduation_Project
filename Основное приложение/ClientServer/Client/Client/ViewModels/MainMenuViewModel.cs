@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Controls;
+using Avalonia.Controls.Chrome;
 using Client.Models;
 using Client.Services;
 using Client.ViewModels.Base;
@@ -25,8 +26,7 @@ namespace Client.ViewModels
         //public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
 
         public MainMenuViewModel(IScreen? screen = null):base(screen)
-        {     
-
+        {    
             HideSideBar = ReactiveCommand.Create(() =>
             {
                 IsOpenSideBar = false;
@@ -41,46 +41,55 @@ namespace Client.ViewModels
             Main = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new NewsViewModel(this));
+                Title = "Новости";
             });
 
 
             DutyChart = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new DutyChartViewModel(this));
+                Title = "График дежурств";
             });
             Events = ReactiveCommand.Create(() => 
             {
                 Router.Navigate.Execute(new EventsViewModel(this));
+                Title = "Мероприятия";
             });
 
             EventsList = ReactiveCommand.Create(() => 
             {
-                Router.Navigate.Execute(new EventsListViewModel(this)); 
+                Router.Navigate.Execute(new EventsListViewModel(this));
+                Title = "План меропритий";
             });
 
             Faq = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new FaqViewModel(this));
+                Title = "Вопрос-ответ";
             });
 
             ListStudents = ReactiveCommand.Create(() => 
             { 
-                Router.Navigate.Execute(new ListStudentsViewModel(this)); 
+                Router.Navigate.Execute(new ListStudentsViewModel(this));
+                Title = "Список студентов";
             });
 
             PurityChart = ReactiveCommand.Create(() =>
             { 
-                Router.Navigate.Execute(new PurityChartViewModel(this)); 
+                Router.Navigate.Execute(new PurityChartViewModel(this));
+                Title = "Экран чистоты";
             });
 
             Statement = ReactiveCommand.Create(() => 
             { 
-                Router.Navigate.Execute(new StatementViewModel(this)); 
+                Router.Navigate.Execute(new StatementViewModel(this));
+                Title = "Заявление";
             });
 
             Profile = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new ProfileViewModel(this));
+                Title = "Профиль";
             });
             Record = ReactiveCommand.Create(() =>
             {
@@ -96,6 +105,8 @@ namespace Client.ViewModels
                 // + сюда добавить выход из учётной записи
                 HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen)); 
             });
+
+            Router.Navigate.Execute(new NewsViewModel(this));
         }
 
         #region Commands
@@ -182,7 +193,7 @@ namespace Client.ViewModels
         /// <para>false = Закрыт</para>
         /// </value>
         [Reactive]
-        public bool IsOpenSideBar { get; set; } = true;
+        public bool IsOpenSideBar { get; set; } = false;
         /// <summary>
         /// Свойство определяющие столбец WorkPlace
         /// </summary>
@@ -207,6 +218,14 @@ namespace Client.ViewModels
         /// </summary>
         [Reactive]
         public bool IsWorker { get; set; } = true;
+        /// <summary>
+        /// Свойство отображающие имя текущей формы
+        /// </summary>
+        /// <value>
+        /// "Новости" по умолчанию
+        /// </value>
+        [Reactive]
+        public string Title { get; set; } = "Новости";
 
         #endregion
     }
