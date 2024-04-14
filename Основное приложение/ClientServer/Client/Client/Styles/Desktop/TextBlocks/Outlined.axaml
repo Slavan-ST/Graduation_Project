@@ -1,0 +1,25 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<StackPanel>
+				<Label Content="Header (h1)" Classes="purple"/>
+				<Label Content="Header (h2)" Classes="lightBlue"/>
+			</StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Main/TextBlocks.axaml"/>
+
+	<Styles.Resources>
+		<ResourcesInclude Source="/Styles/Resources/Colors.axaml"/>
+	</Styles.Resources>
+	
+	<Style Selector="Label.purple">
+		<Setter Property="FontSize" Value="32"/>
+		<Setter Property="BorderBrush" Value="#A378EB"/>
+		<Setter Property="BorderThickness" Value="5"/>
+		<Setter Property="CornerRadius" Value="25"/>
+		<Setter Property="Padding" Value="5"/>
+	</Style>
+</Styles>

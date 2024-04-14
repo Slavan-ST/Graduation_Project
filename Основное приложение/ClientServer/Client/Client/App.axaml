@@ -16,5 +16,6 @@
     <Application.Styles>
         <FluentTheme />
 		<StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
+		<StyleInclude Source="/Styles/Main/TextBlocks.axaml"/>
     </Application.Styles>
 </Application>

@@ -9,22 +9,8 @@ using System;
 
 namespace Client.Controls
 {
-    [TemplatePart("EditableTextBlockPresenter", typeof(ItemsControl))]
-    public class EditableTextBlock : TemplatedControl
+    public class EditableTextBlock : UserControl
     {
-
-        static EditableTextBlock()
-        {
-            Application.Current?.Resources.MergedDictionaries
-                .Add(new ResourceInclude(new Uri("avares://Client/Controls/EditableTextBlock.axaml"))
-                {
-                    Source = new Uri("avares://Client/Controls/EditableTextBlock.axaml")
-                });
-        }
-        public EditableTextBlock()
-        {
-
-        }
 
         public static readonly StyledProperty<string> InsideTextProperty = AvaloniaProperty.Register<EditableTextBlock, string>(nameof(InsideText));
 
