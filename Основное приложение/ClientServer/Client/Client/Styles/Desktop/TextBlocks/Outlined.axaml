@@ -11,10 +11,6 @@
 
 	<StyleInclude Source="/Styles/Main/TextBlocks.axaml"/>
 
-	<Styles.Resources>
-		<ResourcesInclude Source="/Styles/Resources/Colors.axaml"/>
-	</Styles.Resources>
-	
 	<Style Selector="Label.purple">
 		<Setter Property="FontSize" Value="32"/>
 		<Setter Property="BorderBrush" Value="#A378EB"/>
