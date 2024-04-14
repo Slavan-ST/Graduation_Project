@@ -18,7 +18,7 @@
 		<DockPanel LastChildFill="True">
 			<TreeView DockPanel.Dock="Top">
 				<TreeViewItem Header="Фильтры">
-					<StackPanel>
+					<StackPanel >
 						<StackPanel>
 							<TextBlock Text="Студент" Classes="titleFilter"/>
 							<AutoCompleteBox/>
