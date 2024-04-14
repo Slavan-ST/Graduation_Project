@@ -17,7 +17,6 @@ namespace Helper.Models.Main
         public int StudentId { get; set; }
         public DateTime Date { get; set; }
 
-        [JsonIgnore]
         public Student? Student { get; set; }
 
     }

@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:controls="using:Client.Controls"
+			 xmlns:views="using:Client.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="Client.Views.DutyChartView">
 	<UserControl.Styles>
@@ -17,7 +19,7 @@
 				<TextBlock Text="Месяц" Classes="header"/>
 				<Button Content="►" Classes="back"/>
 			</StackPanel>
-			<ItemsControl>
+			<ItemsControl ItemsSource="{Binding DutyItems}" HorizontalAlignment="Center">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
 						<WrapPanel/>
@@ -29,8 +31,9 @@
 								BorderThickness="2"
 								Background="White" Height="150" Width="150">
 							<StackPanel Margin="5">
-								<TextBlock Text="{Binding Room}"/>
-								<TextBlock Text="{Binding Student}"/>
+								<TextBlock Text="{Binding Student.Room.Number}"/>
+								<TextBlock Text="{Binding Student.FIO}"/>
+								<controls:EditableTextBlock InsideText="{TemplateBinding Date}"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>

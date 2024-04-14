@@ -18,7 +18,6 @@ namespace Helper.Models.Main
         public DateTime Date { get; set; }
         public string Marker { get; set; } = string.Empty;
 
-        [JsonIgnore]
         public Student? Student { get; set; }
     }
 }

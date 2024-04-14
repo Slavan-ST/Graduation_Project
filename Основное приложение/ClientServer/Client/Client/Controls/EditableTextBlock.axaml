@@ -1,0 +1,49 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom" 
+        xmlns:controls="using:Client.Controls">
+  <Design.PreviewWith>
+    <controls:EditableTextBlock InsideText="dfslkjfjsdlk"/>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|EditableTextBlock">
+	  <Setter Property="Template">
+		  <Setter.Value>
+			  <ControlTemplate>
+				  <Panel Background="Transparent">
+					  <i:Interaction.Behaviors>
+						  <iac:ShowOnDoubleTappedBehavior TargetControl="TextBoxEdit" />
+						  <iac:ShowOnKeyDownTappedBehavior TargetControl="TextBoxEdit" />
+					  </i:Interaction.Behaviors>
+					  <TextBox x:Name="TextBoxEdit"
+							   IsVisible="False"
+							   Height="{Binding #TextStackPanel.Bounds.Height}"
+							   VerticalContentAlignment="Center"
+							   VerticalAlignment="Center"
+							   Margin="0"
+							   Padding="6,0,6,0"
+							   BorderThickness="0"
+							   Text="{TemplateBinding InsideText}">
+						  <i:Interaction.Behaviors>
+							  <iac:HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Escape" />
+							  <iac:HideOnKeyPressedBehavior TargetControl="TextBoxEdit" Key="Enter" />
+							  <iac:HideOnLostFocusBehavior TargetControl="TextBoxEdit" />
+							  <iac:SelectAllOnGotFocusBehavior />
+						  </i:Interaction.Behaviors>
+					  </TextBox>
+					  <StackPanel x:Name="TextStackPanel"
+								  Orientation="Horizontal"
+								  Background="Transparent"
+								  Focusable="True"
+								  IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+						  <TextBlock x:Name="StyleTextBlock"
+									 Text="{TemplateBinding InsideText}"
+									 Margin="6,8,6,8"/>
+					  </StackPanel>
+				  </Panel>
+			  </ControlTemplate>
+		  </Setter.Value>
+	  </Setter>
+  </Style>
+</Styles>

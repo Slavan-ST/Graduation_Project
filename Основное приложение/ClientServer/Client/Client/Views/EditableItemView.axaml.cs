@@ -1,17 +1,18 @@
-using Avalonia.Input;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Client.ViewModels;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace Client.Views
 {
-    public partial class DutyChartView : ReactiveUserControl<DutyChartViewModel>
+    public partial class EditableItemView : ReactiveUserControl<EditableItemViewModel>
     {
-        public DutyChartView()
+        public EditableItemView()
         {
             this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);
-        }    
+        }
     }
 }
