@@ -33,7 +33,7 @@
 							<StackPanel Margin="5">
 								<TextBlock Text="{Binding Student.Room.Number}"/>
 								<TextBlock Text="{Binding Student.FIO}"/>
-								<controls:EditableTextBlock InsideText="{TemplateBinding Date}"/>
+								<controls:EditableTextBlock InsideText="{Binding Date}"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>
