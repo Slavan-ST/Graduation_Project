@@ -1,4 +1,6 @@
-﻿using Client.ViewModels.Base;
+﻿using Avalonia.Controls;
+using Client.ViewModels.Base;
+using Client.Views;
 using Helper.Models.DTO;
 using Helper.Models.Main;
 using ReactiveUI;
@@ -17,10 +19,15 @@ namespace Client.ViewModels
     {
         public ListStudentsViewModel(IScreen? screen = null) : base(screen)
         {
+            this.WhenAnyValue(x => x.SelectedStudent).Subscribe(/* сюда пихнуть обновление UC ProfileStudent т.к. так как он отображается в Popup (см. разметку) */);
             Test();
-
         }
 
+        [Reactive]
+        public Student? SelectedStudent { get; set; }
+
+        [Reactive]
+        public UserControl? ProfileStudent { get; set; }
         async void Test()
         {
             var students = await GetStudents();

@@ -37,66 +37,88 @@ namespace Client.ViewModels
                 IsOpenSideBar = true;
             });
 
-
             Main = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new NewsViewModel(this));
                 Title = "Новости";
+                IsOpenSideBar = false;
             });
-
 
             DutyChart = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new DutyChartViewModel(this));
                 Title = "График дежурств";
+                IsOpenSideBar = false;
             });
             Events = ReactiveCommand.Create(() => 
             {
                 Router.Navigate.Execute(new EventsViewModel(this));
                 Title = "Мероприятия";
+                IsOpenSideBar = false;
             });
 
             EventsList = ReactiveCommand.Create(() => 
             {
                 Router.Navigate.Execute(new EventsListViewModel(this));
                 Title = "План меропритий";
+                IsOpenSideBar = false;
             });
 
             Faq = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new FaqViewModel(this));
                 Title = "Вопрос-ответ";
+                IsOpenSideBar = false;
             });
 
             ListStudents = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new ListStudentsViewModel(this));
                 Title = "Список студентов";
+                IsOpenSideBar = false;
             });
 
             PurityChart = ReactiveCommand.Create(() =>
             { 
                 Router.Navigate.Execute(new PurityChartViewModel(this));
                 Title = "Экран чистоты";
+                IsOpenSideBar = false;
             });
 
             Statement = ReactiveCommand.Create(() => 
             { 
                 Router.Navigate.Execute(new StatementViewModel(this));
                 Title = "Заявление";
+                IsOpenSideBar = false;
             });
 
             Profile = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new ProfileViewModel(this));
                 Title = "Профиль";
-            });
-            Record = ReactiveCommand.Create(() =>
-            {
-                Router.Navigate.Execute(new RecordStudentsViewModel(this));
                 IsOpenSideBar = false;
             });
 
+            Record = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new RecordStudentsViewModel(this));
+                Title = "Журнал";
+                IsOpenSideBar = false;
+            });
+
+            CleanRaid = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new CleanLineRaidViewModel(this));
+                Title = "Рейд чистоты";
+                IsOpenSideBar = false;
+            });
+
+            DailyCheck = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new DailyCheckViewModel(this));
+                Title = "Ежедневная проверка";
+                IsOpenSideBar = false;
+            });
 
 
             Exit = ReactiveCommand.Create(() => 
@@ -145,8 +167,10 @@ namespace Client.ViewModels
         /// Комманда перехода на окно расписания мероприятий
         /// </summary>
         public ICommand Events { get; set; }
-
-
+        /// <summary>
+        /// Комманда перехода на окно ежедневной проверки
+        /// </summary>
+        public ICommand DailyCheck { get; set; }
 
         /// <summary>
         /// Комманда перехода на окно графика мероприятий (для сотрудников)
@@ -164,8 +188,10 @@ namespace Client.ViewModels
         /// Комманда перехода на окно экрана чистоты
         /// </summary>
         public ICommand PurityChart { get; set; }
-
-
+        /// <summary>
+        /// Комманда перехода на окно "рейда" чистоты
+        /// </summary>
+        public ICommand CleanRaid { get; set; }
 
 
         /// <summary>

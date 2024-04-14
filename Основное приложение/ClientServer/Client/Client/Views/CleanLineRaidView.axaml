@@ -2,6 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.CleanLineRaidView">
 	<UserControl.Styles>
@@ -17,10 +20,32 @@
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel HorizontalAlignment="Left" Margin="50">
-			<TextBlock Text="{Binding Room.Number}" Classes="header"/>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Комната - " Classes="header"/>
+				<TextBlock Text="{Binding Room.Number}" Classes="header"/>
+			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="0,55,0,5">
 				<TextBlock Text="Чистота" Classes="title"/>
-				<Button Content="-" VerticalAlignment="Bottom" Margin="5"/> 
+				<Button Content="-" VerticalAlignment="Bottom" Margin="5">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
+							<iac:PopupAction>
+								<Border BorderBrush="#08F0E9"
+										BorderThickness="3"
+										Background="#08F0E9"
+										CornerRadius="25">
+									<StackPanel Orientation="Horizontal">
+										<Button Content="2"/>
+										<Button Content="3"/>
+										<Button Content="4"/>
+										<Button Content="5"/>
+									</StackPanel>
+
+								</Border>
+							</iac:PopupAction>
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</Button>
 			</StackPanel>
 			<TextBlock Text="Примечание" Classes="title" Margin="0,55,0,5"/>
 			<TextBox TextWrapping="Wrap" MaxWidth="1000" Width="1000" Text="TEST_TEXT" MinHeight="500"/>

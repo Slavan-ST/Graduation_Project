@@ -2,7 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+			 mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.DailyCheckView">
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
@@ -41,7 +44,26 @@
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Студент:" Classes="title"/>
 						<Label Content="{Binding Name}" Grid.Row="1" Classes="plain"/>
-						<Button Content="+" Grid.Column="1" Grid.Row="1" Classes="mark"/>
+						<Button Content="+" Grid.Column="1" Grid.Row="1" Classes="mark">
+							<i:Interaction.Behaviors>
+								<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
+									<iac:PopupAction>
+										<Border BorderBrush="#08F0E9"
+												BorderThickness="3"
+												Background="#08F0E9"
+												CornerRadius="25">
+											<StackPanel Orientation="Horizontal">
+												<Button Content="+"/>
+												<Button Content="H"/>
+												<Button Content="3"/>
+												<Button Content="O"/>
+											</StackPanel>
+
+										</Border>
+									</iac:PopupAction>
+								</ia:EventTriggerBehavior>
+							</i:Interaction.Behaviors>
+						</Button>
 					</Grid>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>

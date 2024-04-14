@@ -72,6 +72,8 @@
 					<Button Content="Списки студентов" Command="{Binding ListStudents}" Classes="main"/>
 					<Button Content="Экран чистоты" Command="{Binding PurityChart}" Classes="main"/>
 					<Button Content="Журнал" Command="{Binding Record}" Classes="main"/>
+					<Button Content="Рейд чистоты" Command="{Binding CleanRaid}" Classes="main"/>
+					<Button Content="Ежедневная проверка" Command="{Binding DailyCheck}" Classes="main"/>
 				</StackPanel>
 				<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="main"/>
 			</StackPanel>
