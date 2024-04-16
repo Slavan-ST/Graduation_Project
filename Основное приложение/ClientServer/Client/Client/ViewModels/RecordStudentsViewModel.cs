@@ -28,7 +28,7 @@ namespace Client.ViewModels
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
-            TestStudent(2023,6);
+            FillJournal(2023,6);
             FillFilter();
 
             AcceptFilters = ReactiveCommand.Create(()=>
@@ -41,13 +41,11 @@ namespace Client.ViewModels
             var students = await StudentAPI.GetStudentsAsync();
             if (students == null)
             {
-                Debug.WriteLine("list count =      null");
                 return;
             }
-            Debug.WriteLine("list count =      " + students.Count());
             ListStudents = new List<Student>(students);
         }
-        public async void TestStudent(int year, int month)
+        public async void FillJournal(int year, int month)
         {
             //получаем кол-во дней в текущем месяце
             int countDay = DateTime.DaysInMonth(year, month);
@@ -83,18 +81,51 @@ namespace Client.ViewModels
             }
 
             //массив столбцов
-            ColumnList<MarksOfStudents> columns = new Avalonia.Controls.Models.TreeDataGrid.ColumnList<MarksOfStudents>();
-            
-            //столбец ФИО студента
-            columns.Add(new TextColumn<MarksOfStudents, string>("Студент", x => $"{x.Student.FIO}"));
-            
-            //тестовый столбец с маркерами - так работает
-            columns.Add(new TextColumn<MarksOfStudents, string>(11, x => $"{x.Logs[1].Marker}"));
-
-            //а вот через цикл заполняться не хотят
-            for (int i = 1; i <= countDay; i++)
+            ColumnList<MarksOfStudents> columns =
+            [
+                //столбец ФИО студента
+                new TextColumn<MarksOfStudents, string>("Студент", x => $"{x.Student.FIO}"),
+                                //тестовый столбец с маркерами - так работает
+                new TextColumn<MarksOfStudents, string>(1, x => ReturnMarker(x.Logs, 1)),
+                new TextColumn<MarksOfStudents, string>(2, x => ReturnMarker(x.Logs, 2)),
+                new TextColumn<MarksOfStudents, string>(3, x => ReturnMarker(x.Logs, 3)),
+                new TextColumn<MarksOfStudents, string>(4, x => ReturnMarker(x.Logs, 4)),
+                new TextColumn<MarksOfStudents, string>(5, x => ReturnMarker(x.Logs, 5)),
+                new TextColumn<MarksOfStudents, string>(6, x => ReturnMarker(x.Logs, 6)),
+                new TextColumn<MarksOfStudents, string>(7, x => ReturnMarker(x.Logs, 7)),
+                new TextColumn<MarksOfStudents, string>(8, x => ReturnMarker(x.Logs, 8)),
+                new TextColumn<MarksOfStudents, string>(9, x => ReturnMarker(x.Logs, 9)),
+                new TextColumn<MarksOfStudents, string>(10, x => ReturnMarker(x.Logs, 10)),
+                new TextColumn<MarksOfStudents, string>(11, x => ReturnMarker(x.Logs, 11)),
+                new TextColumn<MarksOfStudents, string>(12, x => ReturnMarker(x.Logs, 12)),
+                new TextColumn<MarksOfStudents, string>(13, x => ReturnMarker(x.Logs, 13)),
+                new TextColumn<MarksOfStudents, string>(14, x => ReturnMarker(x.Logs, 14)),
+                new TextColumn<MarksOfStudents, string>(15, x => ReturnMarker(x.Logs, 15)),
+                new TextColumn<MarksOfStudents, string>(16, x => ReturnMarker(x.Logs, 16)),
+                new TextColumn<MarksOfStudents, string>(17, x => ReturnMarker(x.Logs, 17)),
+                new TextColumn<MarksOfStudents, string>(18, x => ReturnMarker(x.Logs, 18)),
+                new TextColumn<MarksOfStudents, string>(19, x => ReturnMarker(x.Logs, 19)),
+                new TextColumn<MarksOfStudents, string>(20, x => ReturnMarker(x.Logs, 20)),
+                new TextColumn<MarksOfStudents, string>(21, x => ReturnMarker(x.Logs, 21)),
+                new TextColumn<MarksOfStudents, string>(22, x => ReturnMarker(x.Logs, 22)),
+                new TextColumn<MarksOfStudents, string>(23, x => ReturnMarker(x.Logs, 23)),
+                new TextColumn<MarksOfStudents, string>(24, x => ReturnMarker(x.Logs, 24)),
+                new TextColumn<MarksOfStudents, string>(25, x => ReturnMarker(x.Logs, 25)),
+                new TextColumn<MarksOfStudents, string>(26, x => ReturnMarker(x.Logs, 26)),
+                new TextColumn<MarksOfStudents, string>(27, x => ReturnMarker(x.Logs, 27)),
+                new TextColumn<MarksOfStudents, string>(28, x => ReturnMarker(x.Logs, 28)),
+            ];
+            if (countDay > 28)
             {
-                columns.Add(new TextColumn<MarksOfStudents, string>(i, x => $"{x.Logs[i-1].Marker}"));
+                columns.Add(new TextColumn<MarksOfStudents, string>(29, x => ReturnMarker(x.Logs, 29)));
+            }
+            if (countDay > 29)
+            {
+                columns.Add(new TextColumn<MarksOfStudents, string>(30, x => ReturnMarker(x.Logs, 30)));
+            }
+            if (countDay > 30)
+            {
+                columns.Add(new TextColumn<MarksOfStudents, string>(31, x => ReturnMarker(x.Logs, 31)));
             }
 
             //присваиваем датасоурсе
@@ -106,8 +137,16 @@ namespace Client.ViewModels
                 }
             };
             Source.Items = marksOfStudentsList;
+        }
 
-
+        string ReturnMarker(List<AttendanceLog> logs, int day)
+        {
+            var log = logs.Where(_ => _.Date.Day == day).FirstOrDefault();
+            if (log == null)
+            {
+                return "";
+            }
+            return log.Marker;
         }
 
 
