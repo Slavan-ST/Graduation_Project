@@ -1,0 +1,91 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" Width="600" Height="900">
+			<StackPanel>
+				<ComboBox Classes="outline purple" SelectedIndex="0">
+					<ComboBox.Items>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+					</ComboBox.Items>
+				</ComboBox>
+				<ComboBox Classes="outline lightBlue" SelectedIndex="0">
+					<ComboBox.Items>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+					</ComboBox.Items>
+				</ComboBox>
+				
+				<AutoCompleteBox Classes="outline lightBlue"/>
+
+				<AutoCompleteBox Classes="outline purple"/>
+				
+			</StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Main/TextBlocks.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/TextBlocks/Headers.axaml"/>
+
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Styles/Resources/Colors.axaml"/>
+				<ResourceInclude Source="/Styles/Resources/BorderValue.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+
+	<Style Selector="ComboBox.outline">
+		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="Padding" Value="10"/>
+		<Setter Property="Margin" Value="15"/>
+	</Style>
+
+	<Style Selector="ComboBox.outline.purple">
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
+	</Style>
+
+	<Style Selector="ComboBox.outline.lightBlue">
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+	</Style>
+
+	<Style Selector="ComboBox.outline Border#PopupBorder">
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+	</Style>
+
+	<Style Selector="ComboBoxItem">
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.outline">
+		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="Padding" Value="10"/>
+		<Setter Property="Margin" Value="15"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.outline.purple">
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.outline.lightBlue">
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.outline Border#PopupBorder">
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.outline ContentPresenter#PART_ContentPresenter">
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+	</Style>
+	
+</Styles>

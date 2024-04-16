@@ -67,6 +67,7 @@
 		<Setter Property="CornerRadius" Value="25"/>
 		<Setter Property="Background" Value="White"/>
 	</Style>
+	
 
 	<Style Selector="Label.plain">
 		<Setter Property="MinWidth" Value="600"/>

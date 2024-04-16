@@ -1,0 +1,125 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" Width="800">
+			<WrapPanel>
+				<Border Classes="borderPanel">
+					<StackPanel Classes="panel" Height="280" Width="280">
+						<TextBlock Text="Header" Classes="h3"/>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+					</StackPanel>
+				</Border>
+				<Border Classes="borderPanel">
+					<StackPanel Classes="panel" Height="280" Width="280">
+						<TextBlock Text="Header" Classes="h3"/>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+					</StackPanel>
+				</Border>
+				<Border Classes="borderPanel">
+					<StackPanel Classes="panel" Height="280" Width="280">
+						<TextBlock Text="Header" Classes="h3"/>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+					</StackPanel>
+				</Border>
+				<Border Classes="borderPanel">
+					<StackPanel Classes="panel" Height="280" Width="280">
+						<TextBlock Text="Header" Classes="h3"/>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+						<Border Classes="combineOutline">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Всего: " Classes="h4"/>
+								<TextBlock Text="123" Classes="h4"/>
+							</StackPanel>
+						</Border>
+					</StackPanel>
+				</Border>
+			</WrapPanel>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Desktop/TextBlocks/Headers.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/TextBlocks/Outlined.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/Borders/CombineOutlined.axaml"/>
+
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Styles/Resources/BorderValue.axaml"/>
+				<ResourceInclude Source="/Styles/Resources/Colors.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+
+	<Style Selector="StackPanel.panel">
+		<Setter Property="Background" Value="White"/>
+	</Style>
+
+	<Style Selector="Border.borderPanel">
+		<Setter Property="Margin" Value="10"/>
+		<Setter Property="Background" Value="White"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+	</Style>
+</Styles>

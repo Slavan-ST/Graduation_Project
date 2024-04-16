@@ -28,8 +28,26 @@ namespace Client.ViewModels
 
     public class RecordStudentsViewModel : ViewModelBase
     {
+
+        ObservableCollection<Student>? ListStudents { get; set; }
+
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
+            ListStudents = new ObservableCollection<Student>()
+            {
+                new Student()
+                {
+                    Name = "Иван",
+                    Surname = "Иванович",
+                    Patronymic = "Иванов"
+                },
+                new Student()
+                {
+                    Name = "Петр",
+                    Surname = "Петрович",
+                    Patronymic = "Петров"
+                },
+            };
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
             TestStudent(2023,6);
         }
@@ -93,6 +111,7 @@ namespace Client.ViewModels
                 }
             };
             Source.Items = marksOfStudentsList;
+
 
         }
 

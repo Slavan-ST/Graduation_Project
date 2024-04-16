@@ -1,0 +1,43 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<StackPanel Spacing="10">
+				<Button Content="+" Classes="mark"/>
+				<Button Content="+" Classes="markSelected"/>
+			</StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Main/Buttons.axaml"/>
+
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Styles/Resources/Colors.axaml"/>
+				<ResourceInclude Source="/Styles/Resources/BorderValue.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+
+	<Style Selector="Button.mark">
+		<Setter Property="Background" Value="{StaticResource ResourceKey=lightPurple}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="MinWidth" Value="55"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+	</Style>
+	
+	<Style Selector="Button.markSelected">
+		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightGreen}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="MinWidth" Value="55"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+	</Style>
+	
+</Styles>

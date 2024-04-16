@@ -1,5 +1,22 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<StackPanel>
+				<Border Background="{StaticResource ResourceKey=purple}"
+						Height="50" Width="50" CornerRadius="25" Margin="25"/>
+				<Border Background="{StaticResource ResourceKey=lightBlue}"
+						Height="50" Width="50" CornerRadius="25" Margin="25"/>
+				<Border Background="{StaticResource ResourceKey=lightPurple}"
+						Height="50" Width="50" CornerRadius="25" Margin="25"/>
+				<Border Background="{StaticResource ResourceKey=lightGreen}"
+						Height="50" Width="50" CornerRadius="25" Margin="25"/>
+				
+			</StackPanel>
+		</Border>
+	</Design.PreviewWith>
 	<SolidColorBrush x:Key="purple" Color="#A378EB"/>
 	<SolidColorBrush x:Key="lightBlue" Color="#08F0E9"/>
+	<SolidColorBrush x:Key="lightPurple" Color="#CBADFE"/>
+	<SolidColorBrush x:Key="lightGreen" Color="#00D5CE"/>
 </ResourceDictionary>

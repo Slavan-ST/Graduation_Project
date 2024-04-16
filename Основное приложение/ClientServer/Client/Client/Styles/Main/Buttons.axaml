@@ -2,18 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
-			<StackPanel>
-				<TextBlock Text="Inter"/>
-				<Label Content="Inter"/>
-			</StackPanel>
-		</Border>
+			<Button Content="123"/>
+        </Border>
     </Design.PreviewWith>
 
-	<Style Selector="TextBlock">
+	<Style Selector="Button">
 		<Setter Property="FontFamily" Value="Inter"/>
+		<Setter Property="FontSize" Value="24"/>
 	</Style>
 	
-	<Style Selector="Label">
-		<Setter Property="FontFamily" Value="Inter"/>
-	</Style>
 </Styles>

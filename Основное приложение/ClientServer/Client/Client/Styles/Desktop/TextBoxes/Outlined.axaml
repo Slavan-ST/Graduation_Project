@@ -3,8 +3,8 @@
     <Design.PreviewWith>
         <Border Padding="20" Width="500">
 			<StackPanel>
-				<Label Content="Header (purple)" Classes="outline purple"/>
-				<Label Content="Header (lightBlue)" Classes="outline lightBlue"/>
+				<TextBox Text="Header (purple)" Classes="outline purple"/>
+				<TextBox Text="Header (lightBlue)" Classes="outline lightBlue"/>
 			</StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -17,11 +17,11 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Styles.Resources>
-	
+
 	<StyleInclude Source="/Styles/Main/TextBlocks.axaml"/>
 
-	<Style Selector="Label.outline">
-		<Setter Property="FontSize" Value="28"/>
+	<Style Selector="TextBox.outline">
+		<Setter Property="FontSize" Value="24"/>
 		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
 		<Setter Property="Padding" Value="5"/>
@@ -30,11 +30,11 @@
 		<Setter Property="HorizontalContentAlignment" Value="Left"/>
 	</Style>
 
-	<Style Selector="Label.outline.purple">
+	<Style Selector="TextBox.outline.purple">
 		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
 	</Style>
 
-	<Style Selector="Label.outline.lightBlue">
+	<Style Selector="TextBox.outline.lightBlue">
 		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
 	</Style>
 </Styles>

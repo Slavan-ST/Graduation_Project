@@ -5,6 +5,8 @@
 			<StackPanel>
 				<TextBlock Text="Header (h1)" Classes="h1"/>
 				<TextBlock Text="Header (h2)" Classes="h2"/>
+				<TextBlock Text="Header (h3)" Classes="h3"/>
+				<TextBlock Text="Header (h4)" Classes="h4"/>
 			</StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -12,10 +14,18 @@
 	<StyleInclude Source="/Styles/Main/TextBlocks.axaml"/>
 	
 	<Style Selector="TextBlock.h1">
-		<Setter Property="FontSize" Value="40"/>
+		<Setter Property="FontSize" Value="36"/>
 	</Style>
 
 	<Style Selector="TextBlock.h2">
-		<Setter Property="FontSize" Value="36"/>
+		<Setter Property="FontSize" Value="32"/>
+	</Style>
+	
+	<Style Selector="TextBlock.h3">
+		<Setter Property="FontSize" Value="28"/>
+	</Style>
+
+	<Style Selector="TextBlock.h4">
+		<Setter Property="FontSize" Value="24"/>
 	</Style>
 </Styles>

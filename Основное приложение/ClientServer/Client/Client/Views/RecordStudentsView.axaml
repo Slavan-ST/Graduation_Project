@@ -2,16 +2,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:bh="using:Client.Behaviours"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:vm="clr-namespace:Client.ViewModels;assembly=Client"
 			 xmlns:models="clr-namespace:Client.Models;assembly=Client"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.RecordStudentsView">
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
 		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
 		<StyleInclude Source="/Styles/TreeViews/TreeView.axaml"/>
 		<StyleInclude Source="/Styles/DatePicker/DatePicker.axaml"/>
+		
+		<StyleInclude Source="/Styles/Desktop/ComboBox/Outlined.axaml"/>
+		
 	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
@@ -21,7 +25,27 @@
 					<StackPanel >
 						<StackPanel>
 							<TextBlock Text="Студент" Classes="titleFilter"/>
-							<AutoCompleteBox/>
+							<AutoCompleteBox ItemsSource="{Binding ListStudents}" 
+											 FilterMode="StartsWith"
+											 Classes="outline lightBlue">
+								<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding FIO}"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+							</AutoCompleteBox>
+							<ComboBox>
+								<ComboBox.Items>
+									<TextBlock Text="Item" Classes="h4"/>
+									<TextBlock Text="Item" Classes="h4"/>
+									<TextBlock Text="Item" Classes="h4"/>
+									<TextBlock Text="Item" Classes="h4"/>
+									<TextBlock Text="Item" Classes="h4"/>
+								</ComboBox.Items>
+							</ComboBox>
 						</StackPanel>
 						<StackPanel>
 							<TextBlock Text="Комната" Classes="titleFilter"/>

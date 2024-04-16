@@ -1,0 +1,27 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<Button Content="InSideBar (sideBar)" Classes="sideBar"/>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Main/Buttons.axaml"/>
+
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Styles/Resources/Colors.axaml"/>
+				<ResourceInclude Source="/Styles/Resources/BorderValue.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+
+	<Style Selector="Button.sideBar">
+		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+	</Style>
+	
+</Styles>

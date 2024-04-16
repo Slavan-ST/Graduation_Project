@@ -5,6 +5,7 @@ using Avalonia.ReactiveUI;
 using Client.ViewModels;
 using ReactiveUI;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Client.Views
 {

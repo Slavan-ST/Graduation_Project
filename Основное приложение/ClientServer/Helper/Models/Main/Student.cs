@@ -38,10 +38,16 @@ namespace Helper.Models.Main
         public Group? Group { get; set; }
         public Status? Status { get; set; }
 
+        [JsonIgnore]
         public IEnumerable<AttendanceLog>? AttendanceLogs { get; set; }
         public string FIO
         {
             get => $"{Surname} {Name} {Patronymic}";
+        }
+
+        public override string ToString()
+        {
+            return FIO;
         }
     }
 }
