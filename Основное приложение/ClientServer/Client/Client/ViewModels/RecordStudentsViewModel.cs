@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using Client.API;
+using Client.Models;
 using Client.ViewModels.Base;
 using DynamicData;
 using Helper.Models.DTO;
@@ -20,36 +21,31 @@ using System.Windows.Input;
 
 namespace Client.ViewModels
 {
-    public class MarksOfStudents
-    {
-        public Student Student { get; set; } = new Student();
-        public List<AttendanceLog> Logs { get; set; } = new List<AttendanceLog>();
-    }
 
     public class RecordStudentsViewModel : ViewModelBase
     {
 
-        ObservableCollection<Student>? ListStudents { get; set; }
-
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            ListStudents = new ObservableCollection<Student>()
-            {
-                new Student()
-                {
-                    Name = "Иван",
-                    Surname = "Иванович",
-                    Patronymic = "Иванов"
-                },
-                new Student()
-                {
-                    Name = "Петр",
-                    Surname = "Петрович",
-                    Patronymic = "Петров"
-                },
-            };
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
             TestStudent(2023,6);
+            FillFilter();
+
+            AcceptFilters = ReactiveCommand.Create(()=>
+            {
+
+            });
+        }
+        public async void FillFilter()
+        {
+            var students = await StudentAPI.GetStudentsAsync();
+            if (students == null)
+            {
+                Debug.WriteLine("list count =      null");
+                return;
+            }
+            Debug.WriteLine("list count =      " + students.Count());
+            ListStudents = new List<Student>(students);
         }
         public async void TestStudent(int year, int month)
         {
@@ -84,14 +80,13 @@ namespace Client.ViewModels
                     Logs = studLogs
                 };
                 marksOfStudentsList.Add(marksOfStudents);
-                Debug.WriteLine("list count =      " + marksOfStudents.Logs.Count);
             }
 
             //массив столбцов
             ColumnList<MarksOfStudents> columns = new Avalonia.Controls.Models.TreeDataGrid.ColumnList<MarksOfStudents>();
             
             //столбец ФИО студента
-            columns.Add(new TextColumn<MarksOfStudents, string>("Студент", x => $"{x.Student.Name} {x.Student.Surname} {x.Student.Patronymic}"));
+            columns.Add(new TextColumn<MarksOfStudents, string>("Студент", x => $"{x.Student.FIO}"));
             
             //тестовый столбец с маркерами - так работает
             columns.Add(new TextColumn<MarksOfStudents, string>(11, x => $"{x.Logs[1].Marker}"));
@@ -115,8 +110,19 @@ namespace Client.ViewModels
 
         }
 
+
+        [Reactive]
+        public Student? ListStudentsSelectedItem { get; set; }
+        [Reactive]
+        public Room? ListRoomsSelectedItem { get; set; }
+        [Reactive]
+        public Status? ListStatusesSelectedItem { get; set; }
+
+        [Reactive]
+        public List<Student>? ListStudents { get; set; }
         [Reactive]
         public FlatTreeDataGridSource<MarksOfStudents> Source { get; set; }
+        public ICommand AcceptFilters { get; set; }
 
     }
 }

@@ -25,7 +25,8 @@
 							<TextBlock Text="Студент" Classes="titleFilter"/>
 							<AutoCompleteBox ItemsSource="{Binding ListStudents}" 
 											 FilterMode="StartsWith"
-											 Classes="outline lightBlue">
+											 Classes="outline lightBlue"
+											 SelectedItem="{Binding ListStudentsSelectedItem}">
 								<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
 								</i:Interaction.Behaviors>
@@ -35,26 +36,17 @@
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 							</AutoCompleteBox>
-							<ComboBox>
-								<ComboBox.Items>
-									<TextBlock Text="Item" Classes="h4"/>
-									<TextBlock Text="Item" Classes="h4"/>
-									<TextBlock Text="Item" Classes="h4"/>
-									<TextBlock Text="Item" Classes="h4"/>
-									<TextBlock Text="Item" Classes="h4"/>
-								</ComboBox.Items>
-							</ComboBox>
 						</StackPanel>
 						<StackPanel>
 							<TextBlock Text="Комната" Classes="titleFilter"/>
-							<AutoCompleteBox/>
+							<AutoCompleteBox SelectedItem="{Binding ListRoomsSelectedItem}"/>
 						</StackPanel>
 						<StackPanel>
 							<TextBlock Text="Статус" Classes="titleFilter"/>
-							<AutoCompleteBox/>
+							<AutoCompleteBox SelectedItem="{Binding ListStatusesSelectedItem}"/>
 						</StackPanel>
 						<DatePicker/>
-						<Button Content="Применить" Margin="0,5"/>
+						<Button Content="Применить" Margin="0,5" Command="{Binding AcceptFilters}"/>
 					</StackPanel>
 				</TreeViewItem>
 			</TreeView>
