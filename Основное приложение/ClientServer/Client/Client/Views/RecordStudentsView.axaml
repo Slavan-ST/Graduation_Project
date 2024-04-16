@@ -14,8 +14,6 @@
 		<StyleInclude Source="/Styles/TreeViews/TreeView.axaml"/>
 		<StyleInclude Source="/Styles/DatePicker/DatePicker.axaml"/>
 		
-		<StyleInclude Source="/Styles/Desktop/ComboBox/Outlined.axaml"/>
-		
 	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>

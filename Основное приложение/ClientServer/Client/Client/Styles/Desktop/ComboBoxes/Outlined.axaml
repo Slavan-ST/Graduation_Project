@@ -46,7 +46,6 @@
 		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
 		<Setter Property="Padding" Value="10"/>
-		<Setter Property="Margin" Value="15"/>
 	</Style>
 
 	<Style Selector="ComboBox.outline.purple">
@@ -69,7 +68,6 @@
 		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
 		<Setter Property="Padding" Value="10"/>
-		<Setter Property="Margin" Value="15"/>
 	</Style>
 
 	<Style Selector="AutoCompleteBox.outline.purple">
@@ -80,7 +78,7 @@
 		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
 	</Style>
 
-	<Style Selector="AutoCompleteBox.outline Border#PopupBorder">
+	<Style Selector="AutoCompleteBox.outline Border#PART_SuggestionsContainer">
 		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
 	</Style>
 
