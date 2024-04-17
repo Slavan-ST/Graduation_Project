@@ -1,0 +1,50 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+		<Border Padding="20" Width="800" Height="500">
+			<StackPanel Orientation="Horizontal">
+				<DatePicker DayVisible="False" Classes="outline purple"/>
+				<DatePicker DayVisible="False" Classes="outline lightBlue"/>
+			</StackPanel>
+		</Border>
+    </Design.PreviewWith>
+
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Styles/Resources/Colors.axaml"/>
+				<ResourceInclude Source="/Styles/Resources/BorderValue.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+
+	<Style Selector="DatePicker.outline">
+		<Setter Property="Background" Value="White"/>
+		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+	</Style>
+
+	<Style Selector="DatePicker.outline.purple">
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
+	</Style>
+	
+	<Style Selector="DatePicker.outline.lightBlue">
+		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+	</Style>
+
+	<Style Selector="DatePicker.outline Button#PART_AcceptButton Border">
+		<Setter Property="CornerRadius" Value="0,0,0,25"/>
+		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
+	</Style>
+
+	<Style Selector="DatePicker.outline Button#PART_DismissButton Border">
+		<Setter Property="CornerRadius" Value="0,0,25,0"/>
+		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
+	</Style>
+
+	<Style Selector="DatePicker.outline DatePickerPresenter#PART_PickerPresenter">
+		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+	</Style>
+	
+	
+</Styles>

@@ -10,9 +10,9 @@
              x:Class="Client.Views.RecordStudentsView">
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
 		<StyleInclude Source="/Styles/TreeViews/TreeView.axaml"/>
-		<StyleInclude Source="/Styles/DatePicker/DatePicker.axaml"/>
+		
+		<StyleInclude Source="/Styles/Desktop/DatePickers/Outlined.axaml"/>
 		
 	</UserControl.Styles>
 	<Grid>
@@ -46,7 +46,7 @@
 							<AutoCompleteBox SelectedItem="{Binding ListStatusesSelectedItem}"/>
 						</StackPanel>
 						<DatePicker/>
-						<Button Content="Применить" Margin="0,5" Command="{Binding AcceptFilters}"/>
+						<Button Content="Применить" Margin="0,5"/>
 					</StackPanel>
 				</TreeViewItem>
 			</TreeView>
