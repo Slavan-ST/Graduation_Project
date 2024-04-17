@@ -7,12 +7,6 @@
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.ListStudentsView">
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/TreeViews/TreeView.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/EventsMenu.axaml"/>
-		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
-	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<DockPanel>

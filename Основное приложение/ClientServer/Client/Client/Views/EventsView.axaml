@@ -4,10 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.EventsView">
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/EventsMenu.axaml"/>
-	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<ScrollViewer VerticalScrollBarVisibility="Hidden">

@@ -5,12 +5,6 @@
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.RecordYearView"
 			 x:Name="UC">
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/Buttons/BackButton.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/YearItems.axaml"/>
-	</UserControl.Styles>
-
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="100"/>

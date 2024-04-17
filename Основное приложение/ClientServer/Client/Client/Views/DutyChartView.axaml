@@ -5,11 +5,6 @@
 			 xmlns:views="using:Client.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="Client.Views.DutyChartView">
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/Buttons/BackButton.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
-	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<StackPanel>

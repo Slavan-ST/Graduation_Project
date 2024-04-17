@@ -6,31 +6,16 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="250"
              x:Class="Client.Views.AuthView">
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/PathIcon.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/Buttons/AuthJoin.axaml"/>
-	</UserControl.Styles>
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneAuth.svg}" Stretch="UniformToFill"/>
 		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
 				    Margin="0,250,0,0">
-			<TextBlock Text="Добро пожаловать!"
-					   HorizontalAlignment="Center" FontSize="32"
-					   Margin="0,5,0,5" FontWeight="Regular"/>
-			<TextBlock Text="Чтобы продолжить, авторизируйтесь"
-					   HorizontalAlignment="Center" FontSize="30"
-					   Margin="0,5,0,5" FontWeight="Regular"/>
-			<TextBox Watermark="Логин" FontSize="26"
-					 Margin="0,5,0,5" Height="65"
-					 Width="500" Text="{Binding Login}"
-					 VerticalContentAlignment="Center"/>
-			<TextBox Classes="revealPasswordButton" PasswordChar="•"
-					 Watermark="Пароль" FontSize="26"
-					 Margin="0,5,0,5" Height="65"
-					 Width="500" Text="{Binding Password}"
-					 VerticalContentAlignment="Center"/>
-			<Button Content="Войти" Command="{Binding Auth}"/>
+			<TextBlock Text="Добро пожаловать!" Classes="h3"/>
+			<TextBlock Text="Чтобы продолжить, авторизируйтесь" Classes="h2"/>
+			<TextBox Watermark="Логин" Text="{Binding Login}" Classes="outline lightBlue"/>
+			<TextBox PasswordChar="•" Classes="revealPasswordButton outline lightBlue"
+					 Watermark="Пароль" Text="{Binding Password}"/>
+			<Button Content="Войти" Command="{Binding Auth}" Classes="navigate"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

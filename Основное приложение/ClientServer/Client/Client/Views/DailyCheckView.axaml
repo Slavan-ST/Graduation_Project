@@ -7,13 +7,6 @@
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
 			 mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.DailyCheckView">
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
-		<StyleInclude Source="/Styles/Buttons/MarkElement.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/ProfileTitles.axaml"/>
-	</UserControl.Styles>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>

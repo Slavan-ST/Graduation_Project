@@ -4,11 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.StatementView">
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/TextBlocks/MainTextBlock.axaml"/>
-		<StyleInclude Source="/Styles/TextBlocks/Titles.axaml"/>
-		<StyleInclude Source="/Styles/Buttons/MainBtn.axaml"/>
-	</UserControl.Styles>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
