@@ -17,13 +17,27 @@ namespace Client.ViewModels
         {
             GetEmptyStatement = ReactiveCommand.Create(() =>
             {
-                StatementCreater.CreateStatement(Name, Surname, Patronymic, Phone, Room, DateOut, DateIn);
+                StatementCreater.CreateStatementEmpty();
             });
             GetFillStatement = ReactiveCommand.Create(() =>
             {
-                StatementCreater.CreateStatement(Name, Surname, Patronymic, Phone, Room, DateOut, DateIn);
+                StatementCreater.CreateStatement(
+                    Name, 
+                    Surname, 
+                    Patronymic, 
+                    Phone, 
+                    Room, 
+                    DateOut, 
+                    DateIn, 
+                    Address, 
+                    NameRepresentative, 
+                    SurnameRepresentative, 
+                    PatronymicRepresentative, 
+                    PhoneRepresentative);
             });
         }
+        [Reactive]
+        public string Address { get; set; } = string.Empty;
         [Reactive]
         public string Surname { get; set; } = string.Empty;
         [Reactive]
@@ -38,6 +52,14 @@ namespace Client.ViewModels
         public string DateOut { get; set; } = string.Empty;
         [Reactive]
         public string DateIn { get; set; } = string.Empty;
+        [Reactive]
+        public string SurnameRepresentative { get; set; } = string.Empty;
+        [Reactive]
+        public string NameRepresentative { get; set; } = string.Empty;
+        [Reactive]
+        public string PatronymicRepresentative { get; set; } = string.Empty;
+        [Reactive]
+        public string PhoneRepresentative { get; set; } = string.Empty;
 
         public ICommand GetEmptyStatement { get; set; }
         public ICommand GetFillStatement { get; set; }

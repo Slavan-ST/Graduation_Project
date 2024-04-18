@@ -10,7 +10,7 @@ namespace Client.Services
 {
     public class StatementCreater
     {
-        /// <summary>
+        /// <summary>        
         /// Создание заполненого заявления в PDF
         /// </summary>
         /// <param name="name"></param>
@@ -20,7 +20,24 @@ namespace Client.Services
         /// <param name="room"></param>
         /// <param name="dateOut"></param>
         /// <param name="dateIn"></param>
-        public static void CreateStatement(string name, string surname, string patronymic, string phone, string room, string dateOut, string dateIn)
+        /// <param name="address"></param>
+        /// <param name="repName"></param>
+        /// <param name="repSurname"></param>
+        /// <param name="repPatronymic"></param>
+        /// <param name="repPhone"></param>
+        public static void CreateStatement(
+            string name, 
+            string surname, 
+            string patronymic, 
+            string phone, 
+            string room, 
+            string dateOut,
+            string dateIn, 
+            string address,
+            string repName, 
+            string repSurname, 
+            string repPatronymic, 
+            string repPhone)
         {
             using var document = new Document(new PdfDocument(new PdfWriter("helloworld-pdf.pdf")));
 

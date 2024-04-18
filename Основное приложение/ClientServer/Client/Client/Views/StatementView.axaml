@@ -46,20 +46,17 @@
 					<TextBlock Text="Законый представитель" Classes="h2"/>
 					
 					<TextBlock Text="Фамилия" Classes="h3"/>
-					<TextBox Text="{Binding}" Classes="outline purple h3"/>
+					<TextBox Text="{Binding SurnameRepresentative}" Classes="outline purple h3"/>
 					
 					<TextBlock Text="Имя" Classes="h3"/>
-					<TextBox Text="{Binding}" Classes="outline purple h3"/>
+					<TextBox Text="{Binding NameRepresentative}" Classes="outline purple h3"/>
 					
 					<TextBlock Text="Отчество" Classes="h3"/>
-					<TextBox Text="{Binding}" Classes="outline purple h3"/>
-					
-					<TextBlock Text="№ комнаты" Classes="h3"/>
-					<TextBox Text="{Binding}" Classes="outline purple h3"/>
+					<TextBox Text="{Binding PatronymicRepresentative}" Classes="outline purple h3"/>
 					
 					
 					<TextBlock Text="Номер телефона" Classes="h3"/>
-					<TextBox Text="{Binding}" Classes="outline purple h3"/>
+					<TextBox Text="{Binding PhoneRepresentative}" Classes="outline purple h3"/>
 				</StackPanel>
 			</WrapPanel>
 		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
