@@ -8,9 +8,9 @@
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<StackPanel>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-				<Button Content="◄" Classes="back"/>
-				<TextBlock Text="Месяц" Classes="header"/>
-				<Button Content="►" Classes="back"/>
+				<Button Content="◄" Classes="switch"/>
+				<TextBlock Text="Месяц" Classes="h2" VerticalAlignment="Center"/>
+				<Button Content="►" Classes="switch"/>
 			</StackPanel>
 			<ItemsControl>
 				<ItemsControl.ItemsPanel>
@@ -20,11 +20,9 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border BorderBrush="#08F0E9"
-								BorderThickness="2"
-								Background="White" Height="150" Width="150">
-							<StackPanel Margin="5">
-								<TextBlock Text="{Binding EventName}"/>
+						<Border Classes="borderPanel">
+							<StackPanel Classes="panel">
+								<TextBlock Text="{Binding EventName}" Classes="h3"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>

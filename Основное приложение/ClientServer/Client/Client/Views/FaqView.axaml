@@ -6,10 +6,10 @@
              x:Class="Client.Views.FaqView">
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<TreeView ItemsSource="{Binding QuestAnswer}" >
+		<TreeView ItemsSource="{Binding QuestAnswer}" Classes="trasnparent">
 			<TreeView.ItemTemplate>
 				<TreeDataTemplate ItemsSource="{Binding Answers}">
-					<TextBlock Text="{Binding Title}" Classes="plain"/>
+					<TextBlock Text="{Binding Title}" Classes="h4"/>
 				</TreeDataTemplate>
 			</TreeView.ItemTemplate>
 		</TreeView>

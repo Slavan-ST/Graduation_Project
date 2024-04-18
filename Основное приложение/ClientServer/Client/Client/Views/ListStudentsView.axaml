@@ -10,7 +10,7 @@
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<DockPanel>
-			<TreeView DockPanel.Dock="Top">
+			<TreeView DockPanel.Dock="Top" Classes="trasnparent">
 				<TreeViewItem Header="Фильтры">
 					<StackPanel>
 						<StackPanel>

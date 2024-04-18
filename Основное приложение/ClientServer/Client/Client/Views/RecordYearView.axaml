@@ -12,9 +12,9 @@
 		</Grid.RowDefinitions>
 		<Image Grid.RowSpan="2" Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-			<Button Content="←" Classes="back"/>
-			<TextBlock Text="Year" Classes="title"/>
-			<Button Content="→" Classes="back"/>
+			<Button Content="←" Classes="switch"/>
+			<TextBlock Text="Year" Classes="h2" VerticalAlignment="Center"/>
+			<Button Content="→" Classes="switch"/>
 		</StackPanel>
 		<ScrollViewer Grid.Row="1" HorizontalAlignment="Center">
 			<ItemsControl Margin="25" ItemsSource="{Binding YearStats}">
@@ -25,25 +25,25 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border BorderBrush="#08F0E9" BorderThickness="3" Background="White">
-							<StackPanel Height="280" Width="280">
-								<TextBlock Text="{Binding Mount}" Classes="title"/>
-								<Border Classes="plain">
+						<Border Classes="borderPanel">
+							<StackPanel Classes="panel">
+								<TextBlock Text="{Binding Mount}" Classes="h3"/>
+								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Всего " Classes="titleInItems"/>
-										<TextBlock Text="{Binding CountAll}" Classes="titleInItems"/>
+										<TextBlock Text="Всего " Classes="h4"/>
+										<TextBlock Text="{Binding CountAll}" Classes="h4"/>
 									</StackPanel>
 								</Border>
-								<Border Classes="plain">
+								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Всего " Classes="titleInItems"/>
-										<TextBlock Text="{Binding CountNS}" Classes="titleInItems"/>
+										<TextBlock Text="Всего " Classes="h4"/>
+										<TextBlock Text="{Binding CountNS}" Classes="h4"/>
 									</StackPanel>
 								</Border>
-								<Border Classes="plain">
+								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Всего " Classes="titleInItems"/>
-										<TextBlock Text="{Binding CountNotFound}" Classes="titleInItems"/>
+										<TextBlock Text="Всего " Classes="h4"/>
+										<TextBlock Text="{Binding CountNotFound}" Classes="h4"/>
 									</StackPanel>
 								</Border>
 							</StackPanel>

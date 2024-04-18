@@ -29,12 +29,12 @@
 												  VerticalAlignment="Stretch"/>
 								</Grid>
 							</StackPanel>
-							<Border CornerRadius="25" Background="rgba(8, 255, 248, 0.45)">
+							<Border Classes="borderPanel">
 								<StackPanel Margin="20">
-									<Label Content="{Binding Date}" Classes="plainText"></Label>
-									<Label Content="{Binding Place}" Classes="plainText"/>
-									<Label Content="{Binding Employes}" Classes="plainText"/>
-									<Label Content="{Binding Description}" Classes="plainText"/>
+									<Label Content="{Binding Date}" Classes="h3"/>
+									<Label Content="{Binding Place}" Classes="h3"/>
+									<Label Content="{Binding Employes}" Classes="h3"/>
+									<Label Content="{Binding Description}" Classes="h3"/>
 								</StackPanel>
 							</Border>
 						</DockPanel>

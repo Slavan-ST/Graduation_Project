@@ -9,35 +9,35 @@
 		<StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="50">
 				<StackPanel Margin="15">
-					<TextBlock Text="{Binding Fio}" Classes="dataStudents"/>
-					<TextBlock Text="{Binding NumberRoom}" Classes="dataStudents"/>
-					<TextBlock Text="{Binding MarkClear}" Classes="dataStudents"/>
-					<TextBlock Text="{Binding StatusUser}" Classes="dataStudents"/>
+					<TextBlock Text="{Binding Fio}" Classes="h2"/>
+					<TextBlock Text="{Binding NumberRoom}" Classes="h2"/>
+					<TextBlock Text="{Binding MarkClear}" Classes="h2"/>
+					<TextBlock Text="{Binding StatusUser}" Classes="h2"/>
 				</StackPanel>
 			</StackPanel>
-			<Label Content="Дополнительная информация" Classes="header"/>
+			<Label Content="Дополнительная информация" Classes="h2"/>
 			<StackPanel Margin="50" HorizontalAlignment="Stretch">
-				<Border Classes="up">
+				<Border Classes="combineOutline">
 					<StackPanel Orientation="Horizontal">
-						<Label Content="Контакты" Classes="textElement"/>
+						<Label Content="Контакты" Classes="h3"/>
 						<TextBox Classes="h3" Text="{Binding TestText}"/>
 					</StackPanel>
 				</Border>
-				<Border Classes="up">
+				<Border Classes="combineOutline">
 					<StackPanel Orientation="Horizontal">
-						<Label Content="Домашний адрес" Classes="textElement"/>
+						<Label Content="Домашний адрес" Classes="h3"/>
 						<TextBox Classes="h3" Text="{Binding TestText}"/>
 					</StackPanel>
 				</Border>
-				<Border Classes="up">
+				<Border Classes="combineOutline">
 					<StackPanel Orientation="Horizontal">
-						<Label Content="Группа" Classes="textElement"/>
+						<Label Content="Группа" Classes="h3"/>
 						<TextBox Classes="h3" Text="{Binding TestText}"/>
 					</StackPanel>
 				</Border>
-				<Border Classes="up">
+				<Border Classes="combineOutline">
 					<StackPanel Orientation="Horizontal">
-						<Label Content="Информация о законных предствителях" Classes="textElement"/>
+						<Label Content="Информация о законных предствителях" Classes="h3"/>
 						<TextBox Classes="h3" Text="{Binding TestText}"/>
 					</StackPanel>
 				</Border>

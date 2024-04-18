@@ -1,0 +1,93 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<StackPanel Spacing="10">
+				<ComboBox Classes="h1" SelectedIndex="0">
+					<ComboBox.Items>
+						<TextBlock Text="Header 1" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+					</ComboBox.Items>
+				</ComboBox>
+				
+				<ComboBox Classes="h2" SelectedIndex="0">
+					<ComboBox.Items>
+						<TextBlock Text="Header 2" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+					</ComboBox.Items>
+				</ComboBox>
+				
+				<ComboBox Classes="h3" SelectedIndex="0">
+					<ComboBox.Items>
+						<TextBlock Text="Header 3" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+					</ComboBox.Items>
+				</ComboBox>
+				
+				<ComboBox Classes="h4" SelectedIndex="0">
+					<ComboBox.Items>
+						<TextBlock Text="Header 4" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+						<TextBlock Text="Item" Classes="h4"/>
+					</ComboBox.Items>
+				</ComboBox>
+
+				<AutoCompleteBox Classes="h1" SelectedItem="Header 1"/>
+
+				<AutoCompleteBox Classes="h2" SelectedItem="Header 2"/>
+
+				<AutoCompleteBox Classes="h3" SelectedItem="Header 3"/>
+
+				<AutoCompleteBox Classes="h4" SelectedItem="Header 4"/>
+
+
+			</StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Main/ComboBoxes.axaml"/>
+	
+	<Style Selector="ComboBox.h1">
+		<Setter Property="FontSize" Value="36"/>
+	</Style>
+
+	<Style Selector="ComboBox.h2">
+		<Setter Property="FontSize" Value="32"/>
+	</Style>
+	
+	<Style Selector="ComboBox.h3">
+		<Setter Property="FontSize" Value="28"/>
+	</Style>
+
+	<Style Selector="ComboBox.h4">
+		<Setter Property="FontSize" Value="24"/>
+	</Style>
+	
+	<Style Selector="AutoCompleteBox.h1">
+		<Setter Property="FontSize" Value="36"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.h2">
+		<Setter Property="FontSize" Value="32"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.h3">
+		<Setter Property="FontSize" Value="28"/>
+	</Style>
+
+	<Style Selector="AutoCompleteBox.h4">
+		<Setter Property="FontSize" Value="24"/>
+	</Style>
+	
+</Styles>

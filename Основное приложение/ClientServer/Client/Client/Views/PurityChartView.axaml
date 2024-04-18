@@ -18,14 +18,12 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border Background="White"
-								BorderBrush="#08F0E9"
-								BorderThickness="5">
+						<Border Classes="borderPanel">
 							<StackPanel Margin="20">
-								<Label Content="{Binding Surname}" Classes="plainText"></Label>
-								<Label Content="{Binding Name}" Classes="plainText"/>
-								<Label Content="{Binding Patronymic}" Classes="plainText"/>
-								<Label Content="{Binding Room.Number}" Classes="plainText"/>
+								<Label Content="{Binding Surname}" Classes="h3"/>
+								<Label Content="{Binding Name}" Classes="h3"/>
+								<Label Content="{Binding Patronymic}" Classes="h3"/>
+								<Label Content="{Binding Room.Number}" Classes="h3"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>

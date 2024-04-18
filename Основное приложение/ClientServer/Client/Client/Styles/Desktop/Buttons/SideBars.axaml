@@ -2,7 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
-			<Button Content="InSideBar (sideBar)" Classes="sideBar"/>
+			<StackPanel Spacing="10">
+				<Button Content="InSideBar (sideBar)" Classes="sideBar"/>
+				<Button Content="◄" Classes="switch"/>
+			</StackPanel>
         </Border>
     </Design.PreviewWith>
 
@@ -21,6 +24,14 @@
 		<Setter Property="Background" Value="{StaticResource lightBlue}"/>
 		<Setter Property="BorderBrush" Value="{StaticResource purple}"/>
 		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="Margin" Value="5"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+	</Style>
+
+	<Style Selector="Button.switch">
+		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 	

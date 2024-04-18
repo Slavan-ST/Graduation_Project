@@ -22,18 +22,13 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Grid Grid.ColumnSpan="2" Name="TitlePlace">
-			<Grid.Background>
-				<LinearGradientBrush>
-					<GradientStop Color="#070268" Offset="0"/>
-					<GradientStop Color="#08F0E9" Offset="1"/>
-				</LinearGradientBrush>
-			</Grid.Background>
+		<Grid Grid.ColumnSpan="2" Name="TitlePlace" Classes="gradientFill">
 			<TextBlock Text="{Binding Title}" HorizontalAlignment="Right"
 					   VerticalAlignment="Center"
-					   Margin="5" Classes="title"/>
+					   Margin="5" Classes="h1"/>
 			<Button Width="40" Height="40" Margin="5" 
-					HorizontalAlignment="Left" Command="{Binding OpenSideBar}"/>
+					HorizontalAlignment="Left" Command="{Binding OpenSideBar}" 
+					Classes="reavealSideBar"/>
 		</Grid>
 
 
@@ -53,24 +48,24 @@
 		
 		<Grid Grid.RowSpan="2" IsVisible="{Binding IsOpenSideBar}" Background="White">
 			<StackPanel Margin="25">
-				<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}" Classes="main"/>
+				<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}" Classes="sideBar"/>
 				<StackPanel IsVisible="{Binding IsStudents}">
-					<Button Content="Профиль" Command="{Binding Profile}" Classes="main"/>
-					<Button Content="Заявление" Command="{Binding Statement}" Classes="main"/>
-					<Button Content="Мероприятия" Command="{Binding Events}" Classes="main"/>
+					<Button Content="Профиль" Command="{Binding Profile}" Classes="sideBar"/>
+					<Button Content="Заявление" Command="{Binding Statement}" Classes="sideBar"/>
+					<Button Content="Мероприятия" Command="{Binding Events}" Classes="sideBar"/>
 				</StackPanel>
 				<StackPanel IsVisible="{Binding IsWorker}">
-					<Button Content="План меропритий" Command="{Binding EventsList}" Classes="main"/>
-					<Button Content="График дежурств" Command="{Binding DutyChart}" Classes="main"/>
-					<Button Content="Списки студентов" Command="{Binding ListStudents}" Classes="main"/>
-					<Button Content="Экран чистоты" Command="{Binding PurityChart}" Classes="main"/>
-					<Button Content="Журнал" Command="{Binding Record}" Classes="main"/>
-					<Button Content="Рейд чистоты" Command="{Binding CleanRaid}" Classes="main"/>
-					<Button Content="Ежедневная проверка" Command="{Binding DailyCheck}" Classes="main"/>
+					<Button Content="План меропритий" Command="{Binding EventsList}" Classes="sideBar"/>
+					<Button Content="График дежурств" Command="{Binding DutyChart}" Classes="sideBar"/>
+					<Button Content="Списки студентов" Command="{Binding ListStudents}" Classes="sideBar"/>
+					<Button Content="Экран чистоты" Command="{Binding PurityChart}" Classes="sideBar"/>
+					<Button Content="Журнал" Command="{Binding Record}" Classes="sideBar"/>
+					<Button Content="Рейд чистоты" Command="{Binding CleanRaid}" Classes="sideBar"/>
+					<Button Content="Ежедневная проверка" Command="{Binding DailyCheck}" Classes="sideBar"/>
 				</StackPanel>
-				<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="main"/>
+				<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="sideBar"/>
 			</StackPanel>
-			<Button Content="◄" Classes="back" Command="{Binding HideSideBar}"/>
+			<Button Content="◄" Classes="switch" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
 		</Grid>
 	</Grid>
 </UserControl>

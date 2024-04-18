@@ -11,35 +11,55 @@
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<DockPanel LastChildFill="True">
-			<TreeView DockPanel.Dock="Top">
+			<TreeView DockPanel.Dock="Top" Classes="transparent">
 				<TreeViewItem Header="Фильтры">
 					<StackPanel >
 						<StackPanel>
-							<TextBlock Text="Студент" Classes="titleFilter"/>
+							<TextBlock Text="Студент" Classes="h3"/>
 							<AutoCompleteBox ItemsSource="{Binding ListStudents}" 
 											 FilterMode="StartsWith"
-											 Classes="outline lightBlue"
+											 Classes="outline lightBlue h4"
 											 SelectedItem="{Binding ListStudentsSelectedItem}">
 								<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
 								</i:Interaction.Behaviors>
 								<AutoCompleteBox.ItemTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding FIO}"/>
+										<TextBlock Text="{Binding FIO}" Classes="h4"/>
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Комната" Classes="titleFilter"/>
-							<AutoCompleteBox SelectedItem="{Binding ListRoomsSelectedItem}"/>
+							<TextBlock Text="Комната" Classes="h3"/>
+							<AutoCompleteBox SelectedItem="{Binding ListRoomsSelectedItem}"
+											  Classes="outline lightBlue h4">
+								<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Number}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Статус" Classes="titleFilter"/>
-							<AutoCompleteBox SelectedItem="{Binding ListStatusesSelectedItem}"/>
+							<TextBlock Text="Статус" Classes="h3"/>
+							<AutoCompleteBox SelectedItem="{Binding ListStatusesSelectedItem}"
+											 Classes="outline lightBlue h4">
+								<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Name}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+							</AutoCompleteBox>
 						</StackPanel>
-						<DatePicker/>
-						<Button Content="Применить" Margin="0,5"/>
+						<DatePicker Classes="outline purple"/>
+						<Button Content="Применить" Margin="0,5" Classes="navigate h3"/>
 					</StackPanel>
 				</TreeViewItem>
 			</TreeView>

@@ -9,11 +9,10 @@
 		<ItemsControl ItemsSource="{Binding ListNews}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					
 					<StackPanel>
-						<TextBlock Text="{Binding Title}"></TextBlock>
+						<TextBlock Text="{Binding Title}" Classes="h3"/>
 						<StackPanel Orientation="Horizontal">
-							<Button Content="◄" Command="{Binding BackPhoto}"/>
+							<Button Content="◄" Command="{Binding BackPhoto}" Classes="switch"/>
 							
 							<ItemsControl ItemsSource="{Binding PhotosNews}">
 								<ItemsControl.ItemsPanel>
@@ -23,12 +22,14 @@
 								</ItemsControl.ItemsPanel>
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<Image Source="{Binding ImgNews}"/>
+										<Border Classes="borderPanel">
+											<Image Source="{Binding ImgNews}"/>
+										</Border>
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>
 							
-							<Button Content="►" Command="{Binding NextPhoto}"/>
+							<Button Content="►" Command="{Binding NextPhoto}" Classes="switch"/>
 						</StackPanel>
 					</StackPanel>
 					

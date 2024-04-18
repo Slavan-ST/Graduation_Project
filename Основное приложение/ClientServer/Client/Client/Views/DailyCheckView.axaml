@@ -15,8 +15,8 @@
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		
 		<StackPanel Orientation="Horizontal" Margin="15">
-			<TextBlock Text="Комната - " Classes="header"/>
-			<TextBlock Text="{Binding StudentsInRoom.NumberRoom}" Classes="header"/>
+			<TextBlock Text="Комната - " Classes="h2"/>
+			<TextBlock Text="{Binding StudentsInRoom.NumberRoom}" Classes="h2"/>
 		</StackPanel>
 		<ItemsControl ItemsSource="{Binding StudentsInRoom}" Margin="10,100,0,0">
 			<ItemsControl.ItemsPanel>
@@ -35,9 +35,9 @@
 							<ColumnDefinition Width="*" MaxWidth="650"/>
 							<ColumnDefinition Width="9*" MaxWidth="650"/>
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Студент:" Classes="title"/>
-						<Label Content="{Binding Name}" Grid.Row="1" Classes="plain"/>
-						<Button Content="+" Grid.Column="1" Grid.Row="1" Classes="mark">
+						<TextBlock Text="Студент:" Classes="h2"/>
+						<Label Content="{Binding Name}" Grid.Row="1" Classes="h3"/>
+						<Button Content="-" Grid.Column="1" Grid.Row="1" Classes="markSelected">
 							<i:Interaction.Behaviors>
 								<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
 									<iac:PopupAction>
@@ -46,10 +46,10 @@
 												Background="#08F0E9"
 												CornerRadius="25">
 											<StackPanel Orientation="Horizontal">
-												<Button Content="+"/>
-												<Button Content="H"/>
-												<Button Content="3"/>
-												<Button Content="O"/>
+												<Button Content="+" Classes="mark"/>
+												<Button Content="H" Classes="mark"/>
+												<Button Content="3" Classes="mark"/>
+												<Button Content="O" Classes="mark"/>
 											</StackPanel>
 
 										</Border>
@@ -63,7 +63,7 @@
 		</ItemsControl>
 		
 		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-			<Button Content="Следующая комната" Classes="mainBtn"/>
+			<Button Content="Следующая комната" Classes="navigate h2"/>
 		</StackPanel>
 	</Grid>
 </UserControl>
