@@ -42,13 +42,24 @@ namespace Client.ViewModels
         }
         public async void FillFilter()
         {
+            var statuses = await StatusAPI.GetStatusesAsync();
+            if (statuses == null)
+            {
+                return;
+            }
+            var rooms = await RoomAPI.GetRoomsAsync();
+            if (rooms == null)
+            {
+                return;
+            }
             var students = await StudentAPI.GetStudentsAsync();
-            //var rooms = await RoomA
             if (students == null)
             {
                 return;
             }
             ListStudents = new List<Student>(students);
+            ListStatuses = new List<Status>(statuses);
+            ListRooms = new List<Room>(rooms);
         }
         public async void FillJournal(int year, int month, Func<Task<IEnumerable<Student>?>> func )
         {
@@ -161,19 +172,36 @@ namespace Client.ViewModels
             return log.Marker;
         }
 
-        async Task<IEnumerable<Student>?> _noFilters() => await StudentAPI.GetStudentsAsync();
+        async Task<IEnumerable<Student>?> _noFilters()
+        {
+            ListRoomsSelectedItem = null;
+            ListStatusesSelectedItem = null;
+            ListStudentsSelectedItem = null;
+
+            return await StudentAPI.GetStudentsAsync();
+        }
         async Task<IEnumerable<Student>?> _filters()
         {
-            if (ListStudentsSelectedItem != null)
-            {
-                return new List<Student>() { ListStudentsSelectedItem };
-            }
+            //а нафига? МБ тогда остальные фильтры блочить??
+            //if (ListStudentsSelectedItem != null)
+            //{
+            //    return new List<Student>() { ListStudentsSelectedItem };
+            //}
+
             var list = await StudentAPI.GetStudentsAsync();
             if (list == null)
             {
                 return null;
             }
-            return list.Where(x => x.Room == ListRoomsSelectedItem && x.Status == ListStatusesSelectedItem).ToList();
+            if (ListRoomsSelectedItem != null)
+            {
+                list = list.Where(x => x.Room!.Number == ListRoomsSelectedItem.Number).ToList();
+            }
+            if (ListStatusesSelectedItem != null)
+            {
+                list = list.Where(x => x.Status!.Name == ListStatusesSelectedItem.Name).ToList();
+            }
+            return list;
         }
 
 
@@ -191,9 +219,9 @@ namespace Client.ViewModels
         [Reactive]
         public List<Student>? ListStudents { get; set; }
         [Reactive]
-        public List<Student>? ListRooms { get; set; }
+        public List<Room>? ListRooms { get; set; }
         [Reactive]
-        public List<Student>? ListStatuses { get; set; }
+        public List<Status>? ListStatuses { get; set; }
         [Reactive]
         public FlatTreeDataGridSource<MarksOfStudents> Source { get; set; }
         public ICommand AcceptFilters { get; set; }

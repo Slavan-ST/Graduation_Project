@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
             var students = await db.Students
                 .Include(c => c.Room)
+                .Include(c => c.Status)
                 .Include(c => c.AttendanceLogs)
                 .ToListAsync();
 
@@ -37,6 +38,7 @@ namespace WebAPI.Controllers
 
             var students = await db.Students
                 .Include(c => c.Room)
+                .Include(c => c.Status)
                 .Include(c => c.AttendanceLogs)
                 .Where(x => x.Room!.Number == room)
                 .ToListAsync();
@@ -61,6 +63,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
             var student = await db.Students
                 .Include(c => c.Room)
+                .Include(c => c.Status)
                 .Include(c => c.AttendanceLogs)
                 .Where(x => x.Room!.Number == room && x.Surname == surname && x.Name == name && x.Patronymic == patronymic)
                 .FirstOrDefaultAsync();
@@ -88,6 +91,7 @@ namespace WebAPI.Controllers
             //проверка на существование такой записи в БД
             Student? student = await db.Students
                 .Include(c => c.Room)
+                .Include(c => c.Status)
                 .Where(x => x.Id == studentDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
