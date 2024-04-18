@@ -1,0 +1,88 @@
+﻿using Helper;
+using Helper.Models.Main;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Client.API
+{
+    internal class RoomAPI
+    {
+        public static async Task<IEnumerable<Room>?> GetRoomsAsync()
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.GetFromJsonAsync<IEnumerable<Room>>(Connect.Connection + $"Rooms");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<Room?> GetRoomAsync(string number)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.GetFromJsonAsync<Room>(Connect.Connection + $"Rooms/{number}");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> DeleteStatusAsync(string number)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.DeleteAsync(Connect.Connection + $"Rooms/{number}");
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> PostStatusAsync(Room room)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.PostAsJsonAsync(Connect.Connection + $"Rooms", room);
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> PutPutStatusAsync(Room room)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var response = await client.PutAsJsonAsync(Connect.Connection + $"Rooms", room);
+                return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+    }
+}

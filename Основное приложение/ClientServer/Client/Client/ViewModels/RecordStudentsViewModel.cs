@@ -43,6 +43,7 @@ namespace Client.ViewModels
         public async void FillFilter()
         {
             var students = await StudentAPI.GetStudentsAsync();
+            //var rooms = await RoomA
             if (students == null)
             {
                 return;
