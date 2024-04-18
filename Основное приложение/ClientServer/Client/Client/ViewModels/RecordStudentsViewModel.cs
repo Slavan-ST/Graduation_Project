@@ -6,6 +6,7 @@ using Client.ViewModels.Base;
 using DynamicData;
 using Helper.Models.DTO;
 using Helper.Models.Main;
+using iText.Layout.Element;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -24,16 +25,19 @@ namespace Client.ViewModels
 
     public class RecordStudentsViewModel : ViewModelBase
     {
-
         public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
         {
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
-            FillJournal(2023,6);
+            FillJournal(2023,6, _noFilters);
             FillFilter();
 
-            AcceptFilters = ReactiveCommand.Create(()=>
+            AcceptFilters = ReactiveCommand.Create(() =>
             {
-
+                FillJournal(2023, 6, _filters);
+            });
+            ClearFilters = ReactiveCommand.Create(() =>
+            {
+                FillJournal(2023, 6, _noFilters);
             });
         }
         public async void FillFilter()
@@ -45,8 +49,10 @@ namespace Client.ViewModels
             }
             ListStudents = new List<Student>(students);
         }
-        public async void FillJournal(int year, int month)
+        public async void FillJournal(int year, int month, Func<Task<IEnumerable<Student>?>> func )
         {
+            Source.Items = new List<MarksOfStudents>();
+
             //получаем кол-во дней в текущем месяце
             int countDay = DateTime.DaysInMonth(year, month);
 
@@ -54,7 +60,7 @@ namespace Client.ViewModels
             List<MarksOfStudents> marksOfStudentsList = new List<MarksOfStudents>();
 
             //получаем студентов из БД
-            var students = await StudentAPI.GetStudentsAsync();
+            var students = await func();
 
             if (students == null)
             {
@@ -69,7 +75,12 @@ namespace Client.ViewModels
                 }
 
                 //получаем логи за текущий месяц
-                var studLogs = student.AttendanceLogs.Where(x => x.Date.Year == year && x.Date.Month == month).ToList();
+                var studLogs = student.AttendanceLogs.Where(x => x.Date.Year == Year && x.Date.Month == Month).ToList();
+
+                if (studLogs == null)
+                {
+                    return;
+                }
 
                 //добавляем новую строку
                 MarksOfStudents marksOfStudents = new MarksOfStudents()
@@ -149,7 +160,26 @@ namespace Client.ViewModels
             return log.Marker;
         }
 
+        async Task<IEnumerable<Student>?> _noFilters() => await StudentAPI.GetStudentsAsync();
+        async Task<IEnumerable<Student>?> _filters()
+        {
+            if (ListStudentsSelectedItem != null)
+            {
+                return new List<Student>() { ListStudentsSelectedItem };
+            }
+            var list = await StudentAPI.GetStudentsAsync();
+            if (list == null)
+            {
+                return null;
+            }
+            return list.Where(x => x.Room == ListRoomsSelectedItem && x.Status == ListStatusesSelectedItem).ToList();
+        }
 
+
+        [Reactive]
+        public int Year { get; set; } = 2023;
+        [Reactive]
+        public int Month { get; set; } = 6;
         [Reactive]
         public Student? ListStudentsSelectedItem { get; set; }
         [Reactive]
@@ -160,8 +190,13 @@ namespace Client.ViewModels
         [Reactive]
         public List<Student>? ListStudents { get; set; }
         [Reactive]
+        public List<Student>? ListRooms { get; set; }
+        [Reactive]
+        public List<Student>? ListStatuses { get; set; }
+        [Reactive]
         public FlatTreeDataGridSource<MarksOfStudents> Source { get; set; }
         public ICommand AcceptFilters { get; set; }
+        public ICommand ClearFilters { get; set; }
 
     }
 }
