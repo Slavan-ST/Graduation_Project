@@ -25,6 +25,9 @@
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.10.4" />
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="11.0.10.4" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="11.0.10.4" />
+    <PackageReference Include="itext" Version="8.0.3" />
+    <PackageReference Include="itext.bouncy-castle-adapter" Version="8.0.3" />
+    <PackageReference Include="itext.bouncy-castle-fips-adapter" Version="8.0.3" />
     <PackageReference Include="MessageBox.Avalonia" Version="3.1.5.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
