@@ -18,10 +18,10 @@
 	</Styles.Resources>
 
 	<Style Selector="Button.navigate">
-		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="Background" Value="{StaticResource lightBlue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightBlue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 	
 </Styles>

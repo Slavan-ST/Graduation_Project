@@ -1,0 +1,31 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<StackPanel>
+				<Button Text="Header (h1)" Classes="h1"/>
+				<Button Text="Header (h2)" Classes="h2"/>
+				<Button Text="Header (h3)" Classes="h3"/>
+				<Button Text="Header (h4)" Classes="h4"/>
+			</StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+	<StyleInclude Source="/Styles/Main/Buttons.axaml"/>
+	
+	<Style Selector="Button.h1">
+		<Setter Property="FontSize" Value="36"/>
+	</Style>
+
+	<Style Selector="Button.h2">
+		<Setter Property="FontSize" Value="32"/>
+	</Style>
+	
+	<Style Selector="Button.h3">
+		<Setter Property="FontSize" Value="28"/>
+	</Style>
+
+	<Style Selector="Button.h4">
+		<Setter Property="FontSize" Value="24"/>
+	</Style>
+</Styles>

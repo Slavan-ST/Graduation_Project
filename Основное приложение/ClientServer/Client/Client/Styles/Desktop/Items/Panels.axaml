@@ -119,7 +119,7 @@
 	<Style Selector="Border.borderPanel">
 		<Setter Property="Margin" Value="10"/>
 		<Setter Property="Background" Value="White"/>
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightBlue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
 	</Style>
 </Styles>

@@ -13,14 +13,14 @@
 			<RowDefinition Height="150"/>
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
-		<StackPanel HorizontalAlignment="Left" Margin="50">
+		<StackPanel HorizontalAlignment="Left" Margin="50" MaxWidth="1000">
 			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Комната - " Classes="header"/>
-				<TextBlock Text="{Binding Room.Number}" Classes="header"/>
+				<TextBlock Text="Комната - " Classes="h2"/>
+				<TextBlock Text="{Binding Room.Number}" Classes="h2"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="0,55,0,5">
-				<TextBlock Text="Чистота" Classes="title"/>
-				<Button Content="-" VerticalAlignment="Bottom" Margin="5">
+				<TextBlock Text="Чистота" Classes="h2"/>
+				<Button Content="-" Margin="5,0,0,0" Classes="markSelected h3">
 					<i:Interaction.Behaviors>
 						<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
 							<iac:PopupAction>
@@ -29,23 +29,24 @@
 										Background="#08F0E9"
 										CornerRadius="25">
 									<StackPanel Orientation="Horizontal">
-										<Button Content="2"/>
-										<Button Content="3"/>
-										<Button Content="4"/>
-										<Button Content="5"/>
+										<Button Content="2" Classes="mark"/>
+										<Button Content="3" Classes="mark"/>
+										<Button Content="4" Classes="mark"/>
+										<Button Content="5" Classes="mark"/>
 									</StackPanel>
-
 								</Border>
 							</iac:PopupAction>
 						</ia:EventTriggerBehavior>
 					</i:Interaction.Behaviors>
 				</Button>
 			</StackPanel>
-			<TextBlock Text="Примечание" Classes="title" Margin="0,55,0,5"/>
-			<TextBox TextWrapping="Wrap" MaxWidth="1000" Width="1000" Text="TEST_TEXT" MinHeight="500"/>
+			<DockPanel LastChildFill="True" MinHeight="300" Name="panelDescription">
+				<TextBlock DockPanel.Dock="Top" Text="Примечание" Classes="h2" Margin="0,55,0,5"/>
+				<TextBox TextWrapping="Wrap"  Text="TEST_TEXT" Classes="outline lightBlue h2" Width="500"/>
+			</DockPanel>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-			<Button Content="Следующая комната" Classes="mainBtn"/>
+			<Button Content="Следующая комната" Classes="h2 navigate"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

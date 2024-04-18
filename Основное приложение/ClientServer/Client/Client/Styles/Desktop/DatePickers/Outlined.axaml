@@ -20,30 +20,30 @@
 
 	<Style Selector="DatePicker.outline">
 		<Setter Property="Background" Value="White"/>
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 
 	<Style Selector="DatePicker.outline.purple">
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource purple}"/>
 	</Style>
 	
 	<Style Selector="DatePicker.outline.lightBlue">
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightBlue}"/>
 	</Style>
 
 	<Style Selector="DatePicker.outline Button#PART_AcceptButton Border">
 		<Setter Property="CornerRadius" Value="0,0,0,25"/>
-		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="Background" Value="{StaticResource lightBlue}"/>
 	</Style>
 
 	<Style Selector="DatePicker.outline Button#PART_DismissButton Border">
 		<Setter Property="CornerRadius" Value="0,0,25,0"/>
-		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="Background" Value="{StaticResource lightBlue}"/>
 	</Style>
 
 	<Style Selector="DatePicker.outline DatePickerPresenter#PART_PickerPresenter">
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 	
 	

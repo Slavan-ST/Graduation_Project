@@ -43,47 +43,47 @@
 	</Styles.Resources>
 
 	<Style Selector="ComboBox.outline">
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="Padding" Value="10"/>
 	</Style>
 
 	<Style Selector="ComboBox.outline.purple">
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource purple}"/>
 	</Style>
 
 	<Style Selector="ComboBox.outline.lightBlue">
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightBlue}"/>
 	</Style>
 
 	<Style Selector="ComboBox.outline Border#PopupBorder">
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 
 	<Style Selector="ComboBoxItem">
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 
 	<Style Selector="AutoCompleteBox.outline">
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="Padding" Value="10"/>
 	</Style>
 
 	<Style Selector="AutoCompleteBox.outline.purple">
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource purple}"/>
 	</Style>
 
 	<Style Selector="AutoCompleteBox.outline.lightBlue">
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightBlue}"/>
 	</Style>
 
 	<Style Selector="AutoCompleteBox.outline Border#PART_SuggestionsContainer">
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 
 	<Style Selector="AutoCompleteBox.outline ContentPresenter#PART_ContentPresenter">
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 	
 </Styles>

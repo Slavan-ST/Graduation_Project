@@ -10,12 +10,12 @@
 		<Image Source="{SvgImage /Assets/light/foneAuth.svg}" Stretch="UniformToFill"/>
 		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
 				    Margin="0,250,0,0">
-			<TextBlock Text="Добро пожаловать!" Classes="h3"/>
+			<TextBlock Text="Добро пожаловать!" Classes="h1" HorizontalAlignment="Center"/>
 			<TextBlock Text="Чтобы продолжить, авторизируйтесь" Classes="h2"/>
-			<TextBox Watermark="Логин" Text="{Binding Login}" Classes="outline lightBlue"/>
-			<TextBox PasswordChar="•" Classes="revealPasswordButton outline lightBlue"
+			<TextBox Watermark="Логин" Text="{Binding Login}" Classes="outline lightBlue h2"/>
+			<TextBox PasswordChar="•" Classes="revealPasswordButton outline lightBlue h2"
 					 Watermark="Пароль" Text="{Binding Password}"/>
-			<Button Content="Войти" Command="{Binding Auth}" Classes="navigate"/>
+			<Button Content="Войти" Command="{Binding Auth}" Classes="navigate h2" HorizontalAlignment="Center"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

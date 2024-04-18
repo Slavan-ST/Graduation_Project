@@ -28,9 +28,9 @@
 		<Setter Property="Padding" Value="3"/>
 		<Setter Property="Margin" Value="10"/>
 		<Setter Property="Background" Value="White"/>
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=purple}"/>
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource purple}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>	
 
 </Styles>

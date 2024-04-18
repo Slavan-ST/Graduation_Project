@@ -3,13 +3,14 @@
     <Design.PreviewWith>
         <Border Padding="20">
 			<StackPanel Spacing="10">
-				<Button Content="+" Classes="mark"/>
-				<Button Content="+" Classes="markSelected"/>
+				<Button Content="+" Classes="mark h2"/>
+				<Button Content="+" Classes="markSelected h2"/>
 			</StackPanel>
         </Border>
     </Design.PreviewWith>
 
 	<StyleInclude Source="/Styles/Main/Buttons.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/Buttons/Headers.axaml"/>
 
 	<Styles.Resources>
 		<ResourceDictionary>
@@ -21,23 +22,28 @@
 	</Styles.Resources>
 
 	<Style Selector="Button.mark">
-		<Setter Property="Background" Value="{StaticResource ResourceKey=lightPurple}"/>
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightBlue}"/>
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
+		<Setter Property="Background" Value="{StaticResource lightPurple}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightBlue}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="MinWidth" Value="55"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
 	</Style>
+
+	<Style Selector="Button.markSelected ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Padding" Value="8,2,8,6"/>
+	</Style>
 	
 	<Style Selector="Button.markSelected">
-		<Setter Property="Background" Value="{StaticResource ResourceKey=lightBlue}"/>
-		<Setter Property="BorderBrush" Value="{StaticResource ResourceKey=lightGreen}"/>
-		<Setter Property="BorderThickness" Value="{StaticResource ResourceKey=thicknessValue}"/>
-		<Setter Property="CornerRadius" Value="{StaticResource ResourceKey=cornerRadiusValue}"/>
-		<Setter Property="MinWidth" Value="55"/>
+		<Setter Property="Background" Value="{StaticResource lightBlue}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightGreen}"/>
+		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Top"/>
+		<Setter Property="MaxHeight" Value="55"/>
+		<Setter Property="MinWidth" Value="55"/>
 	</Style>
 	
 </Styles>

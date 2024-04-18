@@ -1,28 +1,25 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
-        <Border Padding="20">
+        <Border Padding="20" Width="1920" Height="1080">
 			<Grid>
 				<Image Source="{SvgImage /Assets/light/foneAuth.svg}" Stretch="UniformToFill"/>
 				<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
 							Margin="0,250,0,0">
-					<TextBlock Text="Добро пожаловать!" Classes="h3"/>
+					<TextBlock Text="Добро пожаловать!" Classes="h1" HorizontalAlignment="Center"/>
 					<TextBlock Text="Чтобы продолжить, авторизируйтесь" Classes="h2"/>
-					<TextBox Watermark="Логин" Classes="outline lightBlue"/>
-					<TextBox PasswordChar="•" Classes="revealPasswordButton outline lightBlue"
-							 Watermark="Пароль"/>
-					<Button Content="Войти" Classes="navigate"/>
+					<TextBox Watermark="Логин" Classes="outline lightBlue h2"/>
+					<TextBox PasswordChar="•" Classes="revealPasswordButton outline lightBlue h2"
+							 Watermark="Пароль" Text="Password"/>
+					<Button Content="Войти" Classes="navigate h2" HorizontalAlignment="Center"/>
 				</StackPanel>
 			</Grid>
         </Border>
     </Design.PreviewWith>
-	
-	<StyleInclude Source="/Styles/Main/Buttons.axaml"/>
-	<StyleInclude Source="/Styles/Main/TextBlocks.axaml"/>
-	<StyleInclude Source="/Styles/Main/TextBoxes.axaml"/>
 
     <StyleInclude Source="/Styles/Desktop/Borders/CombineOutlined.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/Borders/Dedicated.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/Buttons/Headers.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/Buttons/Mark.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/Buttons/Navigating.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/Buttons/SideBars.axaml"/>
@@ -31,7 +28,9 @@
 	<StyleInclude Source="/Styles/Desktop/Items/Panels.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TextBlocks/Headers.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TextBlocks/Outlined.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/TextBoxes/Headers.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TextBoxes/Outlined.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/TextBoxes/PasswordBox.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TreeViews/Header.axaml"/>
 	
 </Styles>

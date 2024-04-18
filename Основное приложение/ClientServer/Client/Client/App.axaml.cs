@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
 using Client.Models;
 using Client.Services;
 using Client.ViewModels;
@@ -31,6 +32,10 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow();
             services.AddSingleton<Message>(new Message(desktop.MainWindow));
             services.AddSingleton<Services.FileDialog>(new Services.FileDialog(desktop.MainWindow));
+            this.Styles.Add(new StyleInclude(new Uri("avares://Client/Themes/Desktop.axaml"))
+            {
+                Source = new Uri("avares://Client/Themes/Desktop.axaml")
+            });
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
