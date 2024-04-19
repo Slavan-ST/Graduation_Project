@@ -1,4 +1,6 @@
-﻿using Client.ViewModels.Base;
+﻿using Client.API;
+using Client.ViewModels.Base;
+using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -14,84 +16,20 @@ namespace Client.ViewModels
     {
         public EventsViewModel(IScreen? screen = null) : base(screen)
         {
-        
+            FillEventsAsync();
+        }
+        async void FillEventsAsync()
+        {
+            var events = await EventAPI.GetEventsAsync();
+            if (events == null)
+            {
+                return;
+            }
+            Events = events.ToList();
         }
 
-        [Reactive] //test data
-        public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>()
-        {
-            new Event()
-            {
-                Name = "event1",
-                Description = "desc1",
-                Date = "12.12.2024",
-                Employes = "worker1",
-                Place = "plc1"
-            },
-
-            new Event()
-            {
-                Name = "event2",
-                Description = "desc2",
-                Date = "12.02.2024",
-                Employes = "worker1",
-                Place = "plc2"
-            },
-
-            new Event()
-            {
-                Name = "event3",
-                Description = "desc3",
-                Date = "05.02.2024",
-                Employes = "worker2",
-                Place = "plc3"
-            },
-
-            new Event()
-            {
-                Name = "event4",
-                Description = "desc4",
-                Date = "05.02.2023",
-                Employes = "worker3",
-                Place = "plc1"
-            },
-
-                        new Event()
-            {
-                Name = "event1",
-                Description = "desc1",
-                Date = "12.12.2024",
-                Employes = "worker1",
-                Place = "plc1"
-            },
-
-            new Event()
-            {
-                Name = "event2",
-                Description = "desc2",
-                Date = "12.02.2024",
-                Employes = "worker1",
-                Place = "plc2"
-            },
-
-            new Event()
-            {
-                Name = "event3",
-                Description = "desc3",
-                Date = "05.02.2024",
-                Employes = "worker2",
-                Place = "plc3"
-            },
-
-            new Event()
-            {
-                Name = "event4",
-                Description = "desc4",
-                Date = "05.02.2023",
-                Employes = "worker3",
-                Place = "plc1"
-            },
-        };
+        [Reactive]
+        public List<EventO> Events { get; set; } = new List<EventO>();
     }
 
 }

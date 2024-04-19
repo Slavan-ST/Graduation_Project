@@ -7,7 +7,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class EventController : ControllerBase
+    public class EventsController : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventO>>> GetEvents()

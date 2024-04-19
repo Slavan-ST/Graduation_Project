@@ -10,6 +10,7 @@ namespace Helper.Models.Main
 {
     public class EventO : Base
     {
+        public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
         public string? Location { get; set; }
         public string? Organizer { get; set; }

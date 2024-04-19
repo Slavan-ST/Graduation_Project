@@ -14,12 +14,12 @@ namespace Client.API
 {
     internal class EventAPI
     {
-        public static async Task<IEnumerable<Status>?> GetEventsAsync()
+        public static async Task<IEnumerable<EventO>?> GetEventsAsync()
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<Status>>(Connect.Connection + $"Events");
+                var response = await client.GetFromJsonAsync<IEnumerable<EventO>>(Connect.Connection + $"Events");
                 return response;
             }
             catch (Exception e)
