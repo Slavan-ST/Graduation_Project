@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Helper.Converters.ConverterDTO">
+    <Position X="37.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\ConverterDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Models.DTO.UserChangedDTO">
+    <Position X="15.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAEAAAAAQABAAAABACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\DTO\UserChangedDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Role" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.DTO.UserDTO">
+    <Position X="14" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAEAAAAAQABAAAABAAAAAQAAAAAAA=</HashCode>
+      <FileName>Models\DTO\UserDTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Role" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.AttendanceLog">
+    <Position X="28.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAQAAAAAAAAABAAAAAAACAAA=</HashCode>
+      <FileName>Models\Main\AttendanceLog.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Student" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.DutySchedule">
+    <Position X="13" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAAACAAA=</HashCode>
+      <FileName>Models\Main\DutySchedule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Models.Main.EventO">
+    <Position X="19.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAIAAAAAAAAIAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Main\EventO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Models.Main.Group">
+    <Position X="24.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Main\Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Models.Main.PurityRaidLog">
+    <Position X="31" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAgAAAAABAAAQAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Main\PurityRaidLog.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Room" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.Role">
+    <Position X="15.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Main\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Models.Main.Room">
+    <Position X="22" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Main\Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Models.Main.Status">
+    <Position X="26.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Main\Status.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Models.Main.Student">
+    <Position X="33.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgEAIGAOAAAAAACEABAAAAQABAAAAAACAACAIAAAAIA=</HashCode>
+      <FileName>Models\Main\Student.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Room" />
+      <Property Name="Group" />
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.User">
+    <Position X="17.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACIAAAAAAAAAEAAAAAQABAAAABACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Main\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Role" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Base">
+    <Position X="23" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Base.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helper.Connect">
+    <Position X="35.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

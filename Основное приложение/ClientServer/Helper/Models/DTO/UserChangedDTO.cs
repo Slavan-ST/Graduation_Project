@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 namespace Helper.Models.DTO
 {
     //эту ДТО будет отправлять клиент при изменении пользователя (эта ДТО включает в себя пароль)
-    public class UserChangedDTO
+    public class UserChangedDTO:Base
     {
-        public int Id { get; set; }
         public string? Name { get; set; } = "";
         public string? Surname { get; set; } = "";
         public string? Patronymic { get; set; } = "";

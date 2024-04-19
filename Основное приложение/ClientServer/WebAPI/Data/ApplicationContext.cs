@@ -18,7 +18,7 @@ namespace WebAPI.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Event> Events { get; set; }
+        public DbSet<EventO> Events { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Student> Students { get; set; }

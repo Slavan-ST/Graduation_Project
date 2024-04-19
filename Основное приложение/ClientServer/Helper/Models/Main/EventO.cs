@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Helper.Models.Main
 {
-    public class Event : Base
+    public class EventO : Base
     {
         public string? Description { get; set; }
         public string? Location { get; set; }

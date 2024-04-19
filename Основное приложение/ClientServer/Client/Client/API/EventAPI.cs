@@ -42,7 +42,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PostStatusAsync(Event eventO)
+        public static async Task<HttpStatusCode?> PostStatusAsync(EventO eventO)
         {
             HttpClient client = new HttpClient();
             try
@@ -56,7 +56,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PutPutStatusAsync(Event eventO)
+        public static async Task<HttpStatusCode?> PutPutStatusAsync(EventO eventO)
         {
             HttpClient client = new HttpClient();
             try

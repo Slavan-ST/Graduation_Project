@@ -25,6 +25,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Android", "Test\Test.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Desktop", "Test\Test.Desktop\Test.Desktop.csproj", "{7ACE6224-BB3F-4BA8-A314-591646D27142}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagram", "Diagram", "{05399754-3B87-4D23-95E0-5B2C057F1070}"
+	ProjectSection(SolutionItems) = preProject
+		Client\Client\ClassDiagramClient.cd = Client\Client\ClassDiagramClient.cd
+		WebAPI\ClassDiagramServer.cd = WebAPI\ClassDiagramServer.cd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

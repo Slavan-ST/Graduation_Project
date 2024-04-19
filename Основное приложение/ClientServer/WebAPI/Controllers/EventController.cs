@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
     public class EventController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
+        public async Task<ActionResult<IEnumerable<EventO>>> GetEvents()
         {
             ApplicationContext db = new ApplicationContext();
             var eventOs = await db.Events.ToListAsync();
@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> PostEvent(Event? eventODTO)
+        public async Task<ActionResult> PostEvent(EventO? eventODTO)
         {
             if (eventODTO == null)
             {
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            Event? eventO = await db.Events
+            EventO? eventO = await db.Events
                 .Where(x => x.Id == eventODTO.Id)
                 .FirstOrDefaultAsync();
 
@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutEvent(Event? eventODTO)
+        public async Task<ActionResult> PutEvent(EventO? eventODTO)
         {
             if (eventODTO == null)
             {
@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
 
             ApplicationContext db = new ApplicationContext();
             //проверка на существование такой записи в БД
-            Event? eventO = await db.Events
+            EventO? eventO = await db.Events
                 .Where(x => x.Id == eventODTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();

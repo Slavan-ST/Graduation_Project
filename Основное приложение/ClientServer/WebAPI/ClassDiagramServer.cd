@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebAPI.Controllers.AttendanceLogController">
+    <Position X="48.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAABAAAAAAACEAAAAAAAAAAAAAAAoEAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\AttendanceLogController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.DutyScheduleController">
+    <Position X="53.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACAAAAAIAAAAAAAAAAAAAAAAAAEAAAIAAAAQCAA=</HashCode>
+      <FileName>Controllers\DutyScheduleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.EventController">
+    <Position X="33" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAQAACAA=</HashCode>
+      <FileName>Controllers\EventController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.GroupController">
+    <Position X="44.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAABA=</HashCode>
+      <FileName>Controllers\GroupController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.LoginController">
+    <Position X="51" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\LoginController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.PurityRaidLogsController">
+    <Position X="37.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAEAAAAAAAAAAAAAEAAAAAwAoBAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PurityRaidLogsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.RoomsController">
+    <Position X="42" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAIAAAACAAAAAAAAAAAAAAAAACAAAAEA=</HashCode>
+      <FileName>Controllers\RoomsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.SignOutController">
+    <Position X="55.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Controllers\SignOutController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.StatusController">
+    <Position X="35.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAIAAAAA=</HashCode>
+      <FileName>Controllers\StatusController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.StudentsController">
+    <Position X="39.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABCAAAAAAAAAACAEAAAAAAABAAAAAAAg=</HashCode>
+      <FileName>Controllers\StudentsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Controllers.UsersController">
+    <Position X="46.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAMAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\UsersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Data.ApplicationContext">
+    <Position X="29.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAGAAAQAAAAAEAAAAAAACEgAAAAAIAAAAAAAAigA=</HashCode>
+      <FileName>Data\ApplicationContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Models.FIOConverter">
+    <Position X="36.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Models\FIOConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Security.Handlers.AccessHandler">
+    <Position X="25.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Security\Handlers\AccessHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Security.Requirements.AccessRequirement" BaseTypeListCollapsed="true">
+    <Position X="38.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Security\Requirements\AccessRequirement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WebAPI.Security.MultiPolicyAuthorizeAttribute" BaseTypeListCollapsed="true">
+    <Position X="27.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Security\MultiPolicyAuthorizeAttribute.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WebAPI.Security.SecretHasher">
+    <Position X="40.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIQAQACAAAAAAAAAAAAgAAAAAIAAAAQAAA=</HashCode>
+      <FileName>Security\SecretHasher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.Program">
+    <Position X="34" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Mvc.ControllerBase" Collapsed="true">
+    <Position X="44.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="37.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Attribute" Collapsed="true">
+    <Position X="27.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.EntityFrameworkCore.DbContext" Collapsed="true">
+    <Position X="29.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Authorization.AuthorizationHandler&lt;TRequirement&gt;" Collapsed="true">
+    <Position X="25.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Helper.Models.DTO.UserChangedDTO">
+    <Position X="34.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Role" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.DTO.UserDTO">
+    <Position X="36.25" Y="11" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Role" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.AttendanceLog">
+    <Position X="48.75" Y="8.5" Width="1.5" />
+    <InheritanceLine Type="Helper.Models.Base" ManuallyRouted="true">
+      <Path>
+        <Point X="43.75" Y="7.805" />
+        <Point X="43.75" Y="8.127" />
+        <Point X="49.5" Y="8.127" />
+        <Point X="49.5" Y="8.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Student" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.DutySchedule">
+    <Position X="33" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.EventO">
+    <Position X="40.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Group">
+    <Position X="44.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.PurityRaidLog">
+    <Position X="51" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Room" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.Role">
+    <Position X="35.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Room">
+    <Position X="42" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Status">
+    <Position X="46.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Student">
+    <Position X="53.5" Y="8.5" Width="1.5" />
+    <InheritanceLine Type="Helper.Models.Base" ManuallyRouted="true">
+      <Path>
+        <Point X="43.75" Y="7.805" />
+        <Point X="43.75" Y="8.118" />
+        <Point X="54.25" Y="8.118" />
+        <Point X="54.25" Y="8.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Room" />
+      <Property Name="Group" />
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Main.User">
+    <Position X="38" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Role" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Helper.Models.Base">
+    <Position X="43" Y="6.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
