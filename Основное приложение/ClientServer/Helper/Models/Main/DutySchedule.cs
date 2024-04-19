@@ -9,11 +9,8 @@ using System.Text.Json.Serialization;
 
 namespace Helper.Models.Main
 {
-    public class DutySchedule
+    public class DutySchedule : Base
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public int StudentId { get; set; }
         public DateTime Date { get; set; }
 

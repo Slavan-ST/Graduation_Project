@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace Helper.Models.Main
 {
-    public class AttendanceLog
+    public class AttendanceLog : Base
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public int StudentId { get; set; }
         public DateTime Date { get; set; }
         public string Marker { get; set; } = string.Empty;

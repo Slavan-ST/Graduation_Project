@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Client.API.AttendanceLogAPI" Collapsed="true">
+    <Position X="16" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAABAAAAAAACEAAAAAAAAAAAAAAAoEAAAAAAAAAA=</HashCode>
+      <FileName>API\AttendanceLogAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.DutyScheduleAPI" Collapsed="true">
+    <Position X="20.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgABAAAAACAAAAAAAAAAAAAAAAAAEQACIAAAAACAA=</HashCode>
+      <FileName>API\DutyScheduleAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.EventAPI" Collapsed="true">
+    <Position X="9.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAgAAAAAAAAAAAAAAAAAAAAAAAAAQCAAAAAA=</HashCode>
+      <FileName>API\EventAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.GroupAPI" Collapsed="true">
+    <Position X="25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAACAAA=</HashCode>
+      <FileName>API\GroupAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.HomeAPI" Collapsed="true">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\HomeAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.PurityRaidLogAPI" Collapsed="true">
+    <Position X="31.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAEAAAAAAAAAAAAAEAAAAAwAoBAAAAAAAAAAAA=</HashCode>
+      <FileName>API\PurityRaidLogAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.RoomAPI" Collapsed="true">
+    <Position X="29.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAQGEAAAAA=</HashCode>
+      <FileName>API\RoomAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.StatusAPI" Collapsed="true">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAIAAAAAAAAAAAAAQCAAAAAA=</HashCode>
+      <FileName>API\StatusAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.StudentAPI" Collapsed="true">
+    <Position X="36.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAEAAAAEAEAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>API\StudentAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.API.UserAPI" Collapsed="true">
+    <Position X="18.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAQQABAA=</HashCode>
+      <FileName>API\UserAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Behaviours.AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour" Collapsed="true">
+    <Position X="3.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAAAAAAFACAAAAAAAAAAAAACAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Behaviours\AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Models.Authorization" Collapsed="true">
+    <Position X="40.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Models\Authorization.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Models.HackPanel" Collapsed="true">
+    <Position X="0.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\HackPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Models.MarksOfStudents" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MarksOfStudents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Models.TreeViewItem" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\TreeViewItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Services.FileDialog" Collapsed="true">
+    <Position X="11.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Services\FileDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Services.Message" Collapsed="true">
+    <Position X="22.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAEAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Services\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Services.StatementCreater" Collapsed="true">
+    <Position X="43" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\StatementCreater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Services.ViewLocator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Services\ViewLocator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Client.ViewModels.Base.ViewModelBase" Collapsed="true">
+    <Position X="19.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Base\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Client.ViewModels.ViewModelBaseNavigator" Collapsed="true">
+    <Position X="17" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Base\ViewModelBaseNavigator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Client.ViewModels.AuthViewModel" Collapsed="true">
+    <Position X="24.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQABAAAAA=</HashCode>
+      <FileName>ViewModels\AuthViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.CleanLineRaidViewModel" Collapsed="true">
+    <Position X="31.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CleanLineRaidViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.DailyCheckViewModel" Collapsed="true">
+    <Position X="33.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\DailyCheckViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.DutyChartViewModel" Collapsed="true">
+    <Position X="2.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAAAAA=</HashCode>
+      <FileName>ViewModels\DutyChartViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.Event" Collapsed="true">
+    <Position X="38.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAEAAAAAAQAAAAAIAABAEAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\EventsListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.EventsListViewModel" Collapsed="true">
+    <Position X="6.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\EventsListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.EventsViewModel" Collapsed="true">
+    <Position X="11.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\EventsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.FaqViewModel" Collapsed="true">
+    <Position X="20.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>ViewModels\FaqViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.ListStudentsViewModel" Collapsed="true">
+    <Position X="27" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAACAAAAAAAAAAAAAAAAAABAAICAAAAAA=</HashCode>
+      <FileName>ViewModels\ListStudentsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.MainMenuViewModel" Collapsed="true">
+    <Position X="15.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAYAAAAAgAAAEEAAAAACAAACAwAACTAAIBACBAAABEQ=</HashCode>
+      <FileName>ViewModels\MainMenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.MainViewModel" Collapsed="true">
+    <Position X="18" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.MainWindowViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Client.ViewModels.NewsViewModel" Collapsed="true">
+    <Position X="4.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\NewsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.ProfileViewModel" Collapsed="true">
+    <Position X="9" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAACAAAAAAAAAABAIAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ProfileViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.PurityChartViewModel" Collapsed="true">
+    <Position X="13.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\PurityChartViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.RecordStudentsViewModel" Collapsed="true">
+    <Position X="22.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAEAAABgEAAAAAAAACAgAAKAAAAAAEAAAgAgTAAAA=</HashCode>
+      <FileName>ViewModels\RecordStudentsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.RecordYearViewModel" Collapsed="true">
+    <Position X="29.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\RecordYearViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.MountStats" Collapsed="true">
+    <Position X="34" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAIAAAAAAAAAAAAAAAAAAAAAAgAAAEAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\RecordYearViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewModels.StatementViewModel" Collapsed="true">
+    <Position X="36" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAqABAEAAAAAAABAEACQABAAAAAACAEAAIAAAAAA=</HashCode>
+      <FileName>ViewModels\StatementViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.AuthView" Collapsed="true">
+    <Position X="11" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AuthView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.CleanLineRaidView" Collapsed="true">
+    <Position X="20" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\CleanLineRaidView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.DailyCheckView" Collapsed="true">
+    <Position X="31.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DailyCheckView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.DutyChartView" Collapsed="true">
+    <Position X="2" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DutyChartView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.EventsListView" Collapsed="true">
+    <Position X="22.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\EventsListView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.EventsView" Collapsed="true">
+    <Position X="33.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\EventsView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.FaqView" Collapsed="true">
+    <Position X="4.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\FaqView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.ListStudentsView" Collapsed="true">
+    <Position X="15.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ListStudentsView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.MainMenuView" Collapsed="true">
+    <Position X="24.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainMenuView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.MainView" Collapsed="true">
+    <Position X="35.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.MainWindow" Collapsed="true">
+    <Position X="45.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindow.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.NewsView" Collapsed="true">
+    <Position X="13.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\NewsView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.ProfileView" Collapsed="true">
+    <Position X="17.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ProfileView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.PurityChartView" Collapsed="true">
+    <Position X="26.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\PurityChartView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.RecordStudentsView" Collapsed="true">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\RecordStudentsView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.RecordYearView" Collapsed="true">
+    <Position X="8.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\RecordYearView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.Views.StatementView" Collapsed="true">
+    <Position X="29" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\StatementView.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.App" Collapsed="true">
+    <Position X="6.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAwAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.axaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client.ViewLocator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewLocator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.AttendanceLog" Collapsed="true">
+    <Position X="45.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.DutySchedule" Collapsed="true">
+    <Position X="47.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Event" Collapsed="true">
+    <Position X="49" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Group" Collapsed="true">
+    <Position X="50.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.PurityRaidLog" Collapsed="true">
+    <Position X="47.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Role" Collapsed="true">
+    <Position X="49" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Room" Collapsed="true">
+    <Position X="50.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Status" Collapsed="true">
+    <Position X="45.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.Student" Collapsed="true">
+    <Position X="47.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Helper.Models.Main.User" Collapsed="true">
+    <Position X="49" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Avalonia.ReactiveUI.ReactiveUserControl&lt;TViewModel&gt;" Collapsed="true">
+    <Position X="19" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Avalonia.Application" Collapsed="true">
+    <Position X="6.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Avalonia.Xaml.Interactivity.Behavior&lt;T&gt;" Collapsed="true">
+    <Position X="3.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Avalonia.Controls.Panel" Collapsed="true">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ReactiveUI.ReactiveObject" Collapsed="true">
+    <Position X="21.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Avalonia.Controls.Window" Collapsed="true">
+    <Position X="42.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace Helper.Models.Main
 {
-    public class Role
+    public class Role: Base
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

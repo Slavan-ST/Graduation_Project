@@ -6,14 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Helper.Models.Main
+namespace Helper.Models
 {
-    public class Group : Base
+    public class Base
     {
-        public string Name { get; set; } = string.Empty;
-        public override string ToString()
-        {
-            return this.Name;
-        }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
     }
 }

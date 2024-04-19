@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace Helper.Models.Main
 {
-    public class Event
+    public class Event : Base
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string? Description { get; set; }
         public string? Location { get; set; }
         public string? Organizer { get; set; }

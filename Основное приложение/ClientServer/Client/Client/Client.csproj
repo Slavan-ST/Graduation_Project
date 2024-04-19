@@ -38,10 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UpToDateCheckInput Remove="Styles\Desktop\TextBoxes\PasswordBox.axaml" />
   </ItemGroup>
 </Project>

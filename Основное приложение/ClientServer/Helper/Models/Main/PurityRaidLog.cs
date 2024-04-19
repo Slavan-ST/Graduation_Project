@@ -6,15 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Helper.Models.Main
 {
-    public class PurityRaidLog
+    public class PurityRaidLog: Base
     {
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public int RoomId { get; set; }
         public DateTime Date { get; set; }
         public int Marker { get; set; }

@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace Helper.Models.Main
 {
-    public class Room
+    public class Room: Base
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Number { get; set; } = "";
 
         public override string ToString()
