@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:bh="using:Client.Behaviours"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
@@ -12,20 +13,53 @@
 		<DockPanel>
 			<TreeView DockPanel.Dock="Top" Classes="trasnparent">
 				<TreeViewItem Header="Фильтры">
-					<StackPanel>
+					<StackPanel >
 						<StackPanel>
-							<TextBlock Text="Студент" Classes="titleFilter"/>
-							<AutoCompleteBox/>
+							<TextBlock Text="Студент" Classes="h3"/>
+							<AutoCompleteBox ItemsSource="{Binding ListStudents}"
+											 FilterMode="StartsWith"
+											 Classes="outline lightBlue h4"
+											 SelectedItem="{Binding ListStudentsSelectedItem}">
+								<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding FIO}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Комната" Classes="titleFilter"/>
-							<AutoCompleteBox/>
+							<TextBlock Text="Комната" Classes="h3"/>
+							<AutoCompleteBox SelectedItem="{Binding ListRoomsSelectedItem}"
+											  Classes="outline lightBlue h4">
+								<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Number}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Статус" Classes="titleFilter"/>
-							<AutoCompleteBox/>
+							<TextBlock Text="Статус" Classes="h3"/>
+							<AutoCompleteBox SelectedItem="{Binding ListStatusesSelectedItem}"
+											 Classes="outline lightBlue h4">
+								<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Name}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+							</AutoCompleteBox>
 						</StackPanel>
-						<Button Content="Применить" Margin="0,5"/>
+						<DatePicker Classes="outline purple"/>
+						<Button Content="Применить" Margin="0,5" Classes="navigate h3"/>
 					</StackPanel>
 				</TreeViewItem>
 			</TreeView>
@@ -53,10 +87,7 @@
 								<i:Interaction.Behaviors>
 									<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="Border">
 										<iac:PopupAction>
-											<Border BorderBrush="#08F0E9"
-													BorderThickness="3"
-													Background="#08F0E9"
-													CornerRadius="25">
+											<Border Classes="borderPanel">
 												<UserControl Content="{Binding StudentProfil}"/>
 											</Border>
 										</iac:PopupAction>
