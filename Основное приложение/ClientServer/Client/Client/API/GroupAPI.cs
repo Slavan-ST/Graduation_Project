@@ -14,7 +14,7 @@ namespace Client.API
     {
         public static async Task<IEnumerable<Group>?> GetGroupsAsync()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<Group>>(Connect.Connection + $"Groups");
@@ -28,7 +28,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> DeleteGroupAsync(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"Groups/{id}");
@@ -42,7 +42,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PostGroupAsync(Group group)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Groups", group);
@@ -56,7 +56,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PutPutGroupAsync(Group group)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"Groups", group);

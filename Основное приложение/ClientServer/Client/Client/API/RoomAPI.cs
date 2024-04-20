@@ -16,7 +16,7 @@ namespace Client.API
     {
         public static async Task<IEnumerable<Room>?> GetRoomsAsync()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<Room>>(Connect.Connection + $"Rooms");
@@ -30,7 +30,7 @@ namespace Client.API
         }
         public static async Task<Room?> GetRoomAsync(string number)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<Room>(Connect.Connection + $"Rooms/{number}");
@@ -44,7 +44,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> DeleteStatusAsync(string number)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"Rooms/{number}");
@@ -58,7 +58,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PostStatusAsync(Room room)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Rooms", room);
@@ -72,7 +72,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PutPutStatusAsync(Room room)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"Rooms", room);

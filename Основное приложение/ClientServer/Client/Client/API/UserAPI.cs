@@ -16,7 +16,7 @@ namespace Client.API
     {
         public static async Task<UserDTO?> GetUserAsync(string login)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Users/{login}");
@@ -30,7 +30,7 @@ namespace Client.API
         }
         public static async Task<IEnumerable<UserDTO>?> GetUsersAsync()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<UserDTO>>(Connect.Connection + $"Users");
@@ -44,7 +44,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> DeleteUserAsync(string login)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"Users/{login}");
@@ -58,7 +58,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PostUserAsync(UserDTO userDTO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Users", userDTO);
@@ -72,7 +72,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PutUserAsync(UserDTO userDTO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"Users", userDTO);

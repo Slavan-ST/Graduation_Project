@@ -1,4 +1,6 @@
-﻿using System;
+﻿// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace Client.API
     {
         public static async Task<AttendanceLog?> GetAttendanceLog(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<AttendanceLog>(Connect.Connection + $"AttendanceLog/{id}");
@@ -32,7 +34,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogs()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog");
@@ -47,7 +49,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogsYear(int year)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog/year:{year}");
@@ -62,7 +64,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogsMonth(int year, int month)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog/month:{month}.{year}");
@@ -77,7 +79,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogsDay(int year, int month, int day)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog/day:{day}.{month}.{year}");
@@ -93,7 +95,7 @@ namespace Client.API
 
         public static async Task<HttpStatusCode?> DeleteAttendanceLog(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"AttendanceLog/{id}");
@@ -108,7 +110,7 @@ namespace Client.API
         //создание лога
         public static async Task<HttpStatusCode?> PostAttendanceLog(AttendanceLog attendanceLogDTO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"AttendanceLog", attendanceLogDTO);
@@ -123,7 +125,7 @@ namespace Client.API
         //обновление лога
         public static async Task<HttpStatusCode?> PutAttendanceLog(AttendanceLog attendanceLogDTO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"AttendanceLog", attendanceLogDTO);

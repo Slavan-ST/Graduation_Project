@@ -16,7 +16,7 @@ namespace Client.API
     {
         public static async Task<UserDTO?> SignIn(string login, string password)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"login?login={login}&password={password}");
@@ -31,7 +31,7 @@ namespace Client.API
 
         public static async Task<HttpStatusCode?> SignOut()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetAsync(Connect.Connection + $"SignOut");

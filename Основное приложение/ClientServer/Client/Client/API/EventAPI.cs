@@ -16,7 +16,7 @@ namespace Client.API
     {
         public static async Task<IEnumerable<EventO>?> GetEventsAsync()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<EventO>>(Connect.Connection + $"Events");
@@ -30,7 +30,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> DeleteStatusAsync(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"Events/{id}");
@@ -44,7 +44,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PostStatusAsync(EventO eventO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Events", eventO);
@@ -58,7 +58,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PutPutStatusAsync(EventO eventO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"Events", eventO);

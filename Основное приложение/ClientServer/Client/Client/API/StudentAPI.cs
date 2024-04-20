@@ -17,7 +17,7 @@ namespace Client.API
     {
         public static async Task<Student?> GetStudentAsync(string fio, string room)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<Student>(Connect.Connection + $"Students/{room}/{fio}");
@@ -34,7 +34,7 @@ namespace Client.API
         //добавить из обновы
         public static async Task<IEnumerable<Student>?> GetStudentsAsync()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<Student>>(Connect.Connection + $"Students");
@@ -48,7 +48,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> DeleteStudentAsync(string fio, string room)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"Students/{room}/{fio}");
@@ -62,7 +62,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PostStudentAsync(Student studentDTO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Students", studentDTO);
@@ -76,7 +76,7 @@ namespace Client.API
         }
         public static async Task<HttpStatusCode?> PutPutStudentAsync(Student studentDTO)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"Students", studentDTO);

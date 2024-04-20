@@ -16,7 +16,7 @@ namespace Client.API
     {
         public static async Task<PurityRaidLog?> GetPurityRaidLog(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<PurityRaidLog>(Connect.Connection + $"PurityRaidLog/{id}");
@@ -31,7 +31,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<PurityRaidLog>?> GetPurityRaidLogs()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog");
@@ -46,7 +46,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<PurityRaidLog>?> GetPurityRaidLogsYear(int year)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog/year:{year}");
@@ -61,7 +61,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<PurityRaidLog>?> GetPurityRaidLogsMonth(int year, int month)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog/month:{month}.{year}");
@@ -76,7 +76,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<PurityRaidLog>?> GetPurityRaidLogsDay(int year, int month, int day)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client =     HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog/day:{day}.{month}.{year}");
@@ -92,7 +92,7 @@ namespace Client.API
 
         public static async Task<HttpStatusCode?> DeletePurityRaidLog(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"PurityRaidLog/{id}");
@@ -107,7 +107,7 @@ namespace Client.API
         //создание лога
         public static async Task<HttpStatusCode?> PostPurityRaidLog(PurityRaidLog purityRaidLog)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"PurityRaidLog", purityRaidLog);
@@ -122,7 +122,7 @@ namespace Client.API
         //обновление лога
         public static async Task<HttpStatusCode?> PutPurityRaidLog(PurityRaidLog purityRaidLog)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"PurityRaidLog", purityRaidLog);

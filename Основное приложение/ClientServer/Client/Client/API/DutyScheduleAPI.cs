@@ -16,7 +16,7 @@ namespace Client.API
     {
         public static async Task<DutySchedule?> GetDutySchedule(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<DutySchedule>(Connect.Connection + $"DutySchedule/{id}");
@@ -31,7 +31,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<DutySchedule>?> GetDutySchedules()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<DutySchedule>>(Connect.Connection + $"DutySchedule");
@@ -46,7 +46,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<DutySchedule>?> GetDutySchedulesYear(int year)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client =     HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<DutySchedule>>(Connect.Connection + $"DutySchedule/year:{year}");
@@ -61,7 +61,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<DutySchedule>?> GetDutySchedulesMonth(int year, int month)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<DutySchedule>>(Connect.Connection + $"DutySchedule/month:{month}.{year}");
@@ -76,7 +76,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<DutySchedule>?> GetDutySchedulesDay(int year, int month, int day)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<DutySchedule>>(Connect.Connection + $"DutySchedule/day:{day}.{month}.{year}");
@@ -92,7 +92,7 @@ namespace Client.API
 
         public static async Task<HttpStatusCode?> DeleteDutySchedule(int id)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.DeleteAsync(Connect.Connection + $"DutySchedule/{id}");
@@ -107,7 +107,7 @@ namespace Client.API
         //создание лога
         public static async Task<HttpStatusCode?> PostDutySchedule(DutySchedule dutySchedule)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"DutySchedule", dutySchedule);
@@ -122,7 +122,7 @@ namespace Client.API
         //обновление лога
         public static async Task<HttpStatusCode?> PutDutySchedule(DutySchedule dutySchedule)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"DutySchedule", dutySchedule);
