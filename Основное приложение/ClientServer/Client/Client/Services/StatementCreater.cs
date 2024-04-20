@@ -1,9 +1,12 @@
 ﻿
 
+using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
+using System;
 using System.IO;
+using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Client.Services
@@ -37,15 +40,46 @@ namespace Client.Services
             string repName, 
             string repSurname, 
             string repPatronymic, 
-            string repPhone)
+            string repPhone,
+            string ageCategory = "несовершеннолетний")
         {
-            using var document = new Document(new PdfDocument(new PdfWriter("helloworld-pdf.pdf")));
+            var font = PdfFontFactory.CreateFont($"{Environment.CurrentDirectory}\\Fonts\\timesnewromanpsmt.ttf", "Identity-H");
+            
+            using var document = new Document(new PdfDocument(new PdfWriter("заявление.pdf")));
+            document.SetFont(font);
+            document.SetFontSize(14);
 
-            var par1 = new Paragraph("right text").SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
 
-            var par2 = new Paragraph("center text").SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
+            var par1 = new Paragraph(
+                new iText.Layout.Element.Text(
 
-            var par3 = new Paragraph("left text").SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT);
+                    "Зам директора по ВР" + Environment.NewLine +
+                    "О.А. Крапп" + Environment.NewLine +
+                    "студента" + Environment.NewLine +
+                    $"{surname} {name} {patronymic} комн {room}" + Environment.NewLine +
+                    $"{ageCategory}" + Environment.NewLine)
+
+                ).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
+
+            var par2 = new Paragraph(
+
+                    $"Прошу отпустить с {dateOut} по {dateOut} по адресу {address}" + Environment.NewLine +
+                    $"{repSurname} {repName} {repPatronymic}: {repPhone}" +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    Environment.NewLine
+
+
+
+                ).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
+
+            var par3 = new Paragraph(
+                
+                    $"{dateOut}"
+
+
+                ).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
 
 
 
