@@ -28,6 +28,7 @@
 	<StyleInclude Source="/Styles/Desktop/ComboBoxes/Outlined.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/DatePickers/Outlined.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/Items/Panels.axaml"/>
+	<StyleInclude Source="/Styles/Desktop/Popups/Profiles.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TextBlocks/Headers.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TextBlocks/Outlined.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TextBoxes/Headers.axaml"/>

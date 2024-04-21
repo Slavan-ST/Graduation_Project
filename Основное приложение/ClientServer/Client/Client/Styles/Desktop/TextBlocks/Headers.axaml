@@ -7,6 +7,10 @@
 				<TextBlock Text="Header (h2)" Classes="h2"/>
 				<TextBlock Text="Header (h3)" Classes="h3"/>
 				<TextBlock Text="Header (h4)" Classes="h4"/>
+				<Label Content="Header (h1)" Classes="h1"/>
+				<Label Content="Header (h2)" Classes="h2"/>
+				<Label Content="Header (h3)" Classes="h3"/>
+				<Label Content="Header (h4)" Classes="h4"/>
 			</StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -26,6 +30,22 @@
 	</Style>
 
 	<Style Selector="TextBlock.h4">
+		<Setter Property="FontSize" Value="24"/>
+	</Style>
+
+	<Style Selector="Label.h1">
+		<Setter Property="FontSize" Value="36"/>
+	</Style>
+
+	<Style Selector="Label.h2">
+		<Setter Property="FontSize" Value="32"/>
+	</Style>
+
+	<Style Selector="Label.h3">
+		<Setter Property="FontSize" Value="28"/>
+	</Style>
+
+	<Style Selector="Label.h4">
 		<Setter Property="FontSize" Value="24"/>
 	</Style>
 </Styles>

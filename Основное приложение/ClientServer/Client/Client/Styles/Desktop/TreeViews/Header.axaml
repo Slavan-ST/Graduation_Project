@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20" Width="600" Height="800">
-			<TreeView Classes="trasnparent">
+			<TreeView Classes="transparent">
 				<TreeViewItem Header="Header 1">
 					<TextBlock Text="Item 1" Classes="h4"/>
 				</TreeViewItem>
@@ -21,15 +21,15 @@
 
 	<StyleInclude Source="/Styles/Desktop/TextBlocks/Headers.axaml"/>
 
-	<Style Selector="TreeView.trasnparent TreeViewItem">
+	<Style Selector="TreeView.transparent TreeViewItem">
 		<Setter Property="FontSize" Value="28"/>
 	</Style>
 	
-	<Style Selector="TreeView.trasnparent Border#PART_LayoutRoot:pointerover">
+	<Style Selector="TreeView.transparent Border#PART_LayoutRoot:pointerover">
 		<Setter Property="Background" Value="Transparent"/>
 	</Style>
 
-	<Style Selector="TreeView.trasnparent TreeViewItem:selected Border#PART_LayoutRoot">
+	<Style Selector="TreeView.transparent TreeViewItem:selected Border#PART_LayoutRoot">
 		<Setter Property="Background" Value="Transparent"/>
 	</Style>
 	

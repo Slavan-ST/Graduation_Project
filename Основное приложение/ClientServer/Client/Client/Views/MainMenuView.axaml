@@ -43,29 +43,31 @@
 						   VerticalAlignment="Center" />
 			</rxui:RoutedViewHost.DefaultContent>
 		</rxui:RoutedViewHost>
-		
-		
-		
-		<Grid Grid.RowSpan="2" IsVisible="{Binding IsOpenSideBar}" Background="White">
-			<StackPanel Margin="25">
-				<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}" Classes="sideBar"/>
-				<StackPanel IsVisible="{Binding IsStudents}">
-					<Button Content="Профиль" Command="{Binding Profile}" Classes="sideBar"/>
-					<Button Content="Заявление" Command="{Binding Statement}" Classes="sideBar"/>
-					<Button Content="Мероприятия" Command="{Binding Events}" Classes="sideBar"/>
-				</StackPanel>
-				<StackPanel IsVisible="{Binding IsWorker}">
-					<Button Content="План меропритий" Command="{Binding EventsList}" Classes="sideBar"/>
-					<Button Content="График дежурств" Command="{Binding DutyChart}" Classes="sideBar"/>
-					<Button Content="Списки студентов" Command="{Binding ListStudents}" Classes="sideBar"/>
-					<Button Content="Экран чистоты" Command="{Binding PurityChart}" Classes="sideBar"/>
-					<Button Content="Журнал" Command="{Binding Record}" Classes="sideBar"/>
-					<Button Content="Рейд чистоты" Command="{Binding CleanRaid}" Classes="sideBar"/>
-					<Button Content="Ежедневная проверка" Command="{Binding DailyCheck}" Classes="sideBar"/>
-				</StackPanel>
-				<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="sideBar"/>
-			</StackPanel>
-			<Button Content="◄" Classes="switch" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
+
+		<Grid Grid.Column="1" Grid.RowSpan="2">
+			<Border Background="rgba(0, 0, 0, 0.3)" IsVisible="{Binding IsOpenSideBar}"/>
 		</Grid>
+
+			<Grid Grid.RowSpan="2" IsVisible="{Binding IsOpenSideBar}" Background="White">
+				<StackPanel Margin="25">
+					<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}" Classes="sideBar"/>
+					<StackPanel IsVisible="{Binding IsStudents}">
+						<Button Content="Профиль" Command="{Binding Profile}" Classes="sideBar"/>
+						<Button Content="Заявление" Command="{Binding Statement}" Classes="sideBar"/>
+						<Button Content="Мероприятия" Command="{Binding Events}" Classes="sideBar"/>
+					</StackPanel>
+					<StackPanel IsVisible="{Binding IsWorker}">
+						<Button Content="План мероприятий" Command="{Binding EventsList}" Classes="sideBar"/>
+						<Button Content="График дежурств" Command="{Binding DutyChart}" Classes="sideBar"/>
+						<Button Content="Списки студентов" Command="{Binding ListStudents}" Classes="sideBar"/>
+						<Button Content="Экран чистоты" Command="{Binding PurityChart}" Classes="sideBar"/>
+						<Button Content="Журнал" Command="{Binding Record}" Classes="sideBar"/>
+						<Button Content="Рейд чистоты" Command="{Binding CleanRaid}" Classes="sideBar"/>
+						<Button Content="Ежедневная проверка" Command="{Binding DailyCheck}" Classes="sideBar"/>
+					</StackPanel>
+					<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="sideBar"/>
+				</StackPanel>
+				<Button Content="◄" Classes="switch" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
+			</Grid>
 	</Grid>
 </UserControl>

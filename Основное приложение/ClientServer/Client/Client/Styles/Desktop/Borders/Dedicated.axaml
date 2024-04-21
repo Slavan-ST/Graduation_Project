@@ -131,7 +131,7 @@
 	</Styles.Resources>
 
 	<Style Selector="Border.dedicate">
-		<Setter Property="Background" Value="{StaticResource lightBlue}"/>
+		<Setter Property="Background" Value="{StaticResource lightBlueAlpha}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
 	

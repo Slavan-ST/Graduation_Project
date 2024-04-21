@@ -15,6 +15,5 @@ namespace Helper.Models.Main
         public DateTime Date { get; set; }
 
         public Student? Student { get; set; }
-
     }
 }

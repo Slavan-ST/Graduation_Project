@@ -6,62 +6,66 @@
              x:Class="Client.Views.StatementView">
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="10*"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="150"/>
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
-		<WrapPanel HorizontalAlignment="Center" Margin="0,20,0,0">
-				<StackPanel Margin="0,0,100,0">
+		<ScrollViewer>
+			<StackPanel HorizontalAlignment="Stretch" Margin="40" >
+				<StackPanel Margin="10">
 					<TextBlock Text="Cтудент" Classes="h2"></TextBlock>
-					
+
 					<TextBlock Text="Фамилия" Classes="h3"/>
 					<TextBox Text="{Binding Surname}" Classes="outline purple h3"/>
-					
-					
-					<TextBlock Text="Имя" Classes="h3"/> 
+
+
+					<TextBlock Text="Имя" Classes="h3"/>
 					<TextBox Text="{Binding Name}" Classes="outline purple h3"/>
-					
-					
+
+
 					<TextBlock Text="Отчество" Classes="h3"/>
 					<TextBox Text="{Binding Patronymic}" Classes="outline purple h3"/>
-					
-					
+
+
 					<TextBlock Text="№ комнаты" Classes="h3"/>
 					<TextBox Text="{Binding Room}" Classes="outline purple h3"/>
-					
-					
+
+
 					<TextBlock Text="Номер телефона" Classes="h3"/>
 					<TextBox Text="{Binding Phone}" Classes="outline purple h3"/>
-					
-					
+
+
 					<TextBlock Text="Дата выезда" Classes="h3"/>
 					<TextBox Text="{Binding DateOut}" Classes="outline purple h3"/>
-					
-					
+
+
 					<TextBlock Text="Дата заезда" Classes="h3"/>
 					<TextBox Text="{Binding DateIn}" Classes="outline purple h3"/>
-					
+
 				</StackPanel>
-				<StackPanel Margin="100,0,0,0">
+				<StackPanel Margin="10">
 					<TextBlock Text="Законый представитель" Classes="h2"/>
-					
+
 					<TextBlock Text="Фамилия" Classes="h3"/>
 					<TextBox Text="{Binding SurnameRepresentative}" Classes="outline purple h3"/>
-					
+
 					<TextBlock Text="Имя" Classes="h3"/>
 					<TextBox Text="{Binding NameRepresentative}" Classes="outline purple h3"/>
-					
+
 					<TextBlock Text="Отчество" Classes="h3"/>
 					<TextBox Text="{Binding PatronymicRepresentative}" Classes="outline purple h3"/>
-					
-					
+
+
 					<TextBlock Text="Номер телефона" Classes="h3"/>
 					<TextBox Text="{Binding PhoneRepresentative}" Classes="outline purple h3"/>
 				</StackPanel>
-			</WrapPanel>
-		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+			</StackPanel>
+		</ScrollViewer>
+		<Border Background="White"  Grid.Row="1">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
 			<Button Command="{Binding GetEmptyStatement}" Content="Получить пустой бланк" Classes="navigate h2"/>
 			<Button Command="{Binding GetFillStatement}" Content="Составить" Classes="navigate h2"/>
 		</StackPanel>
+		</Border>
 	</Grid>
 </UserControl>

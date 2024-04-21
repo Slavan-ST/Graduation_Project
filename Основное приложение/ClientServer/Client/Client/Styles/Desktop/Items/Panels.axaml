@@ -4,7 +4,7 @@
         <Border Padding="20" Width="800">
 			<WrapPanel>
 				<Border Classes="borderPanel">
-					<StackPanel Classes="panel" Height="280" Width="280">
+					<StackPanel Classes="panel">
 						<TextBlock Text="Header" Classes="h3"/>
 						<Border Classes="combineOutline">
 							<StackPanel Orientation="Horizontal">
@@ -27,7 +27,7 @@
 					</StackPanel>
 				</Border>
 				<Border Classes="borderPanel">
-					<StackPanel Classes="panel" Height="280" Width="280">
+					<StackPanel Classes="panel">
 						<TextBlock Text="Header" Classes="h3"/>
 						<Border Classes="combineOutline">
 							<StackPanel Orientation="Horizontal">
@@ -50,7 +50,7 @@
 					</StackPanel>
 				</Border>
 				<Border Classes="borderPanel">
-					<StackPanel Classes="panel" Height="280" Width="280">
+					<StackPanel Classes="panel">
 						<TextBlock Text="Header" Classes="h3"/>
 						<Border Classes="combineOutline">
 							<StackPanel Orientation="Horizontal">
@@ -73,7 +73,7 @@
 					</StackPanel>
 				</Border>
 				<Border Classes="borderPanel">
-					<StackPanel Classes="panel" Height="280" Width="280">
+					<StackPanel Classes="panel">
 						<TextBlock Text="Header" Classes="h3"/>
 						<Border Classes="combineOutline">
 							<StackPanel Orientation="Horizontal">
@@ -114,6 +114,8 @@
 
 	<Style Selector="StackPanel.panel">
 		<Setter Property="Background" Value="White"/>
+		<Setter Property="Height" Value="280"/>
+		<Setter Property="Width" Value="280"/>
 	</Style>
 
 	<Style Selector="Border.borderPanel">

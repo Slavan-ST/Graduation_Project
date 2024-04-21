@@ -60,7 +60,7 @@ namespace Client.ViewModels
             EventsList = ReactiveCommand.Create(() => 
             {
                 Router.Navigate.Execute(new EventsListViewModel(this));
-                Title = "План меропритий";
+                Title = "План мероприятий";
                 IsOpenSideBar = false;
             });
 
@@ -101,8 +101,8 @@ namespace Client.ViewModels
 
             Record = ReactiveCommand.Create(() =>
             {
-                Router.Navigate.Execute(new RecordStudentsViewModel(this));
-                Title = "Журнал";
+                Router.Navigate.Execute(new RecordYearViewModel(this));
+                Title = "Годовой журнал";
                 IsOpenSideBar = false;
             });
 

@@ -19,11 +19,11 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<StackPanel Margin="20">
-								<Label Content="{Binding Surname}" Classes="h3"/>
-								<Label Content="{Binding Name}" Classes="h3"/>
-								<Label Content="{Binding Patronymic}" Classes="h3"/>
-								<Label Content="{Binding Room.Number}" Classes="h3"/>
+							<StackPanel Classes="panel">
+								<TextBlock Text="{Binding Surname}" Classes="h3"/>
+								<TextBlock Text="{Binding Name}" Classes="h3"/>
+								<TextBlock Text="{Binding Patronymic}" Classes="h3"/>
+								<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>
