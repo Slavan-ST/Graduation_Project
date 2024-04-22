@@ -5,40 +5,47 @@
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.ProfileView">
 	<Grid>
-		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<StackPanel Margin="10">
-			<StackPanel Orientation="Horizontal" Margin="15">
-				<StackPanel Margin="10">
-					<TextBlock Text="{Binding Fio}" Classes="h2"/>
-					<TextBlock Text="{Binding NumberRoom}" Classes="h2"/>
-					<TextBlock Text="{Binding MarkClear}" Classes="h2"/>
-					<TextBlock Text="{Binding StatusUser}" Classes="h2"/>
-				</StackPanel>
-			</StackPanel>
-			<TextBlock Text="Дополнительная информация" Classes="h2"/>
-			<StackPanel Margin="15" HorizontalAlignment="Stretch">
-				<StackPanel>
-					<TextBlock Text="Контакты" Classes="h3"/>
-					<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
-				</StackPanel>
-				<StackPanel>
-					<TextBlock Text="Домашний адрес" Classes="h3"/>
-					<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
-				</StackPanel>
-				<StackPanel>
-					<TextBlock Text="Группа" Classes="h3"/>
-					<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
-				</StackPanel>
-				<TextBlock Text="Информация о законных предствителях" Classes="h2"/>
-				<StackPanel>
-					<TextBlock Text="ФИО" Classes="h3"/>
-					<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
-				</StackPanel>
-				<StackPanel>
-					<TextBlock Text="Номер телефона" Classes="h3"/>
-					<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
-				</StackPanel>
-			</StackPanel>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="3*"/>
+		</Grid.RowDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
+		<StackPanel Margin="25">
+			<TextBlock Text="{Binding Fio}" Classes="h2"/>
+			<TextBlock Text="{Binding NumberRoom}" Classes="h2"/>
+			<TextBlock Text="{Binding MarkClear}" Classes="h2"/>
+			<TextBlock Text="{Binding StatusUser}" Classes="h2"/>
 		</StackPanel>
+		<ScrollViewer Grid.Row="1" Margin="25">
+			<StackPanel HorizontalAlignment="Stretch">
+				<TextBlock Text="Дополнительная информация" Classes="h2"/>
+				<StackPanel Margin="10">
+					<StackPanel>
+						<TextBlock Text="Контакты" Classes="h3"/>
+						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Text="Домашний адрес" Classes="h3"/>
+						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Text="Группа" Classes="h3"/>
+						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+					</StackPanel>
+				</StackPanel>
+
+				<TextBlock Text="Информация о законных предствителях" Classes="h2"/>
+				<StackPanel Margin="10">
+					<StackPanel>
+						<TextBlock Text="ФИО" Classes="h3"/>
+						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Text="Номер телефона" Classes="h3"/>
+						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
 	</Grid>
 </UserControl>

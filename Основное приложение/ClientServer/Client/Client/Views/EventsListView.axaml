@@ -28,9 +28,12 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<StackPanel Classes="panel">
-								<TextBlock Text="{Binding Date.Day}" Classes="h3"/>
-								<TextBlock Text="{Binding EventName}" Classes="h3" TextWrapping="Wrap"/>
+							<StackPanel Classes="panel" MinWidth="300" MinHeight="400">
+								<TextBox Text="{Binding Name}" Classes="h4 outline purple"/>
+								<TextBox Text="{Binding Date}" Classes="h4 outline purple"/>
+								<TextBox Text="{Binding Location}" Classes="h4 outline purple"/>
+								<TextBox Text="{Binding Organizer}" Classes="h4 outline purple"/>
+								<TextBox Text="{Binding Description}" Classes="h4 outline purple" TextWrapping="Wrap"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>

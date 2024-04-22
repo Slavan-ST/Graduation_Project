@@ -26,7 +26,7 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<StackPanel Classes="panel">
+							<StackPanel Classes="panel" Height="280" Width="280">
 								<TextBlock Text="{Binding Mount}" Classes="h3"/>
 								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">

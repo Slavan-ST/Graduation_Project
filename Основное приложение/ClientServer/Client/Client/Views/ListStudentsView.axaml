@@ -79,7 +79,7 @@
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<Border Classes="borderPanel">
-								<StackPanel Classes="panel">
+								<StackPanel Classes="panel" Height="280" Width="280">
 									<TextBlock Text="{Binding Surname}" Classes="h3"/>
 									<TextBlock Text="{Binding Name}" Classes="h3"/>
 									<TextBlock Text="{Binding Patronymic}" Classes="h3"/>

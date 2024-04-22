@@ -6,7 +6,7 @@
              x:Class="Client.Views.PurityChartView">
 	<Grid>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<ScrollViewer VerticalScrollBarVisibility="Hidden">
+		<ScrollViewer>
 			<ItemsControl ItemsSource="{Binding ClearMarks}" Background="Transparent"
 						  HorizontalAlignment="Center">
 				<ItemsControl.ItemsPanel>
@@ -19,7 +19,7 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<StackPanel Classes="panel">
+							<StackPanel Classes="panel" Height="280" Width="280">
 								<TextBlock Text="{Binding Surname}" Classes="h3"/>
 								<TextBlock Text="{Binding Name}" Classes="h3"/>
 								<TextBlock Text="{Binding Patronymic}" Classes="h3"/>

@@ -114,8 +114,6 @@
 
 	<Style Selector="StackPanel.panel">
 		<Setter Property="Background" Value="White"/>
-		<Setter Property="Height" Value="280"/>
-		<Setter Property="Width" Value="280"/>
 	</Style>
 
 	<Style Selector="Border.borderPanel">

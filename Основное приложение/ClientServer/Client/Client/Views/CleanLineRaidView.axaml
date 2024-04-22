@@ -15,8 +15,9 @@
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel HorizontalAlignment="Left" Margin="50" MaxWidth="1000">
 			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Комната - " Classes="h2"/>
-				<TextBlock Text="{Binding Room.Number}" Classes="h2"/>
+				<TextBlock Text="Комната" Margin="0,5,5,0" Classes="h2"/>
+				<ComboBox ItemsSource="{Binding Rooms}" SelectedItem="{Binding SelectedRoom}"
+						  Classes="h2 outline lightBlue"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="0,55,0,5">
 				<TextBlock Text="Чистота" Classes="h2"/>
