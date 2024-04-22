@@ -1,5 +1,8 @@
-﻿using Client.ViewModels.Base;
+﻿using Client.API;
+using Client.ViewModels.Base;
+using Helper.Models.Main;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +15,54 @@ namespace Client.ViewModels
     {
         public DailyCheckViewModel(IScreen? screen = null) : base(screen) 
         {
+            FillRooms();
+            FillAllStudents();
 
+            this.WhenAnyValue(x => x.SelectedRoom).Subscribe(x => FillStudents());
+        }
+
+
+
+        [Reactive]
+        public Room? SelectedRoom { get; set; } // для comboBox
+        [Reactive]
+        public List<Room>? Rooms { get; set; } // для comboBox, загружается только при старте страницы
+        [Reactive]
+        public List<Student>? Students { get; set; } //Студенты в комнате
+        [Reactive]
+        public List<Student>? AllStudents { get; set; } //Все студенты (для первоначальной загрузки)
+
+        async void FillRooms()
+        {
+            var rooms = await RoomAPI.GetRoomsAsync();
+            if (rooms != null)
+            {
+                Rooms = new List<Room>(rooms);
+                SelectedRoom = Rooms.First();
+            }
+        }
+
+        async void FillAllStudents()
+        {
+            var students = await StudentAPI.GetStudentsAsync();
+            if (students != null)
+            {
+                AllStudents = new List<Student>(students);
+            }
+        }
+        void FillStudents()
+        {
+            if (SelectedRoom == null)
+            {
+                return;
+            }
+            if (AllStudents == null)
+            {
+                return;
+            }
+            var students = AllStudents.Where(x => x.Room == SelectedRoom).ToList();
+
+            Students = new List<Student>(students);
         }
     }
 }

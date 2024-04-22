@@ -18,7 +18,8 @@
 			</StackPanel>
 		</StackPanel>
 		<ScrollViewer Grid.Row="1">
-			<ItemsControl>
+			<ItemsControl ItemsSource="{Binding Events}" Background="Transparent"
+						  HorizontalAlignment="Center">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
 						<WrapPanel/>

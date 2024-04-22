@@ -1,4 +1,6 @@
-﻿using Client.ViewModels.Base;
+﻿using Client.API;
+using Client.ViewModels.Base;
+using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -14,7 +16,19 @@ namespace Client.ViewModels
     {
         public EventsListViewModel(IScreen? screen = null) : base(screen)
         {
-        
+            FillEventsAsync();
         }
+        async void FillEventsAsync()
+        {
+            var events = await EventAPI.GetEventsAsync();
+            if (events == null)
+            {
+                return;
+            }
+            Events = events.ToList();
+        }
+
+        [Reactive]
+        public List<EventO> Events { get; set; } = new List<EventO>();
     }
 }
