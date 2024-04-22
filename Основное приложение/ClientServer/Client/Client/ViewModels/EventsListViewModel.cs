@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Client.ViewModels
 {
@@ -17,10 +18,15 @@ namespace Client.ViewModels
         public EventsListViewModel(IScreen? screen = null) : base(screen)
         {
             FillEventsAsync();
+            Save = ReactiveCommand.Create(() =>
+            {
+                SaveInAPI();
+            });
         }
+
         async void FillEventsAsync()
         {
-            var events = await EventAPI.GetEventsAsync();
+            var events = await EventAPI.GetsAsync();
             if (events == null)
             {
                 return;
@@ -30,5 +36,14 @@ namespace Client.ViewModels
 
         [Reactive]
         public List<EventO> Events { get; set; } = new List<EventO>();
+        public ICommand Save { get; set; }
+
+        async void SaveInAPI()
+        {
+            foreach (var eventO in Events)
+            {
+                await EventAPI.PutAsync(eventO);
+            }
+        }
     }
 }

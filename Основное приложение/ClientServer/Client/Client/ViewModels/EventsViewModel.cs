@@ -20,7 +20,7 @@ namespace Client.ViewModels
         }
         async void FillEventsAsync()
         {
-            var events = await EventAPI.GetEventsAsync();
+            var events = await EventAPI.GetsAsync();
             if (events == null)
             {
                 return;

@@ -14,7 +14,7 @@ namespace Client.API
 {
     internal class EventAPI
     {
-        public static async Task<IEnumerable<EventO>?> GetEventsAsync()
+        public static async Task<IEnumerable<EventO>?> GetsAsync()
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -28,7 +28,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> DeleteStatusAsync(int id)
+        public static async Task<HttpStatusCode?> DeleteAsync(int id)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -42,7 +42,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PostStatusAsync(EventO eventO)
+        public static async Task<HttpStatusCode?> PostAsync(EventO eventO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -56,7 +56,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PutPutStatusAsync(EventO eventO)
+        public static async Task<HttpStatusCode?> PutAsync(EventO eventO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
