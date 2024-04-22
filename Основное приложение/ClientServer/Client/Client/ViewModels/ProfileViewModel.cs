@@ -1,8 +1,10 @@
 ﻿using Client.ViewModels.Base;
+using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,10 @@ namespace Client.ViewModels
         public ProfileViewModel(IScreen? screen = null) : base(screen)
         {
 
+        }
+        public ProfileViewModel(IScreen? screen = null, Student? student = null) : base(screen)
+        {
+            Debug.WriteLine("ahahahhaahahahhaha");
         }
 
         [Reactive]

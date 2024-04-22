@@ -19,7 +19,10 @@ namespace Client.ViewModels
     {
         public ListStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            this.WhenAnyValue(x => x.SelectedStudent).Subscribe(/* сюда пихнуть обновление UC ProfileStudent т.к. так как он отображается в Popup (см. разметку) */);
+            this.WhenAnyValue(x => x.SelectedStudent).Subscribe(x =>
+            {
+                ProfileStudent = new ProfileViewModel(screen, SelectedStudent);
+            });
             Test();
         }
 
@@ -27,7 +30,7 @@ namespace Client.ViewModels
         public Student? SelectedStudent { get; set; }
 
         [Reactive]
-        public UserControl? ProfileStudent { get; set; }
+        public ProfileViewModel? ProfileStudent { get; set; }
         async void Test()
         {
             var students = await GetStudents();

@@ -2,6 +2,7 @@
 using Client.Services;
 using Client.ViewModels.Base;
 using Helper.Models.DTO;
+using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -34,14 +35,13 @@ namespace Client.ViewModels
                 //получаем пользователя
                 UserDTO? user = await API.HomeAPI.SignIn(Login, Password);
                 //если пользователя получили, то переходим на главную
-                if (user != null)
-                {
-                    HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen));
-                }
-                else
+                if (user == null)
                 {
                     Message.Show("Error", "Пользователь не найден!");
+                    return;
                 }
+                Services.Authorization.GetAuthorization().IsEmployee = user.Role!.Name == "Сотрудник";
+                HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen));
             });
         }
 
