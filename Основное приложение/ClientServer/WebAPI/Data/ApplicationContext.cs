@@ -7,7 +7,7 @@ namespace WebAPI.Data
     public class ApplicationContext : DbContext
     {
         //коннект к БД
-        static string _connectionString = @"Server = SLAVANST\192.168.0.2,54163; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
+        static string _connectionString = @"Server = SLAVAN\192.168.15.16, 50015; Database = SystemO; User id = user; Password = 123; TrustServerCertificate = True; ";
 
         public ApplicationContext()
         {
