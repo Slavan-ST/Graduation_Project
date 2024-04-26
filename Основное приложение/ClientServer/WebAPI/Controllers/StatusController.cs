@@ -5,11 +5,17 @@ using WebAPI.Data;
 
 namespace WebAPI.Controllers
 {
-
+    /// <summary>
+    /// Контроллер для работы со статусами
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class StatusController : ControllerBase
     {
+        /// <summary>
+        /// Получение всех статусов
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> GetStatuses()
         {
@@ -24,7 +30,11 @@ namespace WebAPI.Controllers
             return new JsonResult(statuss);
         }
 
-
+        /// <summary>
+        /// Добавление статуса
+        /// </summary>
+        /// <param name="statusDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> PostStatus(Status? statusDTO)
         {
@@ -52,7 +62,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(201);
         }
-
+        /// <summary>
+        /// Обновление статуса
+        /// </summary>
+        /// <param name="statusDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> PutStatus(Status? statusDTO)
         {
@@ -81,7 +95,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(202);//принято
         }
-
+        /// <summary>
+        /// Удаление статуса
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteStatus(int id)
         {
