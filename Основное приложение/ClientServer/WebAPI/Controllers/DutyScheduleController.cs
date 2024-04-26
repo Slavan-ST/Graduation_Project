@@ -6,14 +6,14 @@ using WebAPI.Data;
 namespace WebAPI.Controllers
 {
     /// <summary>
-    /// 
+    /// Контроллер для работы с графиком дежурств
     /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class DutyScheduleController : ControllerBase
     {
         /// <summary>
-        /// 
+        /// Получение всех логов графика
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
             return new JsonResult(dutySchedules);
         }
         /// <summary>
-        /// 
+        /// Получение графика на указанный день
         /// </summary>
         /// <param name="day"></param>
         /// <param name="month"></param>
@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
             return new JsonResult(dutySchedules);
         }
         /// <summary>
-        /// 
+        /// Получение графика на указанный месяц
         /// </summary>
         /// <param name="month"></param>
         /// <param name="year"></param>
@@ -82,6 +82,11 @@ namespace WebAPI.Controllers
 
             return new JsonResult(dutySchedules);
         }
+        /// <summary>
+        /// Получение графика на указанный год
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
         [HttpGet("year:{year}")]
         public async Task<ActionResult> GetDutyScheduleYear(int year)
         {
@@ -101,6 +106,11 @@ namespace WebAPI.Controllers
             return new JsonResult(dutySchedules);
         }
 
+        /// <summary>
+        /// Получение лога графика по id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult> GetDutySchedule(int id)
         {
@@ -119,7 +129,11 @@ namespace WebAPI.Controllers
 
             return new JsonResult(dutySchedule);
         }
-
+        /// <summary>
+        /// Добавление новой записи графика
+        /// </summary>
+        /// <param name="dutyScheduleDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> PostDutySchedule(DutySchedule dutyScheduleDTO)
         {
@@ -148,6 +162,11 @@ namespace WebAPI.Controllers
             return StatusCode(201);
         }
 
+        /// <summary>
+        /// Обновление записи графика
+        /// </summary>
+        /// <param name="dutyScheduleDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> PutDutySchedule(DutySchedule dutyScheduleDTO)
         {
@@ -175,7 +194,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(202);//принято
         }
-
+        /// <summary>
+        /// Удаление записи по id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDutySchedule(int id)
         {
