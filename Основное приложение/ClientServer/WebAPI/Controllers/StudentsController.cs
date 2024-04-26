@@ -87,7 +87,6 @@ namespace WebAPI.Controllers
 
             if (student == null)
             {
-                Debug.WriteLine($"{room}/{fio}");
                 return NotFound();
             }
             await db.DisposeAsync();

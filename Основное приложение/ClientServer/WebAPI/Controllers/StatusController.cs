@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetStatuses()
+        public async Task<ActionResult<IEnumerable<Status>>> GetStatuses()
         {
             ApplicationContext db = new ApplicationContext();
             var statuss = await db.Statuses.ToListAsync();

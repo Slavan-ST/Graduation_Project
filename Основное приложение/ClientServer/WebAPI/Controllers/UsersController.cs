@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns>Пользователи(без пароля)</returns>
         [HttpGet]
-        public async Task<ActionResult<List<UserDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
             ApplicationContext db = new ApplicationContext();
             var users = await db.Users

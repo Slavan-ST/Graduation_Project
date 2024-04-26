@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetDutySchedule()
+        public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutySchedule()
         {
             ApplicationContext db = new ApplicationContext();
             var dutySchedules = await db.DutySchedule
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("day:{day}.{month}.{year}")]
-        public async Task<ActionResult> GetDutyScheduleDay(int day, int month, int year)
+        public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutyScheduleDay(int day, int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var dutySchedules = await db.DutySchedule
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("month:{month}.{year}")]
-        public async Task<ActionResult> GetDutyScheduleMonth(int month, int year)
+        public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutyScheduleMonth(int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var dutySchedules = await db.DutySchedule
@@ -88,7 +88,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("year:{year}")]
-        public async Task<ActionResult> GetDutyScheduleYear(int year)
+        public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutyScheduleYear(int year)
         {
             ApplicationContext db = new ApplicationContext();
             var dutySchedules = await db.DutySchedule
@@ -112,7 +112,7 @@ namespace WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetDutySchedule(int id)
+        public async Task<ActionResult<DutySchedule>> GetDutySchedule(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var dutySchedule = await db.DutySchedule

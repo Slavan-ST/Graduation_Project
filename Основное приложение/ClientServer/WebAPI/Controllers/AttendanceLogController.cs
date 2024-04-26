@@ -1,7 +1,4 @@
-﻿// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
-
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +23,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetAttendanceLogs()
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogs()
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -50,7 +47,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("day:{day}.{month}.{year}")]
-        public async Task<ActionResult> GetAttendanceLogsDay(int day, int month, int year)
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsDay(int day, int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -74,7 +71,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("month:{month}.{year}")]
-        public async Task<ActionResult> GetAttendanceLogsMonth(int month, int year)
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsMonth(int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -97,7 +94,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("year:{year}")]
-        public async Task<ActionResult> GetAttendanceLogsYear(int year)
+        public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsYear(int year)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLogs = await db.AttendanceLog
@@ -120,7 +117,7 @@ namespace WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAttendanceLog(int id)
+        public async Task<ActionResult<AttendanceLog>> GetAttendanceLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var attendanceLog = await db.AttendanceLog

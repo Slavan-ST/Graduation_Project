@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetPurityRaidLogs()
+        public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogs()
         {
             ApplicationContext db = new ApplicationContext();
             var purityRaidLogs = await db.PurityRaidLogs
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("day:{day}.{month}.{year}")]
-        public async Task<ActionResult> GetPurityRaidLogsDay(int day, int month, int year)
+        public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogsDay(int day, int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var purityRaidLogs = await db.PurityRaidLogs
@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("month:{month}.{year}")]
-        public async Task<ActionResult> GetPurityRaidLogsMonth(int month, int year)
+        public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogsMonth(int month, int year)
         {
             ApplicationContext db = new ApplicationContext();
             var purityRaidLogs = await db.PurityRaidLogs
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
         /// <param name="year"></param>
         /// <returns></returns>
         [HttpGet("year:{year}")]
-        public async Task<ActionResult> GetPurityRaidLogsYear(int year)
+        public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogsYear(int year)
         {
             ApplicationContext db = new ApplicationContext();
             var purityRaidLogs = await db.PurityRaidLogs
@@ -107,7 +107,7 @@ namespace WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetPurityRaidLog(int id)
+        public async Task<ActionResult<PurityRaidLog>> GetPurityRaidLog(int id)
         {
             ApplicationContext db = new ApplicationContext();
             var purityRaidLog = await db.PurityRaidLogs
@@ -139,16 +139,15 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            PurityRaidLog? purityRaidLog = await db.PurityRaidLogs.Where(x => x.Id == purityRaidLogDTO.Id).FirstOrDefaultAsync();
+            PurityRaidLog? purityRaidLog = await db.PurityRaidLogs
+                .Where(x => x.Id == purityRaidLogDTO.Id)
+                .FirstOrDefaultAsync();
+
             if (purityRaidLog != null)
             {
                 return StatusCode(400);
             }
 
-            if (await db.PurityRaidLogs.ContainsAsync(purityRaidLog))
-            {
-                return StatusCode(400);
-            }
             await db.PurityRaidLogs.AddAsync(purityRaidLogDTO);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
