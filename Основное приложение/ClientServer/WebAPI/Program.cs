@@ -8,8 +8,15 @@ using WebAPI.Security.Requirements;
 
 namespace WebAPI
 {
+    /// <summary>
+    /// Основной класс программы
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Метод входа в программу
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -52,8 +59,11 @@ namespace WebAPI
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwagger()
+                    .UseSwaggerUI(c =>
+                    {
+                        c.SwaggerEndpoint("/swagger/v2.0/swagger.json", "v2.0");
+                    });
             }
 
             // настраиваем CORS
