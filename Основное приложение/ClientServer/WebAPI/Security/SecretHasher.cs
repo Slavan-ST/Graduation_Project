@@ -2,6 +2,9 @@
 
 namespace WebAPI.Security
 {
+    /// <summary>
+    /// Хэширование паролей
+    /// </summary>
     public class SecretHasher
     {
         private const int _saltSize = 16; // 128 bits
@@ -11,6 +14,11 @@ namespace WebAPI.Security
 
         private const char segmentDelimiter = ':';
 
+        /// <summary>
+        /// Хэширование
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string Hash(string input)
         {
             byte[] salt = RandomNumberGenerator.GetBytes(_saltSize);
@@ -29,7 +37,12 @@ namespace WebAPI.Security
                 _algorithm
             );
         }
-
+        /// <summary>
+        /// сравнение введенного пароля с существующим
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="hashString"></param>
+        /// <returns></returns>
         public static bool Verify(string input, string hashString)
         {
             string[] segments = hashString.Split(segmentDelimiter);

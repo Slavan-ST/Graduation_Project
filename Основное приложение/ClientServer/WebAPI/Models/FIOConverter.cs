@@ -1,7 +1,15 @@
 ﻿namespace WebAPI.Models
 {
+    /// <summary>
+    /// Для перевода из сокращенного ФИО в полное
+    /// </summary>
     public class FIOConverter
     {
+        /// <summary>
+        /// Для перевода из сокращенного ФИО в полное
+        /// </summary>
+        /// <param name="fio"></param>
+        /// <returns></returns>
         public static (string surname, string name, string? patronymic) GetSurnameNamePatronymicFromFIO(string fio)
         {
             string[] fioWords = fio.Split(" ");

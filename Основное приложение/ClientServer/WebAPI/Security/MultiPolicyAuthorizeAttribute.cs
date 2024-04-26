@@ -4,16 +4,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Security
 {
+    /// <summary>
+    /// Атрибут мульти-прав, разные пользователи могут иметь схожие права
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class MultiPolicyAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
     {
         private readonly string[] _policies;
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="policies"></param>
         public MultiPolicyAuthorizeAttribute(params string[] policies)
         {
             _policies = policies;
         }
-
+        /// <summary>
+        /// Авторизация
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             var authService = context.HttpContext.RequestServices.GetService<IAuthorizationService>();
