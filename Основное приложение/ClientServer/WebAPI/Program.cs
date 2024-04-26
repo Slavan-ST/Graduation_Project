@@ -19,7 +19,20 @@ namespace WebAPI
             builder.Services.AddCors(); // добавляем сервисы CORS
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+
+                var basePath = AppContext.BaseDirectory;
+
+                var xmlPath = Path.Combine(basePath, "WebAPI.xml");
+                options.IncludeXmlComments(xmlPath);
+
+                options.SwaggerDoc("v2.0", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Version = "v2.0",
+                    Title = "Документация API SystemO",
+                });
+            });
             builder.Services.AddAuthorization(options =>
             {
                 //сюда можно лепить политики доступа

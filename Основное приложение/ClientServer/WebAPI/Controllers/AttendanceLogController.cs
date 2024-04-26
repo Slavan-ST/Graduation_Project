@@ -14,10 +14,17 @@ using Helper.Models.Main;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с логами журнала наличия студентов в ночное время суток
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class AttendanceLogController : ControllerBase
     {
+        /// <summary>
+        /// Получение всех логов
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> GetAttendanceLogs()
         {
@@ -35,6 +42,13 @@ namespace WebAPI.Controllers
 
             return new JsonResult(attendanceLogs);
         }
+        /// <summary>
+        /// Получение логов за указанный день
+        /// </summary>
+        /// <param name="day"></param>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         [HttpGet("day:{day}.{month}.{year}")]
         public async Task<ActionResult> GetAttendanceLogsDay(int day, int month, int year)
         {
@@ -53,6 +67,12 @@ namespace WebAPI.Controllers
 
             return new JsonResult(attendanceLogs);
         }
+        /// <summary>
+        /// Получение логов за указанный месяц
+        /// </summary>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         [HttpGet("month:{month}.{year}")]
         public async Task<ActionResult> GetAttendanceLogsMonth(int month, int year)
         {
@@ -71,6 +91,11 @@ namespace WebAPI.Controllers
 
             return new JsonResult(attendanceLogs);
         }
+        /// <summary>
+        /// Получение логов за указанный год
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
         [HttpGet("year:{year}")]
         public async Task<ActionResult> GetAttendanceLogsYear(int year)
         {
@@ -89,7 +114,11 @@ namespace WebAPI.Controllers
 
             return new JsonResult(attendanceLogs);
         }
-
+        /// <summary>
+        /// Получение лога по id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult> GetAttendanceLog(int id)
         {
@@ -108,7 +137,11 @@ namespace WebAPI.Controllers
 
             return new JsonResult(attendanceLog);
         }
-
+        /// <summary>
+        /// Создание нового лога
+        /// </summary>
+        /// <param name="attendanceLogDTO">новый лог</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> PostAttendanceLog(AttendanceLog attendanceLogDTO)
         {
@@ -137,6 +170,11 @@ namespace WebAPI.Controllers
             return StatusCode(201);
         }
 
+        /// <summary>
+        /// Обновление указанного лога
+        /// </summary>
+        /// <param name="attendanceLogDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> PutAttendanceLog(AttendanceLog attendanceLogDTO)
         {
@@ -164,7 +202,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(202);//принято
         }
-
+        /// <summary>
+        /// Удаление лога по id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAttendanceLog(int id)
         {

@@ -5,10 +5,17 @@ using WebAPI.Data;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class DutyScheduleController : ControllerBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> GetDutySchedule()
         {
@@ -26,6 +33,13 @@ namespace WebAPI.Controllers
 
             return new JsonResult(dutySchedules);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="day"></param>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         [HttpGet("day:{day}.{month}.{year}")]
         public async Task<ActionResult> GetDutyScheduleDay(int day, int month, int year)
         {
@@ -44,6 +58,12 @@ namespace WebAPI.Controllers
 
             return new JsonResult(dutySchedules);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         [HttpGet("month:{month}.{year}")]
         public async Task<ActionResult> GetDutyScheduleMonth(int month, int year)
         {
