@@ -10,10 +10,18 @@ using Helper.Converters;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с пользователями
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
+        /// <summary>
+        /// Получение пользователя по логину
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>Пользователь без пароля</returns>
         [HttpGet("{login}")]
         public async Task<ActionResult<UserDTO>> GetUser(string login)
         {
@@ -33,7 +41,10 @@ namespace WebAPI.Controllers
             return new JsonResult(userDTO);
         }
 
-
+        /// <summary>
+        /// Получение всех пользователей
+        /// </summary>
+        /// <returns>Пользователи(без пароля)</returns>
         [HttpGet]
         public async Task<ActionResult<List<UserDTO>>> GetUsers()
         {
@@ -57,9 +68,13 @@ namespace WebAPI.Controllers
 
             return new JsonResult(usersDTO);
         }
-
+        /// <summary>
+        /// Добавление нового пользователя
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> PostUser(UserChangedDTO? userDTO) //новый юзверь
+        public async Task<ActionResult> PostUser(UserChangedDTO? userDTO)
         {
             if (userDTO == null)
             {
@@ -86,7 +101,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(201);
         }
-
+        /// <summary>
+        /// Обновление пользователя
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> PutUser(UserChangedDTO userDTO)
         {
@@ -118,7 +137,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(202);//принято
         }
-
+        /// <summary>
+        /// Удаление пользователя
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         [HttpDelete("{login}")]
         public async Task<ActionResult> DeleteUser(string login)
         {
