@@ -5,10 +5,17 @@ using WebAPI.Data;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// Работа с мероприятиями
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class EventsController : ControllerBase
     {
+        /// <summary>
+        /// Получение всех мероприятий
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventO>>> GetEvents()
         {
@@ -23,7 +30,11 @@ namespace WebAPI.Controllers
             return new JsonResult(eventOs);
         }
 
-
+        /// <summary>
+        /// Добавление нового мероприятия
+        /// </summary>
+        /// <param name="eventODTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> PostEvent(EventO? eventODTO)
         {
@@ -51,7 +62,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(201);
         }
-
+        /// <summary>
+        /// Обновление мероприятия
+        /// </summary>
+        /// <param name="eventODTO"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> PutEvent(EventO? eventODTO)
         {
@@ -80,7 +95,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(202);//принято
         }
-
+        /// <summary>
+        /// Удаление мероприятия
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteEvent(int id)
         {
