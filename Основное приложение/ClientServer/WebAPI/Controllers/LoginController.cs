@@ -13,11 +13,19 @@ using Helper.Models.DTO;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// Контроллер для обработки авторизации
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
-
+        /// <summary>
+        /// Авторизация пользователя
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<UserDTO>> SignInAsync(string login, string password)
         {
