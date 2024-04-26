@@ -7,10 +7,17 @@ using WebAPI.Data;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с комнатами
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class RoomsController : ControllerBase
     {
+        /// <summary>
+        /// Получение всех комнат 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
@@ -24,7 +31,11 @@ namespace WebAPI.Controllers
 
             return new JsonResult(rooms);
         }
-
+        /// <summary>
+        /// Получение комнаты по номеру
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         [HttpGet("{number}")]
         public async Task<ActionResult<Room>> GetRoom(string number)
         {
@@ -42,7 +53,11 @@ namespace WebAPI.Controllers
 
             return new JsonResult(room);
         }
-
+        /// <summary>
+        /// Добавление комнаты
+        /// </summary>
+        /// <param name="roomDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> PostRoom(Room? roomDTO)
         {
@@ -70,7 +85,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(201);
         }
-
+        /// <summary>
+        /// Изменение комнаты
+        /// </summary>
+        /// <param name="roomDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> PutRoom(Room? roomDTO)
         {
@@ -99,7 +118,11 @@ namespace WebAPI.Controllers
 
             return StatusCode(202);//принято
         }
-
+        /// <summary>
+        /// Удаление комнаты
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         [HttpDelete("{number}")]
         public async Task<ActionResult> DeleteRoom(string number)
         {
