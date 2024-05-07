@@ -46,8 +46,12 @@ namespace Client.ViewModels
 
         private async void GetAsync()
         {
-            // реализовать получение данных
+            PurityRaids = await API.PurityRaidLogAPI.GetPurityRaidLogsMonth(2023, 6);
         }
+
+
+        [Reactive]
+        public IEnumerable<PurityRaidLog>? PurityRaids { get; set; }
 
         /// <summary>
         /// Переключается месяц вперед
