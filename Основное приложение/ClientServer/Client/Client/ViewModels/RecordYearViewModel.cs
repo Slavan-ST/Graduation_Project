@@ -1,11 +1,15 @@
 ﻿using Client.ViewModels.Base;
+using iText.StyledXmlParser.Node;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Client.ViewModels
 {
@@ -100,9 +104,20 @@ namespace Client.ViewModels
                     CountNotFound = 12,
                 },
             };
+            OpenMonthJornal = ReactiveCommand.Create(() =>
+            {
+                Debug.WriteLine("itwork");
+            });
+            this.WhenAnyValue(x => x.SelectedMonth).InvokeCommand(OpenMonthJornal); 
         }
 
+        [Reactive]
+        public MountStats SelectedMonth { get; set; }
+
         public ObservableCollection<MountStats> YearStats { get; set; }
+
+        [Reactive]
+        public ICommand OpenMonthJornal { get; set; }
     }
 
     public class MountStats
