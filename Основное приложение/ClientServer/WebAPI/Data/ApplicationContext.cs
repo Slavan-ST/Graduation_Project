@@ -9,9 +9,6 @@ namespace WebAPI.Data
     /// </summary>
     public class ApplicationContext : DbContext
     {
-        //коннект к БД
-        static string _connectionString = @"Server = SLAVAN\192.168.15.16, 50015; Database = SystemO; User id = sa; Password = 123; TrustServerCertificate = True; ";
-
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
@@ -69,7 +66,21 @@ namespace WebAPI.Data
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            builder.AddJsonFile("appsettings.json");
+            var config = builder.Build();
+
+
+#if DEBUG
+            string? connectionString = config.GetConnectionString("DebugConnection");
+#else
+
+            string connectionString = config.GetConnectionString("DefaultConnection");
+#endif
+
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
         /// <summary>
         /// Настройка моделей
