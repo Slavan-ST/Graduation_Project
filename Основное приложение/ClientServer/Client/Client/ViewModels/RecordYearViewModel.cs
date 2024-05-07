@@ -108,7 +108,10 @@ namespace Client.ViewModels
             {
                 Debug.WriteLine("itwork");
             });
-            this.WhenAnyValue(x => x.SelectedMonth).InvokeCommand(OpenMonthJornal); 
+            this.WhenAnyValue(x => x.SelectedMonth).Subscribe(x =>
+            {
+                Debug.WriteLine("OpenMonthJornal");
+            }); 
         }
 
         [Reactive]
