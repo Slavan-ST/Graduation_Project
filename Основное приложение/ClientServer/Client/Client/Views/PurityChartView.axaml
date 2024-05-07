@@ -5,9 +5,20 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.PurityChartView">
 	<Grid>
-		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="7*"/>
+		</Grid.RowDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
+		<StackPanel>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+				<Button Content="◄" Classes="switch" Command="{Binding MonthPrev}"/>
+				<TextBlock Text="{Binding MonthString}" Classes="h2" VerticalAlignment="Center"/>
+				<Button Content="►" Classes="switch" Command="{Binding MonthNext}"/>
+			</StackPanel>
+		</StackPanel>
 		<ScrollViewer>
-			<ItemsControl ItemsSource="{Binding ClearMarks}" Background="Transparent"
+			<ItemsControl ItemsSource="{Binding PurityRaids}" Background="Transparent"
 						  HorizontalAlignment="Center">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
@@ -20,10 +31,10 @@
 					<DataTemplate>
 						<Border Classes="borderPanel">
 							<StackPanel Classes="panel" Height="280" Width="280">
-								<TextBlock Text="{Binding Surname}" Classes="h3"/>
-								<TextBlock Text="{Binding Name}" Classes="h3"/>
-								<TextBlock Text="{Binding Patronymic}" Classes="h3"/>
 								<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
+								<TextBlock Text="{Binding Date.Day}" Classes="h3"/>
+								<TextBlock Text="{Binding Mark}" Classes="h3"/>
+								<TextBlock Text="{Binding Description}" Classes="h3"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>
