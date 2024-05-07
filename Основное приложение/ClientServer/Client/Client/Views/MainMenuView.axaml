@@ -26,9 +26,10 @@
 			<TextBlock Text="{Binding Title}" HorizontalAlignment="Right"
 					   VerticalAlignment="Center"
 					   Margin="5" Classes="h1"/>
-			<Button Width="40" Height="40" Margin="5" 
-					HorizontalAlignment="Left" Command="{Binding OpenSideBar}" 
-					Classes="reavealSideBar"/>
+			<Button Width="40" Height="40" Margin="5"
+					HorizontalAlignment="Left" Command="{Binding OpenSideBar}">
+				<Image Source="{SvgImage /Assets/sideBarBtn.svg}" Stretch="UniformToFill"/>
+			</Button>
 		</Grid>
 
 
