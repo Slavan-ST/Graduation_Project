@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace Client.ViewModels
 {
-    public class RecordYearViewModel : ViewModelBaseNavigator
+    public class RecordYearViewModel : ViewModelBase
     {
         public RecordYearViewModel(IScreen? screen = null) : base(screen)
         {
@@ -29,7 +29,11 @@ namespace Client.ViewModels
                 {
                     return;
                 }
-                Router.Navigate.Execute(new RecordStudentsViewModel(Year, SelectedMonth.Mount, this));
+                if (screen == null)
+                {
+                    return;
+                }
+                screen.Router.Navigate.Execute(new RecordStudentsViewModel(Year, SelectedMonth.Mount, screen));
             });
             this.WhenAnyValue(x => x.Year).Subscribe(x =>
             {
@@ -46,20 +50,19 @@ namespace Client.ViewModels
             try
             {
                 List<MountStat> mountStats = new List<MountStat>();
-                var logs = await API.AttendanceLogAPI.GetAttendanceLogsYear(Year);
 
-                if (logs == null)
+                var allStudents = await API.StudentAPI.GetStudentsAsync();
+
+                if (allStudents == null)
                 {
                     return;
                 }
 
                 for (int i = 1; i <= 12; i++)
                 {
-                    var sortLogs = logs.Where(x => x.Date.Year == Year && x.Date.Month == i).ToList();
-                    var allStudents = logs.DistinctBy(x => x.Student).ToList();
                     int countALl = allStudents.Count();
-                    int countNS = allStudents.Where(x => x.Student!.Age > 18).Count();
-                    int countNotFound = allStudents.Where(x => x.Student!.Status!.Name != "Нет").Count();
+                    int countNS = allStudents.Where(x => x.Age > 18).Count();
+                    int countNotFound = allStudents.Where(x => x.Status!.Name != "Нет").Count();
 
                     MountStat mount = new MountStat()
                     {

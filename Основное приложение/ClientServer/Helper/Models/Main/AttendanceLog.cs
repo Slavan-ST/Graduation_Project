@@ -14,16 +14,28 @@ namespace Helper.Models.Main
     {
         public AttendanceLog() 
         {
-            this.WhenAnyValue(x => x.Student).Subscribe(x =>
-            {
-                StudentDTO = new StudentDTO(Student);
-            });
+
         }
         public int StudentId { get; set; }
         public DateTime Date { get; set; }
         public string Marker { get; set; } = string.Empty;
-        [JsonIgnore]
-        public Student? Student { get; set; }
-        public StudentDTO? StudentDTO { get; set; }
+
+        Student? _student;
+        public Student? Student
+        {
+            get
+            {
+                if (_student == null)
+                {
+                    return null;
+                }
+                _student.AttendanceLogs = null;
+                return _student;
+            }
+            set
+            {
+                _student = value;
+            }
+        }
     }
 }

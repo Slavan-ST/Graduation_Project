@@ -203,6 +203,14 @@ namespace Client.ViewModels
             {
                 list = list.Where(x => x.Status!.Name == ListStatusesSelectedItem.Name).ToList();
             }
+            if (ListStudentsSelectedItem != null)
+            {
+                list = list.Where(x => 
+                    x.Name == ListStudentsSelectedItem.Name &&
+                    x.Surname == ListStudentsSelectedItem.Surname &&
+                    x.Patronymic == ListStudentsSelectedItem.Patronymic
+                ).ToList();
+            }
             return list;
         }
 

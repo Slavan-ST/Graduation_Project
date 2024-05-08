@@ -11,6 +11,10 @@ namespace Helper.Models.Main
 {
     public class Student: Base
     {
+        public Student() 
+        {
+
+        }
         public string Name { get; set; } = string.Empty;
         public string Surname { get; set; } = string.Empty;
         public string Patronymic { get; set; } = string.Empty;
@@ -35,7 +39,25 @@ namespace Helper.Models.Main
         public Group? Group { get; set; }
         public Status? Status { get; set; }
 
-        public IEnumerable<AttendanceLog>? AttendanceLogs { get; set; }
+        IEnumerable<AttendanceLog>? _attendanceLogs = new List<AttendanceLog>();
+        public IEnumerable<AttendanceLog>? AttendanceLogs
+        {
+            get
+            {
+                if (_attendanceLogs != null)
+                {
+                    foreach (var log in _attendanceLogs)
+                    {
+                        log.Student = null;
+                    }
+                }
+                return _attendanceLogs;
+            }
+            set
+            {
+                _attendanceLogs = value;
+            }
+        }
         public string FIO
         {
             get => $"{Surname} {Name} {Patronymic}";

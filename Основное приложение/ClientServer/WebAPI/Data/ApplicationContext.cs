@@ -89,6 +89,7 @@ namespace WebAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(u => u.Login).IsUnique();
+            //modelBuilder.Entity<Student>().Ignore(x => x.AttendanceLogs!);
         }
     }
 }
