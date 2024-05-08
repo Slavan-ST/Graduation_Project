@@ -30,7 +30,7 @@ namespace Client.ViewModels
             Year = year;
             Month = month;
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
-            FillJournal(2023,6, _noFilters);
+            FillJournal(year, month, _noFilters);
             FillFilter();
 
             AcceptFilters = ReactiveCommand.Create(() =>
