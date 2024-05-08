@@ -8,6 +8,12 @@ namespace Helper
 {
     public static class Connect
     {
-        public const string Connection = "http://localhost:8080/";
+        public static string Connection
+        {
+            get
+            {
+                return "http://localhost:8080/";
+            }
+        }
     }
 }

@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReactiveUI;
 
 namespace Helper.Models
 {
-    public class Base
+    public class Base: ReactiveObject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

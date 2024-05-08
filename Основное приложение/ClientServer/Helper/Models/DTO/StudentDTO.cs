@@ -9,8 +9,31 @@ using System.Threading.Tasks;
 
 namespace Helper.Models.Main
 {
-    public class Student: Base
+    public class StudentDTO: Base
     {
+        public StudentDTO() { }
+        public StudentDTO(Student? student) 
+        {
+            if (student == null)
+            {
+                return;
+            }
+
+            this.Name = student.Name;
+            this.Surname = student.Surname;
+            this.Patronymic = student.Patronymic;
+            this.DateBirthday = student.DateBirthday;
+            this.Phone = student.Phone;
+            this.Address = student.Phone;
+            this.RepresentativePhone = student.RepresentativePhone;
+            this.RepresentativePatronymic = student.RepresentativePatronymic;
+            this.RepresentativeName = student.RepresentativeName;
+            this.RepresentativeSurname = student.RepresentativeSurname;
+            this.Gender = student.Gender;
+            this.Room = student.Room;
+            this.Group = student.Group;           
+            this.Status = student.Status;
+        }
         public string Name { get; set; } = string.Empty;
         public string Surname { get; set; } = string.Empty;
         public string Patronymic { get; set; } = string.Empty;
@@ -35,7 +58,6 @@ namespace Helper.Models.Main
         public Group? Group { get; set; }
         public Status? Status { get; set; }
 
-        public IEnumerable<AttendanceLog>? AttendanceLogs { get; set; }
         public string FIO
         {
             get => $"{Surname} {Name} {Patronymic}";

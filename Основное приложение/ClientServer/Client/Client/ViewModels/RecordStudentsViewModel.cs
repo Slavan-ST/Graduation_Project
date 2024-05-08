@@ -25,19 +25,21 @@ namespace Client.ViewModels
 
     public class RecordStudentsViewModel : ViewModelBase
     {
-        public RecordStudentsViewModel(IScreen? screen = null) : base(screen)
+        public RecordStudentsViewModel(int year, int month, IScreen? screen = null) : base(screen)
         {
+            Year = year;
+            Month = month;
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
             FillJournal(2023,6, _noFilters);
             FillFilter();
 
             AcceptFilters = ReactiveCommand.Create(() =>
             {
-                FillJournal(2023, 6, _filters);
+                FillJournal(year, month, _filters);
             });
             ClearFilters = ReactiveCommand.Create(() =>
             {
-                FillJournal(2023, 6, _noFilters);
+                FillJournal(year, month, _noFilters);
             });
         }
         public async void FillFilter()
