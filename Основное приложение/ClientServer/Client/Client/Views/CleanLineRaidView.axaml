@@ -16,12 +16,13 @@
 		<StackPanel HorizontalAlignment="Left" Margin="50" MaxWidth="1000">
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Комната" Margin="0,5,5,0" Classes="h2"/>
-				<ComboBox ItemsSource="{Binding Rooms}" SelectedItem="{Binding SelectedRoom}"
+				<ComboBox ItemsSource="{Binding Rooms}" 
+						  SelectedItem="{Binding SelectedRoom}"
 						  Classes="h2 outline lightBlue"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="0,55,0,5">
 				<TextBlock Text="Чистота" Classes="h2"/>
-				<Button Content="-" Margin="5,0,0,0" Classes="markSelected h3">
+				<Button Content="{Binding Mark}" Margin="5,0,0,0" Classes="markSelected h3">
 					<i:Interaction.Behaviors>
 						<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
 							<iac:PopupAction>
@@ -47,7 +48,7 @@
 			</DockPanel>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-			<Button Content="Следующая комната" Classes="h2 navigate"/>
+			<Button Content="Следующая комната" Classes="h2 navigate" Command="{Binding Next}"/>
 		</StackPanel>
 	</Grid>
 </UserControl>
