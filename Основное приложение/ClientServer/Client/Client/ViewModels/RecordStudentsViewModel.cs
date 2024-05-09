@@ -77,6 +77,7 @@ namespace Client.ViewModels
         }
         public async void FillJournal(int year, int month, Func<Task<IEnumerable<Student>?>> func )
         {
+            IsLoading = true;
             Source.Items = new List<MarksOfStudents>();
 
             //получаем кол-во дней в текущем месяце
@@ -174,6 +175,7 @@ namespace Client.ViewModels
                 }
             };
             Source.Items = marksOfStudentsList;
+            IsLoading = false;
         }
 
         string ReturnMarker(List<AttendanceLog> logs, int day)

@@ -20,6 +20,12 @@ namespace Client.ViewModels
         [Reactive]
         public List<Room>? Rooms { get; set; } // для comboBox, загружается только при старте страницы
 
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public CleanLineRaidViewModel(IScreen? screen = null) : base(screen) 
         {
             Initialize();
