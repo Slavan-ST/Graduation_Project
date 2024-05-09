@@ -19,7 +19,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<PurityRaidLog>(Connect.Connection + $"PurityRaidLog/{id}");
+                var response = await client.GetFromJsonAsync<PurityRaidLog>(Connect.Connection + $"PurityRaidLogs/{id}");
                 return response;
             }
             catch (Exception e)
@@ -34,7 +34,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog");
+                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLogs");
                 return response;
             }
             catch (Exception e)
@@ -49,7 +49,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog/year:{year}");
+                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLogs/year:{year}");
                 return response;
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog/month:{month}.{year}");
+                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLogs/month:{month}.{year}");
                 return response;
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace Client.API
             HttpClient client =     HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLog/day:{day}.{month}.{year}");
+                var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLogs/day:{day}.{month}.{year}");
                 return response;
             }
             catch (Exception e)
@@ -95,7 +95,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"PurityRaidLog/{id}");
+                var response = await client.DeleteAsync(Connect.Connection + $"PurityRaidLogs/{id}");
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.PostAsJsonAsync(Connect.Connection + $"PurityRaidLog", purityRaidLog);
+                var response = await client.PostAsJsonAsync(Connect.Connection + $"PurityRaidLogs", purityRaidLog);
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -125,7 +125,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.PutAsJsonAsync(Connect.Connection + $"PurityRaidLog", purityRaidLog);
+                var response = await client.PutAsJsonAsync(Connect.Connection + $"PurityRaidLogs", purityRaidLog);
                 return response.StatusCode;
             }
             catch (Exception e)
