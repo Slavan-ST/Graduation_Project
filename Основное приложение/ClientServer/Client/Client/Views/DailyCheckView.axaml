@@ -65,5 +65,8 @@
 		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
 			<Button Content="Следующая комната" Classes="navigate h2"/>
 		</StackPanel>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
+			<Ellipse Classes="spinner"/>
+		</Border>
 	</Grid>
 </UserControl>

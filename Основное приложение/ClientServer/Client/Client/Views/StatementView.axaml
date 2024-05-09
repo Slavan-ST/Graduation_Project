@@ -67,5 +67,8 @@
 			<Button Command="{Binding GetFillStatement}" Content="Составить" Classes="navigate h2"/>
 		</StackPanel>
 		</Border>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
+			<Ellipse Classes="spinner"/>
+		</Border>
 	</Grid>
 </UserControl>

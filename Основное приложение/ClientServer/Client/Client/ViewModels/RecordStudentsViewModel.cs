@@ -25,8 +25,15 @@ namespace Client.ViewModels
 
     public class RecordStudentsViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public RecordStudentsViewModel(int year, int month, IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             Year = year;
             Month = month;
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
@@ -35,12 +42,17 @@ namespace Client.ViewModels
 
             AcceptFilters = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 FillJournal(year, month, _filters);
+                IsLoading = false;
             });
             ClearFilters = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 FillJournal(year, month, _noFilters);
+                IsLoading = false;
             });
+            IsLoading = false;
         }
         public async void FillFilter()
         {

@@ -20,8 +20,15 @@ namespace Client.ViewModels
 {
     public class ListStudentsViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public ListStudentsViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             this.WhenAnyValue(x => x.SelectedStudent).Subscribe(x =>
             {
                 ProfileStudent = new ProfileViewModel(screen, SelectedStudent);
@@ -32,12 +39,17 @@ namespace Client.ViewModels
 
             AcceptFilters = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 FillListStudents(_filters);
+                IsLoading = false;
             });
             ClearFilters = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 FillListStudents(_noFilters);
+                IsLoading = false;
             });
+            IsLoading = false;
         }
 
         [Reactive]
@@ -47,22 +59,27 @@ namespace Client.ViewModels
         public ProfileViewModel? ProfileStudent { get; set; }
         async void FillListStudents(Func<Task<IEnumerable<Student>?>> func)
         {
+            IsLoading = true;
             //получаем студентов из БД
             var students = await func();
 
             if (students == null)
             {
+                IsLoading = false;
                 return;
             }
 
             if (students != null)
             {
                 Students = new List<Student>(students);
+                IsLoading = false;
             }
             else
             {
                 Students = new List<Student>();
+                IsLoading = false;
             }
+            IsLoading = false;
         }
 
 
@@ -103,6 +120,7 @@ namespace Client.ViewModels
             //{
             //    return new List<Student>() { ListStudentsSelectedItem };
             //}
+
 
             var list = await StudentAPI.GetStudentsAsync();
             if (list == null)

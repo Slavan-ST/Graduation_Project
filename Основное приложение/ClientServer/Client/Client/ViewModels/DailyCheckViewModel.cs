@@ -13,11 +13,18 @@ namespace Client.ViewModels
 {
     public class DailyCheckViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public DailyCheckViewModel(IScreen? screen = null) : base(screen) 
         {
+            IsLoading = true;
             FillRooms();
             FillAllStudents();
-
+            IsLoading = false;
             this.WhenAnyValue(x => x.SelectedRoom).Subscribe(x => FillStudents());
         }
 
