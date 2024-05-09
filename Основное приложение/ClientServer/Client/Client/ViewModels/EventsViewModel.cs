@@ -14,9 +14,17 @@ namespace Client.ViewModels
 {
     public class EventsViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public EventsViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             FillEventsAsync();
+            IsLoading = false;
         }
         async void FillEventsAsync()
         {

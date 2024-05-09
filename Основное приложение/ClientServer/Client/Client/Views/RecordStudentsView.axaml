@@ -71,6 +71,9 @@
 			<TreeDataGrid Source="{Binding Source}" Background="White" DockPanel.Dock="Bottom"
 						  Margin="15" CornerRadius="25" Padding="10"/>
 		</DockPanel>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
+			<Ellipse Classes="spinner"/>
+		</Border>
 	</Grid>
 	
 </UserControl>

@@ -14,6 +14,11 @@ namespace Client.ViewModels
 {
     public class PurityChartViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
 
         [Reactive]
         public string MonthString { get; set; } = string.Empty;
@@ -22,6 +27,7 @@ namespace Client.ViewModels
 
         public PurityChartViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             MonthString = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(MonthInt);
             MonthNext = ReactiveCommand.Create(() =>
             {
@@ -42,11 +48,14 @@ namespace Client.ViewModels
                 }
             });
             GetAsync();
+            IsLoading = false;
         }
 
         private async void GetAsync()
         {
+            IsLoading = true;
             PurityRaids = await API.PurityRaidLogAPI.GetPurityRaidLogsMonth(2023, 6);
+            IsLoading = false;
         }
 
 

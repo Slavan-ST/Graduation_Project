@@ -15,8 +15,15 @@ namespace Client.ViewModels
 {
     public class RecordYearViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public RecordYearViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             Year = 2023;
             OpenMonthJornal = ReactiveCommand.Create(() =>
             {
@@ -43,6 +50,8 @@ namespace Client.ViewModels
                 }
                 FillStats();
             });
+
+            IsLoading = false;
         }
 
         async void FillStats()

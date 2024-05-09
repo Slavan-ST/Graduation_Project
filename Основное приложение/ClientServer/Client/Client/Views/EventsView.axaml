@@ -42,5 +42,8 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
+			<Ellipse Classes="spinner"/>
+		</Border>
 	</Grid>
 </UserControl>

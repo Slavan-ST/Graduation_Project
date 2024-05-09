@@ -13,13 +13,23 @@ namespace Client.ViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public ProfileViewModel(IScreen? screen = null) : base(screen)
         {
-
+            IsLoading = true;
+            // в загрузке
+            IsLoading = false;
         }
         public ProfileViewModel(IScreen? screen = null, Student? student = null) : base(screen)
         {
-            Debug.WriteLine("ahahahhaahahahhaha");
+            IsLoading = true;
+            // в загрузке
+            IsLoading = false;
         }
 
         [Reactive]

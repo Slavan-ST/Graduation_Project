@@ -7,20 +7,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Input;
 
 namespace Client.ViewModels
 {
     public class StatementViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public StatementViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             GetEmptyStatement = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 StatementCreater.CreateStatementEmpty();
+                IsLoading = false;
             });
             GetFillStatement = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 StatementCreater.CreateStatement(
                     Name, 
                     Surname, 
@@ -34,7 +45,9 @@ namespace Client.ViewModels
                     SurnameRepresentative, 
                     PatronymicRepresentative, 
                     PhoneRepresentative);
+                IsLoading = false;
             });
+            IsLoading = false;
         }
         [Reactive]
         public string Address { get; set; } = string.Empty;

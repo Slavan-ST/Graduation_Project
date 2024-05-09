@@ -15,6 +15,11 @@ namespace Client.ViewModels
 {
     public class DutyChartViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
 
         [Reactive]
         public string MonthString { get; set; } = string.Empty;
@@ -23,6 +28,7 @@ namespace Client.ViewModels
 
         public DutyChartViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             MonthString = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(MonthInt);
             MonthNext = ReactiveCommand.Create(() =>
             {
@@ -43,11 +49,14 @@ namespace Client.ViewModels
                 }
             });
             GetAsync();
+            IsLoading = false;
         }
 
         private async void GetAsync()
         {
+            IsLoading = true;
             DutyItems = await API.DutyScheduleAPI.GetDutySchedulesMonth(DateTime.Now.Year,MonthInt);
+            IsLoading = false;
         }
 
         [Reactive]

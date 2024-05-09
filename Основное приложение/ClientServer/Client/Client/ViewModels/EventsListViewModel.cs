@@ -1,6 +1,7 @@
 ﻿using Client.API;
 using Client.ViewModels.Base;
 using Helper.Models.Main;
+using Org.BouncyCastle.Crypto.Parameters;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -15,13 +16,23 @@ namespace Client.ViewModels
 {
     public class EventsListViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+
         public EventsListViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             FillEventsAsync();
             Save = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 SaveInAPI();
+                IsLoading = false;
             });
+            IsLoading = false;
         }
 
         async void FillEventsAsync()
