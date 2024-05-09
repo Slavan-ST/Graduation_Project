@@ -119,7 +119,7 @@ namespace WebAPI.Controllers
             //проверка на существование такой записи в БД
             User? user = await db.Users
                 .Include(c => c.Role)
-                .Where(x => x.Id == userDTO.Id)
+                .Where(x => x.Login == userDTO.Login)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 

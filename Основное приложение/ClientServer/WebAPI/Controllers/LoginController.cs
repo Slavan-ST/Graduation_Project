@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(403, "Неверный логин или пароль!");
             }
-            if (!SecretHasher.Verify(password, user.Password))
+            if (SecretHasher.Verify(password, user.Password))
             {
                 return StatusCode(403, "Неверный логин или пароль!");
             }
