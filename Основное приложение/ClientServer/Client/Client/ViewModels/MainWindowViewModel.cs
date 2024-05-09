@@ -14,7 +14,7 @@ namespace Client.ViewModels
     {
         public MainWindowViewModel()
         {
-            Router.Navigate.Execute(new MainMenuViewModel(this));
+            Router.Navigate.Execute(new AuthViewModel(this));
         }
         public RoutingState Router { get; } = new RoutingState();
     }

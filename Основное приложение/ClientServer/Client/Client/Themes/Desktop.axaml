@@ -36,5 +36,6 @@
 	<StyleInclude Source="/Styles/Desktop/TextBoxes/PasswordBox.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TreeViews/Header.axaml"/>
 	<StyleInclude Source="/Styles/Main/Grids.axaml"/>
+	<StyleInclude Source="/Styles/Main/SpinnerLoader.axaml"/>
 	
 </Styles>

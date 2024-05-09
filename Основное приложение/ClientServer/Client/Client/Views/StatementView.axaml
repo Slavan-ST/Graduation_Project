@@ -6,8 +6,8 @@
              x:Class="Client.Views.StatementView">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="10*"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<ScrollViewer>

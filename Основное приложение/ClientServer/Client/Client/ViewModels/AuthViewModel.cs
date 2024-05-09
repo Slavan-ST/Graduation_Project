@@ -26,9 +26,11 @@ namespace Client.ViewModels
             Debug.WriteLine("test");
             Auth = ReactiveCommand.Create(async () =>
             {
+                IsLoading = true;
                 //поля не заполнены? заполни!
                 if (string.IsNullOrWhiteSpace(Login) || string.IsNullOrWhiteSpace(Password))
                 {
+                    IsLoading = false;
                     Message.Show("Error", "Заполните все поля!");
                     return;
                 }
@@ -37,9 +39,11 @@ namespace Client.ViewModels
                 //если пользователя получили, то переходим на главную
                 if (user == null)
                 {
+                    IsLoading = false;
                     Message.Show("Error", "Пользователь не найден!");
                     return;
                 }
+                IsLoading = false;
                 Services.Authorization.GetAuthorization().IsEmployee = user.Role!.Name == "Сотрудник";
                 HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen));
             });
@@ -57,5 +61,10 @@ namespace Client.ViewModels
         /// </summary>
         public ICommand Auth { get; set; }
 
+        /// <summary>
+        /// Отображение спинера загрузки
+        /// </summary>
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
     }
 }

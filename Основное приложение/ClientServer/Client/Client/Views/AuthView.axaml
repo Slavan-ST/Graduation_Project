@@ -17,5 +17,8 @@
 					 Watermark="Пароль" Text="{Binding Password}"/>
 			<Button Content="Войти" Command="{Binding Auth}" Classes="navigate h2" HorizontalAlignment="Center"/>
 		</StackPanel>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
+			<Ellipse Classes="spinner"/>
+		</Border>
 	</Grid>
 </UserControl>
