@@ -45,6 +45,27 @@ namespace Client.ViewModels
                 }
                 SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
             });
+
+            Mark2 = ReactiveCommand.Create(() =>
+            {
+                Mark = "2";
+            });
+
+            Mark3 = ReactiveCommand.Create(() =>
+            {
+                Mark = "3";
+            });
+
+            Mark4 = ReactiveCommand.Create(() =>
+            {
+                Mark = "4";
+            });
+
+            Mark5 = ReactiveCommand.Create(() =>
+            {
+                Mark = "5";
+            });
+
             IsLoading = false;
         }
         async void CreateLog()
@@ -77,5 +98,11 @@ namespace Client.ViewModels
             SelectedRoom = Rooms.FirstOrDefault();
         }
         public ICommand Next { get; set; }
+
+        public ICommand Mark2 { get; set; }
+        public ICommand Mark3 { get; set; }
+        public ICommand Mark4 { get; set; }
+        public ICommand Mark5 { get; set; }
+
     }
 }

@@ -40,8 +40,8 @@
 							<ColumnDefinition Width="9*" MaxWidth="650"/>
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Студент:" Classes="h2"/>
-						<Label Content="{Binding FIO}" Grid.Row="1" Classes="h3"/>
-						<Button Content="-" Grid.Column="1" Grid.Row="1" Classes="markSelected">
+						<Label Content="{Binding Student.FIO}" Grid.Row="1" Classes="outline purple h3"/>
+						<Button Content="{Binding Mark}" Grid.Column="1" Grid.Row="1" Classes="markSelected h3">
 							<i:Interaction.Behaviors>
 								<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
 									<iac:PopupAction>
@@ -50,10 +50,10 @@
 												Background="#08F0E9"
 												CornerRadius="25">
 											<StackPanel Orientation="Horizontal">
-												<Button Content="+" Classes="mark"/>
-												<Button Content="H" Classes="mark"/>
-												<Button Content="3" Classes="mark"/>
-												<Button Content="O" Classes="mark"/>
+												<Button Content="+" Classes="mark" Command="{Binding MarkExist}"/>
+												<Button Content="H" Classes="mark" Command="{Binding MarkNotExist}"/>
+												<Button Content="3" Classes="mark" Command="{Binding MarkClaimed}"/>
+												<Button Content="O" Classes="mark" Command="{Binding MarkLate}"/>
 											</StackPanel>
 
 										</Border>

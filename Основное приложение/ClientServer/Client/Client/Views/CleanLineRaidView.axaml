@@ -31,10 +31,10 @@
 										Background="#08F0E9"
 										CornerRadius="25">
 									<StackPanel Orientation="Horizontal">
-										<Button Content="2" Classes="mark"/>
-										<Button Content="3" Classes="mark"/>
-										<Button Content="4" Classes="mark"/>
-										<Button Content="5" Classes="mark"/>
+										<Button Content="2" Classes="mark" Command="{Binding Mark2}"/>
+										<Button Content="3" Classes="mark" Command="{Binding Mark3}"/>
+										<Button Content="4" Classes="mark" Command="{Binding Mark4}"/>
+										<Button Content="5" Classes="mark" Command="{Binding Mark5}"/>
 									</StackPanel>
 								</Border>
 							</iac:PopupAction>
