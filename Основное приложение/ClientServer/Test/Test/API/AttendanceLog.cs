@@ -1,6 +1,4 @@
-﻿using WebAPI;
-using WebAPI.Models.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Client.API
 {
-    internal static class AttendanceLog
+    internal class AttendanceLog
     {
-        public static async Task<AttendanceLogDTO?> GetAttendanceLog(int id)
+        public static async Task<AttendanceLog?> GetAttendanceLog(int id)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<AttendanceLogDTO>(Connect.Connection + $"AttendanceLog/{id}");
+                var response = await client.GetFromJsonAsync<AttendanceLog>(Connect.Connection + $"AttendanceLog/{id}");
                 return response;
             }
             catch (Exception e)
@@ -36,12 +34,12 @@ namespace Client.API
 
         //добавить по датам
 
-        public static async Task<IEnumerable<AttendanceLogDTO>?> GetAttendanceLogs()
+        public static async Task<IEnumerable<AttendanceLog>?> GetAttendanceLogs()
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLogDTO>>(Connect.Connection + $"AttendanceLog");
+                var response = await client.GetFromJsonAsync<IEnumerable<AttendanceLog>>(Connect.Connection + $"AttendanceLog");
                 return response;
             }
             catch (Exception e)
@@ -66,12 +64,12 @@ namespace Client.API
             return null;
         }
         //создание лога
-        public static async Task<HttpStatusCode?> PostAttendanceLog(AttendanceLogDTO attendanceLogDTO)
+        public static async Task<HttpStatusCode?> PostAttendanceLog(AttendanceLog AttendanceLog)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.PostAsJsonAsync(Connect.Connection + $"AttendanceLog", attendanceLogDTO);
+                var response = await client.PostAsJsonAsync(Connect.Connection + $"AttendanceLog", AttendanceLog);
                 return response.StatusCode;
             }
             catch (Exception e)
@@ -81,12 +79,12 @@ namespace Client.API
             return null;
         }
         //обновление лога
-        public static async Task<HttpStatusCode?> PutAttendanceLog(AttendanceLogDTO attendanceLogDTO)
+        public static async Task<HttpStatusCode?> PutAttendanceLog(AttendanceLog AttendanceLog)
         {
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.PutAsJsonAsync(Connect.Connection + $"AttendanceLog", attendanceLogDTO);
+                var response = await client.PutAsJsonAsync(Connect.Connection + $"AttendanceLog", AttendanceLog);
                 return response.StatusCode;
             }
             catch (Exception e)

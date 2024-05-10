@@ -10,6 +10,7 @@ using System.Net.Http.Json;
 using Helper.Models.DTO;
 using Helper;
 using Helper.Models.Main;
+using MsBox.Avalonia;
 
 namespace Client.API
 {

@@ -1,33 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
-using Microsoft.Extensions.Configuration;
-using MsBox.Avalonia.Converters;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Globalization;
+using System.Net.NetworkInformation;
 
 namespace Client
 {
     public static class Connect
     {
+        static Connect()
+        {
+            var config = new ConfigurationBuilder()
+                .AddXmlFile("App.config")
+                .Build();
+
+            string? connect = config["Connect"];
+
+            if (connect == null)
+            {
+                return;
+            }
+
+            _connection = connect;
+        }
+        static string _connection = "http://localhost:8080/";
+
         public static string Connection
         {
             get
             {
-                var config = new ConfigurationBuilder()
-                    .AddXmlFile("App.config")
-                    .Build();
-
-                string? connect = config["Connect"];
-
-                if (connect == null)
+                if (!CheckInternetConnection(_connection))
                 {
-                    return "http://localhost:8080/";
+                    //тут пихай всё своё *************
                 }
-                return connect;
+                return _connection;
             }
         }
+
+        public static bool CheckInternetConnection(string connect)
+        {
+            try
+            {
+                Ping myPing = new Ping();
+                byte[] buffer = new byte[32];
+                int timeout = 1000; // Timeout in milliseconds
+                PingOptions options = new PingOptions();
+                PingReply reply = myPing.Send(connect, timeout, buffer, options);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }
