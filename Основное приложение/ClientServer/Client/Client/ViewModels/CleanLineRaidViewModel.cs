@@ -28,6 +28,7 @@ namespace Client.ViewModels
 
         public CleanLineRaidViewModel(IScreen? screen = null) : base(screen) 
         {
+            IsLoading = true;
             Initialize();
             Next = ReactiveCommand.Create(() =>
             {
@@ -44,6 +45,7 @@ namespace Client.ViewModels
                 }
                 SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
             });
+            IsLoading = false;
         }
         async void CreateLog()
         {
