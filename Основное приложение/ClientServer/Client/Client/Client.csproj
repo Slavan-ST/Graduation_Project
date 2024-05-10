@@ -33,6 +33,8 @@
     <PackageReference Include="itext.bouncy-castle-adapter" Version="8.0.3" />
     <PackageReference Include="itext.bouncy-castle-fips-adapter" Version="8.0.3" />
     <PackageReference Include="MessageBox.Avalonia" Version="3.1.5.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
   </ItemGroup>
@@ -59,5 +61,11 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
