@@ -25,18 +25,34 @@ namespace Client.ViewModels
 
 
 
-        public DailyCheckViewModel(IScreen? screen = null) : base(screen) 
+        public DailyCheckViewModel(IScreen? screen = null) : base(screen)
         {
+            this.WhenAnyValue(x => x.SelectedRoom).Subscribe(x => FillStudents());
+            
+            Next = ReactiveCommand.Create(() =>            
+            {
+                if (Rooms == null)
+                {
+                    return;
+                }
+
+                if (SelectedRoom == null)
+                {
+                    return;
+                }
+
+                SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
+            });
+
             IsLoading = true;
             FillRooms();
             FillAllStudents();
 
             IsLoading = false;
-            this.WhenAnyValue(x => x.SelectedRoom).Subscribe(x => FillStudents());
         }
 
 
-
+        public ICommand Next { get; set; }
         [Reactive]
         public Room? SelectedRoom { get; set; } // для comboBox
         [Reactive]
@@ -76,6 +92,10 @@ namespace Client.ViewModels
             {
                 return;
             }
+            if (Students != null)
+            {
+                SaveChanges(Students);
+            }
             var students = AllStudents.Where(x => x.Room!.Number == SelectedRoom.Number).ToList();
             var studentsInRoom = new List<StudentInRoom>();
             foreach (var i in students)
@@ -87,6 +107,23 @@ namespace Client.ViewModels
             }
 
             Students = studentsInRoom;
+        }
+        async void SaveChanges(List<StudentInRoom> logs)
+        {
+            foreach (var log in logs)
+            {
+                if (log.Student == null)
+                {
+                    continue;
+                }
+                AttendanceLog attendanceLog = new AttendanceLog()
+                {
+                    StudentId = log.Student.Id,
+                    Date = DateTime.Now,
+                    Marker = log.Mark
+                };
+                await API.AttendanceLogAPI.PostAttendanceLog(attendanceLog);
+            }
         }
     }
 }

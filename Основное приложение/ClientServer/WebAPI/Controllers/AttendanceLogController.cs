@@ -149,16 +149,19 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
-            AttendanceLog? attendanceLog = await db.AttendanceLog.Where(x => x.Id == attendanceLogDTO.Id).FirstOrDefaultAsync();
+            AttendanceLog? attendanceLog = await db.AttendanceLog
+                .Where(x => 
+                    x.Date.Year == attendanceLogDTO.Date.Year &&
+                    x.Date.Month == attendanceLogDTO.Date.Month &&
+                    x.Date.Day == attendanceLogDTO.Date.Day &&
+                    x.StudentId == attendanceLogDTO.StudentId)
+                .FirstOrDefaultAsync();
+
             if (attendanceLog != null)
             {
-                return StatusCode(400);
+                return StatusCode(409, "Лог за данный день уже существует для  указанного студента!");
             }
 
-            if (await db.AttendanceLog.ContainsAsync(attendanceLog))
-            {
-                return StatusCode(400);
-            }
             await db.AttendanceLog.AddAsync(attendanceLogDTO);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
@@ -180,9 +183,12 @@ namespace WebAPI.Controllers
             }
             ApplicationContext db = new ApplicationContext();
 
-            var attendanceLog = await db.AttendanceLog
-                .Where(x => x.Id == attendanceLogDTO.Id)
-                .AsNoTracking()
+            AttendanceLog? attendanceLog = await db.AttendanceLog
+                .Where(x =>
+                    x.Date.Year == attendanceLogDTO.Date.Year &&
+                    x.Date.Month == attendanceLogDTO.Date.Month &&
+                    x.Date.Day == attendanceLogDTO.Date.Day &&
+                    x.StudentId == attendanceLogDTO.StudentId)
                 .FirstOrDefaultAsync();
 
             if(attendanceLog == null)
@@ -190,9 +196,11 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
-            attendanceLog = attendanceLogDTO!;
+            attendanceLog.StudentId = attendanceLogDTO.StudentId;
+            attendanceLog.Date = attendanceLogDTO.Date;
+            attendanceLog.Marker = attendanceLogDTO.Marker;
 
-            db.Update(attendanceLog);
+            Debug.WriteLine("И !?");
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 

@@ -114,6 +114,13 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"AttendanceLog", attendanceLogDTO);
+
+                //если лог уже существует, то просто обновляем старый
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutAttendanceLog(attendanceLogDTO);
+                }
+
                 return response.StatusCode;
             }
             catch (Exception e)
