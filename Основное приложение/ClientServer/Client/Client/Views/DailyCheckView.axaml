@@ -15,10 +15,14 @@
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		
 		<StackPanel Orientation="Horizontal" Margin="15">
-			<TextBlock Text="Комната" Classes="h2" Margin="0,5,5,0"/>
-			<ComboBox ItemsSource="{Binding Rooms}" SelectedItem="{Binding SelectedRoom}" Classes="h2 outline lightBlue"/>
+			<TextBlock Text="Комната" 
+					   Classes="h2" 
+					   Margin="0,5,5,0"/>
+			<ComboBox ItemsSource="{Binding Rooms}" 
+					  SelectedItem="{Binding SelectedRoom}" 
+					  Classes="h2 outline lightBlue"/>
 		</StackPanel>
-		<ItemsControl ItemsSource="{Binding StudentsInRoom}" Margin="10,100,0,0">
+		<ItemsControl ItemsSource="{Binding Students}" Margin="10,100,0,0">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
 					<StackPanel/>
@@ -36,7 +40,7 @@
 							<ColumnDefinition Width="9*" MaxWidth="650"/>
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Студент:" Classes="h2"/>
-						<Label Content="{Binding Name}" Grid.Row="1" Classes="h3"/>
+						<Label Content="{Binding FIO}" Grid.Row="1" Classes="h3"/>
 						<Button Content="-" Grid.Column="1" Grid.Row="1" Classes="markSelected">
 							<i:Interaction.Behaviors>
 								<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">

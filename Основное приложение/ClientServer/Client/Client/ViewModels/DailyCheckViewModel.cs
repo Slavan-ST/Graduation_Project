@@ -67,7 +67,7 @@ namespace Client.ViewModels
             {
                 return;
             }
-            var students = AllStudents.Where(x => x.Room == SelectedRoom).ToList();
+            var students = AllStudents.Where(x => x.Room!.Number == SelectedRoom.Number).ToList();
 
             Students = new List<Student>(students);
         }
