@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Helper.Models.DTO;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Diagnostics;
 using System.Security.Claims;
-using WebAPI.Security;
 using WebAPI.Data;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Helper.Models.DTO;
+using WebAPI.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Controllers
 {
@@ -18,7 +14,7 @@ namespace WebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class LoginController : ControllerBase
+    public class HomeController : ControllerBase
     {
         /// <summary>
         /// Авторизация пользователя
@@ -26,6 +22,7 @@ namespace WebAPI.Controllers
         /// <param name="login"></param>
         /// <param name="password"></param>
         /// <returns></returns>
+        [Route("Home/SignIn")]
         [HttpGet]
         public async Task<ActionResult<UserDTO>> SignInAsync(string login, string password)
         {
@@ -59,6 +56,31 @@ namespace WebAPI.Controllers
             UserDTO userDTO = new UserDTO(user);
 
             return new JsonResult(userDTO);
+        }
+
+        /// <summary>
+        /// Выход
+        /// </summary>
+        /// <returns></returns>
+        [Route("Home/SignOut")]
+        [HttpGet]
+        public async Task<IActionResult> SignOutAsync()
+        {
+            await HttpContext.SignOutAsync();
+            return Ok();
+        }
+        /// <summary>
+        /// Выход
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        [Route("")]
+        [Route("Home")]
+        [Route("Home/Index")]
+        [HttpGet]
+        public IActionResult TestConnect()
+        {
+            return Ok();
         }
     }
 }

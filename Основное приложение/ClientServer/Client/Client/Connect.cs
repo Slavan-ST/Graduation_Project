@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Net.NetworkInformation;
 
@@ -47,8 +48,9 @@ namespace Client
                 PingReply reply = myPing.Send(connect, timeout, buffer, options);
                 return (reply.Status == IPStatus.Success);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 return false;
             }
         }
