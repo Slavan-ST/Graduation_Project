@@ -32,8 +32,6 @@ namespace Client.ViewModels
             Initialize();
             Next = ReactiveCommand.Create(() =>
             {
-                CreateLog();
-
                 if (SelectedRoom == null)
                 {
                     return;
@@ -64,6 +62,11 @@ namespace Client.ViewModels
             Mark5 = ReactiveCommand.Create(() =>
             {
                 Mark = "5";
+            });
+
+            Save = ReactiveCommand.Create(() =>
+            {
+                CreateLog();
             });
 
             IsLoading = false;
@@ -98,6 +101,7 @@ namespace Client.ViewModels
             SelectedRoom = Rooms.FirstOrDefault();
         }
         public ICommand Next { get; set; }
+        public ICommand Save { get; set; }
 
         public ICommand Mark2 { get; set; }
         public ICommand Mark3 { get; set; }

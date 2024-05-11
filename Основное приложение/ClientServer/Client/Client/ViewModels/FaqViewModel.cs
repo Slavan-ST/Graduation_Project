@@ -27,22 +27,33 @@ namespace Client.ViewModels
 
         public FaqViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
-            QuestAnswer = new ObservableCollection<TreeViewItem>
-            {
+            /* 
+                Новые записи добавлять в виде:
+                
                 new TreeViewItem("Вопрос1", new ObservableCollection<TreeViewItem>
                     {
                         new TreeViewItem("Ответ1")
                     }),
+             
+             */
 
-                new TreeViewItem("Вопрос2", new ObservableCollection<TreeViewItem>
+
+            IsLoading = true;
+            QuestAnswer = new ObservableCollection<TreeViewItem>
+            {
+                new TreeViewItem("Что делать если забыл пароль?", new ObservableCollection<TreeViewItem>
                     {
-                        new TreeViewItem("Ответ2")
+                        new TreeViewItem("Обратиться к администратору системы")
                     }),
 
-                new TreeViewItem("Вопрос3"), 
-                new TreeViewItem("Вопрос4"), 
-                new TreeViewItem("Вопрос5")
+                new TreeViewItem("Пароль возможно восстановить самостоятельно?", new ObservableCollection<TreeViewItem>
+                    {
+                        new TreeViewItem("Нет. Это сделано для большей безопасности данных пользователей")
+                    }),
+                new TreeViewItem("Появилась надпись сервер не отвечает. Что делать?", new ObservableCollection<TreeViewItem>
+                    {
+                        new TreeViewItem("Обратиться к администратору системы. Возможно идут технические работы")
+                    })
 
             };
             IsLoading = false;

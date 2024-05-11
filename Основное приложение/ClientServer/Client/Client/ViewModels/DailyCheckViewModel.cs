@@ -28,8 +28,8 @@ namespace Client.ViewModels
         public DailyCheckViewModel(IScreen? screen = null) : base(screen)
         {
             this.WhenAnyValue(x => x.SelectedRoom).Subscribe(x => FillStudents());
-            
-            Next = ReactiveCommand.Create(() =>            
+
+            Next = ReactiveCommand.Create(() =>
             {
                 if (Rooms == null)
                 {
@@ -43,6 +43,13 @@ namespace Client.ViewModels
 
                 SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
             });
+            Save = ReactiveCommand.Create(() =>
+            {
+                if (Students != null)
+                {
+                    SaveChanges(Students);
+                }
+            });
 
             IsLoading = true;
             FillRooms();
@@ -53,6 +60,7 @@ namespace Client.ViewModels
 
 
         public ICommand Next { get; set; }
+        public ICommand Save { get; set; }
         [Reactive]
         public Room? SelectedRoom { get; set; } // для comboBox
         [Reactive]
@@ -91,10 +99,6 @@ namespace Client.ViewModels
             if (AllStudents == null)
             {
                 return;
-            }
-            if (Students != null)
-            {
-                SaveChanges(Students);
             }
             var students = AllStudents.Where(x => x.Room!.Number == SelectedRoom.Number).ToList();
             var studentsInRoom = new List<StudentInRoom>();

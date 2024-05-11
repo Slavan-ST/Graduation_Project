@@ -53,7 +53,7 @@
 				<StackPanel Margin="25">
 					<Button Content="На главную" IsVisible="{Binding !IsMain}" Command="{Binding OnMain}" Classes="sideBar"/>
 					<StackPanel IsVisible="{Binding IsStudents}">
-						<Button Content="Профиль" Command="{Binding Profile}" Classes="sideBar"/>
+						<!-- Временно не надо !!<Button Content="Профиль" Command="{Binding Profile}" Classes="sideBar"/>-->
 						<Button Content="Заявление" Command="{Binding Statement}" Classes="sideBar"/>
 						<Button Content="Мероприятия" Command="{Binding Events}" Classes="sideBar"/>
 					</StackPanel>
