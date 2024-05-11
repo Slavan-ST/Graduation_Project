@@ -27,7 +27,7 @@ namespace Client.ViewModels
             Year = 2023;
             OpenMonthJornal = ReactiveCommand.Create(() =>
             {
-                Debug.WriteLine("itwork");
+
             });
 
             this.WhenAnyValue(x => x.SelectedMonth).Subscribe(x =>

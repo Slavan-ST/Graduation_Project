@@ -23,7 +23,6 @@ namespace Client.ViewModels
         /// </summary>
         public AuthViewModel(IScreen? screen = null) : base(screen)
         {
-            Debug.WriteLine("test");
             Auth = ReactiveCommand.Create(async () =>
             {
                 IsLoading = true;

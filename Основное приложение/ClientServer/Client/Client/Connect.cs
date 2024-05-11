@@ -1,8 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Client.API;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Threading;
+using System.Threading.Tasks;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace Client
 {
@@ -24,34 +29,44 @@ namespace Client
             _connection = connect;
         }
         static string _connection = "http://localhost:8080/";
-
+        static bool _check = false;
         public static string Connection
         {
             get
             {
-                if (!CheckInternetConnection(_connection))
+                CheckInternetConnection();
+                if (_check)
+                {
+                    Debug.WriteLine("Сервер не отвечает!");
+                }
+                else
                 {
                     //тут пихай всё своё *************
+                    Debug.WriteLine("Всё ОК, сервер на связи");
                 }
                 return _connection;
             }
         }
-
-        public static bool CheckInternetConnection(string connect)
+        static async void CheckInternetConnection()
         {
+            await CheckInternetConnectionAsync(_connection);
+        }
+        public async static Task<bool> CheckInternetConnectionAsync(string connect)
+        {
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
-                Ping myPing = new Ping();
-                byte[] buffer = new byte[32];
-                int timeout = 1000; // Timeout in milliseconds
-                PingOptions options = new PingOptions();
-                PingReply reply = myPing.Send(connect, timeout, buffer, options);
-                return (reply.Status == IPStatus.Success);
+                var response = await client.GetAsync(_connection + $"Home");
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return _check = true;
+                }
+                return _check = false;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return false;
+                return _check = false;
             }
         }
 

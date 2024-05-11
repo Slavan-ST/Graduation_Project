@@ -14,7 +14,6 @@ namespace Client
             var viewModelName = viewModel!.GetType().FullName;
             var viewTypeName = viewModelName!.Replace("ViewModel", "View");
 
-            Debug.WriteLine("View in locator: " + viewTypeName);
             try
             {
                 var viewType = Type.GetType(viewTypeName);
@@ -26,7 +25,6 @@ namespace Client
             }
             catch (Exception)
             {
-                Debug.WriteLine("Error in locator: " + viewTypeName);
                 throw;
             }
         }
