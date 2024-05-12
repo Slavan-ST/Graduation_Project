@@ -1,0 +1,37 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<TreeView>
+				<TreeViewItem Header="Header 1" Classes="h1">
+					<TextBlock Text="Item 1" Classes="h4"/>
+				</TreeViewItem>
+				<TreeViewItem Header="Header 2" Classes="h2">
+					<TextBlock Text="Item 2" Classes="h4"/>
+				</TreeViewItem>
+				<TreeViewItem Header="Header 3" Classes="h3">
+					<TextBlock Text="Item 3" Classes="h4"/>
+				</TreeViewItem>
+				<TreeViewItem Header="Header 4" Classes="h4">
+					<TextBlock Text="Item 4" Classes="h4"/>
+				</TreeViewItem>
+			</TreeView>
+        </Border>
+    </Design.PreviewWith>
+	
+	<Style Selector="TreeViewItem.h1">
+		<Setter Property="FontSize" Value="36"/>
+	</Style>
+
+	<Style Selector="TreeViewItem.h2">
+		<Setter Property="FontSize" Value="32"/>
+	</Style>
+	
+	<Style Selector="TreeViewItem.h3">
+		<Setter Property="FontSize" Value="28"/>
+	</Style>
+
+	<Style Selector="TreeViewItem.h4">
+		<Setter Property="FontSize" Value="24"/>
+	</Style>
+</Styles>

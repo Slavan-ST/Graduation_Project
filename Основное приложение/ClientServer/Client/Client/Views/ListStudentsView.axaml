@@ -13,7 +13,7 @@
 		<DockPanel>
 			<TreeView DockPanel.Dock="Top" Classes="transparent" >
 				<TreeViewItem Header="Фильтры">
-					<StackPanel >
+					<StackPanel Margin="10">
 						<StackPanel>
 							<TextBlock Text="Студент" Classes="h3"/>
 							<AutoCompleteBox ItemsSource="{Binding ListStudents}"
@@ -60,7 +60,7 @@
 								</AutoCompleteBox.ItemTemplate>
 							</AutoCompleteBox>
 						</StackPanel>
-						<StackPanel Orientation="Horizontal">
+						<StackPanel Orientation="Horizontal" Margin="10">
 							<Button Content="Применить" Margin="0,0,5,0" Classes="navigate h3" Command="{Binding AcceptFilters}"/>
 							<Button Content="Сбросить" Margin="5,0" Classes="navigate h3" Command="{Binding ClearFilters}"/>
 						</StackPanel>

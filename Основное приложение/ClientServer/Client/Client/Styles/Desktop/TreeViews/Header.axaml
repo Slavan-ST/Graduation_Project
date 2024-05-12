@@ -3,34 +3,37 @@
     <Design.PreviewWith>
         <Border Padding="20" Width="600" Height="800">
 			<TreeView Classes="transparent">
-				<TreeViewItem Header="Header 1">
-					<TextBlock Text="Item 1" Classes="h4"/>
+				<TreeViewItem Header="Header 1" Classes="h1">
+					<TextBlock Text="Item 1" Classes="h1"/>
 				</TreeViewItem>
-				<TreeViewItem Header="Header 2">
-					<TextBlock Text="Item 2" Classes="h4"/>
+				<TreeViewItem Header="Header 2" Classes="h1">
+					<TextBlock Text="Item 2" Classes="h2"/>
 				</TreeViewItem>
-				<TreeViewItem Header="Header 3">
-					<TextBlock Text="Item 3" Classes="h4"/>
+				<TreeViewItem Header="Header 3" Classes="h1">
+					<TextBlock Text="Item 3" Classes="h3"/>
 				</TreeViewItem>
-				<TreeViewItem Header="Header 4">
+				<TreeViewItem Header="Header 4" Classes="h1">
 					<TextBlock Text="Item 4" Classes="h4"/>
 				</TreeViewItem>
 			</TreeView>
         </Border>
     </Design.PreviewWith>
 
+	<StyleInclude Source="/Styles/Desktop/TreeViews/Headers.axaml"/>
 	<StyleInclude Source="/Styles/Desktop/TextBlocks/Headers.axaml"/>
 
-	<Style Selector="TreeView.transparent TreeViewItem">
-		<Setter Property="FontSize" Value="28"/>
-	</Style>
 	
-	<Style Selector="TreeView.transparent Border#PART_LayoutRoot:pointerover">
+	<Style Selector="TreeView.transparent TreeViewItem:pointerover Border#PART_LayoutRoot">
 		<Setter Property="Background" Value="Transparent"/>
 	</Style>
 
 	<Style Selector="TreeView.transparent TreeViewItem:selected Border#PART_LayoutRoot">
 		<Setter Property="Background" Value="Transparent"/>
+	</Style>
+
+	<Style Selector="TreeView.transparent TreeViewItem">
+		<Setter Property="Margin" Value="35"/>
+		<Setter Property="FontSize" Value="42"/>
 	</Style>
 	
 </Styles>

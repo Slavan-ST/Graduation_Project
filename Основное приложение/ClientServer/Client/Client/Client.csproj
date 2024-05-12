@@ -66,6 +66,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaXaml Update="Styles\Desktop\TreeViews\Headers.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

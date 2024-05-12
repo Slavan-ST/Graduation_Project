@@ -16,7 +16,8 @@
 				<Button Classes="switch" Command="{Binding MonthPrev}">
 					<Image Source="{SvgImage /Assets/light/leftBtn.svg}" Stretch="UniformToFill"/>
 				</Button>
-				<TextBlock Text="{Binding MonthString}" Classes="h2" VerticalAlignment="Center"/>
+				<TextBlock Text="{Binding MonthString}" Classes="h2" 
+						   VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="50"/>
 				<Button Classes="switch" Command="{Binding MonthNext}">
 					<Image Source="{SvgImage /Assets/light/rightBtn.svg}" Stretch="UniformToFill"/>
 				</Button>
