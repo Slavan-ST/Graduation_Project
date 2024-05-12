@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult TestConnect()
         {
-            return Ok();
+            return new JsonResult(System.Net.HttpStatusCode.OK);
         }
     }
 }

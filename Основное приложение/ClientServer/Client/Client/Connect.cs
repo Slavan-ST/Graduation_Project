@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,8 +57,8 @@ namespace Client
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetAsync(_connection + $"Home");
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                var response = await client.GetFromJsonAsync<System.Net.HttpStatusCode>(_connection + $"Home");
+                if (response == System.Net.HttpStatusCode.OK)
                 {
                     return _check = true;
                 }
