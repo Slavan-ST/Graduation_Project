@@ -6,20 +6,7 @@
              x:Class="Client.Views.RecordYearView"
 			 x:Name="UC">
 	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="100"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
 		<Image Grid.RowSpan="2" Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-			<Button Classes="switch">
-				<Image Source="{SvgImage /Assets/light/leftBtn.svg}" Stretch="UniformToFill"/>
-			</Button>
-			<TextBlock Text="Year" Classes="h2" VerticalAlignment="Center"/>
-			<Button Content="→" Classes="switch">
-				<Image Source="{SvgImage /Assets/light/rightBtn.svg}" Stretch="UniformToFill"/>
-			</Button>
-		</StackPanel>
 		<ScrollViewer Grid.Row="1" HorizontalAlignment="Center">
 			<ListBox Margin="25" ItemsSource="{Binding YearStats}"
 					 SelectedItem="{Binding SelectedMonth}"
@@ -31,7 +18,7 @@
 				</ListBox.ItemsPanel>
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<Border Classes="borderPanel">
+						<Border Classes="borderPanel" Margin="10">
 							<StackPanel Classes="panel" Height="280" Width="280">
 								<TextBlock Text="{Binding Mount}" Classes="h3"/>
 								<Border Classes="combineOutline">

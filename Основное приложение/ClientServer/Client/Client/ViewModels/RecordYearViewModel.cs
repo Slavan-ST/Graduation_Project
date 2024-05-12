@@ -20,14 +20,18 @@ namespace Client.ViewModels
         /// </summary>
         [Reactive]
         public bool IsLoading { get; set; } = false;
+        [Reactive]
+        public int CurrentYear { get; set; } = DateTime.Now.Year;
+
+        public ICommand NextYear { get; set; }
 
         public RecordYearViewModel(IScreen? screen = null) : base(screen)
         {
             IsLoading = true;
-            Year = 2023;
-            OpenMonthJornal = ReactiveCommand.Create(() =>
-            {
 
+            NextYear = ReactiveCommand.Create(() =>
+            {
+                CurrentYear += 1;
             });
 
             this.WhenAnyValue(x => x.SelectedMonth).Subscribe(x =>
@@ -40,11 +44,11 @@ namespace Client.ViewModels
                 {
                     return;
                 }
-                screen.Router.Navigate.Execute(new RecordStudentsViewModel(Year, SelectedMonth.Mount, screen));
+                screen.Router.Navigate.Execute(new RecordStudentsViewModel(CurrentYear, SelectedMonth.Mount, screen));
             });
-            this.WhenAnyValue(x => x.Year).Subscribe(x =>
+            this.WhenAnyValue(x => x.CurrentYear).Subscribe(x =>
             {
-                if (Year == 0)
+                if (CurrentYear == 0)
                 {
                     return;
                 }
@@ -91,15 +95,9 @@ namespace Client.ViewModels
         }
 
         [Reactive]
-        public int Year { get; set; } 
-
-        [Reactive]
         public MountStat? SelectedMonth { get; set; }
         [Reactive]
         public List<MountStat>? YearStats { get; set; }
-
-        [Reactive]
-        public ICommand OpenMonthJornal { get; set; }
     }
 
     public class MountStat:ReactiveObject
