@@ -28,12 +28,14 @@ namespace Client.ViewModels
         }
         async void FillEventsAsync()
         {
+            IsLoading = true;
             var events = await EventAPI.GetsAsync();
             if (events == null)
             {
                 return;
             }
             Events = events.ToList();
+            IsLoading = false;
         }
 
         [Reactive]

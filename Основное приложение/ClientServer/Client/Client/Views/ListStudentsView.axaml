@@ -9,6 +9,10 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.ListStudentsView">
 	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<DockPanel>
 			<TreeView DockPanel.Dock="Top" Classes="transparent" >
@@ -104,7 +108,12 @@
 				</ListBox>
 		</ScrollViewer>
 		</DockPanel>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
+		<Border Grid.Row="2" Background="White">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+				<Button Content="Записать студента" Classes="navigate h2" Command="{Binding NewStudent}"/>
+			</StackPanel>
+		</Border>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>

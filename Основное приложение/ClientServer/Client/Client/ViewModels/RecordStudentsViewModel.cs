@@ -91,6 +91,7 @@ namespace Client.ViewModels
 
             if (students == null)
             {
+                IsLoading = false;
                 return;
             }
 
@@ -98,6 +99,7 @@ namespace Client.ViewModels
             {
                 if (student.AttendanceLogs == null)
                 {
+                    IsLoading = false;
                     return;
                 }
 
@@ -106,6 +108,7 @@ namespace Client.ViewModels
 
                 if (studLogs == null)
                 {
+                    IsLoading = false;
                     return;
                 }
 
@@ -190,11 +193,13 @@ namespace Client.ViewModels
 
         async Task<IEnumerable<Student>?> _noFilters()
         {
+            IsLoading = true;
             ListRoomsSelectedItem = null;
             ListStatusesSelectedItem = null;
             ListStudentsSelectedItem = null;
-
-            return await StudentAPI.GetStudentsAsync();
+            var students = await StudentAPI.GetStudentsAsync();
+            IsLoading = false;
+            return students;
         }
         async Task<IEnumerable<Student>?> _filters()
         {
@@ -203,7 +208,7 @@ namespace Client.ViewModels
             //{
             //    return new List<Student>() { ListStudentsSelectedItem };
             //}
-
+            IsLoading = true;
             var list = await StudentAPI.GetStudentsAsync();
             if (list == null)
             {
@@ -225,6 +230,7 @@ namespace Client.ViewModels
                     x.Patronymic == ListStudentsSelectedItem.Patronymic
                 ).ToList();
             }
+            IsLoading = false;
             return list;
         }
 

@@ -23,6 +23,7 @@ namespace Client.ViewModels
         /// </summary>
         public AuthViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             Auth = ReactiveCommand.Create(async () =>
             {
                 IsLoading = true;
@@ -46,6 +47,7 @@ namespace Client.ViewModels
                 Services.Authorization.GetAuthorization().IsEmployee = user.Role!.Name == "Сотрудник";
                 HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen));
             });
+            IsLoading = false;
         }
 
         [Reactive]

@@ -27,10 +27,12 @@ namespace Client.ViewModels
 
         public DailyCheckViewModel(IScreen? screen = null) : base(screen)
         {
+            IsLoading = true;
             this.WhenAnyValue(x => x.SelectedRoom).Subscribe(x => FillStudents());
 
             Next = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 if (Rooms == null)
                 {
                     return;
@@ -42,16 +44,17 @@ namespace Client.ViewModels
                 }
 
                 SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
+                IsLoading = false;
             });
             Save = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 if (Students != null)
                 {
                     SaveChanges(Students);
                 }
+                IsLoading = false;
             });
-
-            IsLoading = true;
             FillRooms();
             FillAllStudents();
 

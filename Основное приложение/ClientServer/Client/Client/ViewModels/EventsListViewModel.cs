@@ -1,7 +1,6 @@
 ﻿using Client.API;
 using Client.ViewModels.Base;
 using Helper.Models.Main;
-using Org.BouncyCastle.Crypto.Parameters;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -32,6 +31,10 @@ namespace Client.ViewModels
                 SaveInAPI();
                 IsLoading = false;
             });
+            NewEvent = ReactiveCommand.Create(() =>
+            {
+                // new Event, want here
+            });
             IsLoading = false;
         }
 
@@ -48,6 +51,7 @@ namespace Client.ViewModels
         [Reactive]
         public List<EventO> Events { get; set; } = new List<EventO>();
         public ICommand Save { get; set; }
+        public ICommand NewEvent { get; set; }
 
         async void SaveInAPI()
         {

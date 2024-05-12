@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20" Width="600" Height="800">
-			<TreeView Classes="transparent">
+			<TreeView Classes="transparent faq">
 				<TreeViewItem Header="Header 1" Classes="h1">
 					<TextBlock Text="Item 1" Classes="h1"/>
 				</TreeViewItem>
@@ -31,7 +31,7 @@
 		<Setter Property="Background" Value="Transparent"/>
 	</Style>
 
-	<Style Selector="TreeView.transparent TreeViewItem">
+	<Style Selector="TreeView.transparent.faq TreeViewItem">
 		<Setter Property="Margin" Value="35"/>
 		<Setter Property="FontSize" Value="42"/>
 	</Style>

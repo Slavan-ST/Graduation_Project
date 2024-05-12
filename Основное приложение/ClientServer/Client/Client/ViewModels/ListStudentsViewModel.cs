@@ -26,6 +26,8 @@ namespace Client.ViewModels
         [Reactive]
         public bool IsLoading { get; set; } = false;
 
+        public ICommand NewStudent { get; set; }
+
         public ListStudentsViewModel(IScreen? screen = null) : base(screen)
         {
             IsLoading = true;
@@ -49,6 +51,11 @@ namespace Client.ViewModels
                 FillListStudents(_noFilters);
                 IsLoading = false;
             });
+
+            NewStudent = ReactiveCommand.Create(() =>
+            {
+                // func add student here
+            })
             IsLoading = false;
         }
 

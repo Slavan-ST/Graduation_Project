@@ -8,6 +8,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="3*"/>
+			<RowDefinition Height="auto" MaxHeight="100"/>
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel Margin="25">
@@ -47,7 +48,12 @@
 				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
+		<Border Grid.Row="2" Background="White" IsVisible="{Binding IsWorker}">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
+			</StackPanel>
+		</Border>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="3">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>

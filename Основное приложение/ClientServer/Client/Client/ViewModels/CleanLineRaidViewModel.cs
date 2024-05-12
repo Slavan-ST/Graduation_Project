@@ -32,6 +32,7 @@ namespace Client.ViewModels
             Initialize();
             Next = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 if (SelectedRoom == null)
                 {
                     return;
@@ -42,6 +43,7 @@ namespace Client.ViewModels
                     return;
                 }
                 SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
+                IsLoading = false;
             });
 
             Mark2 = ReactiveCommand.Create(() =>
@@ -66,7 +68,9 @@ namespace Client.ViewModels
 
             Save = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 CreateLog();
+                IsLoading = false;
             });
 
             IsLoading = false;

@@ -5,8 +5,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.EventsListView">
 	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto" MaxHeight="100"/>
+		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
-		<ScrollViewer Grid.Row="1">
+		<ScrollViewer>
 			<ItemsControl ItemsSource="{Binding Events}" Background="Transparent"
 						  HorizontalAlignment="Center">
 				<ItemsControl.ItemsPanel>
@@ -29,6 +33,12 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
+		<Border Grid.Row="1" Background="White">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+				<Button Content="Создать мероприятие" Classes="navigate h2" Command="{Binding NewEvent}"/>
+				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
+			</StackPanel>
+		</Border>
 		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
 			<Ellipse Classes="spinner"/>
 		</Border>
