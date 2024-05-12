@@ -2,6 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:bh="using:Client.Behaviours"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:vm="clr-namespace:Client.ViewModels;assembly=Client"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.StatementView">
 	<Grid>
@@ -15,24 +18,19 @@
 				<StackPanel Margin="10">
 					<TextBlock Text="Cтудент" Classes="h2"></TextBlock>
 
-					<TextBlock Text="Фамилия" Classes="h3"/>
-					<TextBox Text="{Binding Surname}" Classes="outline purple h3"/>
-
-
-					<TextBlock Text="Имя" Classes="h3"/>
-					<TextBox Text="{Binding Name}" Classes="outline purple h3"/>
-
-
-					<TextBlock Text="Отчество" Classes="h3"/>
-					<TextBox Text="{Binding Patronymic}" Classes="outline purple h3"/>
-
-
-					<TextBlock Text="№ комнаты" Classes="h3"/>
-					<TextBox Text="{Binding Room}" Classes="outline purple h3"/>
-
-
-					<TextBlock Text="Номер телефона" Classes="h3"/>
-					<TextBox Text="{Binding Phone}" Classes="outline purple h3"/>
+					<AutoCompleteBox ItemsSource="{Binding ListStudents}"
+											 FilterMode="StartsWith"
+											 Classes="outline lightBlue h4"
+											 SelectedItem="{Binding ListStudentsSelectedItem}">
+						<i:Interaction.Behaviors>
+							<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+						</i:Interaction.Behaviors>
+						<AutoCompleteBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding FIO}" Classes="h4"/>
+							</DataTemplate>
+						</AutoCompleteBox.ItemTemplate>
+					</AutoCompleteBox>
 
 
 					<TextBlock Text="Дата выезда" Classes="h3"/>
@@ -42,22 +40,6 @@
 					<TextBlock Text="Дата заезда" Classes="h3"/>
 					<TextBox Text="{Binding DateIn}" Classes="outline purple h3"/>
 
-				</StackPanel>
-				<StackPanel Margin="10">
-					<TextBlock Text="Законый представитель" Classes="h2"/>
-
-					<TextBlock Text="Фамилия" Classes="h3"/>
-					<TextBox Text="{Binding SurnameRepresentative}" Classes="outline purple h3"/>
-
-					<TextBlock Text="Имя" Classes="h3"/>
-					<TextBox Text="{Binding NameRepresentative}" Classes="outline purple h3"/>
-
-					<TextBlock Text="Отчество" Classes="h3"/>
-					<TextBox Text="{Binding PatronymicRepresentative}" Classes="outline purple h3"/>
-
-
-					<TextBlock Text="Номер телефона" Classes="h3"/>
-					<TextBox Text="{Binding PhoneRepresentative}" Classes="outline purple h3"/>
 				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>

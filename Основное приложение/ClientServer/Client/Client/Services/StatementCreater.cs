@@ -1,5 +1,6 @@
 ﻿
 
+using Helper.Models.Main;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
@@ -28,20 +29,7 @@ namespace Client.Services
         /// <param name="repSurname"></param>
         /// <param name="repPatronymic"></param>
         /// <param name="repPhone"></param>
-        public static void CreateStatement(
-            string name, 
-            string surname, 
-            string patronymic, 
-            string phone, 
-            string room, 
-            string dateOut,
-            string dateIn, 
-            string address,
-            string repName, 
-            string repSurname, 
-            string repPatronymic, 
-            string repPhone,
-            string ageCategory = "несовершеннолетний")
+        public static void CreateStatement(Student student, string dateOut, string dateIn)
         {
             var font = PdfFontFactory.CreateFont($"{Environment.CurrentDirectory}\\Fonts\\timesnewromanpsmt.ttf", "Identity-H");
             
@@ -49,6 +37,8 @@ namespace Client.Services
             document.SetFont(font);
             document.SetFontSize(14);
 
+            string roomNum = (student.Room == null)? 20.ToString() : student.Room.Number;
+            string ageCategory = (student.Age >= 18) ? "совершеннолетний" : "несовершеннолетний";
 
             var par1 = new Paragraph(
                 new iText.Layout.Element.Text(
@@ -56,29 +46,40 @@ namespace Client.Services
                     "Зам директора по ВР" + Environment.NewLine +
                     "О.А. Крапп" + Environment.NewLine +
                     "студента" + Environment.NewLine +
-                    $"{surname} {name} {patronymic} комн {room}" + Environment.NewLine +
+                    $"{student.Surname} {student.Name} {student.Patronymic} комн {roomNum}" + Environment.NewLine +
                     $"{ageCategory}" + Environment.NewLine)
 
                 ).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
 
-            var par2 = new Paragraph(
+            Paragraph par2;
 
-                    $"Прошу отпустить с {dateOut} по {dateOut} по адресу {address}" + Environment.NewLine +
-                    $"{repSurname} {repName} {repPatronymic}: {repPhone}" +
+            if (student.Age >= 18)
+            {
+                par2 = new Paragraph(
+
+                    $"Прошу отпустить с {dateOut} по {dateOut} по адресу: {student.Address}" + Environment.NewLine +
+                    $"{student.RepresentativeSurname} {student.RepresentativeName} {student.RepresentativePatronymic}: {student.RepresentativePhone}" +
                     Environment.NewLine +
                     Environment.NewLine +
                     Environment.NewLine +
                     Environment.NewLine
+                ).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT);
+            }
+            else
+            {
+                par2 = new Paragraph(
 
-
-
-                ).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
-
-            var par3 = new Paragraph(
+                    $"Прошу отпустить с {dateOut} по {dateOut} по адресу: {student.Address}" + Environment.NewLine +
+                    $"Мой номер: {student.Phone}" +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    Environment.NewLine
+                ).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT);
+            }
+            Paragraph par3 = new Paragraph(
                 
                     $"{dateOut}"
-
-
                 ).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
 
 

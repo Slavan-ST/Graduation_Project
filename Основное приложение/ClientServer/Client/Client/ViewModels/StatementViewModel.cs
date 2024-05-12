@@ -1,5 +1,8 @@
-﻿using Client.Services;
+﻿using Client.API;
+using Client.Services;
 using Client.ViewModels.Base;
+using Helper.Models.Main;
+using MsBox.Avalonia;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -22,6 +25,8 @@ namespace Client.ViewModels
 
         public StatementViewModel(IScreen? screen = null) : base(screen)
         {
+            FillStudents();
+            ListStudentsSelectedItem = ListStudents.FirstOrDefault();
             IsLoading = true;
             GetEmptyStatement = ReactiveCommand.Create(() =>
             {
@@ -29,51 +34,39 @@ namespace Client.ViewModels
                 StatementCreater.CreateStatementEmpty();
                 IsLoading = false;
             });
-            GetFillStatement = ReactiveCommand.Create(() =>
+            GetFillStatement = ReactiveCommand.Create(async() =>
             {
+                if (ListStudentsSelectedItem == null)
+                {
+                    await MessageBoxManager.GetMessageBoxStandard("Ошибка", "Выберете студента!").ShowAsync();
+                    return;
+                }
                 IsLoading = true;
-                StatementCreater.CreateStatement(
-                    Name, 
-                    Surname, 
-                    Patronymic, 
-                    Phone, 
-                    Room, 
-                    DateOut, 
-                    DateIn, 
-                    Address, 
-                    NameRepresentative, 
-                    SurnameRepresentative, 
-                    PatronymicRepresentative, 
-                    PhoneRepresentative);
+                StatementCreater.CreateStatement(ListStudentsSelectedItem,DateOut,DateIn);
                 IsLoading = false;
             });
             IsLoading = false;
         }
+
+
+        public async void FillStudents()
+        {
+            var students = await StudentAPI.GetStudentsAsync();
+            if (students == null)
+            {
+                return;
+            }
+            ListStudents = new List<Student>(students);
+        }
+
         [Reactive]
-        public string Address { get; set; } = string.Empty;
+        public Student? ListStudentsSelectedItem { get; set; }
         [Reactive]
-        public string Surname { get; set; } = string.Empty;
-        [Reactive]
-        public string Name { get; set; } = string.Empty;
-        [Reactive]
-        public string Patronymic { get; set; } = string.Empty;
-        [Reactive]
-        public string Room { get; set; } = string.Empty;
-        [Reactive]
-        public string Phone { get; set; } = string.Empty;
+        public List<Student> ListStudents { get; set; } = new List<Student>();
         [Reactive]
         public string DateOut { get; set; } = string.Empty;
         [Reactive]
         public string DateIn { get; set; } = string.Empty;
-        [Reactive]
-        public string SurnameRepresentative { get; set; } = string.Empty;
-        [Reactive]
-        public string NameRepresentative { get; set; } = string.Empty;
-        [Reactive]
-        public string PatronymicRepresentative { get; set; } = string.Empty;
-        [Reactive]
-        public string PhoneRepresentative { get; set; } = string.Empty;
-
         public ICommand GetEmptyStatement { get; set; }
         public ICommand GetFillStatement { get; set; }
     }

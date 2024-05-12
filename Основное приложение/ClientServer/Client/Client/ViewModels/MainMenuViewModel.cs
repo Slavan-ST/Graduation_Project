@@ -128,7 +128,7 @@ namespace Client.ViewModels
                 HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen)); 
             });
 
-            Router.Navigate.Execute(new NewsViewModel(this));
+            Router.Navigate.Execute(new FaqViewModel(this));
         }
 
         #region Commands
@@ -251,7 +251,7 @@ namespace Client.ViewModels
         /// "Новости" по умолчанию
         /// </value>
         [Reactive]
-        public string Title { get; set; } = "Новости";
+        public string Title { get; set; } = "";
 
         #endregion
     }
