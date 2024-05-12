@@ -251,7 +251,7 @@ namespace Client.ViewModels
         /// "Новости" по умолчанию
         /// </value>
         [Reactive]
-        public string Title { get; set; } = "";
+        public string Title { get; set; } = "Вопрос-ответ";
 
         #endregion
     }
