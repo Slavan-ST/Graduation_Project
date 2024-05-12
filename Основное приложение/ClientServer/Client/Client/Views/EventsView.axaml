@@ -31,7 +31,7 @@
 							</StackPanel>
 							<Border Classes="dedicate">
 								<StackPanel Margin="20">
-									<TextBlock Text="{Binding Date}" Classes="h3"/>
+									<TextBlock Text="{Binding ShortDateTime}" Classes="h3"/>
 									<TextBlock Text="{Binding Location}" Classes="h3"/>
 									<TextBlock Text="{Binding Organizer}" Classes="h3"/>
 									<TextBlock Text="{Binding Description}" Classes="h3"/>

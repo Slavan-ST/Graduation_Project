@@ -68,7 +68,9 @@
 					</StackPanel>
 					<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="sideBar"/>
 				</StackPanel>
-				<Button Content="◄" Classes="switch" HorizontalAlignment="Right" Command="{Binding HideSideBar}"/>
+				<Button Classes="switch" HorizontalAlignment="Right" Command="{Binding HideSideBar}">
+					<Image Source="{SvgImage /Assets/light/leftBtn.svg}" Stretch="UniformToFill"/>
+				</Button>
 			</Grid>
 	</Grid>
 </UserControl>

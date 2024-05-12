@@ -17,5 +17,6 @@ namespace Helper.Models.Main
         public string Marker { get; set; } = string.Empty;
         public string? Description { get; set; }
         public Room? Room { get; set; }
+        public string ShortDate { get => Date.ToShortDateString(); }
     }
 }

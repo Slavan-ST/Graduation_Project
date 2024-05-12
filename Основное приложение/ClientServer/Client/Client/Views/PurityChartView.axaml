@@ -12,12 +12,16 @@
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-				<Button Content="◄" Classes="switch" Command="{Binding MonthPrev}"/>
+				<Button Content="◄" Classes="switch" Command="{Binding MonthPrev}">
+					<Image Source="{SvgImage /Assets/light/leftBtn.svg}" Stretch="UniformToFill"/>
+				</Button>
 				<TextBlock Text="{Binding MonthString}" Classes="h2" VerticalAlignment="Center"/>
-				<Button Content="►" Classes="switch" Command="{Binding MonthNext}"/>
+				<Button Content="►" Classes="switch" Command="{Binding MonthNext}">
+					<Image Source="{SvgImage /Assets/light/rightBtn.svg}" Stretch="UniformToFill"/>
+				</Button>
 			</StackPanel>
 		</StackPanel>
-		<ScrollViewer>
+		<ScrollViewer Grid.Row="1">
 			<ItemsControl ItemsSource="{Binding PurityRaids}" Background="Transparent"
 						  HorizontalAlignment="Center">
 				<ItemsControl.ItemsPanel>
@@ -32,7 +36,7 @@
 						<Border Classes="borderPanel">
 							<StackPanel Classes="panel" Height="280" Width="280">
 								<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
-								<TextBlock Text="{Binding Date.Day}" Classes="h3"/>
+								<TextBlock Text="{Binding ShortDate}" Classes="h3"/>
 								<TextBlock Text="{Binding Mark}" Classes="h3"/>
 								<TextBlock Text="{Binding Description}" Classes="h3"/>
 							</StackPanel>

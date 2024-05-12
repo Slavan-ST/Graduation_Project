@@ -40,7 +40,7 @@
 							<ColumnDefinition Width="9*" MaxWidth="650"/>
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Студент:" Classes="h2"/>
-						<Label Content="{Binding Student.FIO}" Grid.Row="1" Classes="outline purple h3"/>
+						<TextBlock Text="{Binding Student.FIO}" Grid.Row="1" Classes="outline purple h3"/>
 						<Button Content="{Binding Mark}" Grid.Column="1" Grid.Row="1" Classes="markSelected h3">
 							<i:Interaction.Behaviors>
 								<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
@@ -66,11 +66,11 @@
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 		
-		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="15" Spacing="5">
 			<Button Content="Следующая комната" Classes="navigate h2" Command="{Binding Next}"/>
 			<Button Content="Сохранить" Classes="h2 navigate" Command="{Binding Save}"/>
 		</StackPanel>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>

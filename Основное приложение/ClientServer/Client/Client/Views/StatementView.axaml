@@ -62,7 +62,7 @@
 			</StackPanel>
 		</ScrollViewer>
 		<Border Background="White"  Grid.Row="1">
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15" Spacing="5">
 			<Button Command="{Binding GetEmptyStatement}" Content="Получить пустой бланк" Classes="navigate h2"/>
 			<Button Command="{Binding GetFillStatement}" Content="Составить" Classes="navigate h2"/>
 		</StackPanel>

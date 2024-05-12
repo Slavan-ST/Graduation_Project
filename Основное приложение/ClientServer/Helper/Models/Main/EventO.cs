@@ -15,5 +15,6 @@ namespace Helper.Models.Main
         public string? Location { get; set; }
         public string? Organizer { get; set; }
         public DateTime Date { get; set; }
+        public string ShortDateTime { get => Date.ToShortDateString() + " " + Date.ToShortTimeString(); }
     }
 }

@@ -11,6 +11,8 @@
   
   <ItemGroup>
     <None Remove="Assets\light\bell.svg" />
+    <None Remove="Assets\light\leftBtn.svg" />
+    <None Remove="Assets\light\rightBtn.svg" />
     <None Remove="Assets\sideBarBtn.svg" />
     <None Remove="Fonts\COPYRIGHT.txt" />
     <None Remove="Fonts\timesnewromanpsmt.ttf" />

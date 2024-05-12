@@ -81,10 +81,13 @@
 						<DataTemplate>
 							<Border Classes="borderPanel">
 								<StackPanel Classes="panel" Height="280" Width="280">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="Комната - " Classes="h3"/>
+										<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
+									</StackPanel>
 									<TextBlock Text="{Binding Surname}" Classes="h3"/>
 									<TextBlock Text="{Binding Name}" Classes="h3"/>
 									<TextBlock Text="{Binding Patronymic}" Classes="h3"/>
-									<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
 								</StackPanel>
 								<i:Interaction.Behaviors>
 									<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="Border">
