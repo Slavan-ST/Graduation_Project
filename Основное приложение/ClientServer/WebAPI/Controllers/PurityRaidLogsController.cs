@@ -145,7 +145,7 @@ namespace WebAPI.Controllers
 
             if (purityRaidLog != null)
             {
-                return StatusCode(400);
+                return new JsonResult(StatusCode(409));
             }
 
             await db.PurityRaidLogs.AddAsync(purityRaidLogDTO);

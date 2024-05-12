@@ -48,6 +48,12 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Events", eventO);
+
+                //если лог уже существует, то просто обновляем старый
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutAsync(eventO);
+                }
                 return response.StatusCode;
             }
             catch (Exception e)

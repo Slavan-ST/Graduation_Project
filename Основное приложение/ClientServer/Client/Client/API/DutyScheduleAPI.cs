@@ -111,6 +111,10 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"DutySchedule", dutySchedule);
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutDutySchedule(dutySchedule);
+                }
                 return response.StatusCode;
             }
             catch (Exception e)
