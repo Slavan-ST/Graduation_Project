@@ -1,4 +1,5 @@
-﻿using Client.API;
+﻿using Avalonia.Markup.Xaml.Templates;
+using Client.API;
 using Client.ViewModels.Base;
 using Helper.Models.Main;
 using ReactiveUI;
@@ -33,7 +34,10 @@ namespace Client.ViewModels
             });
             NewEvent = ReactiveCommand.Create(() =>
             {
-                // new Event, want here
+                var temp = new List<EventO>(Events);
+                temp.Add(new EventO());
+
+                Events = new List<EventO>(temp);
             });
             IsLoading = false;
         }
@@ -57,7 +61,7 @@ namespace Client.ViewModels
         {
             foreach (var eventO in Events)
             {
-                await EventAPI.PutAsync(eventO);
+                await EventAPI.PostAsync(eventO);
             }
         }
     }

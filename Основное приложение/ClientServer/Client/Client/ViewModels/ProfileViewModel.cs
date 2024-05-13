@@ -42,7 +42,7 @@ namespace Client.ViewModels
                 IsLoading = true;
                 // save inforemation about student through API
                 IsLoading = false;
-            })
+            });
             IsLoading = false;
         }
 

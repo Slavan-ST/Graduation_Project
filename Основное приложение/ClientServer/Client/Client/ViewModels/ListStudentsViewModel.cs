@@ -55,7 +55,7 @@ namespace Client.ViewModels
             NewStudent = ReactiveCommand.Create(() =>
             {
                 // func add student here
-            })
+            });
             IsLoading = false;
         }
 

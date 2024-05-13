@@ -36,7 +36,7 @@ namespace Client
             get
             {
                 CheckInternetConnection();
-                if (_check)
+                if (!_check)
                 {
                     Debug.WriteLine("Сервер не отвечает!");
                 }
@@ -58,15 +58,10 @@ namespace Client
             try
             {
                 var response = await client.GetFromJsonAsync<System.Net.HttpStatusCode>(_connection + $"Home");
-                if (response == System.Net.HttpStatusCode.OK)
-                {
-                    return _check = true;
-                }
-                return _check = false;
+                return _check = true;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
                 return _check = false;
             }
         }
