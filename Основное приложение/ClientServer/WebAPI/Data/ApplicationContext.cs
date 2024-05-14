@@ -76,7 +76,7 @@ namespace WebAPI.Data
             string? connectionString = config.GetConnectionString("DebugConnection");
 #else
 
-            string connectionString = config.GetConnectionString("DefaultConnection");
+            string connectionString = config.GetConnectionString("Connection1080");
 #endif
 
 
