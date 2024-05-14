@@ -60,7 +60,7 @@ namespace Client
                 var response = await client.GetFromJsonAsync<System.Net.HttpStatusCode>(_connection + $"Home");
                 return _check = true;
             }
-            catch (Exception ex)
+            catch
             {
                 return _check = false;
             }

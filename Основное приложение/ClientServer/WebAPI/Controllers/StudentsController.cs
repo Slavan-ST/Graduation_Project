@@ -167,21 +167,14 @@ namespace WebAPI.Controllers
         /// <summary>
         /// Удаление студента
         /// </summary>
-        /// <param name="room"></param>
-        /// <param name="fio"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{room}/{fio}")]
-        public async Task<ActionResult> Delete(string room, string fio)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            room = room.Trim();
-            fio = fio.Trim();
-
-            (string surname, string name, string? patronymic) = FIOConverter.GetSurnameNamePatronymicFromFIO(fio);
-
             ApplicationContext db = new ApplicationContext();
             var student = await db.Students
-                .Include(c => c.Room)
-                .Where(x => x.Room!.Number == room && x.Surname == surname && x.Name == name && x.Patronymic == patronymic)
+                .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (student == null)
