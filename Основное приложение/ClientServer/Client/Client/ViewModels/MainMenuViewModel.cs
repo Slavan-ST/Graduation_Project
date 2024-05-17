@@ -61,10 +61,34 @@ namespace Client.ViewModels
                 IsOpenSideBar = false;
             });
 
-            Faq = ReactiveCommand.Create(() => 
-            { 
+            Faq = ReactiveCommand.Create(() =>
+            {
                 Router.Navigate.Execute(new FaqViewModel(this));
                 Title = "Вопрос-ответ";
+                IsOpenSideBar = false;
+            });
+            Group = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new GroupViewModel(this));
+                Title = "Group";
+                IsOpenSideBar = false;
+            });
+            Role = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new RoleViewModel(this));
+                Title = "Role";
+                IsOpenSideBar = false;
+            });
+            Room = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new RoomViewModel(this));
+                Title = "Room";
+                IsOpenSideBar = false;
+            });
+            Status = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new StatusViewModel(this));
+                Title = "Status";
                 IsOpenSideBar = false;
             });
 

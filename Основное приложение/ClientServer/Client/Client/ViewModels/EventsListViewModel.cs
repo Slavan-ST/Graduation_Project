@@ -77,18 +77,6 @@ namespace Client.ViewModels
             });
         }
 
-        async void FillEventsAsync()
-        {
-            IsLoading = true;
-            var events = await EventAPI.GetsAsync();
-            if (events == null)
-            {
-                IsLoading = false;
-                return;
-            }
-            Events = events.ToList();
-            IsLoading = false;
-        }
 
         [Reactive]
         public List<EventO> Events { get; set; } = new List<EventO>();
@@ -103,6 +91,19 @@ namespace Client.ViewModels
             {
                 await EventAPI.PostAsync(eventO);
             }
+            IsLoading = false;
+        }
+
+        async void FillEventsAsync()
+        {
+            IsLoading = true;
+            var events = await EventAPI.GetsAsync();
+            if (events == null)
+            {
+                IsLoading = false;
+                return;
+            }
+            Events = events.ToList();
             IsLoading = false;
         }
     }
