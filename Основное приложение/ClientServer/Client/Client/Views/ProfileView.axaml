@@ -83,6 +83,7 @@
 		<Border Grid.Row="2" Background="White" IsVisible="{Binding IsWorker}">
 			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
+				<Button Content="Удалить" Classes="navigate h2" Command="{Binding Delete}"/>
 			</StackPanel>
 		</Border>
 		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="3">

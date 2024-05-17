@@ -29,6 +29,7 @@ namespace Client.ViewModels
         [Reactive]
         public Student? Student { get; set; }
         public ICommand? Save { get; set; }
+        public ICommand? Delete { get; set; }
 
 
         [Reactive]
