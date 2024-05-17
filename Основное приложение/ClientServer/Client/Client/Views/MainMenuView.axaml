@@ -27,7 +27,7 @@
 					   VerticalAlignment="Center"
 					   Margin="0,0,50,0" Classes="h2"/>
 			<Button Width="40" Height="40" Margin="5"
-					HorizontalAlignment="Left" Command="{Binding OpenSideBar}">
+					HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding OpenSideBar}">
 				<Image Source="{SvgImage /Assets/sideBarBtn.svg}" Stretch="UniformToFill"/>
 			</Button>
 		</Grid>

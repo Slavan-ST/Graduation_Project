@@ -8,11 +8,11 @@
              x:Class="Client.Views.ProfileView">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="3*"/>
+			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto" MaxHeight="100"/>
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
+		<ScrollViewer>
 		<StackPanel Margin="25">
 			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.FIO}" Classes="h3 outline purple"/>
 			<AutoCompleteBox IsDropDownOpen="{Binding !IsWorker}" SelectedItem="{Binding SelectedRoom}"
@@ -22,7 +22,7 @@
 								</i:Interaction.Behaviors>
 								<AutoCompleteBox.ItemTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Number}" Classes="h4"/>
+										<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
@@ -33,7 +33,7 @@
 								</i:Interaction.Behaviors>
 								<AutoCompleteBox.ItemTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Number}" Classes="h4"/>
+										<TextBlock Text="{Binding Group.Number}" Classes="h3"/>
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
@@ -44,14 +44,11 @@
 								</i:Interaction.Behaviors>
 								<AutoCompleteBox.ItemTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Number}" Classes="h4"/>
+										<TextBlock Text="{Binding Status.Number}" Classes="h3"/>
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
 			<TextBlock Text="Дополнительная информация" Classes="h2"/>
-		</StackPanel>
-		<ScrollViewer Grid.Row="1" Margin="25">
-			<StackPanel HorizontalAlignment="Stretch">
 				<StackPanel Margin="10">
 					<StackPanel>
 						<TextBlock Text="Контакты" Classes="h3"/>
@@ -78,8 +75,8 @@
 						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Student.RepresentativePhone}"/>
 					</StackPanel>
 				</StackPanel>
-			</StackPanel>
-		</ScrollViewer>
+		</StackPanel>
+			</ScrollViewer>
 		<Border Grid.Row="2" Background="White" IsVisible="{Binding IsWorker}">
 			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>

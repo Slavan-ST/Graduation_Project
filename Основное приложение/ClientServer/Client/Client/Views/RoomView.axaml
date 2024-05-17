@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.Views.RoomView">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<ScrollViewer>
+			<ListBox ItemsSource="{Binding Rooms}" Background="Transparent"
+					 HorizontalAlignment="Center" SelectedItem="{Binding SelectedRoom}">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel>
+
+						</WrapPanel>
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Border Classes="borderPanel">
+							<StackPanel Classes="panel" Height="280" Width="280">
+								<Border Padding="10">
+									<StackPanel>
+										<TextBlock Text="Комната - " Classes="h3"/>
+										<TextBox Text="{Binding Room.Number}" Classes="h3 outline purple"/>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="В комнате " Classes="h3"/>
+											<TextBlock Text="{Binding Room.CountStudents}" Classes="h3"/>
+											<TextBlock Text=" чел."/>
+										</StackPanel>
+									</StackPanel>
+								</Border>
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</ScrollViewer>
+		<Border Grid.Row="2" Background="White">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+				<Button Content="Новая комната" Classes="navigate h2" Command="{Binding NewRoom}"/>
+				<Button Content="Удалить" Classes="navigate h2" Command="{Binding Delete}"/>
+				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
+			</StackPanel>
+		</Border>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
+			<Ellipse Classes="spinner"/>
+		</Border>
+	</Grid>
+</UserControl>
