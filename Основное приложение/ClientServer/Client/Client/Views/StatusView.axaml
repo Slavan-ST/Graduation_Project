@@ -11,7 +11,7 @@
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
 		<ScrollViewer>
-			<ListBox ItemsSource="{Binding Stutuses}" Background="Transparent"
+			<ListBox ItemsSource="{Binding Statuses}" Background="Transparent"
 					 HorizontalAlignment="Center" SelectedItem="{Binding SelectedStatus}">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
