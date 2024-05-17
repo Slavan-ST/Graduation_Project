@@ -1,60 +1,17 @@
-﻿using Client.ViewModels.Base;
+﻿using Client.API;
+using Client.ViewModels.Base;
 using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Отображение спинера загрузки
-        /// </summary>
-        [Reactive]
-        public bool IsLoading { get; set; } = false;
-
-        /// <summary>
-        /// Группа студента
-        /// </summary>
-        [Reactive]
-        public Group SelectedGroup { get; set; }
-
-        /// <summary>
-        /// Все группы
-        /// </summary>
-        [Reactive]
-        public List<Group> Groups { get; set; }
-        /// <summary>
-        /// Все комнаты
-        /// </summary>
-        [Reactive]
-        public List<Room> Rooms { get; set; }
-
-        /// <summary>
-        /// Все статусы
-        /// </summary>
-        [Reactive]
-        public List<Status> Statuses { get; set; }
-
-        /// <summary>
-        /// Комната студента
-        /// </summary>
-        [Reactive]
-        public Room SelectedRoom { get; set; }
-
-        /// <summary>
-        /// Статус студента
-        /// </summary>
-        [Reactive]
-        public Status SelectedStatus { get; set; }
-
-        /// <summary>
-        /// bool view border with buttons on profileView
-        /// </summary>
-        [Reactive]
-        public bool IsWorker { get; set; } = false;
-
         public ProfileViewModel(IScreen? screen = null) : base(screen)
         {
             Initialize();
@@ -69,12 +26,17 @@ namespace Client.ViewModels
             Initialize(student);
         }
 
-        /// <summary>
-        /// пока так тестовое поле, обращаться через Student. ко всем остальным
-        /// </summary>
         [Reactive]
         public Student? Student { get; set; }
         public ICommand? Save { get; set; }
+
+
+        [Reactive]
+        public bool IsLoading { get; set; } = false;
+        [Reactive]
+        public List<Group>? Groups { get; set; }
+        [Reactive]
+        public bool IsWorker { get; set; } = false;
 
 
 
@@ -89,6 +51,7 @@ namespace Client.ViewModels
                 SaveStudentInApi();
                 IsLoading = false;
             });
+            FillComboBoxesAsync();
             IsLoading = false;
         }
         void Initialize(Student student)
@@ -110,5 +73,57 @@ namespace Client.ViewModels
             }
             await API.StudentAPI.PostStudentAsync(this.Student);
         }
+
+
+
+        #region Боксы
+
+
+        [Reactive]
+        public Room? SelectedRoom { get; set; }
+        [Reactive]
+        public Group? SelectedGroup { get; set; }
+        [Reactive]
+        public Status? SelectedStatus { get; set; }
+
+        [Reactive]
+        public List<Room>? Rooms { get; set; }
+        [Reactive]
+        public List<Status>? Statuses { get; set; }
+
+        public async void FillComboBoxesAsync()
+        {
+            var statuses = await StatusAPI.GetStatusesAsync();
+            if (statuses == null)
+            {
+                return;
+            }
+            var rooms = await RoomAPI.GetRoomsAsync();
+            if (rooms == null)
+            {
+                return;
+            }
+            var students = await StudentAPI.GetStudentsAsync();
+            if (students == null)
+            {
+                return;
+            }
+            var groups = await GroupAPI.GetGroupsAsync();
+            if (groups == null)
+            {
+                return;
+            }
+
+            Statuses = new List<Status>(statuses);
+            Rooms = new List<Room>(rooms);
+            Groups = new List<Group>(groups);
+
+
+            SelectedGroup = Groups.FirstOrDefault();
+            SelectedRoom = Rooms.FirstOrDefault();
+            SelectedStatus = Statuses.FirstOrDefault();
+            
+        }
+        #endregion
     }
 }

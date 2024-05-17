@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class GroupController : ControllerBase
+    public class GroupsController : ControllerBase
     {
         /// <summary>
         /// Получение всех групп
