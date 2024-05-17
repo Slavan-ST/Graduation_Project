@@ -1,12 +1,17 @@
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Client.ViewModels;
+using ReactiveUI;
 
 namespace Client.Views
 {
-    public partial class GroupView : UserControl
+    public partial class GroupView : ReactiveUserControl<GroupViewModel>
     {
         public GroupView()
         {
-            InitializeComponent();
+            this.WhenActivated(disposables => { });
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }
