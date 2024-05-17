@@ -20,7 +20,10 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Group>>> GetGroups()
         {
             ApplicationContext db = new ApplicationContext();
-            var groups = await db.Groups.ToListAsync();
+            var groups = await db.Groups
+                .Include(x => x.Students)
+                .ToListAsync();
+
             if (groups == null)
             {
                 return NotFound();
@@ -46,6 +49,7 @@ namespace WebAPI.Controllers
 
             //проверка на существование такой записи в БД
             Group? group = await db.Groups
+                .Include(x => x.Students)
                 .Where(x => x.Id == groupDTO.Id)
                 .FirstOrDefaultAsync();
 
@@ -78,6 +82,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
             //проверка на существование такой записи в БД
             Group? group = await db.Groups
+                .Include(x => x.Students)
                 .Where(x => x.Id == groupDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -106,6 +111,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
 
             var group = await db.Groups
+                .Include(x => x.Students)
                 .Where(x => x.Name == name)
                 .FirstOrDefaultAsync();
 

@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class StatusController : ControllerBase
+    public class StatusesController : ControllerBase
     {
         /// <summary>
         /// Получение всех статусов
@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Status>>> GetStatuses()
         {
             ApplicationContext db = new ApplicationContext();
-            var statuss = await db.Statuses.ToListAsync();
+            var statuss = await db.Statuses.Include(x => x.Students).ToListAsync();
             if (statuss == null)
             {
                 return NotFound();

@@ -27,9 +27,9 @@
 								<Border Padding="10">
 									<StackPanel>
 										<TextBlock Text="Роль" Classes="h3"/>
-										<TextBox Text="{Binding Role.Name}" Classes="h3 outline purple"/>
+										<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
 										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="{Binding Role.CountUser}" Classes="h3"/>
+											<TextBlock Text="{Binding CountUser}" Classes="h3"/>
 											<TextBlock Text=" чел."/>
 										</StackPanel>
 									</StackPanel>

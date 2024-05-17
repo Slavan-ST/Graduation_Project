@@ -21,7 +21,10 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
             ApplicationContext db = new ApplicationContext();
-            var roles = await db.Roles.ToListAsync();
+            var roles = await db.Roles
+                //.Include(x => x.Students)
+                .ToListAsync();
+
             if (roles == null)
             {
                 return NotFound();
@@ -40,6 +43,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var role = await db.Roles
+                //.Include(x => x.Students)
                 .Where(x => x.Name == name)
                 .FirstOrDefaultAsync();
 
@@ -68,6 +72,7 @@ namespace WebAPI.Controllers
 
             //проверка на существование такой записи в БД
             Role? role = await db.Roles
+                //.Include(x => x.Students)
                 .Where(x => x.Id == roleDTO.Id)
                 .FirstOrDefaultAsync();
 
@@ -100,6 +105,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
             //проверка на существование такой записи в БД
             Role? role = await db.Roles
+                //.Include(x => x.Students)
                 .Where(x => x.Id == roleDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -128,6 +134,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
 
             var role = await db.Roles
+                //.Include(x => x.Students)
                 .Where(x => x.Name == name)
                 .FirstOrDefaultAsync();
 

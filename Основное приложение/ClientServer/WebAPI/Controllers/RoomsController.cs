@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
             ApplicationContext db = new ApplicationContext();
-            var rooms = await db.Rooms.ToListAsync();
+            var rooms = await db.Rooms.Include(x => x.Students).ToListAsync();
             if (rooms == null)
             {
                 return NotFound();
@@ -41,6 +41,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new ApplicationContext();
             var room = await db.Rooms
+                .Include(x => x.Students)
                 .Where(x => x.Number == number)
                 .FirstOrDefaultAsync();
 
@@ -101,6 +102,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
             //проверка на существование такой записи в БД
             Room? room = await db.Rooms
+                .Include(x => x.Students)
                 .Where(x => x.Id == roomDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -129,6 +131,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
 
             var room = await db.Rooms
+                .Include(x => x.Students)
                 .Where(x => x.Number == number)
                 .FirstOrDefaultAsync();
 
