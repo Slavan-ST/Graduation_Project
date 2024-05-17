@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using ReactiveUI.Fody.Helpers;
+using ReactiveUI;
 
 namespace Helper.Models.Main
 {
@@ -50,8 +51,6 @@ namespace Helper.Models.Main
 
 
         [Reactive]
-        public Room? Room { get; set; }
-        [Reactive]
         public Group? Group { get; set; }
         [Reactive]
         public Status? Status { get; set; }
@@ -73,6 +72,24 @@ namespace Helper.Models.Main
             set
             {
                 _attendanceLogs = value;
+            }
+        }
+
+        Room? _room;
+        public Room? Room
+        {
+            get
+            {
+                if (_room == null)
+                {
+                    return null;
+                }
+                _room.Students = null;
+                return _room;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _room, value);
             }
         }
         public string FIO
