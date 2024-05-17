@@ -15,5 +15,27 @@ namespace Helper.Models.Main
         {
             return this.Name;
         }
+
+
+        IEnumerable<Student>? _students = new List<Student>();
+        public IEnumerable<Student>? Students
+        {
+            get
+            {
+                if (_students != null)
+                {
+                    foreach (var stud in _students)
+                    {
+                        stud.Group = null;
+                    }
+                }
+                return _students;
+            }
+            set
+            {
+                _students = value;
+            }
+        }
+
     }
 }

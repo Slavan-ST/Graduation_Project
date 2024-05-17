@@ -50,10 +50,6 @@ namespace Helper.Models.Main
         public int StatusId { get; set; }
 
 
-        [Reactive]
-        public Group? Group { get; set; }
-        [Reactive]
-        public Status? Status { get; set; }
 
         IEnumerable<AttendanceLog>? _attendanceLogs = new List<AttendanceLog>();
         public IEnumerable<AttendanceLog>? AttendanceLogs
@@ -90,6 +86,40 @@ namespace Helper.Models.Main
             set
             {
                 this.RaiseAndSetIfChanged(ref _room, value);
+            }
+        }
+        Status? _status;
+        public Status? Status
+        {
+            get
+            {
+                if (_status == null)
+                {
+                    return null;
+                }
+                _status.Students = null;
+                return _status;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _status, value);
+            }
+        }
+        Group? _group;
+        public Group? Group
+        {
+            get
+            {
+                if (_group == null)
+                {
+                    return null;
+                }
+                _group.Students = null;
+                return _group;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _group, value);
             }
         }
         public string FIO
