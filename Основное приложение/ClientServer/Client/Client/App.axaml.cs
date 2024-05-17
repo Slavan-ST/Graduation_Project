@@ -62,6 +62,7 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new RoomView(), typeof(IViewFor<RoomViewModel>));
         Locator.CurrentMutable.Register(() => new StatusView(), typeof(IViewFor<RoomViewModel>));
         Locator.CurrentMutable.Register(() => new RoleView(), typeof(IViewFor<RoleViewModel>));
+        Locator.CurrentMutable.Register(() => new GroupView(), typeof(IViewFor<GroupViewModel>));
 
         Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
 
