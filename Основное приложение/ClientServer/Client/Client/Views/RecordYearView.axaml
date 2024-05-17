@@ -29,13 +29,13 @@
 								</Border>
 								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Всего " Classes="h4"/>
+										<TextBlock Text="H/C " Classes="h4"/>
 										<TextBlock Text="{Binding CountNS}" Classes="h4"/>
 									</StackPanel>
 								</Border>
 								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Всего " Classes="h4"/>
+										<TextBlock Text="Статусы" Classes="h4"/>
 										<TextBlock Text="{Binding CountNotFound}" Classes="h4"/>
 									</StackPanel>
 								</Border>

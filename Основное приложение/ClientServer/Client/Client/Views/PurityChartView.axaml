@@ -36,12 +36,16 @@
 					<DataTemplate>
 						<Border Classes="borderPanel">
 							<StackPanel Classes="panel" Height="280" Width="280">
-								<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
-								<TextBlock Text="{Binding ShortDate}" Classes="h3"/>
-								<StackPanel Orientation="Horizontal">
-									<TextBlock Text="Оценка - " Classes="h3"/>
-									<TextBlock Text="{Binding Marker}" Classes="h3"/>
-								</StackPanel>
+								<Border Padding="10">
+									<StackPanel>
+										<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
+										<TextBlock Text="{Binding ShortDate}" Classes="h3"/>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="Оценка - " Classes="h3"/>
+											<TextBlock Text="{Binding Marker}" Classes="h3"/>
+										</StackPanel>
+									</StackPanel>
+								</Border>
 								<TextBlock Text="{Binding Description}" Classes="h3"/>
 							</StackPanel>
 						</Border>
