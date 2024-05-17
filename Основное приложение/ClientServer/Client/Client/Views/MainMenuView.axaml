@@ -57,6 +57,9 @@
 						<Button Content="Заявление" Command="{Binding Statement}" Classes="sideBar"/>
 						<Button Content="Мероприятия" Command="{Binding Events}" Classes="sideBar"/>
 					</StackPanel>
+					<StackPanel IsVisible="{Binding IsAdmin}">
+						<Button Content="Роли" Command="{Binding Role}" Classes="sideBar"/>
+					</StackPanel>
 					<StackPanel IsVisible="{Binding IsWorker}">
 						<Button Content="План мероприятий" Command="{Binding EventsList}" Classes="sideBar"/>
 						<Button Content="График дежурств" Command="{Binding DutyChart}" Classes="sideBar"/>
@@ -65,6 +68,9 @@
 						<Button Content="Журнал" Command="{Binding Record}" Classes="sideBar"/>
 						<Button Content="Рейд чистоты" Command="{Binding CleanRaid}" Classes="sideBar"/>
 						<Button Content="Ежедневная проверка" Command="{Binding DailyCheck}" Classes="sideBar"/>
+						<Button Content="Комнаты" Command="{Binding Room}" Classes="sideBar"/>
+						<Button Content="Группы" Command="{Binding Group}" Classes="sideBar"/>
+						<Button Content="Статусы" Command="{Binding Status}" Classes="sideBar"/>
 					</StackPanel>
 					<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="sideBar"/>
 				</StackPanel>

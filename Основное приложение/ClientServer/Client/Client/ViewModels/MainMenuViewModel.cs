@@ -189,8 +189,26 @@ namespace Client.ViewModels
         /// Комманда перехода на окно "рейда" чистоты
         /// </summary>
         public ICommand CleanRaid { get; set; }
-
-
+        /// <summary>
+        /// Команда перехода на окно с комнатами
+        /// </summary>
+        [Reactive]
+        public ICommand Room {  get; set; }
+        /// <summary>
+        /// Команда перехода на окно с статусами
+        /// </summary>
+        [Reactive]
+        public ICommand Status { get; set; }
+        /// <summary>
+        /// Команда перехода на окно с группами
+        /// </summary>
+        [Reactive]
+        public ICommand Group { get; set; }
+        /// <summary>
+        /// Команда перехода на окно с ролями
+        /// </summary>
+        [Reactive]
+        public ICommand Role { get; set; }
         /// <summary>
         /// Комманда перехода на окно справки (FAQ)
         /// </summary>
@@ -241,6 +259,11 @@ namespace Client.ViewModels
         /// </summary>
         [Reactive]
         public bool IsWorker { get; set; } = true;
+        /// <summary>
+        /// Свойство показывающие относится ли учетная запись пользователя к роли "Администратор"
+        /// </summary>
+        [Reactive]
+        public bool IsAdmin { get; set; } = true;
         /// <summary>
         /// Свойство отображающие имя текущей формы
         /// </summary>
