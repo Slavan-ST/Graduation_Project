@@ -6,7 +6,7 @@
              x:Class="Client.Views.ProfileView">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="3*"/>
 			<RowDefinition Height="auto" MaxHeight="100"/>
 		</Grid.RowDefinitions>

@@ -83,15 +83,17 @@ namespace Client.ViewModels
             Save = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-                IsLoading = false;
                 SaveStudentInApi();
+                IsLoading = false;
             });
             IsLoading = false;
         }
         void Initialize(Student student)
         {
+            IsLoading = true;
             Initialize();
             FillLines(student);
+            IsLoading = false;
         }
         void FillLines(Student student)
         {
