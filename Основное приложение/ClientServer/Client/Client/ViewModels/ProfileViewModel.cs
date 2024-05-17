@@ -22,6 +22,41 @@ namespace Client.ViewModels
         public bool IsLoading { get; set; } = false;
 
         /// <summary>
+        /// Группа студента
+        /// </summary>
+        [Reactive]
+        public Group SelectedGroup { get; set; }
+
+        /// <summary>
+        /// Все группы
+        /// </summary>
+        [Reactive]
+        public List<Group> Groups { get; set; }
+        /// <summary>
+        /// Все комнаты
+        /// </summary>
+        [Reactive]
+        public List<Room> Rooms { get; set; }
+
+        /// <summary>
+        /// Все статусы
+        /// </summary>
+        [Reactive]
+        public List<Status> Statuses { get; set; }
+
+        /// <summary>
+        /// Комната студента
+        /// </summary>
+        [Reactive]
+        public Room SelectedRoom { get; set; }
+
+        /// <summary>
+        /// Статус студента
+        /// </summary>
+        [Reactive]
+        public Status SelectedStatus { get; set; }
+
+        /// <summary>
         /// bool view border with buttons on profileView
         /// </summary>
         [Reactive]
