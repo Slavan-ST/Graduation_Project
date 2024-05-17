@@ -2,6 +2,7 @@
 using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Client.ViewModels
