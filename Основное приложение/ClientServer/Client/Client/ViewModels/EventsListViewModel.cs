@@ -29,18 +29,32 @@ namespace Client.ViewModels
             Save = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-                SaveInAPI();
+                SaveInAPIAsync();
                 IsLoading = false;
             });
             NewEvent = ReactiveCommand.Create(async () =>
             {
-                IsLoading = true;
-                var temp = new List<EventO>(Events);
-                var eventAdd = new EventO();
-                temp.Add(eventAdd);
-                await EventAPI.PostAsync(eventAdd);
-                Events = new List<EventO>(temp);
-                IsLoading = false;
+                try
+                {
+                    IsLoading = true;
+                    var eventAdd = new EventO();
+                    int? id = await EventAPI.PostAsync(eventAdd);
+                    if (id == null)
+                    {
+                        IsLoading = false;
+                        return;
+                    }
+                    var temp = new List<EventO>(Events)
+                    {
+                        eventAdd
+                    };
+                    Events = new List<EventO>(temp);
+                    IsLoading = false;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
             });
             Delete = ReactiveCommand.Create(async (int id) =>
             {
@@ -54,10 +68,10 @@ namespace Client.ViewModels
                     return;
                 }
 
-                temp.Remove(eventRemove);
-                Events = new List<EventO>(temp);
 
                 await EventAPI.DeleteAsync(eventRemove.Id);
+                temp.Remove(eventRemove);
+                Events = new List<EventO>(temp);
                 IsLoading = false;
             });
         }
@@ -81,7 +95,7 @@ namespace Client.ViewModels
         public ICommand NewEvent { get; set; }
         public ICommand Delete { get; set; }
 
-        async void SaveInAPI()
+        async void SaveInAPIAsync()
         {
             IsLoading = true;
             foreach (var eventO in Events)

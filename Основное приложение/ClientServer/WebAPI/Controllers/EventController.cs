@@ -1,6 +1,7 @@
 ﻿using Helper.Models.Main;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using WebAPI.Data;
 
 namespace WebAPI.Controllers
@@ -56,11 +57,12 @@ namespace WebAPI.Controllers
 
             eventO = eventODTO;
 
-            await db.Events.AddAsync(eventO!);
+            await db.Events.AddAsync(eventO);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
-            return StatusCode(201);
+            Debug.WriteLine("New event, id: " + eventO.Id);
+            return new JsonResult(eventO.Id);
         }
         /// <summary>
         /// Обновление мероприятия

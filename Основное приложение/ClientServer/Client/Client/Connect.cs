@@ -35,15 +35,22 @@ namespace Client
         {
             get
             {
-                CheckInternetConnection();
-                if (!_check)
+                try
                 {
-                    Debug.WriteLine("Сервер не отвечает!");
+                    CheckInternetConnection();
+                    if (!_check)
+                    {
+                        Debug.WriteLine("Сервер не отвечает!");
+                    }
+                    else
+                    {
+                        //тут пихай всё своё *************
+                        Debug.WriteLine("Всё ОК, сервер на связи");
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    //тут пихай всё своё *************
-                    Debug.WriteLine("Всё ОК, сервер на связи");
+                    Debug.WriteLine(ex);
                 }
                 return _connection;
             }

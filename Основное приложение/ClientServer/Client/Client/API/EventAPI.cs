@@ -42,7 +42,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PostAsync(EventO eventO)
+        public static async Task<int?> PostAsync(EventO eventO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -54,7 +54,8 @@ namespace Client.API
                 {
                     await PutAsync(eventO);
                 }
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {
