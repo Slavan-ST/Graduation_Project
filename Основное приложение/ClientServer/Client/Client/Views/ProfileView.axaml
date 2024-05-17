@@ -12,10 +12,10 @@
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel Margin="25">
-			<TextBlock Text="{Binding Fio}" Classes="h2"/>
-			<TextBlock Text="{Binding NumberRoom}" Classes="h2"/>
-			<TextBlock Text="{Binding MarkClear}" Classes="h2"/>
-			<TextBlock Text="{Binding StatusUser}" Classes="h2"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding FIO}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Room.Number}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Group.Name}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Status.Name}" Classes="h2 outline purple"/>
 		</StackPanel>
 		<ScrollViewer Grid.Row="1" Margin="25">
 			<StackPanel HorizontalAlignment="Stretch">
@@ -23,15 +23,19 @@
 				<StackPanel Margin="10">
 					<StackPanel>
 						<TextBlock Text="Контакты" Classes="h3"/>
-						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Phone}"/>
+					<StackPanel>
+						<TextBlock Text="Дата рождения" Classes="h3"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding ShortDateBirthday}"/>
+					</StackPanel>
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Text="Домашний адрес" Classes="h3"/>
-						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Address}"/>
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Text="Группа" Classes="h3"/>
-						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding TestText}"/>
 					</StackPanel>
 				</StackPanel>
 
@@ -39,11 +43,11 @@
 				<StackPanel Margin="10">
 					<StackPanel>
 						<TextBlock Text="ФИО" Classes="h3"/>
-						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding RepresentativeFIO}"/>
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Text="Номер телефона" Classes="h3"/>
-						<TextBox Classes="outline purple h3" Text="{Binding TestText}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding RepresentativePhone}"/>
 					</StackPanel>
 				</StackPanel>
 			</StackPanel>

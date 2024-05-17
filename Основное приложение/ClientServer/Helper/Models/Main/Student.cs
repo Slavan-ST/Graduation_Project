@@ -86,6 +86,16 @@ namespace Helper.Models.Main
                 return (DateTime.Now - DateBirthday).Hours / (24 * 365);
             }
         }
+
+        public string ShortDateBirthday
+        {
+            get => DateBirthday.ToShortDateString();
+        }
+
+        public string RepresentativeFIO
+        {
+            get => $"{RepresentativeName} {RepresentativePatronymic} {RepresentativeSurname}";
+        }
         public override string ToString()
         {
             return FIO;
