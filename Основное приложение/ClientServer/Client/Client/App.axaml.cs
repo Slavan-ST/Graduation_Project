@@ -7,6 +7,7 @@ using Client.Models;
 using Client.Services;
 using Client.ViewModels;
 using Client.Views;
+using Helper.Models.Main;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
@@ -58,6 +59,7 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new StatementView(), typeof(IViewFor<StatementViewModel>));
         Locator.CurrentMutable.Register(() => new RecordStudentsView(), typeof(IViewFor<RecordStudentsViewModel>));
         Locator.CurrentMutable.Register(() => new CleanLineRaidView(), typeof(IViewFor<CleanLineRaidViewModel>));
+        Locator.CurrentMutable.Register(() => new RoomViewModel(), typeof(IViewFor<RoomViewModel>));
 
         Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
 
