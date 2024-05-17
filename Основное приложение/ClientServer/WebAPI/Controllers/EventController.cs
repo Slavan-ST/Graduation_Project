@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
 
             if (eventO != null)
             {
-                return new JsonResult(StatusCode(409));
+                return StatusCode(409);
             }
 
             eventO = eventODTO;

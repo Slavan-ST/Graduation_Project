@@ -128,7 +128,7 @@ namespace WebAPI.Controllers
 
             if (student != null)
             {
-                return new JsonResult(StatusCode(409, "Данный студент уже существует!"));
+                return StatusCode(409);
             }
 
             student = studentDTO!;

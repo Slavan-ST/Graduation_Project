@@ -159,7 +159,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLog != null)
             {
-                return new JsonResult(StatusCode(409, "Лог за данный день уже существует для  указанного студента!"));
+                return StatusCode(409);
             }
 
             await db.AttendanceLog.AddAsync(attendanceLogDTO);

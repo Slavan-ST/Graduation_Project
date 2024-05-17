@@ -70,12 +70,12 @@ namespace WebAPI.Controllers
             
             //проверка на существование такой записи в БД
             Room? room = await db.Rooms
-                .Where(x => x.Id == roomDTO.Id)
+                .Where(x => x.Id == roomDTO.Id || x.Number == roomDTO.Number)
                 .FirstOrDefaultAsync();
             
             if (room != null)
             {
-                return StatusCode(400);
+                return StatusCode(409);
             }
 
             room = roomDTO;

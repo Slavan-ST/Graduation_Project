@@ -146,15 +146,12 @@ namespace WebAPI.Controllers
 
             //проверка на существование такой записи в БД
             DutySchedule? dutySchedule = await db.DutySchedule.Where(x => x.Id == dutyScheduleDTO.Id).FirstOrDefaultAsync();
+            
             if (dutySchedule != null)
             {
-                return StatusCode(400);
+                return StatusCode(409);
             }
 
-            if (await db.DutySchedule.ContainsAsync(dutySchedule))
-            {
-                return StatusCode(400);
-            }
             await db.DutySchedule.AddAsync(dutyScheduleDTO);
             await db.SaveChangesAsync();
             await db.DisposeAsync();

@@ -46,12 +46,12 @@ namespace WebAPI.Controllers
 
             //проверка на существование такой записи в БД
             Status? status = await db.Statuses
-                .Where(x => x.Id == statusDTO.Id)
+                .Where(x => x.Id == statusDTO.Id || x.Name == statusDTO.Name)
                 .FirstOrDefaultAsync();
 
             if (status != null)
             {
-                return StatusCode(400);
+                return StatusCode(409);
             }
 
             status = statusDTO;

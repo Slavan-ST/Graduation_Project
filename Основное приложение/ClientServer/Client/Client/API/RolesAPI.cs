@@ -68,6 +68,10 @@ namespace Client.API
                     await PutAsync(role);
                     return null;
                 }
+                else
+                {
+                    Debug.WriteLine("Code: " + response.StatusCode);
+                }
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;
             }

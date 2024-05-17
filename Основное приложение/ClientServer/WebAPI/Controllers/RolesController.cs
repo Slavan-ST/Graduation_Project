@@ -73,12 +73,12 @@ namespace WebAPI.Controllers
             //проверка на существование такой записи в БД
             Role? role = await db.Roles
                 //.Include(x => x.Students)
-                .Where(x => x.Id == roleDTO.Id)
+                .Where(x => x.Id == roleDTO.Id || x.Name == roleDTO.Name)
                 .FirstOrDefaultAsync();
 
             if (role != null)
             {
-                return StatusCode(400);
+                return StatusCode(409);
             }
 
             role = roleDTO;

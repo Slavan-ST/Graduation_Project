@@ -50,12 +50,12 @@ namespace WebAPI.Controllers
             //проверка на существование такой записи в БД
             Group? group = await db.Groups
                 .Include(x => x.Students)
-                .Where(x => x.Id == groupDTO.Id)
+                .Where(x => x.Id == groupDTO.Id || x.Name == groupDTO.Name)
                 .FirstOrDefaultAsync();
 
             if (group != null)
             {
-                return StatusCode(400);
+                return StatusCode(409);
             }
 
             group = groupDTO;

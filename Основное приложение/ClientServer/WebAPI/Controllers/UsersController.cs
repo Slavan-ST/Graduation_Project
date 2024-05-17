@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
 
             if (user != null)
             {
-                return StatusCode(409, "объект уже существует");
+                return StatusCode(409);
             }
             user = ConverterDTO.UserFromChangedDTO(userDTO);
             user.Password = SecretHasher.Hash(user.Password);
