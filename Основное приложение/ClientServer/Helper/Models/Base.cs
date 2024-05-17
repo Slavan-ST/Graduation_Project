@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace Helper.Models
 {
     public class Base: ReactiveObject
     {
         [Key]
+        [Reactive]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
     }

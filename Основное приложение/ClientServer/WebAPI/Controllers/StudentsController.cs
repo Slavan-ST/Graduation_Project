@@ -110,16 +110,25 @@ namespace WebAPI.Controllers
             ApplicationContext db = new ApplicationContext();
 
             //проверка на существование такой записи в БД
+            //Варианта 2:
+            //1) Совпал Id - такого быть не должно
+            //2) Совпало ФИО и номер телефона студентов, такого тоже быть не должно
+
             Student? student = await db.Students
                 .Include(c => c.Room)
                 .Include(c => c.Status)
-                .Where(x => x.Id == studentDTO.Id)
+                .Where(x => x.Id == studentDTO.Id ||                            
+                            x.Phone == studentDTO.Phone &&
+                            x.Name == studentDTO.Name &&
+                            x.Surname == studentDTO.Surname &&
+                            x.Patronymic == studentDTO.Patronymic
+                       )
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
             if (student != null)
             {
-                return StatusCode(400);
+                return new JsonResult(StatusCode(409, "Данный студент уже существует!"));
             }
 
             student = studentDTO!;

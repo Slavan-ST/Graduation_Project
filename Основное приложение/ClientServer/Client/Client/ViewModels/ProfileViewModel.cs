@@ -36,40 +36,43 @@ namespace Client.ViewModels
             Initialize();
         }
 
+        /// <summary>
+        /// пока так тестовое поле, обращаться через Student. ко всем остальным
+        /// </summary>
+        [Reactive]
+        public Student? Student { get; set; }
+        public ICommand? Save { get; set; }
 
         //Student
-        [Reactive]
-        public string Name { get; set; } = "test";
-        [Reactive]
-        public string Surname { get; set; } = "test";
-        [Reactive]
-        public string Patronymic { get; set; } = "test";
-        [Reactive]
-        public string Phone { get; set; } = "test";
-        [Reactive]
-        public string Gender { get; set; } = "-";
-        [Reactive]
-        public DateTime DateBirthday { get; set; }
-        [Reactive]
-        public Status? Status { get; set; }
-        [Reactive]
-        public Group? Group{ get; set; }
-        [Reactive]
-        public Room? Room { get; set; }
+        //[Reactive]
+        //public string Name { get; set; } = "test";
+        //[Reactive]
+        //public string Surname { get; set; } = "test";
+        //[Reactive]
+        //public string Patronymic { get; set; } = "test";
+        //[Reactive]
+        //public string Phone { get; set; } = "test";
+        //[Reactive]
+        //public string Gender { get; set; } = "-";
+        //[Reactive]
+        //public DateTime DateBirthday { get; set; }
+        //[Reactive]
+        //public Status? Status { get; set; }
+        //[Reactive]
+        //public Group? Group { get; set; }
+        //[Reactive]
+        //public Room? Room { get; set; }
 
+        ////Representative
+        //[Reactive]
+        //public string RepName { get; set; } = "test";
+        //[Reactive]
+        //public string RepSurname { get; set; } = "test";
+        //[Reactive]
+        //public string RepPatronymic { get; set; } = "test";
+        //[Reactive]
+        //public string RepPhone { get; set; } = "test";
 
-
-        //Representative
-        [Reactive]
-        public string RepName { get; set; } = "test";
-        [Reactive]
-        public string RepSurname { get; set; } = "test";
-        [Reactive]
-        public string RepPatronymic { get; set; } = "test";
-        [Reactive]
-        public string RepPhone { get; set; } = "test";
-
-        public ICommand? Save { get; set; }
 
 
 
@@ -81,6 +84,7 @@ namespace Client.ViewModels
             {
                 IsLoading = true;
                 IsLoading = false;
+                SaveStudentInApi();
             });
             IsLoading = false;
         }
@@ -91,23 +95,27 @@ namespace Client.ViewModels
         }
         void FillLines(Student student)
         {
-            this.Name = student.Name;
-            this.Surname = student.Surname;
-            this.Patronymic = student.Patronymic;
-            this.Phone = student.Phone;
-            this.DateBirthday = student.DateBirthday;
-            this.Status = student.Status;
-            this.Group = student.Group;
-            this.Gender = student.Gender;
-            this.RepName = student.RepresentativeName;
-            this.RepSurname = student.RepresentativeSurname;
-            this.RepPatronymic = student.RepresentativePatronymic;
-            this.RepPhone = student.RepresentativePhone;
-
+            //this.Name = student.Name;
+            //this.Surname = student.Surname;
+            //this.Patronymic = student.Patronymic;
+            //this.Phone = student.Phone;
+            //this.DateBirthday = student.DateBirthday;
+            //this.Status = student.Status;
+            //this.Group = student.Group;
+            //this.Gender = student.Gender;
+            //this.RepName = student.RepresentativeName;
+            //this.RepSurname = student.RepresentativeSurname;
+            //this.RepPatronymic = student.RepresentativePatronymic;
+            //this.RepPhone = student.RepresentativePhone;
+            this.Student = student;
         }
-        void SaveInApi()
+        async void SaveStudentInApi()
         {
-
+            if (this.Student == null)
+            {
+                return;
+            }
+            await API.StudentAPI.PostStudentAsync(this.Student);
         }
     }
 }

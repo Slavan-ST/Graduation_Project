@@ -67,6 +67,13 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Students", studentDTO);
+
+                //если студент уже существует, то обновим его
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutPutStudentAsync(studentDTO);
+                }
+
                 return response.StatusCode;
             }
             catch (Exception e)

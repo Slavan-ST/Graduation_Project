@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using ReactiveUI.Fody.Helpers;
 
 namespace Helper.Models.Main
 {
@@ -15,28 +16,44 @@ namespace Helper.Models.Main
         {
 
         }
+        [Reactive]
         public string Name { get; set; } = string.Empty;
+        [Reactive]
         public string Surname { get; set; } = string.Empty;
+        [Reactive]
         public string Patronymic { get; set; } = string.Empty;
+        [Reactive]
         public DateTime DateBirthday { get; set; }
 
+        [Reactive]
         public string Phone { get; set; } = string.Empty;
+        [Reactive]
         public string Address { get; set; } = string.Empty;
+        [Reactive]
         public string RepresentativeName { get; set; } = string.Empty;
+        [Reactive]
         public string RepresentativeSurname { get; set; } = string.Empty;
+        [Reactive]
         public string RepresentativePatronymic { get; set; } = string.Empty;
+        [Reactive]
         public string RepresentativePhone { get; set; } = string.Empty;
-
+        [Reactive]
         public string Gender { get; set; } = string.Empty; //1 символ
 
 
+        [Reactive]
         public int RoomId { get; set; }
+        [Reactive]
         public int GroupId { get; set; }
+        [Reactive]
         public int StatusId { get; set; }
 
 
+        [Reactive]
         public Room? Room { get; set; }
+        [Reactive]
         public Group? Group { get; set; }
+        [Reactive]
         public Status? Status { get; set; }
 
         IEnumerable<AttendanceLog>? _attendanceLogs = new List<AttendanceLog>();
