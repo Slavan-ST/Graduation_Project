@@ -29,36 +29,80 @@ namespace Client.ViewModels
 
         public ProfileViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
-            // в загрузке
-            IsLoading = false;
+            Initialize();
         }
         public ProfileViewModel(IScreen? screen = null, Student? student = null) : base(screen)
+        {
+            Initialize();
+        }
+        void Initialize()
         {
             IsLoading = true;
             IsWorker = true;
             Save = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-                // save inforemation about student through API
                 IsLoading = false;
             });
             IsLoading = false;
         }
+        void Initialize(Student student)
+        {
+            Initialize();
+            FillLines(student);
+        }
+        void FillLines(Student student)
+        {
+            this.Name = student.Name;
+            this.Surname = student.Surname;
+            this.Patronymic = student.Patronymic;
+            this.Phone = student.Phone;
+            this.DateBirthday = student.DateBirthday;
+            this.Status = student.Status;
+            this.Group = student.Group;
+            this.Gender = student.Gender;
+            this.RepName = student.RepresentativeName;
+            this.RepSurname = student.RepresentativeSurname;
+            this.RepPatronymic = student.RepresentativePatronymic;
+            this.RepPhone = student.RepresentativePhone;
 
-        public ICommand Save { get; set; }
+        }
 
-        [Reactive]
-        public string TestText { get; set; } = "test";
-        [Reactive]
-        public string Fio { get; set; } = "test";
-        [Reactive]
-        public string NumberRoom { get; set; } = "test";
-        [Reactive]
-        public string MarkClear { get; set; } = "test";
-        [Reactive]
-        public string StatusUser { get; set; } = "test";
+        public ICommand? Save { get; set; }
 
-        
+
+        //Student
+        [Reactive]
+        public string Name { get; set; } = "test";
+        [Reactive]
+        public string Surname { get; set; } = "test";
+        [Reactive]
+        public string Patronymic { get; set; } = "test";
+        [Reactive]
+        public string Phone { get; set; } = "test";
+        [Reactive]
+        public string Gender { get; set; } = "-";
+        [Reactive]
+        public DateTime DateBirthday { get; set; }
+        [Reactive]
+        public Status? Status { get; set; }
+        [Reactive]
+        public Group? Group{ get; set; }
+        [Reactive]
+        public Room? Room { get; set; }
+
+
+
+        //Representative
+        [Reactive]
+        public string RepName { get; set; } = "test";
+        [Reactive]
+        public string RepSurname { get; set; } = "test";
+        [Reactive]
+        public string RepPatronymic { get; set; } = "test";
+        [Reactive]
+        public string RepPhone { get; set; } = "test";
+
+
     }
 }
