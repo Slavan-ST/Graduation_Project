@@ -44,6 +44,7 @@ namespace Client.ViewModels
                         IsLoading = false;
                         return;
                     }
+                    eventAdd.Id = (int)id;
                     var temp = new List<EventO>(Events)
                     {
                         eventAdd

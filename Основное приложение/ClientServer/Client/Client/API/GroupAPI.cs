@@ -40,13 +40,14 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PostGroupAsync(Group group)
+        public static async Task<int?> PostGroupAsync(Group group)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Groups", group);
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

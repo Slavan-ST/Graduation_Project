@@ -70,13 +70,14 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PutPutStatusAsync(Room room)
+        public static async Task<int?> PutPutStatusAsync(Room room)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"Rooms", room);
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

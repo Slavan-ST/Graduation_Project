@@ -42,13 +42,14 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PostStatusAsync(Status status)
+        public static async Task<int?> PostStatusAsync(Status status)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Status", status);
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

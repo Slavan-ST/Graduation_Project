@@ -31,6 +31,9 @@ namespace Client.ViewModels
             {
                 IsLoading = true;
                 StatementCreater.CreateStatementEmpty();
+                ListStudentsSelectedItem = ListStudents.FirstOrDefault();
+                DateIn = "";
+                DateOut = "";
                 IsLoading = false;
             });
             GetFillStatement = ReactiveCommand.Create(async() =>
@@ -43,6 +46,9 @@ namespace Client.ViewModels
                     return;
                 }
                 StatementCreater.CreateStatement(ListStudentsSelectedItem,DateOut,DateIn);
+                ListStudentsSelectedItem = ListStudents.FirstOrDefault();
+                DateIn = "";
+                DateOut = "";
                 IsLoading = false;
             });
         }

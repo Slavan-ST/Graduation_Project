@@ -56,11 +56,11 @@ namespace WebAPI.Controllers
 
             group = groupDTO;
 
-            await db.Groups.AddAsync(group!);
+            await db.Groups.AddAsync(group);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
-            return StatusCode(201);
+            return new JsonResult(group.Id);
         }
         /// <summary>
         /// Изменение группы

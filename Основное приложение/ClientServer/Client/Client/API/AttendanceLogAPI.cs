@@ -108,7 +108,7 @@ namespace Client.API
             return null;
         }
         //создание лога
-        public static async Task<HttpStatusCode?> PostAttendanceLog(AttendanceLog attendanceLogDTO)
+        public static async Task<int?> PostAttendanceLog(AttendanceLog attendanceLogDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -121,7 +121,8 @@ namespace Client.API
                     await PutAttendanceLog(attendanceLogDTO);
                 }
 
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

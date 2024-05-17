@@ -56,11 +56,11 @@ namespace WebAPI.Controllers
 
             status = statusDTO;
 
-            await db.Statuses.AddAsync(status!);
+            await db.Statuses.AddAsync(status);
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
-            return StatusCode(201);
+            return new JsonResult(status.Id);
         }
         /// <summary>
         /// Обновление статуса

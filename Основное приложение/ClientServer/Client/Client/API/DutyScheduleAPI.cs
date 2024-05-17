@@ -105,7 +105,7 @@ namespace Client.API
             return null;
         }
         //создание лога
-        public static async Task<HttpStatusCode?> PostDutySchedule(DutySchedule dutySchedule)
+        public static async Task<int?> PostDutySchedule(DutySchedule dutySchedule)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -115,7 +115,8 @@ namespace Client.API
                 {
                     await PutDutySchedule(dutySchedule);
                 }
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

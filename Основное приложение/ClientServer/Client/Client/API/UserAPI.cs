@@ -56,13 +56,14 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PostUserAsync(UserDTO userDTO)
+        public static async Task<int?> PostUserAsync(UserDTO userDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Users", userDTO);
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

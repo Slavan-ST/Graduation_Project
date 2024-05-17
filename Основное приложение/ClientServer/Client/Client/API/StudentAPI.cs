@@ -61,7 +61,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PostStudentAsync(Student studentDTO)
+        public static async Task<int?> PostStudentAsync(Student studentDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -74,7 +74,8 @@ namespace Client.API
                     await PutPutStudentAsync(studentDTO);
                 }
 
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

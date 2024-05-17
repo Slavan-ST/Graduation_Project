@@ -105,13 +105,14 @@ namespace Client.API
             return null;
         }
         //создание лога
-        public static async Task<HttpStatusCode?> PostPurityRaidLog(PurityRaidLog purityRaidLog)
+        public static async Task<int?> PostPurityRaidLog(PurityRaidLog purityRaidLog)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"PurityRaidLogs", purityRaidLog);
-                return response.StatusCode;
+                int result = await response.Content.ReadFromJsonAsync<int>();
+                return result;
             }
             catch (Exception e)
             {

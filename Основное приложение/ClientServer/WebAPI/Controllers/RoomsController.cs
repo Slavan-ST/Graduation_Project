@@ -83,7 +83,7 @@ namespace WebAPI.Controllers
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
-            return StatusCode(201);
+            return new JsonResult(room.Id);
         }
         /// <summary>
         /// Изменение комнаты
