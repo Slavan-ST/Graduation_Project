@@ -11,18 +11,18 @@ using System.Windows.Input;
 
 namespace Client.ViewModels
 {
-    public class StatusViewModel : ViewModelBase
+    public class RoleViewModel : ViewModelBase
     {
         [Reactive]
-        public List<Status> Statuses { get; set; }
+        public List<Role> Role { get; set; }
         [Reactive]
-        public Status SelectedStatus { get; set; }
+        public Role SelectedRole { get; set; }
 
-        public ICommand NewStatus { get; set; }
+        public ICommand NewRole { get; set; }
         public ICommand Delete { get; set; }
         public ICommand Save { get; set; }
 
-        public StatusViewModel(IScreen? screen = null) : base(screen)
+        public RoleViewModel(IScreen? screen = null) : base(screen)
         {
 
         }
