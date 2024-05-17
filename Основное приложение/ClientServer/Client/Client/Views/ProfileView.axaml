@@ -12,10 +12,10 @@
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel Margin="25">
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Students.FIO}" Classes="h2 outline purple"/>
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Students.Room.Number}" Classes="h2 outline purple"/>
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Students.Group.Name}" Classes="h2 outline purple"/>
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Students.Status.Name}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.FIO}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.Room.Number}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.Group.Name}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.Status.Name}" Classes="h2 outline purple"/>
 		</StackPanel>
 		<ScrollViewer Grid.Row="1" Margin="25">
 			<StackPanel HorizontalAlignment="Stretch">
@@ -23,15 +23,15 @@
 				<StackPanel Margin="10">
 					<StackPanel>
 						<TextBlock Text="Контакты" Classes="h3"/>
-						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Students.Phone}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Student.Phone}"/>
 					<StackPanel>
 						<TextBlock Text="Дата рождения" Classes="h3"/>
-						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Students.ShortDateBirthday}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Student.ShortDateBirthday}"/>
 					</StackPanel>
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Text="Домашний адрес" Classes="h3"/>
-						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Students.Address}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Student.Address}"/>
 					</StackPanel>
 				</StackPanel>
 
@@ -39,11 +39,11 @@
 				<StackPanel Margin="10">
 					<StackPanel>
 						<TextBlock Text="ФИО" Classes="h3"/>
-						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Students.RepresentativeFIO}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Student.RepresentativeFIO}"/>
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Text="Номер телефона" Classes="h3"/>
-						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Students.RepresentativePhone}"/>
+						<TextBox IsReadOnly="{Binding !IsWorker}" Classes="outline purple h3" Text="{Binding Student.RepresentativePhone}"/>
 					</StackPanel>
 				</StackPanel>
 			</StackPanel>
