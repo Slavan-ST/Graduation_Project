@@ -17,8 +17,14 @@ public class MainViewModel : ViewModelBaseNavigator
     }
     void Initialize()
     {
-        //Router.Navigate.Execute(new AuthViewModel(this));
+
+#if DEBUG
+        //Router.Navigate.Execute(new MainMenuViewModel(this));
+        Router.Navigate.Execute(new AuthViewModel(this));
+#else
         Router.Navigate.Execute(new MainMenuViewModel(this));
+#endif
+
     }
 
 }

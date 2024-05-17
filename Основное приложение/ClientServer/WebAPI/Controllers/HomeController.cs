@@ -13,7 +13,6 @@ namespace WebAPI.Controllers
     /// Контроллер для обработки авторизации
     /// </summary>
     [ApiController]
-    [Route("[controller]")]
     public class HomeController : ControllerBase
     {
         /// <summary>
@@ -22,7 +21,7 @@ namespace WebAPI.Controllers
         /// <param name="login"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        [Route("Home/SignIn")]
+        [Route("Home/SignIn/")]
         [HttpGet]
         public async Task<ActionResult<UserDTO>> SignInAsync(string login, string password)
         {

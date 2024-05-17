@@ -19,7 +19,7 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"login?login={login}&password={password}");
+                var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Home/SignIn/?login={login}&password={password}");
                 return response;
             }
             catch (Exception e)
