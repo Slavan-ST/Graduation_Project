@@ -33,7 +33,8 @@ namespace Client.ViewModels
             IsLoading = true;
             this.WhenAnyValue(x => x.SelectedStudent).Subscribe(x =>
             {
-                ProfileStudent = new ProfileViewModel(screen, SelectedStudent);
+                //при клике на студента будет открываться окно профиля с выбранным студентом
+                this.HostScreen.Router.Navigate.Execute(new ProfileViewModel(screen, SelectedStudent));
             });
 
             FillFilter();
@@ -54,7 +55,7 @@ namespace Client.ViewModels
 
             NewStudent = ReactiveCommand.Create(() =>
             {
-                // func add student here
+                this.HostScreen.Router.Navigate.Execute(new ProfileViewModel(screen, new Student()));
             });
             IsLoading = false;
         }

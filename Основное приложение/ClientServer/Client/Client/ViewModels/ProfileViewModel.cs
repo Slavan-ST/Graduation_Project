@@ -35,40 +35,6 @@ namespace Client.ViewModels
         {
             Initialize();
         }
-        void Initialize()
-        {
-            IsLoading = true;
-            IsWorker = true;
-            Save = ReactiveCommand.Create(() =>
-            {
-                IsLoading = true;
-                IsLoading = false;
-            });
-            IsLoading = false;
-        }
-        void Initialize(Student student)
-        {
-            Initialize();
-            FillLines(student);
-        }
-        void FillLines(Student student)
-        {
-            this.Name = student.Name;
-            this.Surname = student.Surname;
-            this.Patronymic = student.Patronymic;
-            this.Phone = student.Phone;
-            this.DateBirthday = student.DateBirthday;
-            this.Status = student.Status;
-            this.Group = student.Group;
-            this.Gender = student.Gender;
-            this.RepName = student.RepresentativeName;
-            this.RepSurname = student.RepresentativeSurname;
-            this.RepPatronymic = student.RepresentativePatronymic;
-            this.RepPhone = student.RepresentativePhone;
-
-        }
-
-        public ICommand? Save { get; set; }
 
 
         //Student
@@ -103,6 +69,45 @@ namespace Client.ViewModels
         [Reactive]
         public string RepPhone { get; set; } = "test";
 
+        public ICommand? Save { get; set; }
 
+
+
+        void Initialize()
+        {
+            IsLoading = true;
+            IsWorker = true;
+            Save = ReactiveCommand.Create(() =>
+            {
+                IsLoading = true;
+                IsLoading = false;
+            });
+            IsLoading = false;
+        }
+        void Initialize(Student student)
+        {
+            Initialize();
+            FillLines(student);
+        }
+        void FillLines(Student student)
+        {
+            this.Name = student.Name;
+            this.Surname = student.Surname;
+            this.Patronymic = student.Patronymic;
+            this.Phone = student.Phone;
+            this.DateBirthday = student.DateBirthday;
+            this.Status = student.Status;
+            this.Group = student.Group;
+            this.Gender = student.Gender;
+            this.RepName = student.RepresentativeName;
+            this.RepSurname = student.RepresentativeSurname;
+            this.RepPatronymic = student.RepresentativePatronymic;
+            this.RepPhone = student.RepresentativePhone;
+
+        }
+        void SaveInApi()
+        {
+
+        }
     }
 }
