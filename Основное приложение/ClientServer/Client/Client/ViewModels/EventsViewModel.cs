@@ -22,9 +22,7 @@ namespace Client.ViewModels
 
         public EventsViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
             FillEventsAsync();
-            IsLoading = false;
         }
         async void FillEventsAsync()
         {

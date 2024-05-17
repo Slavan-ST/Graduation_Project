@@ -33,7 +33,6 @@ namespace Client.ViewModels
 
         public RecordStudentsViewModel(int year, int month, IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
             Year = year;
             Month = month;
             Source = new FlatTreeDataGridSource<MarksOfStudents>(new List<MarksOfStudents>());
@@ -52,10 +51,10 @@ namespace Client.ViewModels
                 FillJournal(year, month, _noFilters);
                 IsLoading = false;
             });
-            IsLoading = false;
         }
         public async void FillFilter()
         {
+            IsLoading = true;
             var statuses = await StatusAPI.GetStatusesAsync();
             if (statuses == null)
             {
@@ -74,6 +73,7 @@ namespace Client.ViewModels
             ListStudents = new List<Student>(students);
             ListStatuses = new List<Status>(statuses);
             ListRooms = new List<Room>(rooms);
+            IsLoading = false ;
         }
         public async void FillJournal(int year, int month, Func<Task<IEnumerable<Student>?>> func )
         {

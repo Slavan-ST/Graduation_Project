@@ -28,7 +28,6 @@ namespace Client.ViewModels
 
         public CleanLineRaidViewModel(IScreen? screen = null) : base(screen) 
         {
-            IsLoading = true;
             Initialize();
             Next = ReactiveCommand.Create(() =>
             {
@@ -72,8 +71,6 @@ namespace Client.ViewModels
                 CreateLog();
                 IsLoading = false;
             });
-
-            IsLoading = false;
         }
         async void CreateLog()
         {

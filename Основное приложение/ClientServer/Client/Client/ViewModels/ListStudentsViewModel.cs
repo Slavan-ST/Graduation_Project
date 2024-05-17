@@ -23,7 +23,6 @@ namespace Client.ViewModels
 
         public ListStudentsViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
             this.WhenAnyValue(x => x.SelectedStudent).Subscribe(x =>
             {
                 //при клике на студента будет открываться окно профиля с выбранным студентом
@@ -50,7 +49,6 @@ namespace Client.ViewModels
             {
                 this.HostScreen.Router.Navigate.Execute(new ProfileViewModel(screen, new Student()));
             });
-            IsLoading = false;
         }
 
         [Reactive]

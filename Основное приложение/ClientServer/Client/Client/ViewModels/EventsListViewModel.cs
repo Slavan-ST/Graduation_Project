@@ -25,7 +25,6 @@ namespace Client.ViewModels
 
         public EventsListViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
             FillEventsAsync();
             Save = ReactiveCommand.Create(() =>
             {
@@ -35,15 +34,17 @@ namespace Client.ViewModels
             });
             NewEvent = ReactiveCommand.Create(async () =>
             {
+                IsLoading = true;
                 var temp = new List<EventO>(Events);
                 var eventAdd = new EventO();
                 temp.Add(eventAdd);
                 await EventAPI.PostAsync(eventAdd);
                 Events = new List<EventO>(temp);
+                IsLoading = false;
             });
             Delete = ReactiveCommand.Create(async (int id) =>
             {
-                Debug.WriteLine("it's work");
+                IsLoading = true;
                 var temp = new List<EventO>(Events);
                 var eventRemove = temp.Where(x => x.Id == id).FirstOrDefault();
 
@@ -57,17 +58,18 @@ namespace Client.ViewModels
 
                 await EventAPI.DeleteAsync(eventRemove.Id);
             });
-            IsLoading = false;
         }
 
         async void FillEventsAsync()
         {
+            IsLoading = true;
             var events = await EventAPI.GetsAsync();
             if (events == null)
             {
                 return;
             }
             Events = events.ToList();
+            IsLoading = false;
         }
 
         [Reactive]
@@ -78,10 +80,12 @@ namespace Client.ViewModels
 
         async void SaveInAPI()
         {
+            IsLoading = true;
             foreach (var eventO in Events)
             {
                 await EventAPI.PostAsync(eventO);
             }
+            IsLoading = false;
         }
     }
 }

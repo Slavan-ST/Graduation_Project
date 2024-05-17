@@ -28,28 +28,30 @@ namespace Client.ViewModels
 
         public DutyChartViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
             MonthString = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(MonthInt);
             MonthNext = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 if(MonthInt != 12)
                 {
                     MonthInt += 1;
                     MonthString = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(MonthInt);
                     GetAsync();
                 }
+                IsLoading = false;
             });
             MonthPrev = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 if(MonthInt != 1)
                 {
                     MonthInt -= 1;
                     MonthString = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(MonthInt);
                     GetAsync();
                 }
+                IsLoading = false;
             });
             GetAsync();
-            IsLoading = false;
         }
 
         private async void GetAsync()

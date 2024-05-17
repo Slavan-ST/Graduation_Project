@@ -35,8 +35,6 @@ namespace Client.ViewModels
              
              */
 
-
-            IsLoading = true;
             QuestAnswer = new ObservableCollection<TreeViewItem>
             {
                 new TreeViewItem("Что делать если забыл пароль?", new ObservableCollection<TreeViewItem>
@@ -54,7 +52,6 @@ namespace Client.ViewModels
                     })
 
             };
-            IsLoading = false;
         }
     }
 }

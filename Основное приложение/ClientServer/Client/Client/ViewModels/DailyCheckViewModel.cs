@@ -21,13 +21,8 @@ namespace Client.ViewModels
         [Reactive]
         public bool IsLoading { get; set; } = false;
 
-
-
-
-
         public DailyCheckViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
             this.WhenAnyValue(x => x.SelectedRoom).Subscribe(x => FillStudents());
 
             Next = ReactiveCommand.Create(() =>
@@ -35,16 +30,17 @@ namespace Client.ViewModels
                 IsLoading = true;
                 if (Rooms == null)
                 {
+                    IsLoading = false;
                     return;
                 }
 
                 if (SelectedRoom == null)
                 {
+                    IsLoading = false;
                     return;
                 }
 
                 SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
-                IsLoading = false;
             });
             Save = ReactiveCommand.Create(() =>
             {
@@ -57,8 +53,6 @@ namespace Client.ViewModels
             });
             FillRooms();
             FillAllStudents();
-
-            IsLoading = false;
         }
 
 
@@ -87,14 +81,17 @@ namespace Client.ViewModels
 
         async void FillAllStudents()
         {
+            IsLoading = true;
             var students = await StudentAPI.GetStudentsAsync();
             if (students != null)
             {
                 AllStudents = new List<Student>(students);
             }
+            IsLoading = false;
         }
         void FillStudents()
         {
+            IsLoading = true;
             if (SelectedRoom == null)
             {
                 return;
@@ -114,9 +111,11 @@ namespace Client.ViewModels
             }
 
             Students = studentsInRoom;
+            IsLoading = false;
         }
         async void SaveChanges(List<StudentInRoom> logs)
         {
+            IsLoading = true;
             foreach (var log in logs)
             {
                 if (log.Student == null)
@@ -131,6 +130,7 @@ namespace Client.ViewModels
                 };
                 await API.AttendanceLogAPI.PostAttendanceLog(attendanceLog);
             }
+            IsLoading = false;
         }
     }
 }

@@ -27,39 +27,45 @@ namespace Client.ViewModels
 
         public RecordYearViewModel(IScreen? screen = null) : base(screen)
         {
-            IsLoading = true;
-
             NextYear = ReactiveCommand.Create(() =>
             {
+                IsLoading = true;
                 CurrentYear += 1;
+                IsLoading = false;
             });
 
             this.WhenAnyValue(x => x.SelectedMonth).Subscribe(x =>
             {
+                IsLoading = true;
                 if (SelectedMonth == null)
                 {
+                    IsLoading = false;
                     return;
                 }
                 if (screen == null)
                 {
+                    IsLoading = false;
                     return;
                 }
                 screen.Router.Navigate.Execute(new RecordStudentsViewModel(CurrentYear, SelectedMonth.Mount, screen));
+                IsLoading = false;
             });
             this.WhenAnyValue(x => x.CurrentYear).Subscribe(x =>
             {
+                IsLoading = true;
                 if (CurrentYear == 0)
                 {
+                    IsLoading = false;
                     return;
                 }
                 FillStats();
+                IsLoading = false;
             });
-
-            IsLoading = false;
         }
 
         async void FillStats()
         {
+            IsLoading = true;
             try
             {
                 List<MountStat> mountStats = new List<MountStat>();
@@ -92,6 +98,7 @@ namespace Client.ViewModels
             {
                 Debug.WriteLine("Error 404 in RecordYear");
             }
+            IsLoading = false;
         }
 
         [Reactive]

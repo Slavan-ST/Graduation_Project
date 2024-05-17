@@ -27,7 +27,6 @@ namespace Client.ViewModels
         {
             FillStudents();
             ListStudentsSelectedItem = ListStudents.FirstOrDefault();
-            IsLoading = true;
             GetEmptyStatement = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
@@ -36,27 +35,28 @@ namespace Client.ViewModels
             });
             GetFillStatement = ReactiveCommand.Create(async() =>
             {
+                IsLoading = true;
                 if (ListStudentsSelectedItem == null)
                 {
                     await MessageBoxManager.GetMessageBoxStandard("Ошибка", "Выберете студента!").ShowAsync();
                     return;
                 }
-                IsLoading = true;
                 StatementCreater.CreateStatement(ListStudentsSelectedItem,DateOut,DateIn);
                 IsLoading = false;
             });
-            IsLoading = false;
         }
 
 
         public async void FillStudents()
         {
+            IsLoading = true;
             var students = await StudentAPI.GetStudentsAsync();
             if (students == null)
             {
                 return;
             }
             ListStudents = new List<Student>(students);
+            IsLoading = false;
         }
 
         [Reactive]
