@@ -71,7 +71,8 @@ namespace Client.API
                 //если студент уже существует, то обновим его
                 if (response.StatusCode == HttpStatusCode.Conflict)
                 {
-                    await PutPutStudentAsync(studentDTO);
+                    await PutStudentAsync(studentDTO);
+                    return null;
                 }
 
                 int result = await response.Content.ReadFromJsonAsync<int>();
@@ -83,7 +84,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PutPutStudentAsync(Student studentDTO)
+        public static async Task<HttpStatusCode?> PutStudentAsync(Student studentDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try

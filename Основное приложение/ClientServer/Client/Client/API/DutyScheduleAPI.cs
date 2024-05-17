@@ -114,6 +114,7 @@ namespace Client.API
                 if (response.StatusCode == HttpStatusCode.Conflict)
                 {
                     await PutDutySchedule(dutySchedule);
+                    return null;
                 }
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;

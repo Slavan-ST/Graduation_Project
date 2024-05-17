@@ -48,6 +48,11 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Status", status);
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutStatusAsync(status);
+                    return null;
+                }
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;
             }
@@ -57,7 +62,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PutPutStatusAsync(Status status)
+        public static async Task<HttpStatusCode?> PutStatusAsync(Status status)
         {
             HttpClient client = HttpClientSingleton.Client;
             try

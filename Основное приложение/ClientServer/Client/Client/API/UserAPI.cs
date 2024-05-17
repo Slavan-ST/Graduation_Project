@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Net.Http.Json;
 using Helper.Models.DTO;
 using Helper;
+using Helper.Models.Main;
 
 namespace Client.API
 {
@@ -62,6 +63,11 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Users", userDTO);
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutUserAsync(userDTO);
+                    return null;
+                }
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;
             }

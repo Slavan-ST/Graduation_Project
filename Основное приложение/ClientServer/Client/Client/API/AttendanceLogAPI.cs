@@ -119,6 +119,7 @@ namespace Client.API
                 if (response.StatusCode == HttpStatusCode.Conflict)
                 {
                     await PutAttendanceLog(attendanceLogDTO);
+                    return null;
                 }
 
                 int result = await response.Content.ReadFromJsonAsync<int>();

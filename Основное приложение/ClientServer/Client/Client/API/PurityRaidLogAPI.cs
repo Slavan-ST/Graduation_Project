@@ -111,6 +111,11 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"PurityRaidLogs", purityRaidLog);
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutPurityRaidLog(purityRaidLog);
+                    return null;
+                }
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;
             }

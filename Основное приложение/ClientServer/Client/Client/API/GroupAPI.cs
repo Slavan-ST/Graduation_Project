@@ -46,6 +46,11 @@ namespace Client.API
             try
             {
                 var response = await client.PostAsJsonAsync(Connect.Connection + $"Groups", group);
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    await PutPutGroupAsync(group);
+                    return null;
+                }
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;
             }

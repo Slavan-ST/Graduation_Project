@@ -53,6 +53,7 @@ namespace Client.API
                 if (response.StatusCode == HttpStatusCode.Conflict)
                 {
                     await PutAsync(eventO);
+                    return null;
                 }
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;

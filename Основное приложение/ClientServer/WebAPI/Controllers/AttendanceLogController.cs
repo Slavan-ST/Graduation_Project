@@ -200,7 +200,6 @@ namespace WebAPI.Controllers
             attendanceLog.Date = attendanceLogDTO.Date;
             attendanceLog.Marker = attendanceLogDTO.Marker;
 
-            Debug.WriteLine("И !?");
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
