@@ -68,11 +68,14 @@ namespace Client.ViewModels
         }
         async void SaveStudentInApi()
         {
+            IsLoading = true;
             if (this.Student == null)
             {
+                IsLoading = false;
                 return;
             }
             await API.StudentAPI.PostStudentAsync(this.Student);
+            IsLoading = false;
         }
 
 

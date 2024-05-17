@@ -94,10 +94,12 @@ namespace Client.ViewModels
             IsLoading = true;
             if (SelectedRoom == null)
             {
+                IsLoading = false;
                 return;
             }
             if (AllStudents == null)
             {
+                IsLoading = false;
                 return;
             }
             var students = AllStudents.Where(x => x.Room!.Number == SelectedRoom.Number).ToList();

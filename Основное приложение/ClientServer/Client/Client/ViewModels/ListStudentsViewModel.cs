@@ -106,24 +106,21 @@ namespace Client.ViewModels
 
         async Task<IEnumerable<Student>?> _noFilters()
         {
+            IsLoading = true;
             ListRoomsSelectedItem = null;
             ListStatusesSelectedItem = null;
             ListStudentsSelectedItem = null;
-
-            return await StudentAPI.GetStudentsAsync();
+            var students = await StudentAPI.GetStudentsAsync();
+            IsLoading = false;
+            return students;
         }
         async Task<IEnumerable<Student>?> _filters()
         {
-            //а нафига? МБ тогда остальные фильтры блочить??
-            //if (ListStudentsSelectedItem != null)
-            //{
-            //    return new List<Student>() { ListStudentsSelectedItem };
-            //}
-
-
+            IsLoading = true;
             var list = await StudentAPI.GetStudentsAsync();
             if (list == null)
             {
+                IsLoading = false;
                 return null;
             }
             if (ListRoomsSelectedItem != null)
@@ -142,29 +139,35 @@ namespace Client.ViewModels
                     x.Patronymic == ListStudentsSelectedItem.Patronymic
                 ).ToList();
             }
+            IsLoading = false;
             return list;
         }
 
         public async void FillFilter()
         {
+            IsLoading = true;
             var statuses = await StatusAPI.GetStatusesAsync();
             if (statuses == null)
             {
+                IsLoading = false;
                 return;
             }
             var rooms = await RoomAPI.GetRoomsAsync();
             if (rooms == null)
             {
+                IsLoading = false;
                 return;
             }
             var students = await StudentAPI.GetStudentsAsync();
             if (students == null)
             {
+                IsLoading = false;
                 return;
             }
             ListStudents = new List<Student>(students);
             ListStatuses = new List<Status>(statuses);
             ListRooms = new List<Room>(rooms);
+            IsLoading = false;
         }
         #endregion
     }

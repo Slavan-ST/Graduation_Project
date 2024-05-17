@@ -39,6 +39,7 @@ namespace Client.ViewModels
                 if (ListStudentsSelectedItem == null)
                 {
                     await MessageBoxManager.GetMessageBoxStandard("Ошибка", "Выберете студента!").ShowAsync();
+                    IsLoading = false;
                     return;
                 }
                 StatementCreater.CreateStatement(ListStudentsSelectedItem,DateOut,DateIn);
@@ -53,6 +54,7 @@ namespace Client.ViewModels
             var students = await StudentAPI.GetStudentsAsync();
             if (students == null)
             {
+                IsLoading = false;
                 return;
             }
             ListStudents = new List<Student>(students);

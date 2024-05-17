@@ -74,6 +74,7 @@ namespace Client.ViewModels
 
                 if (allStudents == null)
                 {
+                    IsLoading = false;
                     return;
                 }
 

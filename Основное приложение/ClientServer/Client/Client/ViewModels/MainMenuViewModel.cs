@@ -22,9 +22,6 @@ namespace Client.ViewModels
 {
     public class MainMenuViewModel : ViewModelBaseNavigator
     {
-        // Пример команды перехода
-        //public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
-
         public MainMenuViewModel(IScreen? screen = null):base(screen)
         {    
             HideSideBar = ReactiveCommand.Create(() =>

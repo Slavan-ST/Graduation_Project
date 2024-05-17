@@ -58,16 +58,19 @@ namespace Client.ViewModels
             var statuses = await StatusAPI.GetStatusesAsync();
             if (statuses == null)
             {
+                IsLoading = false;
                 return;
             }
             var rooms = await RoomAPI.GetRoomsAsync();
             if (rooms == null)
             {
+                IsLoading = false;
                 return;
             }
             var students = await StudentAPI.GetStudentsAsync();
             if (students == null)
             {
+                IsLoading = false;
                 return;
             }
             ListStudents = new List<Student>(students);
@@ -183,11 +186,14 @@ namespace Client.ViewModels
 
         string ReturnMarker(List<AttendanceLog> logs, int day)
         {
+            IsLoading = true;
             var log = logs.Where(_ => _.Date.Day == day).FirstOrDefault();
             if (log == null)
             {
+                IsLoading = false;
                 return "";
             }
+            IsLoading = false;
             return log.Marker;
         }
 
@@ -203,15 +209,11 @@ namespace Client.ViewModels
         }
         async Task<IEnumerable<Student>?> _filters()
         {
-            //а нафига? МБ тогда остальные фильтры блочить??
-            //if (ListStudentsSelectedItem != null)
-            //{
-            //    return new List<Student>() { ListStudentsSelectedItem };
-            //}
             IsLoading = true;
             var list = await StudentAPI.GetStudentsAsync();
             if (list == null)
             {
+                IsLoading = false;
                 return null;
             }
             if (ListRoomsSelectedItem != null)

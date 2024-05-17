@@ -30,6 +30,7 @@ namespace Client.ViewModels
             var events = await EventAPI.GetsAsync();
             if (events == null)
             {
+                IsLoading = false;
                 return;
             }
             Events = events.ToList();

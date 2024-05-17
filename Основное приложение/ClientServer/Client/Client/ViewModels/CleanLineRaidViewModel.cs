@@ -34,11 +34,13 @@ namespace Client.ViewModels
                 IsLoading = true;
                 if (SelectedRoom == null)
                 {
+                    IsLoading = false;
                     return;
                 }
 
                 if (Rooms == null)
                 {
+                    IsLoading = false;
                     return;
                 }
                 SelectedRoom = Rooms.Where(x => (x.Id + 1) == SelectedRoom.Id).FirstOrDefault();
@@ -74,12 +76,15 @@ namespace Client.ViewModels
         }
         async void CreateLog()
         {
+            IsLoading = true;
             if (SelectedRoom == null)
             {
+                IsLoading = false;
                 return;
             }
             if (Mark == null)
             {
+                IsLoading = false;
                 return;
             }
             PurityRaidLog purityRaidLog = new PurityRaidLog()
@@ -90,16 +95,20 @@ namespace Client.ViewModels
                 Description = Description
             };
             await API.PurityRaidLogAPI.PostPurityRaidLog(purityRaidLog);
+            IsLoading = false;
         }
         async void Initialize()
         {
+            IsLoading = true;
             var rooms = await RoomAPI.GetRoomsAsync();
             if (rooms == null)
             {
+                IsLoading = false;
                 return;
             }
             Rooms = new List<Room>(rooms);
             SelectedRoom = Rooms.FirstOrDefault();
+            IsLoading = false;
         }
         public ICommand Next { get; set; }
         public ICommand Save { get; set; }

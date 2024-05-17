@@ -50,6 +50,7 @@ namespace Client.ViewModels
 
                 if (eventRemove == null)
                 {
+                    IsLoading = false;
                     return;
                 }
 
@@ -57,6 +58,7 @@ namespace Client.ViewModels
                 Events = new List<EventO>(temp);
 
                 await EventAPI.DeleteAsync(eventRemove.Id);
+                IsLoading = false;
             });
         }
 
@@ -66,6 +68,7 @@ namespace Client.ViewModels
             var events = await EventAPI.GetsAsync();
             if (events == null)
             {
+                IsLoading = false;
                 return;
             }
             Events = events.ToList();
