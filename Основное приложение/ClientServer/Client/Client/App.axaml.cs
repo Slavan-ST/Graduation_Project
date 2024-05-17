@@ -59,7 +59,8 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new StatementView(), typeof(IViewFor<StatementViewModel>));
         Locator.CurrentMutable.Register(() => new RecordStudentsView(), typeof(IViewFor<RecordStudentsViewModel>));
         Locator.CurrentMutable.Register(() => new CleanLineRaidView(), typeof(IViewFor<CleanLineRaidViewModel>));
-        Locator.CurrentMutable.Register(() => new RoomViewModel(), typeof(IViewFor<RoomViewModel>));
+        Locator.CurrentMutable.Register(() => new RoomView(), typeof(IViewFor<RoomViewModel>));
+        Locator.CurrentMutable.Register(() => new StatusView(), typeof(IViewFor<RoomViewModel>));
 
         Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
 
