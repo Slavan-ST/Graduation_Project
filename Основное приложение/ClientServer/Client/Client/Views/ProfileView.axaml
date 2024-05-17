@@ -2,24 +2,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:bh="using:Client.Behaviours"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Client.Views.ProfileView">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="3*"/>
 			<RowDefinition Height="auto" MaxHeight="100"/>
 		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
 		<StackPanel Margin="25">
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.FIO}" Classes="h2 outline purple"/>
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.Room.Number}" Classes="h2 outline purple"/>
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.Group.Name}" Classes="h2 outline purple"/>
-			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.Status.Name}" Classes="h2 outline purple"/>
+			<TextBox IsReadOnly="{Binding !IsWorker}" Text="{Binding Student.FIO}" Classes="h3 outline purple"/>
+			<AutoCompleteBox IsDropDownOpen="{Binding !IsWorker}" SelectedItem="{Binding SelectedRoom}"
+							 ItemsSource="{Binding Rooms}" Classes="h3 outline purple">
+												<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Number}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+			</AutoCompleteBox>
+			<AutoCompleteBox IsDropDownOpen="{Binding !IsWorker}" SelectedItem="{Binding SelectedGroup}"
+							 ItemsSource="{Binding Groups}" Classes="h3 outline purple">
+																<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Number}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+			</AutoCompleteBox>
+			<AutoCompleteBox IsDropDownOpen="{Binding !IsWorker}" SelectedItem="{Binding SelectedStatus}"
+							 ItemsSource="{Binding Statuses}" Classes="h3 outline purple">
+																<i:Interaction.Behaviors>
+									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+								</i:Interaction.Behaviors>
+								<AutoCompleteBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Number}" Classes="h4"/>
+									</DataTemplate>
+								</AutoCompleteBox.ItemTemplate>
+			</AutoCompleteBox>
+			<TextBlock Text="Дополнительная информация" Classes="h2"/>
 		</StackPanel>
 		<ScrollViewer Grid.Row="1" Margin="25">
 			<StackPanel HorizontalAlignment="Stretch">
-				<TextBlock Text="Дополнительная информация" Classes="h2"/>
 				<StackPanel Margin="10">
 					<StackPanel>
 						<TextBlock Text="Контакты" Classes="h3"/>
