@@ -73,7 +73,7 @@
 			</ItemsControl>
 		</StackPanel>
 		
-		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="15" Spacing="5" Grid.ColumnSpan="3">
+		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="15" Spacing="15" Grid.ColumnSpan="3">
 			<Button Content="Следующая комната" Classes="navigate h2" Command="{Binding Next}"/>
 			<Button Content="Сохранить" Classes="h2 navigate" Command="{Binding Save}"/>
 		</StackPanel>
