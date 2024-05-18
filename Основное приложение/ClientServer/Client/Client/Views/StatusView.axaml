@@ -23,22 +23,24 @@
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<StackPanel Classes="panel" Height="280" Width="280">
-								<Border Padding="10">
-									<StackPanel>
-										<TextBlock Text="Статус" Classes="h3"/>
-										<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
-										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="{Binding CountStudents}" Classes="h3"/>
-											<TextBlock Text=" чел."/>
+							<Grid>
+								<StackPanel Classes="panel" Height="280" Width="280">
+									<Border Padding="10">
+										<StackPanel>
+											<TextBlock Text="Статус" Classes="h3"/>
+											<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Text="{Binding CountStudents}" Classes="h3"/>
+												<TextBlock Text=" чел." Classes="h3"/>
+											</StackPanel>
 										</StackPanel>
-										<Button Content="Удалить"
-											   Classes="navigate h2"
-											   Command="{Binding $parent[UserControl].DataContext.Delete}"
-											   CommandParameter="{Binding Id}"/>
-									</StackPanel>
-								</Border>
-							</StackPanel>
+									</Border>
+								</StackPanel>
+								<Button Content="X"
+										Classes="delete h4"
+										Command="{Binding $parent[UserControl].DataContext.Delete}"
+										CommandParameter="{Binding Id}"/>
+							</Grid>
 						</Border>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
@@ -47,7 +49,6 @@
 		<Border Grid.Row="2" Background="White">
 			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
 				<Button Content="Новый статус" Classes="navigate h2" Command="{Binding NewStatus}"/>
-				<Button Content="Удалить" Classes="navigate h2" Command="{Binding Delete}"/>
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
 			</StackPanel>
 		</Border>

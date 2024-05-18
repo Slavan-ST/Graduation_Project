@@ -23,5 +23,14 @@
 		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
+
+	<Style Selector="Button.delete">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
+		<Setter Property="VerticalAlignment" Value="Top"/>
+		<Setter Property="HorizontalAlignment" Value="Right"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+	</Style>
 	
 </Styles>
