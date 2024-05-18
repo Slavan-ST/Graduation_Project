@@ -22,17 +22,19 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<StackPanel Classes="panel" MinWidth="300" MinHeight="400">
-								<TextBox Text="{Binding Name}" Classes="h4 outline purple"/>
-								<TextBox Text="{Binding ShortDateTime}" Classes="h4 outline purple"/>
-								<TextBox Text="{Binding Location}" Classes="h4 outline purple"/>
-								<TextBox Text="{Binding Organizer}" Classes="h4 outline purple"/>
-								<TextBox Text="{Binding Description}" Classes="h4 outline purple" TextWrapping="Wrap"/>
-								<Button Content="Удалить"
-										Classes="navigate h2"
-										Command="{Binding $parent[UserControl].DataContext.Delete}" 
+							<Grid>
+								<StackPanel Classes="panel" MinWidth="300" MinHeight="400" MaxWidth="300">
+									<TextBox Text="{Binding Name}" Classes="h4 outline purple"/>
+									<TextBox Text="{Binding ShortDateTime}" Classes="h4 outline purple"/>
+									<TextBox Text="{Binding Location}" Classes="h4 outline purple"/>
+									<TextBox Text="{Binding Organizer}" Classes="h4 outline purple"/>
+									<TextBox Text="{Binding Description}" Classes="h4 outline purple" TextWrapping="Wrap"/>
+								</StackPanel>
+								<Button Content="X"
+										Classes="delete h2"
+										Command="{Binding $parent[UserControl].DataContext.Delete}"
 										CommandParameter="{Binding Id}"/>
-							</StackPanel>
+							</Grid>
 						</Border>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

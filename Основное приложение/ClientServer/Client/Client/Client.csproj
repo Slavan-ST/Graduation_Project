@@ -72,6 +72,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Registration.axaml.cs">
+      <DependentUpon>Registration.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

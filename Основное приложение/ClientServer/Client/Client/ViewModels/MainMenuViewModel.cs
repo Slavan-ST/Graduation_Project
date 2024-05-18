@@ -70,25 +70,25 @@ namespace Client.ViewModels
             Group = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new GroupViewModel(this));
-                Title = "Group";
+                Title = "Группы";
                 IsOpenSideBar = false;
             });
             Role = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new RoleViewModel(this));
-                Title = "Role";
+                Title = "Роли";
                 IsOpenSideBar = false;
             });
             Room = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new RoomViewModel(this));
-                Title = "Room";
+                Title = "Комнаты";
                 IsOpenSideBar = false;
             });
             Status = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new StatusViewModel(this));
-                Title = "Status";
+                Title = "Статусы";
                 IsOpenSideBar = false;
             });
 
@@ -140,6 +140,18 @@ namespace Client.ViewModels
                 Title = "Ежедневная проверка";
                 IsOpenSideBar = false;
             });
+            Registration = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new RegistrationViewModel(this));
+                Title = "Регистрация";
+                IsOpenSideBar = false;
+            });
+            RestorePassword = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new RestorePasswordViewModel(this));
+                Title = "Восстановление пароля";
+                IsOpenSideBar = false;
+            });
 
 
             Exit = ReactiveCommand.Create(() => 
@@ -163,7 +175,14 @@ namespace Client.ViewModels
         /// </summary>
         public ICommand OpenSideBar { get; set; }
 
-
+        /// <summary>
+        /// Команда перехода на регистрацию пользователей
+        /// </summary>
+        public ICommand Registration { get; set; }
+        /// <summary>
+        /// Команда перехода на окно восстановления пароля
+        /// </summary>
+        public ICommand RestorePassword { get; set; }
         /// <summary>
         /// Команда перехода на главную 
         /// </summary>

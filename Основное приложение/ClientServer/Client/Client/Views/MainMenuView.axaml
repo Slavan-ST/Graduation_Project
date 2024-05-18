@@ -59,6 +59,8 @@
 					</StackPanel>
 					<StackPanel IsVisible="{Binding IsAdmin}">
 						<Button Content="Роли" Command="{Binding Role}" Classes="sideBar"/>
+						<Button Content="Регистрация" Command="{Binding Registration}" Classes="sideBar"/>
+						<Button Content="Восстановление пароля" Command="{Binding RestorePassword}" Classes="sideBar"/>
 					</StackPanel>
 					<StackPanel IsVisible="{Binding IsWorker}">
 						<Button Content="План мероприятий" Command="{Binding EventsList}" Classes="sideBar"/>

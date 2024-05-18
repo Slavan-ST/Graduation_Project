@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:bh="using:Client.Behaviours"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.Views.RegistrationView">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
+		<StackPanel Margin="15">
+			<TextBlock Text="Имя" Classes="h2"/>
+			<TextBox Text="{Binding NewUser.Name}" Classes="h2 outline purple"/>
+			
+			<TextBlock Text="Фамилия" Classes="h2"/>
+			<TextBox Text="{Binding NewUser.Surname}" Classes="h2 outline purple"/>
+			
+			<TextBlock Text="Отчество" Classes="h2"/>
+			<TextBox Text="{Binding NewUser.Patronymic}" Classes="h2 outline purple"/>
+			
+			<TextBlock Text="Логин" Classes="h2"/>
+			<TextBox Text="{Binding NewUser.Login}" Classes="h2 outline purple"/>
+			
+			<TextBlock Text="Пароль" Classes="h2"/>
+			<TextBox Text="{Binding NewUser.Password}" Classes="h2 outline purple"/>
+
+			<AutoCompleteBox ItemsSource="{Binding Roles}"
+											 FilterMode="StartsWith"
+											 Classes="outline lightBlue h3"
+											 SelectedItem="{Binding SelectedRole}">
+				<i:Interaction.Behaviors>
+					<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
+				</i:Interaction.Behaviors>
+				<AutoCompleteBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Role.Name}" Classes="h3"/>
+					</DataTemplate>
+				</AutoCompleteBox.ItemTemplate>
+			</AutoCompleteBox>
+		</StackPanel>
+		<Border Grid.Row="2" Background="White">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+				<Button Content="Создать пользователя" Classes="navigate h2" Command="{Binding Create}"/>
+			</StackPanel>
+		</Border>
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="3">
+			<Ellipse Classes="spinner"/>
+		</Border>
+	</Grid>
+</UserControl>
