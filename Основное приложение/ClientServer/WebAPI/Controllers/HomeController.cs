@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDTO>> SignInAsync(string login, string password)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var user = await db.Users
                 .Include(c => c.Role)
@@ -44,15 +44,15 @@ namespace WebAPI.Controllers
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, login),
-                new Claim(ClaimTypes.Role, user.Role!.Name)
+                new(ClaimTypes.Name, login),
+                new(ClaimTypes.Role, user.Role!.Name)
             };
 
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+            ClaimsIdentity claimsIdentity = new(claims, "Cookies");
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-            UserDTO userDTO = new UserDTO(user);
+            UserDTO userDTO = new(user);
 
             return new JsonResult(userDTO);
         }

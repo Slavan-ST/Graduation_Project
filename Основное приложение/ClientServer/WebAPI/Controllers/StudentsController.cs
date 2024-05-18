@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var students = await db.Students
                 .Include(c => c.Room)
                 .Include(c => c.Status)
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         [HttpGet("{room}")]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudentsFromRoom(string room)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var students = await db.Students
                 .Include(c => c.Room)
@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
 
             (string surname, string name, string? patronymic) = FIOConverter.GetSurnameNamePatronymicFromFIO(fio);
             
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var student = await db.Students
                 .Include(c => c.Room)
                 .Include(c => c.Status)
@@ -107,7 +107,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             //Варианта 2:
@@ -151,7 +151,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             Student? student = await db.Students
@@ -181,7 +181,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var student = await db.Students
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();

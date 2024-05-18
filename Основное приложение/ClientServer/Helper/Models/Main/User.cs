@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +19,24 @@ namespace Helper.Models.Main
         public string Password { get; set; } = "";
         public byte[]? Image { get; set; }
         public int RoleId { get; set; }
-        public Role? Role { get; set; }
+
+        Role? _role;
+        public Role? Role
+        {
+            get
+            {
+                if (_role == null)
+                {
+                    return null;
+                }
+                _role.Users = null;
+                return _role;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _role, value);
+            }
+        }
+
     }
 }

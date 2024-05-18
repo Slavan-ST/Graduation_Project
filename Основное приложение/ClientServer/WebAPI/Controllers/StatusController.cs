@@ -19,15 +19,15 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Status>>> GetStatuses()
         {
-            ApplicationContext db = new ApplicationContext();
-            var statuss = await db.Statuses.Include(x => x.Students).ToListAsync();
-            if (statuss == null)
+            ApplicationContext db = new();
+            var statuses = await db.Statuses.Include(x => x.Students).ToListAsync();
+            if (statuses == null)
             {
                 return NotFound();
             }
             await db.DisposeAsync();
 
-            return new JsonResult(statuss);
+            return new JsonResult(statuses);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             Status? status = await db.Statuses
@@ -75,7 +75,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             //проверка на существование такой записи в БД
             Status? status = await db.Statuses
                 .Where(x => x.Id == statusDTO.Id)
@@ -103,7 +103,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteStatus(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var status = await db.Statuses
                 .Where(x => x.Id == id)

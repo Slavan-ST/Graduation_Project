@@ -48,10 +48,7 @@ namespace Client.ViewModels
                     }
                     objAdd.Id = (int)id;
 
-                    if (Rooms == null)
-                    {
-                        Rooms = new List<Room>();
-                    }
+                    Rooms ??= [];
                     var temp = new List<Room>(Rooms)
                     {
                         objAdd
@@ -69,10 +66,7 @@ namespace Client.ViewModels
             {
                 IsLoading = true;
 
-                if (Rooms == null)
-                {
-                    Rooms = new List<Room>();
-                }
+                Rooms ??= [];
 
                 var temp = new List<Room>(Rooms);
                 var objRemove = temp.Where(x => x.Id == id).FirstOrDefault();
@@ -84,7 +78,7 @@ namespace Client.ViewModels
                 }
 
 
-                await EventAPI.DeleteAsync(objRemove.Id);
+                await RoomAPI.DeleteRoomAsync(objRemove.Id);
                 temp.Remove(objRemove);
                 Rooms = new List<Room>(temp);
                 IsLoading = false;

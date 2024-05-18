@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutySchedule()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var dutySchedules = await db.DutySchedule
                 .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
         [HttpGet("day:{day}.{month}.{year}")]
         public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutyScheduleDay(int day, int month, int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var dutySchedules = await db.DutySchedule
                 .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
         [HttpGet("month:{month}.{year}")]
         public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutyScheduleMonth(int month, int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var dutySchedules = await db.DutySchedule
                 .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
         [HttpGet("year:{year}")]
         public async Task<ActionResult<IEnumerable<DutySchedule>>> GetDutyScheduleYear(int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var dutySchedules = await db.DutySchedule
                 .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
@@ -114,7 +114,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DutySchedule>> GetDutySchedule(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var dutySchedule = await db.DutySchedule
                 .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
@@ -142,7 +142,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             DutySchedule? dutySchedule = await db.DutySchedule.Where(x => x.Id == dutyScheduleDTO.Id).FirstOrDefaultAsync();
@@ -171,7 +171,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var dutySchedule = await db.DutySchedule
                 .Where(x => x.Id == dutyScheduleDTO.Id)
@@ -199,7 +199,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDutySchedule(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var dutySchedule = await db.DutySchedule
                 .Where(x => x.Id == id)

@@ -49,10 +49,7 @@ namespace Client.ViewModels
                     }
                     objAdd.Id = (int)id;
 
-                    if (Statuses == null)
-                    {
-                        Statuses = new List<Status>();
-                    }
+                    Statuses ??= [];
                     var temp = new List<Status>(Statuses)
                     {
                         objAdd
@@ -70,10 +67,7 @@ namespace Client.ViewModels
             {
                 IsLoading = true;
 
-                if (Statuses == null)
-                {
-                    Statuses = new List<Status>();
-                }
+                Statuses ??= [];
 
                 var temp = new List<Status>(Statuses);
                 var objRemove = temp.Where(x => x.Id == id).FirstOrDefault();
@@ -85,7 +79,7 @@ namespace Client.ViewModels
                 }
 
 
-                await EventAPI.DeleteAsync(objRemove.Id);
+                await StatusAPI.DeleteStatusAsync(objRemove.Id);
                 temp.Remove(objRemove);
                 Statuses = new List<Status>(temp);
                 IsLoading = false;

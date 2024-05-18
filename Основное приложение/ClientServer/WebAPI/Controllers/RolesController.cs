@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var roles = await db.Roles
                 //.Include(x => x.Students)
                 .ToListAsync();
@@ -41,7 +41,8 @@ namespace WebAPI.Controllers
         [HttpGet("{name}")]
         public async Task<ActionResult<Role>> GetRole(string name)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext applicationContext = new();
+            ApplicationContext db = applicationContext;
             var role = await db.Roles
                 //.Include(x => x.Students)
                 .Where(x => x.Name == name)
@@ -68,7 +69,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             Role? role = await db.Roles
@@ -102,7 +103,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             //проверка на существование такой записи в БД
             Role? role = await db.Roles
                 //.Include(x => x.Students)
@@ -126,16 +127,16 @@ namespace WebAPI.Controllers
         /// <summary>
         /// Удаление комнаты
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{name}")]
-        public async Task<ActionResult> DeleteRole(string name)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteRole(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var role = await db.Roles
                 //.Include(x => x.Students)
-                .Where(x => x.Name == name)
+                .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (role == null)

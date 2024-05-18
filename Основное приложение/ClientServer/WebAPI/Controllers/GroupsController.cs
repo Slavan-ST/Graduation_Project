@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Group>>> GetGroups()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var groups = await db.Groups
                 .Include(x => x.Students)
                 .ToListAsync();
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             Group? group = await db.Groups
@@ -79,7 +79,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             //проверка на существование такой записи в БД
             Group? group = await db.Groups
                 .Include(x => x.Students)
@@ -103,16 +103,16 @@ namespace WebAPI.Controllers
         /// <summary>
         /// Удаление группы
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{name}")]
-        public async Task<ActionResult> DeleteGroup(string name)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteGroup(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var group = await db.Groups
                 .Include(x => x.Students)
-                .Where(x => x.Name == name)
+                .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (group == null)

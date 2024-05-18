@@ -43,12 +43,12 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> DeleteAsync(string name)
+        public static async Task<HttpStatusCode?> DeleteAsync(int id)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.DeleteAsync(Connect.Connection + $"Roles/{name}");
+                var response = await client.DeleteAsync(Connect.Connection + $"Roles/{id}");
                 return response.StatusCode;
             }
             catch (Exception e)

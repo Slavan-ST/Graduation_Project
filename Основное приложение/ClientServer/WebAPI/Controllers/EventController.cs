@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventO>>> GetEvents()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var eventOs = await db.Events.ToListAsync();
             if (eventOs == null)
             {
@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             EventO? eventO = await db.Events
@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             //проверка на существование такой записи в БД
             EventO? eventO = await db.Events
                 .Where(x => x.Id == eventODTO.Id)
@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteEvent(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var eventO = await db.Events
                 .Where(x => x.Id == id)

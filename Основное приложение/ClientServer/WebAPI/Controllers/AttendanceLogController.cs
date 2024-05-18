@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogs()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
                 .Include(c => c.Student)               
                 .Include(c => c.Student!.Room)
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
         [HttpGet("day:{day}.{month}.{year}")]
         public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsDay(int day, int month, int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
                 .Include(c => c.Student)             
                 .Include(c => c.Student!.Room)
@@ -72,7 +72,7 @@ namespace WebAPI.Controllers
         [HttpGet("month:{month}.{year}")]
         public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsMonth(int month, int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
                 .Include(c => c.Student)              
                 .Include(c => c.Student!.Room)
@@ -95,7 +95,7 @@ namespace WebAPI.Controllers
         [HttpGet("year:{year}")]
         public async Task<ActionResult<IEnumerable<AttendanceLog>>> GetAttendanceLogsYear(int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
                 .Include(c => c.Student)              
                 .Include(c => c.Student!.Room)
@@ -118,7 +118,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AttendanceLog>> GetAttendanceLog(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var attendanceLog = await db.AttendanceLog
                 .Include(c => c.Student)  
                 .Include(c => c.Student!.Room)
@@ -146,7 +146,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             AttendanceLog? attendanceLog = await db.AttendanceLog
@@ -181,7 +181,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             AttendanceLog? attendanceLog = await db.AttendanceLog
                 .Where(x =>
@@ -213,7 +213,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAttendanceLog(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var attendanceLog = await db.AttendanceLog
                 .Where(x => x.Id == id)

@@ -49,10 +49,7 @@ namespace Client.ViewModels
                     }
                     objAdd.Id = (int)id;
 
-                    if (Roles == null)
-                    {
-                        Roles = new List<Role>();
-                    }
+                    Roles ??= [];
                     var temp = new List<Role>(Roles)
                     {
                         objAdd
@@ -68,27 +65,31 @@ namespace Client.ViewModels
             });
             Delete = ReactiveCommand.Create(async (int id) =>
             {
-                IsLoading = true;
-
-                if (Roles == null)
+                try
                 {
-                    Roles = new List<Role>();
-                }
+                    IsLoading = true;
 
-                var temp = new List<Role>(Roles);
-                var objRemove = temp.Where(x => x.Id == id).FirstOrDefault();
+                    Roles ??= [];
 
-                if (objRemove == null)
-                {
+                    var temp = new List<Role>(Roles);
+                    var objRemove = temp.Where(x => x.Id == id).FirstOrDefault();
+
+                    if (objRemove == null)
+                    {
+                        IsLoading = false;
+                        return;
+                    }
+
+
+                    await RolesAPI.DeleteAsync(objRemove.Id);
+                    temp.Remove(objRemove);
+                    Roles = new List<Role>(temp);
                     IsLoading = false;
-                    return;
                 }
-
-
-                await RolesAPI.DeleteAsync(objRemove.Name);
-                temp.Remove(objRemove);
-                Roles = new List<Role>(temp);
-                IsLoading = false;
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
             });
         }
 

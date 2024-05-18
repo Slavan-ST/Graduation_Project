@@ -18,5 +18,24 @@ namespace Helper.Models.Main
             return this.Name;
         }
 
+        IEnumerable<User>? _user = [];
+        public IEnumerable<User>? Users
+        {
+            get
+            {
+                if (_user != null)
+                {
+                    foreach (var user in _user)
+                    {
+                        user.Role = null;
+                    }
+                }
+                return _user;
+            }
+            set
+            {
+                _user = value;
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogs()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var purityRaidLogs = await db.PurityRaidLogs
                 .Include(c => c.Room)
                 .ToListAsync();
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
         [HttpGet("day:{day}.{month}.{year}")]
         public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogsDay(int day, int month, int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var purityRaidLogs = await db.PurityRaidLogs
                 .Include(c => c.Room)
                 .Where(c => c.Date.Year == year && c.Date.Month == month && c.Date.Day == day)
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
         [HttpGet("month:{month}.{year}")]
         public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogsMonth(int month, int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var purityRaidLogs = await db.PurityRaidLogs
                 .Include(c => c.Room)
                 .Where(c => c.Date.Year == year && c.Date.Month == month)
@@ -87,7 +87,7 @@ namespace WebAPI.Controllers
         [HttpGet("year:{year}")]
         public async Task<ActionResult<IEnumerable<PurityRaidLog>>> GetPurityRaidLogsYear(int year)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var purityRaidLogs = await db.PurityRaidLogs
                 .Include(c => c.Room)
                 .Where(c => c.Date.Year == year)
@@ -109,7 +109,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PurityRaidLog>> GetPurityRaidLog(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var purityRaidLog = await db.PurityRaidLogs
                 .Include(c => c.Room)
                 .Where(x => x.Id == id)
@@ -136,7 +136,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             PurityRaidLog? purityRaidLog = await db.PurityRaidLogs
@@ -166,7 +166,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var purityRaidLog = await db.PurityRaidLogs
                 .Where(x => x.Id == purityRaidLogDTO.Id)
@@ -194,7 +194,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePurityRaidLog(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var purityRaidLog = await db.PurityRaidLogs
                 .Where(x => x.Id == id)

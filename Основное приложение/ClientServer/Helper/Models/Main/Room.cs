@@ -25,7 +25,7 @@ namespace Helper.Models.Main
             }
         }
 
-        IEnumerable<Student>? _students = new List<Student>();
+        IEnumerable<Student>? _students = [];
         public IEnumerable<Student>? Students
         {
             get

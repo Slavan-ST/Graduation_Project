@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var rooms = await db.Rooms.Include(x => x.Students).ToListAsync();
             if (rooms == null)
             {
@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         [HttpGet("{number}")]
         public async Task<ActionResult<Room>> GetRoom(string number)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var room = await db.Rooms
                 .Include(x => x.Students)
                 .Where(x => x.Number == number)
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             
             //проверка на существование такой записи в БД
             Room? room = await db.Rooms
@@ -99,7 +99,7 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             //проверка на существование такой записи в БД
             Room? room = await db.Rooms
                 .Include(x => x.Students)
@@ -123,16 +123,16 @@ namespace WebAPI.Controllers
         /// <summary>
         /// Удаление комнаты
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{number}")]
-        public async Task<ActionResult> DeleteRoom(string number)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteRoom(int id)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var room = await db.Rooms
                 .Include(x => x.Students)
-                .Where(x => x.Number == number)
+                .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (room == null)

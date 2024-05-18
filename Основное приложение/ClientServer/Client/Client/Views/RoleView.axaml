@@ -32,6 +32,10 @@
 											<TextBlock Text="{Binding CountUser}" Classes="h3"/>
 											<TextBlock Text=" чел."/>
 										</StackPanel>
+										<Button Content="Удалить"
+											   Classes="navigate h2"
+											   Command="{Binding $parent[UserControl].DataContext.Delete}"
+											   CommandParameter="{Binding Id}"/>
 									</StackPanel>
 								</Border>
 							</StackPanel>

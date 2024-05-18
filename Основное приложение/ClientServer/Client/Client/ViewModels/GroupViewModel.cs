@@ -49,10 +49,7 @@ namespace Client.ViewModels
                     }
                     objAdd.Id = (int)id;
 
-                    if (Groups == null)
-                    {
-                        Groups = new List<Group>();
-                    }
+                    Groups ??= [];
                     var temp = new List<Group>(Groups)
                     {
                         objAdd
@@ -70,10 +67,7 @@ namespace Client.ViewModels
             {
                 IsLoading = true;
 
-                if (Groups == null)
-                {
-                    Groups = new List<Group>();
-                }
+                Groups ??= [];
 
                 var temp = new List<Group>(Groups);
                 var objRemove = temp.Where(x => x.Id == id).FirstOrDefault();
@@ -85,7 +79,7 @@ namespace Client.ViewModels
                 }
 
 
-                await EventAPI.DeleteAsync(objRemove.Id);
+                await GroupAPI.DeleteGroupAsync(objRemove.Id);
                 temp.Remove(objRemove);
                 Groups = new List<Group>(temp);
                 IsLoading = false;

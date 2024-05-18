@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpGet("{login}")]
         public async Task<ActionResult<UserDTO>> GetUser(string login)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var user = await db.Users
                 .Include(c => c.Role)
                 .Where(x => x.Login == login)
@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            UserDTO userDTO = new UserDTO(user);
+            UserDTO userDTO = new(user);
 
             return new JsonResult(userDTO);
         }
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
             var users = await db.Users
                 .Include(c => c.Role)
                 .ToListAsync();
@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            List<UserDTO> usersDTO = new List<UserDTO>();
+            List<UserDTO> usersDTO = [];
             foreach (var user in  users)
             {
                 usersDTO.Add(new UserDTO(user));
@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             var user = await db.Users
                 .Include(c => c.Role)
@@ -113,7 +113,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
 
             //проверка на существование такой записи в БД
@@ -145,7 +145,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{login}")]
         public async Task<ActionResult> DeleteUser(string login)
         {
-            ApplicationContext db = new ApplicationContext();
+            ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
             User? user = await db.Users
