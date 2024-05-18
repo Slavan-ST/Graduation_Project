@@ -1,5 +1,5 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Thickness x:Key="thicknessValue"> 5 </Thickness>
-	<CornerRadius x:Key="cornerRadiusValue"> 25 </CornerRadius>
+	<Thickness x:Key="thicknessValue"> 4 </Thickness>
+	<CornerRadius x:Key="cornerRadiusValue"> 15 </CornerRadius>
 </ResourceDictionary>
