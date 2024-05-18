@@ -40,24 +40,12 @@
 									<StackPanel>
 										<TextBlock Text="Дата" Classes="h3"/>
 										<TextBox Text="{Binding ShortDate}" Classes="h3 outline purple"/>
-										<TextBlock Text="Комната" Classes="h3"/>
-										<AutoCompleteBox ItemsSource="{Binding ListRooms}"
-														 SelectedItem="{Binding ListRoomsSelectedItem}"
-														 Classes="outline lightBlue h4">
-											<i:Interaction.Behaviors>
-												<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
-											</i:Interaction.Behaviors>
-											<AutoCompleteBox.ItemTemplate>
-												<DataTemplate>
-													<TextBlock Text="{Binding Number}" Classes="h4"/>
-												</DataTemplate>
-											</AutoCompleteBox.ItemTemplate>
-										</AutoCompleteBox>
+										
 										<TextBlock Text="Студент" Classes="h3"/>
-										<AutoCompleteBox ItemsSource="{Binding ListStudents}"
+										<AutoCompleteBox ItemsSource="{Binding $parent[UserControl].DataContext.ListStudents}"
 														 FilterMode="StartsWith"
 														 Classes="outline purple h4"
-														 SelectedItem="{Binding ListStudentsSelectedItem}">
+														 SelectedItem="{Binding Student}">
 											<i:Interaction.Behaviors>
 												<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
 											</i:Interaction.Behaviors>

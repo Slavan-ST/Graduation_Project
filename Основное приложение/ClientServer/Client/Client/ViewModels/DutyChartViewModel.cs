@@ -5,6 +5,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,6 @@ namespace Client.ViewModels
         public bool IsLoading { get; set; }
         [Reactive]
         public List<Student>? ListStudents { get; set; }
-        [Reactive]
-        public List<Room>? ListRooms { get; set; }
 
         [Reactive]
         public IEnumerable<DutySchedule>? DutyItems { get; set; }
@@ -71,17 +70,39 @@ namespace Client.ViewModels
             {
                 IsLoading = true;
                 // новое дежурство (идеально сделать проверку что в этом месяце уже нет места)
+                Add();
                 IsLoading = false;
             });
             Save = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-
+                SaveInAPI();
                 IsLoading = false;
             });
-            Delete = ReactiveCommand.Create(() =>
+            Delete = ReactiveCommand.Create(async (int id) =>
             {
                 IsLoading = true;
+
+
+                if (DutyItems == null)
+                {
+                    IsLoading = false;
+                    return;
+                }
+
+                var temp = new List<DutySchedule>(DutyItems);
+                var itemRemove = temp.Where(x => x.Id == id).FirstOrDefault();
+
+                if (itemRemove == null)
+                {
+                    IsLoading = false;
+                    return;
+                }
+
+
+                await EventAPI.DeleteAsync(itemRemove.Id);
+                temp.Remove(itemRemove);
+                DutyItems = new List<DutySchedule>(temp);
 
                 IsLoading = false;
             });
@@ -90,12 +111,7 @@ namespace Client.ViewModels
         public async void FillItemsSource()
         {
             IsLoading = true;
-            var rooms = await RoomAPI.GetRoomsAsync();
-            if (rooms == null)
-            {
-                IsLoading = false;
-                return;
-            }
+
             var students = await StudentAPI.GetStudentsAsync();
             if (students == null)
             {
@@ -103,7 +119,7 @@ namespace Client.ViewModels
                 return;
             }
             ListStudents = new List<Student>(students);
-            ListRooms = new List<Room>(rooms);
+
             IsLoading = false;
         }
         private async void GetAsync()
@@ -111,6 +127,48 @@ namespace Client.ViewModels
             IsLoading = true;
             DutyItems = await API.DutyScheduleAPI.GetDutySchedulesMonth(DateTime.Now.Year, MonthInt);
             IsLoading = false;
+        }
+        async void SaveInAPI()
+        {
+            if (DutyItems == null)
+            {
+                return;
+            }
+
+            IsLoading = true;
+            foreach (var item in DutyItems)
+            {
+                await API.DutyScheduleAPI.PostDutySchedule(item);
+            }
+            IsLoading = false;
+        }
+        async void Add()
+        {
+            try
+            {
+                IsLoading = true;
+                var itemAdd = new DutySchedule();
+                int? id = await DutyScheduleAPI.PostDutySchedule(itemAdd);
+                if (id == null)
+                {
+                    IsLoading = false;
+                    return;
+                }
+                itemAdd.Id = (int)id;
+
+                DutyItems ??= new List<DutySchedule>();
+
+                var temp = new List<DutySchedule>(DutyItems)
+                    {
+                        itemAdd
+                    };
+                DutyItems = new List<DutySchedule>(temp);
+                IsLoading = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }
