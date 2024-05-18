@@ -30,18 +30,18 @@ namespace Client.ViewModels
             });
 
             FillFilter();
-            FillListStudents(_noFilters);
+            FillListStudents(NoFilters);
 
             AcceptFilters = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-                FillListStudents(_filters);
+                FillListStudents(Filters);
                 IsLoading = false;
             });
             ClearFilters = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-                FillListStudents(_noFilters);
+                FillListStudents(NoFilters);
                 IsLoading = false;
             });
 
@@ -104,7 +104,7 @@ namespace Client.ViewModels
         public ICommand AcceptFilters { get; set; }
         public ICommand ClearFilters { get; set; }
 
-        async Task<IEnumerable<Student>?> _noFilters()
+        async Task<IEnumerable<Student>?> NoFilters()
         {
             IsLoading = true;
             ListRoomsSelectedItem = null;
@@ -114,7 +114,7 @@ namespace Client.ViewModels
             IsLoading = false;
             return students;
         }
-        async Task<IEnumerable<Student>?> _filters()
+        async Task<IEnumerable<Student>?> Filters()
         {
             IsLoading = true;
             var list = await StudentAPI.GetStudentsAsync();

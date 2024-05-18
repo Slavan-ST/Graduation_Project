@@ -124,7 +124,7 @@ namespace Client.ViewModels
                 {
                     continue;
                 }
-                AttendanceLog attendanceLog = new AttendanceLog()
+                AttendanceLog attendanceLog = new()
                 {
                     StudentId = log.Student.Id,
                     Date = DateTime.Now,
