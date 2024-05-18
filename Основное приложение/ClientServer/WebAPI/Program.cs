@@ -40,16 +40,16 @@ namespace WebAPI
                     Title = "Документация API SystemO",
                 });
             });
-            builder.Services.AddAuthorization(options =>
-            {
-                //сюда можно лепить политики доступа
-                options.AddPolicy("user", policy => policy.Requirements.Add(new AccessRequirement("User")));
-                options.AddPolicy("admin", policy =>
+
+            builder.Services.AddAuthorizationBuilder()
+                .AddPolicy("user", policy => policy.Requirements.Add(new AccessRequirement("User")))
+                .AddPolicy("admin", policy =>
                 {
                     policy.Requirements.Add(new AccessRequirement("Admin"));
-                });
-                options.AddPolicy("moderator", policy => policy.Requirements.Add(new AccessRequirement("Moderator")));
-            }); //авторизация, добавление политик доступа
+                })
+                .AddPolicy("moderator", policy => policy.Requirements.Add(new AccessRequirement("Moderator"))); //авторизация, добавление политик доступа
+            
+            
             builder.Services.AddSingleton<IAuthorizationHandler, AccessHandler>();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/login");
 
