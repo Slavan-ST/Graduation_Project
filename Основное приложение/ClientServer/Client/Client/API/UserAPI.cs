@@ -15,12 +15,12 @@ namespace Client.API
 {
     internal static class UserAPI
     {
-        public static async Task<UserDTO?> GetUserAsync(string login)
+        public static async Task<User?> GetUserAsync(string login)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Users/{login}");
+                var response = await client.GetFromJsonAsync<User>(Connect.Connection + $"Users/{login}");
                 return response;
             }
             catch (Exception e)
@@ -29,12 +29,12 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<IEnumerable<UserDTO>?> GetUsersAsync()
+        public static async Task<IEnumerable<User>?> GetUsersAsync()
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<IEnumerable<UserDTO>>(Connect.Connection + $"Users");
+                var response = await client.GetFromJsonAsync<IEnumerable<User>>(Connect.Connection + $"Users");
                 return response;
             }
             catch (Exception e)
@@ -57,7 +57,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<int?> PostUserAsync(UserChangedDTO userDTO)
+        public static async Task<int?> PostUserAsync(User userDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -77,7 +77,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PutUserAsync(UserChangedDTO userDTO)
+        public static async Task<HttpStatusCode?> PutUserAsync(User userDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try

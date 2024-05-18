@@ -18,7 +18,7 @@ namespace Client.ViewModels
         [Reactive]
         public bool IsLoading { get; set; } = false;
         [Reactive]
-        public UserChangedDTO? NewUser { get; set; } = new UserChangedDTO();
+        public User? NewUser { get; set; } = new User();
         [Reactive]
         public List<Role>? Roles { get; set; }
         [Reactive]
