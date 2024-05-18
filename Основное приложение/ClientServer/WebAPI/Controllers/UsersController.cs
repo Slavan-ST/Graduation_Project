@@ -94,7 +94,7 @@ namespace WebAPI.Controllers
             }
             catch
             {
-
+                return StatusCode(409);
             }
             await db.DisposeAsync();
 

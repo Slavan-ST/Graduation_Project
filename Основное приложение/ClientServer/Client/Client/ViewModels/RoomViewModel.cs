@@ -60,6 +60,7 @@ namespace Client.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
+                    IsLoading = false;
                 }
             });
             Delete = ReactiveCommand.Create(async (int id) =>
@@ -82,6 +83,7 @@ namespace Client.ViewModels
                 if (code == System.Net.HttpStatusCode.Conflict)
                 {
                     //тут можно сообщение об ошибке впихать, что-то вроде того что есть что-то с чем связана эта запись
+                    IsLoading = false;
                     return;
                 }
                 temp.Remove(objRemove);
