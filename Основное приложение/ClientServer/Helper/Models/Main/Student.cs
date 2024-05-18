@@ -51,7 +51,7 @@ namespace Helper.Models.Main
 
 
 
-        IEnumerable<AttendanceLog>? _attendanceLogs = new List<AttendanceLog>();
+        IEnumerable<AttendanceLog>? _attendanceLogs = [];
         public IEnumerable<AttendanceLog>? AttendanceLogs
         {
             get

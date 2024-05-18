@@ -183,6 +183,8 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var student = await db.Students
+                .Include(x => x.AttendanceLogs)
+                 //.Include(x => x.Duty)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
@@ -190,6 +192,8 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(404);
             }
+
+           
 
             db.Students.Remove(student);
             await db.SaveChangesAsync();
