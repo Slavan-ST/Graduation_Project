@@ -27,10 +27,10 @@
 								<Grid>
 									<StackPanel Classes="panel" Height="280" Width="280">
 										<StackPanel>
-											<TextBlock Text="Статус" Classes="h3"/>
+											<TextBlock Text="Статус" Classes="h3" Margin="25,0,25,0"/>
 											<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
 											<StackPanel Orientation="Horizontal">
-												<TextBlock Text="{Binding CountStudents}" Classes="h3"/>
+												<TextBlock Text="{Binding CountStudents}" Classes="h3" Margin="25,0,0,0"/>
 												<TextBlock Text=" чел." Classes="h3"/>
 											</StackPanel>
 										</StackPanel>
@@ -47,7 +47,7 @@
 			</ListBox>
 		</ScrollViewer>
 		<Border Grid.Row="2" Background="White">
-			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="15">
 				<Button Content="Новый статус" Classes="navigate h2" Command="{Binding NewStatus}"/>
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
 			</StackPanel>

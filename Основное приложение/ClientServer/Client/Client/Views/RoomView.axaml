@@ -27,9 +27,9 @@
 								<Grid>
 									<StackPanel Classes="panel" Height="280" Width="280">
 										<StackPanel>
-											<TextBlock Text="Комната" Classes="h3"/>
+											<TextBlock Text="Комната" Classes="h3" Margin="25,0,25,0"/>
 											<TextBox Text="{Binding Number}" Classes="h3 outline purple"/>
-											<StackPanel Orientation="Horizontal">
+											<StackPanel Orientation="Horizontal" Margin="25,0,25,0">
 												<TextBlock Text="В комнате " Classes="h3"/>
 												<TextBlock Text="{Binding CountStudents}" Classes="h3"/>
 												<TextBlock Text=" чел." Classes="h3"/>
@@ -48,7 +48,7 @@
 			</ListBox>
 		</ScrollViewer>
 		<Border Grid.Row="2" Background="White">
-			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="15">
 				<Button Content="Новая комната" Classes="navigate h2" Command="{Binding NewRoom}"/>
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
 			</StackPanel>

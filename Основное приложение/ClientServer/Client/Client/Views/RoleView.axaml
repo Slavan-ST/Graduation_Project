@@ -30,7 +30,7 @@
 											<TextBlock Text="Роль" Classes="h3" Margin="25,0,25,0"/>
 											<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
 											<StackPanel Orientation="Horizontal">
-												<TextBlock Text="{Binding CountUsers}" Classes="h3" Margin="25,0,25,0"/>
+												<TextBlock Text="{Binding CountUsers}" Classes="h3" Margin="25,0,0,0"/>
 												<TextBlock Text=" чел." Classes="h3"/>
 											</StackPanel>
 										</StackPanel>
@@ -47,7 +47,7 @@
 			</ListBox>
 		</ScrollViewer>
 		<Border Grid.Row="2" Background="White">
-			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="15">
 				<Button Content="Новая роль" Classes="navigate h2" Command="{Binding NewRole}"/>
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
 			</StackPanel>
