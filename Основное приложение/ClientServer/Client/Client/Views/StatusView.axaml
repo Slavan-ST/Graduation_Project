@@ -27,10 +27,10 @@
 								<Grid>
 									<StackPanel Classes="panel" Height="280" Width="280">
 										<StackPanel>
-											<TextBlock Text="Статус" Classes="h3"/>
+											<TextBlock Text="Статус" Classes="h3" Margin="25,0,25,0"/>
 											<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
 											<StackPanel Orientation="Horizontal">
-												<TextBlock Text="{Binding CountStudents}" Classes="h3"/>
+												<TextBlock Text="{Binding CountStudents}" Classes="h3" Margin="25,0,25,0"/>
 												<TextBlock Text=" чел." Classes="h3"/>
 											</StackPanel>
 										</StackPanel>
