@@ -18,6 +18,17 @@ namespace Helper.Models.Main
             return this.Name;
         }
 
+        public int UsersCount
+        {
+            get
+            {
+                if (Users == null)
+                {
+                    return 0;
+                }
+                return Users.Count();
+            }
+        }
         IEnumerable<User>? _user = new List<User>();
         public IEnumerable<User>? Users
         {

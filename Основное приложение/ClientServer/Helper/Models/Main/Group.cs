@@ -17,6 +17,17 @@ namespace Helper.Models.Main
         }
 
 
+        public int StudentsCount
+        {
+            get
+            {
+                if (Students == null)
+                {
+                    return 0;
+                }
+                return Students.Count();
+            }
+        }
         IEnumerable<Student>? _students = new List<Student>();
         public IEnumerable<Student>? Students
         {
