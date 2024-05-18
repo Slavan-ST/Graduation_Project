@@ -12,7 +12,7 @@ namespace Helper.Models
 {
     public class Base: ReactiveObject
     {
-        //[Key]
+        [Key]
         [Reactive]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

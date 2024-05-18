@@ -1,5 +1,6 @@
 ﻿using Helper.Models.DTO;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,7 @@ namespace Helper.Models.Main
         public string Login { get; set; } = "";
         public string Password { get; set; } = "";
         public byte[]? Image { get; set; }
+        [Reactive]
         public int RoleId { get; set; }
 
         Role? _role;
@@ -36,10 +38,6 @@ namespace Helper.Models.Main
             }
             set
             {
-                if (value != null)
-                {
-                    RoleId = value.Id;
-                }
                 this.RaiseAndSetIfChanged(ref _role, value);
             }
         }

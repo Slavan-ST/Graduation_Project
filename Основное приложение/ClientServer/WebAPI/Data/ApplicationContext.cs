@@ -208,9 +208,7 @@ namespace WebAPI.Data
                     .HasMaxLength(250);
                 entity.Property(e => e.Patronymic).HasMaxLength(50);
                 entity.Property(e => e.Surname).HasMaxLength(50);
-
-                entity.HasOne(d => d.Role).WithMany(p => p.Users)
-                    .HasForeignKey(d => d.RoleId);
+                entity.Ignore(e => e.Role);
             });
 
             OnModelCreatingPartial(modelBuilder);

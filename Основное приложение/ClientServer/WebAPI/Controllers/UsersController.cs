@@ -73,22 +73,21 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
+
             ApplicationContext db = new();
 
             var user = await db.Users
                 .Where(x => x.Login == userDTO.Login)
-                .AsNoTracking()
                 .FirstOrDefaultAsync();
 
             if (user != null)
             {
                 return StatusCode(409);
             }
-            user = userDTO;
-            Debug.WriteLine(userDTO.RoleId);
+
             try
             {
-                await db.Users.AddAsync(user);
+                await db.Users.AddAsync(userDTO);
                 await db.SaveChangesAsync();
             }
             catch

@@ -96,8 +96,8 @@ namespace Client.API
             HttpClient client = HttpClientSingleton.Client;
             try
             {
-                var response = await client.GetFromJsonAsync<HttpStatusCode>(Connect.Connection + $"Users/{login}&{newPassword}");
-                return response;
+                var response = await client.GetAsync(Connect.Connection + $"Users/{login}&{newPassword}");
+                return response.StatusCode;
             }
             catch (Exception e)
             {

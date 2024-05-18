@@ -6,6 +6,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,14 @@ namespace Client.ViewModels
             {
                 IsLoading = true;
 
+                if (NewUser.Role != null)
+                {
+                    NewUser.RoleId = NewUser.Role.Id;
+                }
+                else
+                {
+                    NewUser.RoleId = 2;
+                }
                 await API.UserAPI.PostUserAsync(NewUser);
 
                 IsLoading = false;
