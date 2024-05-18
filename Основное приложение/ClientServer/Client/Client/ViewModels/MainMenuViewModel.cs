@@ -43,8 +43,8 @@ namespace Client.ViewModels
 
             DutyChart = ReactiveCommand.Create(() => 
             { 
-                Router.Navigate.Execute(new DutyChartViewModel(this));
-                Title = "График дежурств";
+                Router.Navigate.Execute(new DutyChartListViewModel(this));
+                Title = "Дежурства";
                 IsOpenSideBar = false;
             });
             Events = ReactiveCommand.Create(() => 
@@ -152,6 +152,12 @@ namespace Client.ViewModels
                 Title = "Восстановление пароля";
                 IsOpenSideBar = false;
             });
+            DutySchulde = ReactiveCommand.Create(() =>
+            {
+                Router.Navigate.Execute(new DutyChartViewModel(this));
+                Title = "План дежурств";
+                IsOpenSideBar = false;
+            });
 
 
             Exit = ReactiveCommand.Create(() => 
@@ -175,6 +181,7 @@ namespace Client.ViewModels
         /// </summary>
         public ICommand OpenSideBar { get; set; }
 
+        public ICommand DutySchulde { get; set; }
         /// <summary>
         /// Команда перехода на регистрацию пользователей
         /// </summary>

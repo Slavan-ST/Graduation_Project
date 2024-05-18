@@ -5,15 +5,20 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.FaqView">
 	<Grid>
-		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<TreeView ItemsSource="{Binding QuestAnswer}" Classes="transparent">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2.75*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.ColumnSpan="3"/>
+		<TreeView ItemsSource="{Binding QuestAnswer}" Classes="transparent" Grid.Column="1" Margin="0,20,0,0">
 			<TreeView.ItemTemplate>
 				<TreeDataTemplate ItemsSource="{Binding Answers}">
 					<TextBlock Text="{Binding Title}" Classes="h4"/>
 				</TreeDataTemplate>
 			</TreeView.ItemTemplate>
 		</TreeView>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.ColumnSpan="3">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>

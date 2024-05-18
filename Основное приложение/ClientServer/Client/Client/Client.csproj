@@ -72,6 +72,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\DutyChartList.axaml.cs">
+      <DependentUpon>DutyChartList.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\RegistrationView.axaml.cs">
       <DependentUpon>RegistrationView.axaml</DependentUpon>
     </Compile>

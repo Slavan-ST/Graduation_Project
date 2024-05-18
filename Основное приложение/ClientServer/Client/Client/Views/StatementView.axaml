@@ -12,8 +12,13 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
-		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
-		<ScrollViewer>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2.75*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+		<ScrollViewer  Grid.Column="1">
 			<StackPanel HorizontalAlignment="Stretch" Margin="40" >
 				<StackPanel Margin="10">
 					<TextBlock Text="Cтудент" Classes="h2"></TextBlock>
@@ -43,13 +48,13 @@
 				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>
-		<Border Background="White"  Grid.Row="1">
+		<Border Background="White"  Grid.Row="1" Grid.ColumnSpan="3">
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15" Spacing="5">
 			<Button Command="{Binding GetEmptyStatement}" Content="Получить пустой бланк" Classes="navigate h2"/>
 			<Button Command="{Binding GetFillStatement}" Content="Составить" Classes="navigate h2"/>
 		</StackPanel>
 		</Border>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2" Grid.ColumnSpan="3">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>

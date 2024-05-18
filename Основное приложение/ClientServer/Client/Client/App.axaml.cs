@@ -47,7 +47,7 @@ public partial class App : Application
 
 
         Locator.CurrentMutable.Register(() => new AuthView(), typeof(IViewFor<AuthViewModel>));
-        Locator.CurrentMutable.Register(() => new DutyChartView(), typeof(IViewFor<DutyChartViewModel>));
+        Locator.CurrentMutable.Register(() => new DutyChartListView(), typeof(IViewFor<DutyChartListViewModel>));
         Locator.CurrentMutable.Register(() => new EventsListView(), typeof(IViewFor<EventsListViewModel>));
         Locator.CurrentMutable.Register(() => new EventsView(), typeof(IViewFor<EventsViewModel>));
         Locator.CurrentMutable.Register(() => new FaqView(), typeof(IViewFor<FaqViewModel>));
@@ -65,6 +65,7 @@ public partial class App : Application
         Locator.CurrentMutable.Register(() => new GroupView(), typeof(IViewFor<GroupViewModel>));
         Locator.CurrentMutable.Register(() => new RegistrationView(), typeof(IViewFor<RegistrationViewModel>));
         Locator.CurrentMutable.Register(() => new RestorePasswordView(), typeof(IViewFor<RestorePasswordViewModel>));
+        Locator.CurrentMutable.Register(() => new DutyChartView(), typeof(IViewFor<DutyChartViewModel>));
 
         Locator.CurrentMutable.RegisterConstant<IScreen>(new MainViewModel());
 
