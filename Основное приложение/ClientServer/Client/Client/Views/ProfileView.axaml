@@ -22,7 +22,7 @@
 								</i:Interaction.Behaviors>
 								<AutoCompleteBox.ItemTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Room.Number}" Classes="h3"/>
+										<TextBlock Text="{Binding Number}" Classes="h3"/>
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
@@ -33,7 +33,7 @@
 								</i:Interaction.Behaviors>
 								<AutoCompleteBox.ItemTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Group.Number}" Classes="h3"/>
+										<TextBlock Text="{Binding Name}" Classes="h3"/>
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
@@ -44,7 +44,7 @@
 								</i:Interaction.Behaviors>
 								<AutoCompleteBox.ItemTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Status.Number}" Classes="h3"/>
+										<TextBlock Text="{Binding Name}" Classes="h3"/>
 									</DataTemplate>
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>

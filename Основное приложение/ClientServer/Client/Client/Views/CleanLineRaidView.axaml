@@ -12,8 +12,13 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
-		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
-		<StackPanel HorizontalAlignment="Left" Margin="50" MaxWidth="1000">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2.75*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+		<StackPanel HorizontalAlignment="Left" Margin="50" MaxWidth="1000" Grid.Column="1">
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Комната" Margin="0,5,5,0" Classes="h2"/>
 				<ComboBox ItemsSource="{Binding Rooms}" 
@@ -48,11 +53,11 @@
 						 Classes="outline lightBlue h2" Width="500"/>
 			</DockPanel>
 		</StackPanel>
-		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="10" Spacing="5">
+		<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="10" Spacing="5" Grid.ColumnSpan="3">
 			<Button Content="Следующая комната" Classes="h2 navigate" Command="{Binding Next}"/>
 			<Button Content="Сохранить" Classes="h2 navigate" Command="{Binding Save}"/>
 		</StackPanel>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2" Grid.ColumnSpan="3">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>

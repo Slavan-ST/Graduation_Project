@@ -10,7 +10,12 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto" MaxHeight="100"/>
 		</Grid.RowDefinitions>
-		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2"/>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2.75*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
 		<ScrollViewer>
 			<ItemsControl ItemsSource="{Binding Events}" Background="Transparent"
 						  HorizontalAlignment="Center">
@@ -49,13 +54,13 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
-		<Border Grid.Row="1" Background="White">
-			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+		<Border Grid.Row="1" Background="White" Grid.ColumnSpan="3">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="15">
 				<Button Content="Создать мероприятие" Classes="navigate h2" Command="{Binding NewEvent}"/>
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
 			</StackPanel>
 		</Border>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2">
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2" Grid.ColumnSpan="3">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>

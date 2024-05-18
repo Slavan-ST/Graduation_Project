@@ -88,9 +88,5 @@
 	<Style Selector="AutoCompleteBox.outline ContentPresenter#PART_ContentPresenter">
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 	</Style>
-
-	<Style Selector="AutoCompleteBox.outline ContentPresenter#PART_ContentPresenter ContentPresenter#PART_ContentPresenter ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="Red"/>
-	</Style>
 	
 </Styles>

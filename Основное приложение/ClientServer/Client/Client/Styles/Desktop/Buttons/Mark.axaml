@@ -37,7 +37,7 @@
 	
 	<Style Selector="Button.markSelected">
 		<Setter Property="Background" Value="{StaticResource lightBlue}"/>
-		<Setter Property="BorderBrush" Value="{StaticResource lightGreen}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource lightBlue}"/>
 		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
