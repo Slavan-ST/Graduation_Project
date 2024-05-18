@@ -79,9 +79,8 @@
 						<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="sideBar"/>
 					</StackPanel>
 				</ScrollViewer>
-				<Button Classes="switch" HorizontalAlignment="Right" Command="{Binding HideSideBar}">
-					<Image Source="{SvgImage /Assets/light/leftBtn.svg}" Stretch="UniformToFill"/>
-				</Button>
+				<Button Classes="close" Command="{Binding HideSideBar}" Margin="3"
+						Content="X" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 			</Grid>
 	</Grid>
 </UserControl>

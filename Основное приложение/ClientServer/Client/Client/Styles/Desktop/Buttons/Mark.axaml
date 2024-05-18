@@ -3,8 +3,8 @@
     <Design.PreviewWith>
         <Border Padding="20">
 			<StackPanel Spacing="10">
-				<Button Content="+" Classes="mark h2"/>
-				<Button Content="+" Classes="markSelected h2"/>
+				<Button Content="+" Classes="mark h3"/>
+				<Button Content="+" Classes="markSelected h3"/>
 			</StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -27,6 +27,7 @@
 		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="MinWidth" Value="55"/>
+		<Setter Property="MaxHeight" Value="55"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
 		<Setter Property="VerticalContentAlignment" Value="Center"/>
 	</Style>

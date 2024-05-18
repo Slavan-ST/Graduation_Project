@@ -32,15 +32,15 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border Classes="borderPanel">
-							<StackPanel Classes="panel" Height="280" Width="280">
+						<Border Classes="dedicate" Margin="15">
+							<StackPanel Height="280" Width="280">
 								<Border Padding="10">
 									<StackPanel>
 										<TextBlock Text="{Binding ShortDate}" Classes="h3"/>
 										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="Комната " Classes="h3"/>
+											<TextBlock Text="{Binding Student.Room.Number}" Classes="h3"/>
 										</StackPanel>
-										<TextBlock Text="Комната" Classes="h3"/>
-										<TextBlock Text="{Binding Student.Room.Number}" Classes="h3"/>
 										<TextBlock Text="{Binding Student.FIO}" Classes="h3" TextWrapping="Wrap"/>
 									</StackPanel>
 								</Border>

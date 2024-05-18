@@ -17,7 +17,7 @@
 				<TreeViewItem Header="Фильтры">
 					<StackPanel Margin="10">
 						<StackPanel>
-							<TextBlock Text="Студент" Classes="h3"/>
+							<TextBlock Text="Студент" Classes="h3" Margin="25,0,25,0"/>
 							<AutoCompleteBox ItemsSource="{Binding ListStudents}"
 											 FilterMode="StartsWith"
 											 Classes="outline lightBlue h4"
@@ -33,7 +33,7 @@
 							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Комната" Classes="h3"/>
+							<TextBlock Text="Комната" Classes="h3" Margin="25,0,25,0"/>
 							<AutoCompleteBox ItemsSource="{Binding ListRooms}"
 												SelectedItem="{Binding ListRoomsSelectedItem}"
 											  Classes="outline lightBlue h4">
@@ -48,7 +48,7 @@
 							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Статус" Classes="h3"/>
+							<TextBlock Text="Статус" Classes="h3" Margin="25,0,25,0"/>
 							<AutoCompleteBox ItemsSource="{Binding ListStatuses}"
 											 SelectedItem="{Binding ListStatusesSelectedItem}"
 											 Classes="outline lightBlue h4">
@@ -81,7 +81,7 @@
 					</ListBox.ItemsPanel>
 					<ListBox.ItemTemplate>
 						<DataTemplate>
-							<Border Classes="borderPanel">
+							<Border Classes="borderPanel" Padding="15">
 								<StackPanel Classes="panel" Height="280" Width="280">
 									<StackPanel Orientation="Horizontal">
 										<TextBlock Text="Комната - " Classes="h3"/>

@@ -22,9 +22,9 @@
 					</ComboBox.Items>
 				</ComboBox>
 				
-				<AutoCompleteBox Classes="outline lightBlue"/>
+				<AutoCompleteBox Classes="outline lightBlue" Text="Item"/>
 
-				<AutoCompleteBox Classes="outline purple"/>
+				<AutoCompleteBox Classes="outline purple" Text="Item"/>
 				
 			</StackPanel>
         </Border>
@@ -47,6 +47,7 @@
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="Padding" Value="10,0,10,0"/>
 		<Setter Property="Margin" Value="10"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
 	</Style>
 
 	<Style Selector="ComboBox.outline.purple">
@@ -72,6 +73,10 @@
 		<Setter Property="Margin" Value="10"/>
 	</Style>
 
+	<Style Selector="AutoCompleteBox.outline TextBox">
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+	</Style>
+	
 	<Style Selector="AutoCompleteBox.outline.purple">
 		<Setter Property="BorderBrush" Value="{StaticResource purple}"/>
 	</Style>

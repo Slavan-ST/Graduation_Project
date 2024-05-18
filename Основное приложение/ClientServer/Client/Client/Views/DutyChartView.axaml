@@ -35,13 +35,13 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<StackPanel Classes="panel" MinWidth="300" MinHeight="400" MaxWidth="300" Margin="10">
+							<StackPanel Classes="panel" MinWidth="500" MinHeight="400" MaxWidth="500" Margin="10">
 								<Grid>
 									<StackPanel>
-										<TextBlock Text="Дата" Classes="h3"/>
+										<TextBlock Text="Дата" Classes="h3" Margin="25,0,25,0"/>
 										<TextBox Text="{Binding ShortDate}" Classes="h3 outline purple"/>
 										
-										<TextBlock Text="Студент" Classes="h3"/>
+										<TextBlock Text="Студент" Classes="h3" Margin="25,0,25,0"/>
 										<AutoCompleteBox ItemsSource="{Binding $parent[UserControl].DataContext.ListStudents}"
 														 FilterMode="StartsWith"
 														 Classes="outline purple h4"
@@ -57,7 +57,7 @@
 										</AutoCompleteBox>
 									</StackPanel>
 									<Button Content="X"
-											Classes="delete h4"
+											Classes="delete close h4"
 											Command="{Binding $parent[UserControl].DataContext.Delete}"
 											CommandParameter="{Binding Id}"/>
 								</Grid>

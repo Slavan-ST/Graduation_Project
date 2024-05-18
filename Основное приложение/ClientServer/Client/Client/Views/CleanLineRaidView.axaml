@@ -20,13 +20,13 @@
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
 		<StackPanel HorizontalAlignment="Left" Margin="50" MaxWidth="1000" Grid.Column="1">
 			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Комната" Margin="0,5,5,0" Classes="h2"/>
+				<TextBlock Text="Комната" Margin="20,0,20,0" Classes="h2" VerticalAlignment="Center"/>
 				<ComboBox ItemsSource="{Binding Rooms}" 
 						  SelectedItem="{Binding SelectedRoom}"
 						  Classes="h2 outline lightBlue"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="0,55,0,5">
-				<TextBlock Text="Чистота" Classes="h2"/>
+				<TextBlock Text="Чистота" Classes="h2" Margin="20,0,20,0"/>
 				<Button Content="{Binding Mark}" Margin="5,0,0,0" Classes="markSelected h3">
 					<i:Interaction.Behaviors>
 						<ia:EventTriggerBehavior EventName="Click" SourceObject="SourceProperty">
@@ -48,7 +48,7 @@
 				</Button>
 			</StackPanel>
 			<DockPanel LastChildFill="True"  Name="panelDescription">
-				<TextBlock DockPanel.Dock="Top" Text="Примечание" Classes="h2" Margin="0,55,0,5"/>
+				<TextBlock DockPanel.Dock="Top" Text="Примечание" Classes="h2" Margin="20,55,0,5"/>
 				<TextBox TextWrapping="Wrap"  Text="TEST_TEXT"
 						 Classes="outline lightBlue h2" Width="500"/>
 			</DockPanel>

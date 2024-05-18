@@ -21,7 +21,7 @@
 						<DockPanel LastChildFill="True" MinWidth="500" MinHeight="400" Margin="45" 
 								   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 							<StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-								<TextBlock Text="{Binding Name}" Classes="h2"/>
+								<TextBlock Text="{Binding Name}" Classes="h2" Margin="20,0,20,0"/>
 								<Grid Height="35" Width="35" Margin="5">
 									<Image Source="{SvgImage /Assets/light/bell.svg}"/>
 									<ToggleButton Background="Transparent"

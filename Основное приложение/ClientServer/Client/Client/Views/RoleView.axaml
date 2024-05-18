@@ -27,16 +27,16 @@
 								<Grid>
 									<StackPanel Classes="panel" Height="280" Width="280">
 										<StackPanel>
-											<TextBlock Text="Роль" Classes="h3"/>
+											<TextBlock Text="Роль" Classes="h3" Margin="25,0,25,0"/>
 											<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
 											<StackPanel Orientation="Horizontal">
-												<TextBlock Text="{Binding CountUsers}" Classes="h3"/>
+												<TextBlock Text="{Binding CountUsers}" Classes="h3" Margin="25,0,25,0"/>
 												<TextBlock Text=" чел." Classes="h3"/>
 											</StackPanel>
 										</StackPanel>
 									</StackPanel>
 									<Button Content="X"
-											Classes="delete h4"
+											Classes="delete close h4"
 											Command="{Binding $parent[UserControl].DataContext.Delete}"
 											CommandParameter="{Binding Id}"/>
 								</Grid>

@@ -25,12 +25,12 @@
 		
 		
 	<Style Selector="Border.combineOutline">
-		<Setter Property="Padding" Value="3"/>
 		<Setter Property="Margin" Value="10"/>
 		<Setter Property="Background" Value="White"/>
 		<Setter Property="BorderBrush" Value="{StaticResource purple}"/>
 		<Setter Property="BorderThickness" Value="{StaticResource thicknessValue}"/>
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
+		<Setter Property="Padding" Value="10,0,10,0"/>
 	</Style>	
 
 </Styles>

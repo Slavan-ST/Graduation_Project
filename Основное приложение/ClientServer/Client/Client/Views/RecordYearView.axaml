@@ -20,7 +20,7 @@
 					<DataTemplate>
 						<Border Classes="borderPanel" Margin="10">
 							<StackPanel Classes="panel" Height="280" Width="280">
-								<TextBlock Text="{Binding Name}" Classes="h3"/>
+								<TextBlock Text="{Binding Name}" Classes="h3" Margin="25,0,25,0"/>
 								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">
 										<TextBlock Text="Всего " Classes="h4"/>
@@ -37,7 +37,7 @@
 								</Border>
 								<Border Classes="combineOutline">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Статусы " Classes="h4"/>
+										<TextBlock Text="Статус. " Classes="h4"/>
 										<TextBlock Text="{Binding CountNotFound}" Classes="h4"/>
 										<TextBlock Text=" чел." Classes="h4"/>
 									</StackPanel>

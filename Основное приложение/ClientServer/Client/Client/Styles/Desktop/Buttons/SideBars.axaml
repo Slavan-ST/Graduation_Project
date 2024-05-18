@@ -5,6 +5,7 @@
 			<StackPanel Spacing="10">
 				<Button Content="InSideBar (sideBar)" Classes="sideBar"/>
 				<Button Content="◄" Classes="switch"/>
+				<Button Content="X" Classes="close" BorderThickness="1" BorderBrush="Black"/>
 			</StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -40,6 +41,25 @@
 		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
 		<Setter Property="Height" Value="40"/>
 		<Setter Property="Width" Value="35"/> 
+	</Style>
+
+	<Style Selector="Button.close">
+		<Setter Property="Foreground" Value="{StaticResource purple}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="CornerRadius" Value="{StaticResource cornerRadiusValue}"/>
+		<Setter Property="Height" Value="30"/>
+		<Setter Property="Width" Value="30"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="FontSize" Value="22"/>
+		<Setter Property="FontWeight" Value="ExtraBold"/>
+	</Style>
+
+	<Style Selector="Button.close:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{StaticResource purple}"/>
+		<Setter Property="FontWeight" Value="DemiBold"/>
 	</Style>
 	
 </Styles>

@@ -11,23 +11,29 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
-		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<StackPanel Margin="15">
-			<TextBlock Text="Имя" Classes="h2"/>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2.75*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
+		<StackPanel Margin="15" Grid.Column="1">
+			<TextBlock Text="Имя" Classes="h2" Margin="25,0,25,0"/>
 			<TextBox Text="{Binding NewUser.Name}" Classes="h2 outline purple"/>
 			
-			<TextBlock Text="Фамилия" Classes="h2"/>
+			<TextBlock Text="Фамилия" Classes="h2" Margin="25,0,25,0"/>
 			<TextBox Text="{Binding NewUser.Surname}" Classes="h2 outline purple"/>
 			
-			<TextBlock Text="Отчество" Classes="h2"/>
+			<TextBlock Text="Отчество" Classes="h2" Margin="25,0,25,0"/>
 			<TextBox Text="{Binding NewUser.Patronymic}" Classes="h2 outline purple"/>
 			
-			<TextBlock Text="Логин" Classes="h2"/>
+			<TextBlock Text="Логин" Classes="h2" Margin="25,0,25,0"/>
 			<TextBox Text="{Binding NewUser.Login}" Classes="h2 outline purple"/>
 			
-			<TextBlock Text="Пароль" Classes="h2"/>
+			<TextBlock Text="Пароль" Classes="h2" Margin="25,0,25,0"/>
 			<TextBox Text="{Binding NewUser.Password}" PasswordChar="•" Classes="revealPasswordButton h2 outline purple"/>
 
+			<TextBlock Text="Роль" Classes="h2" Margin="25,0,25,0"/>
 			<AutoCompleteBox ItemsSource="{Binding Roles}"
 											 FilterMode="StartsWith"
 											 Classes="outline purple h3"
@@ -42,8 +48,8 @@
 				</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
 		</StackPanel>
-		<Border Grid.Row="2" Background="White">
-			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+		<Border Grid.Row="2" Background="White" Grid.ColumnSpan="3">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="15">
 				<Button Content="Создать пользователя" Classes="navigate h2" Command="{Binding Create}"/>
 			</StackPanel>
 		</Border>

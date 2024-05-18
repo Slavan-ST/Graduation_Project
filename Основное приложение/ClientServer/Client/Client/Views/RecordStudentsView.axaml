@@ -15,10 +15,10 @@
 				<TreeViewItem Header="Фильтры">
 					<StackPanel >
 						<StackPanel>
-							<TextBlock Text="Студент" Classes="h3"/>
+							<TextBlock Text="Студент" Classes="h3" Margin="25,0,25,0"/>
 							<AutoCompleteBox ItemsSource="{Binding ListStudents}" 
 											 FilterMode="StartsWith"
-											 Classes="outline lightBlue h4"
+											 Classes="outline purple h4"
 											 SelectedItem="{Binding ListStudentsSelectedItem}">
 								<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
@@ -31,10 +31,10 @@
 							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Комната" Classes="h3"/>
+							<TextBlock Text="Комната" Classes="h3" Margin="25,0,25,0"/>
 							<AutoCompleteBox ItemsSource="{Binding ListRooms}"
 												SelectedItem="{Binding ListRoomsSelectedItem}"
-											  Classes="outline lightBlue h4">
+											  Classes="outline purple h4">
 								<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
 								</i:Interaction.Behaviors>
@@ -46,10 +46,10 @@
 							</AutoCompleteBox>
 						</StackPanel>
 						<StackPanel>
-							<TextBlock Text="Статус" Classes="h3"/>
+							<TextBlock Text="Статус" Classes="h3" Margin="25,0,25,0"/>
 							<AutoCompleteBox ItemsSource="{Binding ListStatuses}"
 											 SelectedItem="{Binding ListStatusesSelectedItem}"
-											 Classes="outline lightBlue h4">
+											 Classes="outline purple h4">
 								<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
 								</i:Interaction.Behaviors>
@@ -69,7 +69,7 @@
 				</TreeViewItem>
 			</TreeView>
 			<TreeDataGrid Source="{Binding Source}" Background="White" DockPanel.Dock="Bottom"
-						  Margin="15" CornerRadius="25" Padding="15"/>
+						  Margin="15" CornerRadius="15" Padding="15"/>
 		</DockPanel>
 		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)">
 			<Ellipse Classes="spinner"/>
