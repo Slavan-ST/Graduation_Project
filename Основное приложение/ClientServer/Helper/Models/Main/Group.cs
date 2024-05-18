@@ -17,7 +17,7 @@ namespace Helper.Models.Main
         }
 
 
-        public int StudentsCount
+        public int CountStudents
         {
             get
             {

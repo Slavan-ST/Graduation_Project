@@ -18,7 +18,7 @@ namespace Helper.Models.Main
             return this.Name;
         }
 
-        public int UsersCount
+        public int CountUsers
         {
             get
             {
