@@ -15,6 +15,23 @@ namespace Helper.Models.Main
         public DateTime Date { get; set; }
         public string ShortDate { get => Date.ToShortDateString(); }
 
-        public Student? Student { get; set; }
+
+        Student? _student;
+        public Student? Student
+        {
+            get
+            {
+                if (_student == null)
+                {
+                    return null;
+                }
+                _student.DutySchedules = null;
+                return _student;
+            }
+            set
+            {
+                _student = value;
+            }
+        }
     }
 }

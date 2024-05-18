@@ -51,7 +51,7 @@ namespace Helper.Models.Main
 
 
 
-        IEnumerable<AttendanceLog>? _attendanceLogs = [];
+        IEnumerable<AttendanceLog>? _attendanceLogs = new List<AttendanceLog>();
         public IEnumerable<AttendanceLog>? AttendanceLogs
         {
             get
@@ -68,6 +68,25 @@ namespace Helper.Models.Main
             set
             {
                 _attendanceLogs = value;
+            }
+        }
+        IEnumerable<DutySchedule>? _dutySchedules = new List<DutySchedule>();
+        public IEnumerable<DutySchedule>? DutySchedules
+        {
+            get
+            {
+                if (_dutySchedules != null)
+                {
+                    foreach (var log in _dutySchedules)
+                    {
+                        log.Student = null;
+                    }
+                }
+                return _dutySchedules;
+            }
+            set
+            {
+                _dutySchedules = value;
             }
         }
 

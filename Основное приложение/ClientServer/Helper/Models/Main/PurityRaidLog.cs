@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using ReactiveUI;
 
 namespace Helper.Models.Main
 {
@@ -16,7 +17,28 @@ namespace Helper.Models.Main
         public DateTime Date { get; set; }
         public string Marker { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public Room? Room { get; set; }
-        public string ShortDate { get => Date.ToShortDateString(); }
+
+        Room? _roms;
+        public Room? Room
+        {
+            get
+            {
+                if (_roms == null)
+                {
+                    return null;
+                }
+                _roms.PurityRaidLogs = null;
+                return _roms;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _roms, value);
+            }
+        }
+
+        public string ShortDate 
+        { 
+            get => Date.ToShortDateString(); 
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Helper.Models.Main
             }
         }
 
-        IEnumerable<Student>? _students = [];
+        IEnumerable<Student>? _students = new List<Student>();
         public IEnumerable<Student>? Students
         {
             get
@@ -42,6 +42,25 @@ namespace Helper.Models.Main
             set
             {
                 _students = value;
+            }
+        }
+        IEnumerable<PurityRaidLog>? _purityRaidLogs = new List<PurityRaidLog>();
+        public IEnumerable<PurityRaidLog>? PurityRaidLogs
+        {
+            get
+            {
+                if (_purityRaidLogs != null)
+                {
+                    foreach (var log in _purityRaidLogs)
+                    {
+                        log.Room = null;
+                    }
+                }
+                return _purityRaidLogs;
+            }
+            set
+            {
+                _purityRaidLogs = value;
             }
         }
 
