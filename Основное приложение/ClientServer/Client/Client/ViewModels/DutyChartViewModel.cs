@@ -21,10 +21,6 @@ namespace Client.ViewModels
         public List<Student>? ListStudents { get; set; }
         [Reactive]
         public List<Room>? ListRooms { get; set; }
-        [Reactive]
-        public Student? ListStudentsSelectedItem { get; set; }
-        [Reactive]
-        public Room? ListRoomsSelectedItem { get; set; }
 
         [Reactive]
         public IEnumerable<DutySchedule>? DutyItems { get; set; }

@@ -1,4 +1,5 @@
-﻿using Client.ViewModels.Base;
+﻿using Client.API;
+using Client.ViewModels.Base;
 using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -25,6 +26,15 @@ namespace Client.ViewModels
         public string MonthString { get; set; } = string.Empty;
         [Reactive]
         public int MonthInt { get; set; } = DateTime.Now.Month;
+
+        [Reactive]
+        public List<Student>? ListStudents { get; set; }
+        [Reactive]
+        public List<Room>? ListRooms { get; set; }
+        [Reactive]
+        public Student? ListStudentsSelectedItem { get; set; }
+        [Reactive]
+        public Room? ListRoomsSelectedItem { get; set; }
 
         public DutyChartListViewModel(IScreen? screen = null) : base(screen)
         {
@@ -72,5 +82,24 @@ namespace Client.ViewModels
         /// Переключается месяц назад
         /// </summary>
         public ICommand MonthPrev { get; set; }
+        public async void FillItemsSource()
+        {
+            IsLoading = true;
+            var rooms = await RoomAPI.GetRoomsAsync();
+            if (rooms == null)
+            {
+                IsLoading = false;
+                return;
+            }
+            var students = await StudentAPI.GetStudentsAsync();
+            if (students == null)
+            {
+                IsLoading = false;
+                return;
+            }
+            ListStudents = new List<Student>(students);
+            ListRooms = new List<Room>(rooms);
+            IsLoading = false;
+        }
     }
 }
