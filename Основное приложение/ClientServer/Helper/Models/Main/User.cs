@@ -1,8 +1,10 @@
-﻿using ReactiveUI;
+﻿using Helper.Models.DTO;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -29,11 +31,15 @@ namespace Helper.Models.Main
                 {
                     return null;
                 }
-                _role.Users = null;
+                _role.Users = null;               
                 return _role;
             }
             set
             {
+                if (value != null)
+                {
+                    RoleId = value.Id;
+                }
                 this.RaiseAndSetIfChanged(ref _role, value);
             }
         }

@@ -21,8 +21,6 @@ namespace Client.ViewModels
         public User? NewUser { get; set; } = new User();
         [Reactive]
         public List<Role>? Roles { get; set; }
-        [Reactive]
-        public Role? SelectedRole { get; set; }
         public ICommand Create {  get; set; }
         public RegistrationViewModel(IScreen? screen = null) : base(screen)
         {

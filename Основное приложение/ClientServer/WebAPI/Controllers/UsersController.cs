@@ -87,8 +87,15 @@ namespace WebAPI.Controllers
             }
             user = userDTO;
 
-            await db.Users.AddAsync(user);
-            await db.SaveChangesAsync();
+            try
+            {
+                await db.Users.AddAsync(user);
+                await db.SaveChangesAsync();
+            }
+            catch
+            {
+
+            }
             await db.DisposeAsync();
 
             return new JsonResult(userDTO.Id);
