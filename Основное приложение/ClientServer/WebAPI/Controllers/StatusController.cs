@@ -106,12 +106,20 @@ namespace WebAPI.Controllers
             ApplicationContext db = new();
 
             var status = await db.Statuses
+                .Include(x => x.Students)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (status == null)
             {
                 return StatusCode(404);
+            }
+            if (status.Students != null)
+            {
+                if (status.Students.Count() > 0)
+                {
+                    return StatusCode(409);
+                }
             }
 
             db.Statuses.Remove(status);

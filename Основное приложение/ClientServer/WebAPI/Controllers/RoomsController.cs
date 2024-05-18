@@ -132,12 +132,27 @@ namespace WebAPI.Controllers
 
             var room = await db.Rooms
                 .Include(x => x.Students)
+                .Include(x => x.PurityRaidLogs)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (room == null)
             {
                 return StatusCode(404);
+            }
+            if (room.Students != null)
+            {
+                if (room.Students.Count() > 0)
+                {
+                    return StatusCode(409);
+                }
+            }
+            if (room.PurityRaidLogs != null)
+            {
+                if (room.PurityRaidLogs.Count() > 0)
+                {
+                    return StatusCode(409);
+                }
             }
 
             db.Rooms.Remove(room);

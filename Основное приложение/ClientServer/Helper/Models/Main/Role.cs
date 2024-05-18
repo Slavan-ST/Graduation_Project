@@ -18,7 +18,7 @@ namespace Helper.Models.Main
             return this.Name;
         }
 
-        IEnumerable<User>? _user = [];
+        IEnumerable<User>? _user = new List<User>();
         public IEnumerable<User>? Users
         {
             get

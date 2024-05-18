@@ -155,6 +155,8 @@ namespace WebAPI.Controllers
 
             //проверка на существование такой записи в БД
             Student? student = await db.Students
+                .Include(x => x.AttendanceLogs)
+                .Include(x => x.DutySchedules)
                 .Where(x => x.Id == studentDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -162,6 +164,20 @@ namespace WebAPI.Controllers
             if (student == null)
             {
                 return StatusCode(404);
+            }
+            if (student.AttendanceLogs != null)
+            {
+                if (student.AttendanceLogs.Count() > 0)
+                {
+                    return StatusCode(409);
+                }
+            }
+            if (student.DutySchedules != null)
+            {
+                if (student.DutySchedules.Count() > 0)
+                {
+                    return StatusCode(409);
+                }
             }
 
             student = studentDTO!;

@@ -120,6 +120,14 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
+            if (group.Students != null)
+            {
+                if (group.Students.Count() > 0)
+                {
+                    return StatusCode(409);
+                }
+            }
+
             db.Groups.Remove(group);
             await db.SaveChangesAsync();
             await db.DisposeAsync();

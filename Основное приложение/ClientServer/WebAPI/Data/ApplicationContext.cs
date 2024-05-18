@@ -7,7 +7,7 @@ namespace WebAPI.Data
     /// <summary>
     /// Класс для работы с БД
     /// </summary>
-    public class ApplicationContext : DbContext
+    public partial class ApplicationContext : DbContext
     {
         /// <summary>
         /// Конструктор без параметров
@@ -88,8 +88,135 @@ namespace WebAPI.Data
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasIndex(u => u.Login).IsUnique();
+            //modelBuilder.Entity<User>().HasIndex(u => u.Login).IsUnique();
             //modelBuilder.Entity<Student>().Ignore(x => x.AttendanceLogs!);
+
+
+            modelBuilder.Entity<AttendanceLog>(entity =>
+            {
+                entity.ToTable("AttendanceLog", tb => tb.HasComment("Журнал посещаемости"));
+
+                entity.Property(e => e.Marker)
+                    .IsRequired()
+                    .HasMaxLength(4);
+
+                entity.HasOne(d => d.Student).WithMany(p => p.AttendanceLogs)
+                    .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AttendanceLog_Students");
+            });
+
+            modelBuilder.Entity<DutySchedule>(entity =>
+            {
+                entity.ToTable("DutySchedule");
+
+                entity.HasOne(d => d.Student).WithMany(p => p.DutySchedules)
+                    .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DutySchedule_Students");
+            });
+
+            modelBuilder.Entity<EventO>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                entity.Property(e => e.Organizer).IsRequired();
+            });
+
+            modelBuilder.Entity<Group>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+
+            modelBuilder.Entity<PurityRaidLog>(entity =>
+            {
+                entity.Property(e => e.Marker)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Room).WithMany(p => p.PurityRaidLogs)
+                    .HasForeignKey(d => d.RoomId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PurityRaidLogs_Rooms");
+            });
+
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Room>(entity =>
+            {
+                entity.Property(e => e.Number)
+                    .IsRequired()
+                    .HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<Status>(entity =>
+            {
+                entity.Property(e => e.Name).IsRequired();
+            });
+
+            modelBuilder.Entity<Student>(entity =>
+            {
+                entity.Property(e => e.Gender).HasMaxLength(1);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                entity.Property(e => e.Patronymic).HasMaxLength(50);
+                entity.Property(e => e.Phone).HasMaxLength(20);
+                entity.Property(e => e.RepresentativeName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+                entity.Property(e => e.RepresentativePatronymic).HasMaxLength(100);
+                entity.Property(e => e.RepresentativePhone).HasMaxLength(20);
+                entity.Property(e => e.RepresentativeSurname)
+                    .IsRequired()
+                    .HasMaxLength(100);
+                entity.Property(e => e.Surname)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Group).WithMany(p => p.Students)
+                    .HasForeignKey(d => d.GroupId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Students_Groups");
+
+                entity.HasOne(d => d.Room).WithMany(p => p.Students)
+                    .HasForeignKey(d => d.RoomId)
+                    .HasConstraintName("FK_Students_Rooms");
+
+                entity.HasOne(d => d.Status).WithMany(p => p.Students)
+                    .HasForeignKey(d => d.StatusId)
+                    .HasConstraintName("FK_Students_Statuses");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.Login)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(250);
+                entity.Property(e => e.Patronymic).HasMaxLength(50);
+                entity.Property(e => e.Surname).HasMaxLength(50);
+
+                entity.HasOne(d => d.Role).WithMany(p => p.Users)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Users_Roles");
+            });
+
+            OnModelCreatingPartial(modelBuilder);
         }
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

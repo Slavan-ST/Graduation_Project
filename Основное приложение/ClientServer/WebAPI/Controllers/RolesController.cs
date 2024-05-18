@@ -106,7 +106,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new();
             //проверка на существование такой записи в БД
             Role? role = await db.Roles
-                //.Include(x => x.Students)
+                .Include(x => x.Users)
                 .Where(x => x.Id == roleDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -135,13 +135,21 @@ namespace WebAPI.Controllers
             ApplicationContext db = new();
 
             var role = await db.Roles
-                //.Include(x => x.Students)
+                .Include(x => x.Users)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (role == null)
             {
                 return StatusCode(404);
+            }
+
+            if (role.Users != null)
+            {
+                if (role.Users.Count() > 0)
+                {
+                    return StatusCode(409);
+                }
             }
 
             db.Roles.Remove(role);
