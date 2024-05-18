@@ -37,7 +37,7 @@
 				</i:Interaction.Behaviors>
 				<AutoCompleteBox.ItemTemplate>
 					<DataTemplate>
-						<TextBlock Text="{Binding Role.Name}" Classes="h3"/>
+						<TextBlock Text="{Binding Name}" Classes="h3"/>
 					</DataTemplate>
 				</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>

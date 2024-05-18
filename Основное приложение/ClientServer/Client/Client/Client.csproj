@@ -72,8 +72,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Registration.axaml.cs">
-      <DependentUpon>Registration.axaml</DependentUpon>
+    <Compile Update="Views\RegistrationView.axaml.cs">
+      <DependentUpon>RegistrationView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
