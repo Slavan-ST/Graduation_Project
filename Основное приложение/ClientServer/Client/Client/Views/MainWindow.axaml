@@ -12,7 +12,7 @@
         Title="Client"
 		Width="{Binding MainWinWidth}"
 		MinHeight="600" MinWidth="800" 
-		WindowState="Maximized">
+		WindowState="FullScreen">
 	<views:MainView/>
 	
 </Window>
