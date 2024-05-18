@@ -26,12 +26,12 @@
 			<TextBox Text="{Binding NewUser.Login}" Classes="h2 outline purple"/>
 			
 			<TextBlock Text="Пароль" Classes="h2"/>
-			<TextBox Text="{Binding NewUser.Password}" Classes="h2 outline purple"/>
+			<TextBox Text="{Binding NewUser.Password}" PasswordChar="•" Classes="revealPasswordButton h2 outline purple"/>
 
 			<AutoCompleteBox ItemsSource="{Binding Roles}"
 											 FilterMode="StartsWith"
-											 Classes="outline lightBlue h3"
-											 SelectedItem="{Binding SelectedRole}">
+											 Classes="outline purple h3"
+											 SelectedItem="{Binding NewUser.Role}">
 				<i:Interaction.Behaviors>
 					<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
 				</i:Interaction.Behaviors>
