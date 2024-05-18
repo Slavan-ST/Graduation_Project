@@ -79,7 +79,13 @@ namespace Client.ViewModels
                 }
 
 
-                await GroupAPI.DeleteGroupAsync(objRemove.Id);
+                var code = await GroupAPI.DeleteGroupAsync(objRemove.Id);
+                if (code == System.Net.HttpStatusCode.Conflict)
+                {
+                    //тут можно сообщение об ошибке впихать, что-то вроде того что есть что-то с чем связана эта запись
+                    return;
+                }
+
                 temp.Remove(objRemove);
                 Groups = new List<Group>(temp);
                 IsLoading = false;

@@ -79,7 +79,12 @@ namespace Client.ViewModels
                 }
 
 
-                await StatusAPI.DeleteStatusAsync(objRemove.Id);
+                var code =await StatusAPI.DeleteStatusAsync(objRemove.Id);
+                if (code == System.Net.HttpStatusCode.Conflict)
+                {
+                    //тут можно сообщение об ошибке впихать, что-то вроде того что есть что-то с чем связана эта запись
+                    return;
+                }
                 temp.Remove(objRemove);
                 Statuses = new List<Status>(temp);
                 IsLoading = false;

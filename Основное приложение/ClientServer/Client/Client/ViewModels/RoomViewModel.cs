@@ -78,7 +78,12 @@ namespace Client.ViewModels
                 }
 
 
-                await RoomAPI.DeleteRoomAsync(objRemove.Id);
+                var code = await RoomAPI.DeleteRoomAsync(objRemove.Id);
+                if (code == System.Net.HttpStatusCode.Conflict)
+                {
+                    //тут можно сообщение об ошибке впихать, что-то вроде того что есть что-то с чем связана эта запись
+                    return;
+                }
                 temp.Remove(objRemove);
                 Rooms = new List<Room>(temp);
                 IsLoading = false;
