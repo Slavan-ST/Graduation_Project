@@ -22,10 +22,12 @@ namespace Client.ViewModels
 
         public RestorePasswordViewModel(IScreen? screen = null) : base(screen)
         {
-            Restore = ReactiveCommand.Create(() =>
+            Restore = ReactiveCommand.Create(async() =>
             {
                 IsLoading = true;
-                // восстановление пароля
+
+                await API.UserAPI.PutUserAsync(Login, NewPassword);
+
                 IsLoading = false;
             });
         }

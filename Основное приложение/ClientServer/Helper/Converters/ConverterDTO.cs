@@ -35,7 +35,7 @@ namespace Helper.Converters
                 Patronymic = userDTO.Patronymic,
                 Login = userDTO.Login,
                 Image = userDTO.Image,
-                Role = userDTO.Role,
+                RoleId = userDTO.Role!.Id,
                 Password = userDTO.Password
             };
         }

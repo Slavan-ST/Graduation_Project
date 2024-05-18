@@ -57,7 +57,7 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<int?> PostUserAsync(UserDTO userDTO)
+        public static async Task<int?> PostUserAsync(UserChangedDTO userDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
@@ -77,13 +77,27 @@ namespace Client.API
             }
             return null;
         }
-        public static async Task<HttpStatusCode?> PutUserAsync(UserDTO userDTO)
+        public static async Task<HttpStatusCode?> PutUserAsync(UserChangedDTO userDTO)
         {
             HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.PutAsJsonAsync(Connect.Connection + $"Users", userDTO);
                 return response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            return null;
+        }
+        public static async Task<HttpStatusCode?> PutUserAsync(string login, string newPassword)
+        {
+            HttpClient client = HttpClientSingleton.Client;
+            try
+            {
+                var response = await client.GetFromJsonAsync<HttpStatusCode>(Connect.Connection + $"Users/{login}&{newPassword}");
+                return response;
             }
             catch (Exception e)
             {

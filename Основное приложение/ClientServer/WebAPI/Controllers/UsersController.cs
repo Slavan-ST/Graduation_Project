@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
         /// <param name="login"></param>
         /// <returns>Пользователь без пароля</returns>
         [HttpGet("{login}")]
-        public async Task<ActionResult<UserDTO>> GetUser(string login)
+        public async Task<ActionResult<User>> GetUser(string login)
         {
             ApplicationContext db = new();
             var user = await db.Users
@@ -36,9 +36,8 @@ namespace WebAPI.Controllers
             }
             await db.DisposeAsync();
 
-            UserDTO userDTO = new(user);
 
-            return new JsonResult(userDTO);
+            return new JsonResult(user);
         }
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns>Пользователи(без пароля)</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             ApplicationContext db = new();
             var users = await db.Users
@@ -60,13 +59,7 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            List<UserDTO> usersDTO = [];
-            foreach (var user in  users)
-            {
-                usersDTO.Add(new UserDTO(user));
-            }
-
-            return new JsonResult(usersDTO);
+            return new JsonResult(users);
         }
         /// <summary>
         /// Добавление нового пользователя
@@ -74,7 +67,7 @@ namespace WebAPI.Controllers
         /// <param name="userDTO"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> PostUser(UserChangedDTO? userDTO)
+        public async Task<ActionResult> PostUser(User? userDTO)
         {
             if (userDTO == null)
             {
@@ -92,8 +85,7 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(409);
             }
-            user = ConverterDTO.UserFromChangedDTO(userDTO);
-            user.Password = SecretHasher.Hash(user.Password);
+            user = userDTO;
 
             await db.Users.AddAsync(user);
             await db.SaveChangesAsync();
@@ -107,7 +99,7 @@ namespace WebAPI.Controllers
         /// <param name="userDTO"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<ActionResult> PutUser(UserChangedDTO userDTO)
+        public async Task<ActionResult> PutUser(User userDTO)
         {
             if (userDTO == null)
             {
@@ -128,8 +120,44 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
-            user = ConverterDTO.UserFromChangedDTO(userDTO)!;
+            user = userDTO;
             user.Password = SecretHasher.Hash(user.Password);
+
+            db.Users.Update(user);
+            await db.SaveChangesAsync();
+            await db.DisposeAsync();
+
+            return StatusCode(202);//принято
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        [HttpGet("{login}&{newPassword}")]
+        public async Task<ActionResult> PutUser(string login, string newPassword)
+        {
+            if (login == null || newPassword == null)
+            {
+                return NoContent();
+            }
+            ApplicationContext db = new();
+
+
+            //проверка на существование такой записи в БД
+            User? user = await db.Users
+                .Include(c => c.Role)
+                .Where(x => x.Login == login)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return StatusCode(404);
+            }
+
+            user.Password = SecretHasher.Hash(newPassword);
 
             db.Users.Update(user);
             await db.SaveChangesAsync();

@@ -1,4 +1,6 @@
-﻿using Client.ViewModels.Base;
+﻿using Client.API;
+using Client.ViewModels.Base;
+using Helper.Models.DTO;
 using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -16,20 +18,35 @@ namespace Client.ViewModels
         [Reactive]
         public bool IsLoading { get; set; } = false;
         [Reactive]
-        public User NewUser { get; set; } = new User();
+        public UserChangedDTO? NewUser { get; set; } = new UserChangedDTO();
         [Reactive]
-        public List<Role> Roles { get; set; }
+        public List<Role>? Roles { get; set; }
         [Reactive]
-        public Role SelectedRole { get; set; }
+        public Role? SelectedRole { get; set; }
         public ICommand Create {  get; set; }
         public RegistrationViewModel(IScreen? screen = null) : base(screen)
         {
-            Create = ReactiveCommand.Create(() =>
+            Fill();
+            Create = ReactiveCommand.Create(async () =>
             {
                 IsLoading = true;
-                // сохранение пользователя в бд
+
+                await API.UserAPI.PostUserAsync(NewUser);
+
                 IsLoading = false;
             });
+        }
+        async void Fill()
+        {
+            IsLoading = true;
+            var roles = await RolesAPI.GetAsync();
+            if (roles == null)
+            {
+                IsLoading = false;
+                return;
+            }
+            Roles = new List<Role>(roles);
+            IsLoading = false;
         }
     }
 }
