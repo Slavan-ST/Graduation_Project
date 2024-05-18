@@ -21,7 +21,7 @@
 		<ScrollViewer  Grid.Column="1">
 			<StackPanel HorizontalAlignment="Stretch" Margin="40" >
 				<StackPanel Margin="10">
-					<TextBlock Text="Cтудент" Classes="h2"></TextBlock>
+					<TextBlock Text="Cтудент" Classes="h2" Margin="20,0,20,0"></TextBlock>
 
 					<AutoCompleteBox ItemsSource="{Binding ListStudents}"
 											 FilterMode="StartsWith"
@@ -38,22 +38,20 @@
 					</AutoCompleteBox>
 
 
-					<TextBlock Text="Дата выезда" Classes="h3"/>
+					<TextBlock Text="Дата выезда" Classes="h3" Margin="20,0,20,0"/>
 					<TextBox Text="{Binding DateOut}" Classes="outline purple h3"/>
 
 
-					<TextBlock Text="Дата заезда" Classes="h3"/>
+					<TextBlock Text="Дата заезда" Classes="h3" Margin="20,0,20,0"/>
 					<TextBox Text="{Binding DateIn}" Classes="outline purple h3"/>
 
 				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>
-		<Border Background="White"  Grid.Row="1" Grid.ColumnSpan="3">
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15" Spacing="5">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15" Spacing="5" Grid.Row="1" Grid.ColumnSpan="3">
 			<Button Command="{Binding GetEmptyStatement}" Content="Получить пустой бланк" Classes="navigate h2"/>
 			<Button Command="{Binding GetFillStatement}" Content="Составить" Classes="navigate h2"/>
 		</StackPanel>
-		</Border>
 		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="2" Grid.ColumnSpan="3">
 			<Ellipse Classes="spinner"/>
 		</Border>
