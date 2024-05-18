@@ -30,7 +30,7 @@
 											<TextBlock Text="Роль" Classes="h3"/>
 											<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
 											<StackPanel Orientation="Horizontal">
-												<TextBlock Text="{Binding CountUser}" Classes="h3"/>
+												<TextBlock Text="{Binding CountUsers}" Classes="h3"/>
 												<TextBlock Text=" чел." Classes="h3"/>
 											</StackPanel>
 										</StackPanel>
