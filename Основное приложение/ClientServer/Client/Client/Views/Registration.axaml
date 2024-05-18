@@ -7,12 +7,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Views.RegistrationView">
 	<Grid>
-		<RowDefinitions>
+		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
-		</RowDefinitions>
+		</Grid.RowDefinitions>
 		<Image Source="{SvgImage /Assets/light/foneMain.svg}" Stretch="UniformToFill"/>
-		<StackPanel>
+		<StackPanel Margin="15">
 			<TextBlock Text="Имя" Classes="h2"/>
 			<TextBox Text="{Binding NewUser.Name}" Classes="h2 outline purple"/>
 			
@@ -26,7 +26,7 @@
 			<TextBox Text="{Binding NewUser.Login}" Classes="h2 outline purple"/>
 			
 			<TextBlock Text="Пароль" Classes="h2"/>
-			<TextBox Text="{Binding NewUser.Password}"/>
+			<TextBox Text="{Binding NewUser.Password}" Classes="h2 outline purple"/>
 
 			<AutoCompleteBox ItemsSource="{Binding Roles}"
 											 FilterMode="StartsWith"

@@ -29,7 +29,7 @@ namespace Client.ViewModels
                 IsLoading = true;
                 // сохранение пользователя в бд
                 IsLoading = false;
-            })
+            });
         }
     }
 }

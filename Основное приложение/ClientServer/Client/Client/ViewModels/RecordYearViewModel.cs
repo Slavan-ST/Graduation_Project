@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace Client.ViewModels
                     IsLoading = false;
                     return;
                 }
-                screen.Router.Navigate.Execute(new RecordStudentsViewModel(CurrentYear, SelectedMonth.Mount, screen));
+                screen.Router.Navigate.Execute(new RecordStudentsViewModel(CurrentYear, SelectedMonth.Month, screen));
                 IsLoading = false;
             });
             this.WhenAnyValue(x => x.CurrentYear).Subscribe(x =>
@@ -86,7 +87,7 @@ namespace Client.ViewModels
 
                     MountStat mount = new MountStat()
                     {
-                        Mount = i,
+                        Month = i,
                         CountAll = countALl,
                         CountNotFound = countNotFound,
                         CountNS = countNS
@@ -115,10 +116,15 @@ namespace Client.ViewModels
 
         }
         [Reactive]
-        public int Mount { get; set; }
+        public int Month { get; set; }
 
         public int CountAll { get; set; } //человек
         public int CountNS {  get; set; } //несовершеннолетних
         public int CountNotFound { get; set; } //статусных
+
+        public string Name
+        {
+            get => CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Month);
+        }
     }
 }

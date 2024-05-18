@@ -17,7 +17,7 @@ namespace Client.ViewModels
         [Reactive]
         public string Login {  get; set; } = string.Empty;
         [Reactive]
-        public string Password { get; set; } = string.Empty;
+        public string NewPassword { get; set; } = string.Empty;
         public ICommand Restore {  get; set; }
 
         public RestorePasswordViewModel(IScreen? screen = null) : base(screen)

@@ -23,9 +23,9 @@
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Border Classes="borderPanel">
-							<Grid>
-								<StackPanel Classes="panel" Height="280" Width="280">
-									<Border Padding="10">
+							<Border Padding="10">
+								<Grid>
+									<StackPanel Classes="panel" Height="280" Width="280">
 										<StackPanel>
 											<TextBlock Text="Статус" Classes="h3"/>
 											<TextBox Text="{Binding Name}" Classes="h3 outline purple"/>
@@ -34,13 +34,13 @@
 												<TextBlock Text=" чел." Classes="h3"/>
 											</StackPanel>
 										</StackPanel>
-									</Border>
-								</StackPanel>
-								<Button Content="X"
-										Classes="delete h4"
-										Command="{Binding $parent[UserControl].DataContext.Delete}"
-										CommandParameter="{Binding Id}"/>
-							</Grid>
+									</StackPanel>
+									<Button Content="X"
+											Classes="delete h4"
+											Command="{Binding $parent[UserControl].DataContext.Delete}"
+											CommandParameter="{Binding Id}"/>
+								</Grid>
+							</Border>
 						</Border>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
