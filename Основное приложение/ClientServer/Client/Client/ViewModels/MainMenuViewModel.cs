@@ -26,13 +26,11 @@ namespace Client.ViewModels
         {
             Initialize();
             UnVisible("Guest");
-            Router.Navigate.Execute(new EventsViewModel(this));
         }
         public MainMenuViewModel(IScreen? screen = null, string role = "user") : base(screen)
         {
             Initialize();
             UnVisible(role);
-            Router.Navigate.Execute(new EventsViewModel(this));
         }
         void UnVisible(string role)
         {
@@ -204,6 +202,7 @@ namespace Client.ViewModels
                 // + сюда добавить выход из учётной записи
                 HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen));
             });
+            Router.Navigate.Execute(new FaqView(this));
 
         }
 
