@@ -39,24 +39,32 @@ namespace Client.ViewModels
                 IsAdmin = true;
                 IsStudents = false;
                 IsWorker = false;
+                Title = "Регистрация";
+                Router.Navigate.Execute(new RegistrationViewModel(this));
             }
             if (role == "Moderator")
             {
                 IsAdmin = false;
                 IsStudents = true;
                 IsWorker = true;
+                Title = "Список студентов";
+                Router.Navigate.Execute(new ListStudentsViewModel(this));
             }
             if (role == "MegaAdmin")
             {
                 IsAdmin = true;
                 IsStudents = true;
                 IsWorker = true;
+                Title = "Вопрос-ответ";
+                Router.Navigate.Execute(new FaqViewModel(this));
             }
             if (role == "User")
             {
                 IsAdmin = false;
                 IsStudents = true;
                 IsWorker = false;
+                Title = "Мероприятия";
+                Router.Navigate.Execute(new EventsListViewModel(this));
             }
         }
         void Initialize()
@@ -202,7 +210,6 @@ namespace Client.ViewModels
                 // + сюда добавить выход из учётной записи
                 HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen));
             });
-            Router.Navigate.Execute(new FaqViewModel(this));
 
         }
 

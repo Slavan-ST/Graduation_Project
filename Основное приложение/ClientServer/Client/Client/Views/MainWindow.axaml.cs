@@ -12,7 +12,9 @@ public partial class MainWindow:Window
 {
     public MainWindow()
     {
+#if DEBUG
         this.AttachDevTools();
+#endif
         AvaloniaXamlLoader.Load(this);
         DataContext = new MainWindowViewModel();
     }
