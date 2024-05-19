@@ -202,7 +202,7 @@ namespace Client.ViewModels
                 // + сюда добавить выход из учётной записи
                 HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen));
             });
-            Router.Navigate.Execute(new FaqView(this));
+            Router.Navigate.Execute(new FaqViewModel(this));
 
         }
 
