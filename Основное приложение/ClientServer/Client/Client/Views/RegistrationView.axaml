@@ -53,7 +53,7 @@
 				<Button Content="Создать пользователя" Classes="navigate h2" Command="{Binding Create}"/>
 			</StackPanel>
 		</Border>
-		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="3">
+		<Border IsVisible="{Binding IsLoading}" Background="rgba(0, 0, 0, 0.5)" Grid.RowSpan="3" Grid.ColumnSpan="3">
 			<Ellipse Classes="spinner"/>
 		</Border>
 	</Grid>
