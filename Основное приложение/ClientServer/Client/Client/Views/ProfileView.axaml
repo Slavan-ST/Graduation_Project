@@ -87,7 +87,7 @@
 		</StackPanel>
 			</ScrollViewer>
 		<Border Grid.Row="2" Background="White" IsVisible="{Binding IsWorker}" Grid.ColumnSpan="3">
-			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="5">
+			<StackPanel Orientation="Horizontal" Margin="15" HorizontalAlignment="Right" Spacing="15">
 				<Button Content="Сохранить изменения" Classes="navigate h2" Command="{Binding Save}"/>
 				<Button Content="Удалить" Classes="navigate h2" Command="{Binding Delete}"/>
 			</StackPanel>
