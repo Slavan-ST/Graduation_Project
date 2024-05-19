@@ -22,7 +22,7 @@
 			<TextBlock Text="Студент" Classes="h3" Margin="25,0,25,0"/>
 			<TextBox  Text="{Binding Student.FIO}" Classes="h3 outline purple"/>
 			<TextBlock Text="Комната" Classes="h3"  Margin="25,0,25,0"/>
-			<AutoCompleteBox SelectedItem="{Binding SelectedRoom}"
+			<AutoCompleteBox SelectedItem="{Binding Student.Room}"
 							 ItemsSource="{Binding Rooms}" Classes="h3 outline purple">
 												<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
@@ -34,7 +34,7 @@
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
 			<TextBlock Text="Группа" Classes="h3"  Margin="25,0,25,0"/>
-			<AutoCompleteBox SelectedItem="{Binding SelectedGroup}"
+			<AutoCompleteBox SelectedItem="{Binding Student.Group}"
 							 ItemsSource="{Binding Groups}" Classes="h3 outline purple">
 																<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>
@@ -46,7 +46,7 @@
 								</AutoCompleteBox.ItemTemplate>
 			</AutoCompleteBox>
 			<TextBlock Text="Статус" Classes="h3" Margin="25,0,25,0"/>
-			<AutoCompleteBox SelectedItem="{Binding SelectedStatus}"
+			<AutoCompleteBox SelectedItem="{Binding Student.Status}"
 							 ItemsSource="{Binding Statuses}" Classes="h3 outline purple">
 																<i:Interaction.Behaviors>
 									<bh:AutoCompleteZeroMinimumPrefixLengthDropdownBehaviour/>

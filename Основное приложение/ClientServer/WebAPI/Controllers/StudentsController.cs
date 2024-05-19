@@ -102,42 +102,56 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(Student studentDTO)
         {
-            if (studentDTO == null)
+            try
             {
-                return NoContent();
+                if (studentDTO == null)
+                {
+                    return NoContent();
+                }
+
+                ApplicationContext db = new();
+
+                //проверка на существование такой записи в БД
+                //Варианта 2:
+                //1) Совпал Id - такого быть не должно
+                //2) Совпало ФИО и номер телефона студентов, такого тоже быть не должно
+
+                Student? student = await db.Students
+                    .Include(c => c.Room)
+                    .Include(c => c.Status)
+                    .Where(x => x.Id == studentDTO.Id ||
+                                x.Phone == studentDTO.Phone &&
+                                x.Name == studentDTO.Name &&
+                                x.Surname == studentDTO.Surname &&
+                                x.Patronymic == studentDTO.Patronymic
+                           )
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+
+                if (student != null)
+                {
+                    return StatusCode(409);
+                }
+
+                if (studentDTO.Group != null)
+                {
+                    Debug.WriteLine(studentDTO.Group.Name);
+                }
+                else
+                {
+                    Debug.WriteLine(studentDTO.GroupId);
+                }
+
+                await db.Students.AddAsync(studentDTO);
+                await db.SaveChangesAsync();
+                await db.DisposeAsync();
+
+                return new JsonResult(studentDTO.Id);
             }
-
-            ApplicationContext db = new();
-
-            //проверка на существование такой записи в БД
-            //Варианта 2:
-            //1) Совпал Id - такого быть не должно
-            //2) Совпало ФИО и номер телефона студентов, такого тоже быть не должно
-
-            Student? student = await db.Students
-                .Include(c => c.Room)
-                .Include(c => c.Status)
-                .Where(x => x.Id == studentDTO.Id ||                            
-                            x.Phone == studentDTO.Phone &&
-                            x.Name == studentDTO.Name &&
-                            x.Surname == studentDTO.Surname &&
-                            x.Patronymic == studentDTO.Patronymic
-                       )
-                .AsNoTracking()
-                .FirstOrDefaultAsync();
-
-            if (student != null)
+            catch
             {
-                return StatusCode(409);
+                return StatusCode(400);
             }
-
-            student = studentDTO!;
-
-            await db.Students.AddAsync(student);
-            await db.SaveChangesAsync();
-            await db.DisposeAsync();
-
-            return new JsonResult(student.Id);
         }
         /// <summary>
         /// Изменение студента

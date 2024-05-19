@@ -74,6 +74,11 @@ namespace Client.API
                     await PutStudentAsync(studentDTO);
                     return null;
                 }
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    await PutStudentAsync(studentDTO);
+                    return null;
+                }
 
                 int result = await response.Content.ReadFromJsonAsync<int>();
                 return result;
