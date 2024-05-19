@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace WebAPI.Security
 {
@@ -46,6 +47,7 @@ namespace WebAPI.Security
         public static bool Verify(string input, string hashString)
         {
             string[] segments = hashString.Split(segmentDelimiter);
+            Debug.WriteLine(segments[0]);
             byte[] hash = Convert.FromHexString(segments[0]);
             byte[] salt = Convert.FromHexString(segments[1]);
             int iterations = int.Parse(segments[2]);

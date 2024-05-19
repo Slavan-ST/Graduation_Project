@@ -7,6 +7,7 @@ using WebAPI.Data;
 using Helper.Models.DTO;
 using Helper.Models.Main;
 using Helper.Converters;
+using Microsoft.Data.SqlClient;
 
 namespace WebAPI.Controllers
 {
@@ -87,7 +88,20 @@ namespace WebAPI.Controllers
 
             try
             {
-                await db.Users.AddAsync(userDTO);
+                userDTO.Password = SecretHasher.Hash(userDTO.Password);
+
+                await db.Database.ExecuteSqlRawAsync(
+                    @"insert into Users (Name, Surname, Patronymic, Login, Password, RoleId) values 
+                     (@name, @sname, @pat, @phone, @gender, @role);",
+
+                    new SqlParameter("@name", userDTO.Name),
+                    new SqlParameter("@sname", userDTO.Surname),
+                    new SqlParameter("@pat", userDTO.Patronymic),
+                    new SqlParameter("@phone", userDTO.Login),
+                    new SqlParameter("@gender", userDTO.Password),
+                    new SqlParameter("@role", userDTO.RoleId)
+
+                    );
                 await db.SaveChangesAsync();
             }
             catch
