@@ -2,6 +2,7 @@
 using Helper.Models.DTO;
 using Helper.Models.Main;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebAPI.Data;
@@ -111,6 +112,7 @@ namespace WebAPI.Controllers
                     return NoContent();
                 }
 
+
                 ApplicationContext db = new();
 
                 //проверка на существование такой записи в БД
@@ -119,9 +121,6 @@ namespace WebAPI.Controllers
                 //2) Совпало ФИО и номер телефона студентов, такого тоже быть не должно
 
                 Student? student = await db.Students
-                    .Include(c => c.Room)
-                    .Include(c => c.Status)
-                    .Include(c => c.Group)
                     .Where(x => x.Id == studentDTO.Id ||
                                 x.Phone == studentDTO.Phone &&
                                 x.Name == studentDTO.Name &&
@@ -136,16 +135,39 @@ namespace WebAPI.Controllers
                     return StatusCode(409);
                 }
 
-                if (studentDTO.Group != null)
+                if (studentDTO.Status != null && studentDTO.Group != null && studentDTO.Room != null)
                 {
-                    Debug.WriteLine(studentDTO.Group.Name);
-                }
-                else
-                {
-                    Debug.WriteLine(studentDTO.GroupId);
+                    studentDTO.StatusId = studentDTO.Status.Id;
+                    studentDTO.GroupId = studentDTO.Group.Id;
+                    studentDTO.RoomId = studentDTO.Room.Id;
                 }
 
-                await db.Students.AddAsync(studentDTO);
+                if (studentDTO.DateBirthday.Year < 1754)
+                {
+                    studentDTO.DateBirthday = new DateTime(1754,1,1);
+                }
+                await db.Database.ExecuteSqlRawAsync(
+                    @"insert into Students values 
+                     (@name, @sname, @pat, @phone, @gender,@adr,@date, @repn, @reps, @repp, @repph, @sid,@gid,@rid);",
+
+                    new SqlParameter("@name", studentDTO.Name),
+                    new SqlParameter("@sname", studentDTO.Surname),
+                    new SqlParameter("@pat", studentDTO.Patronymic),
+                    new SqlParameter("@phone", studentDTO.Phone),
+                    new SqlParameter("@gender", studentDTO.Gender),
+                    new SqlParameter("@adr", studentDTO.Address),
+                    new SqlParameter("@date", studentDTO.DateBirthday),
+                    new SqlParameter("@repn", studentDTO.RepresentativeName),
+                    new SqlParameter("@reps", studentDTO.RepresentativeSurname),
+                    new SqlParameter("@repp", studentDTO.RepresentativePatronymic),
+                    new SqlParameter("@repph", studentDTO.RepresentativePhone),
+                    new SqlParameter("@sid", studentDTO.StatusId),
+                    new SqlParameter("@gid", studentDTO.GroupId),
+                    new SqlParameter("@rid", studentDTO.RoomId)
+
+                    );
+
+                //await db.Students.AddAsync(studentDTO);
                 await db.SaveChangesAsync();
                 await db.DisposeAsync();
 
@@ -181,20 +203,6 @@ namespace WebAPI.Controllers
             if (student == null)
             {
                 return StatusCode(404);
-            }
-            if (student.AttendanceLogs != null)
-            {
-                if (student.AttendanceLogs.Count() > 0)
-                {
-                    return StatusCode(409);
-                }
-            }
-            if (student.DutySchedules != null)
-            {
-                if (student.DutySchedules.Count() > 0)
-                {
-                    return StatusCode(409);
-                }
             }
 
             student = studentDTO!;

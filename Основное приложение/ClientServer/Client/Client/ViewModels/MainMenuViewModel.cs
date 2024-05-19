@@ -22,8 +22,47 @@ namespace Client.ViewModels
 {
     public class MainMenuViewModel : ViewModelBaseNavigator
     {
-        public MainMenuViewModel(IScreen? screen = null):base(screen)
-        {    
+        public MainMenuViewModel(IScreen? screen = null) : base(screen)
+        {
+            Initialize();
+            UnVisible("Guest");
+            Router.Navigate.Execute(new EventsViewModel(this));
+        }
+        public MainMenuViewModel(IScreen? screen = null, string role = "user") : base(screen)
+        {
+            Initialize();
+            UnVisible(role);
+            Router.Navigate.Execute(new EventsViewModel(this));
+        }
+        void UnVisible(string role)
+        {
+            if (role == "Admin")
+            {
+                IsAdmin = true;
+                IsStudents = false;
+                IsWorker = false;
+            }
+            if (role == "Moderator")
+            {
+                IsAdmin = false;
+                IsStudents = true;
+                IsWorker = true;
+            }
+            if (role == "MegaAdmin")
+            {
+                IsAdmin = true;
+                IsStudents = true;
+                IsWorker = true;
+            }
+            if (role == "User")
+            {
+                IsAdmin = false;
+                IsStudents = true;
+                IsWorker = false;
+            }
+        }
+        void Initialize()
+        {
             HideSideBar = ReactiveCommand.Create(() =>
             {
                 IsOpenSideBar = false;
@@ -41,20 +80,20 @@ namespace Client.ViewModels
                 IsOpenSideBar = false;
             });
 
-            DutyChart = ReactiveCommand.Create(() => 
-            { 
+            DutyChart = ReactiveCommand.Create(() =>
+            {
                 Router.Navigate.Execute(new DutyChartListViewModel(this));
                 Title = "Дежурства";
                 IsOpenSideBar = false;
             });
-            Events = ReactiveCommand.Create(() => 
+            Events = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new EventsViewModel(this));
                 Title = "Мероприятия";
                 IsOpenSideBar = false;
             });
 
-            EventsList = ReactiveCommand.Create(() => 
+            EventsList = ReactiveCommand.Create(() =>
             {
                 Router.Navigate.Execute(new EventsListViewModel(this));
                 Title = "План мероприятий";
@@ -92,22 +131,22 @@ namespace Client.ViewModels
                 IsOpenSideBar = false;
             });
 
-            ListStudents = ReactiveCommand.Create(() => 
-            { 
+            ListStudents = ReactiveCommand.Create(() =>
+            {
                 Router.Navigate.Execute(new ListStudentsViewModel(this));
                 Title = "Список студентов";
                 IsOpenSideBar = false;
             });
 
             PurityChart = ReactiveCommand.Create(() =>
-            { 
+            {
                 Router.Navigate.Execute(new PurityChartViewModel(this));
                 Title = "Экран чистоты";
                 IsOpenSideBar = false;
             });
 
-            Statement = ReactiveCommand.Create(() => 
-            { 
+            Statement = ReactiveCommand.Create(() =>
+            {
                 Router.Navigate.Execute(new StatementViewModel(this));
                 Title = "Заявление";
                 IsOpenSideBar = false;
@@ -160,14 +199,12 @@ namespace Client.ViewModels
             });
 
 
-            Exit = ReactiveCommand.Create(() => 
+            Exit = ReactiveCommand.Create(() =>
             {
-
                 // + сюда добавить выход из учётной записи
-                HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen)); 
+                HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen));
             });
 
-            Router.Navigate.Execute(new EventsViewModel(this));
         }
 
         #region Commands
@@ -175,25 +212,25 @@ namespace Client.ViewModels
         /// <summary>
         /// Комманда для сокрытия SideBar'a
         /// </summary>
-        public ICommand HideSideBar { get; set; }
+        public ICommand? HideSideBar { get; set; }
         /// <summary>
         /// Комманда для открытия SideBar'a
         /// </summary>
-        public ICommand OpenSideBar { get; set; }
+        public ICommand? OpenSideBar { get; set; }
 
-        public ICommand DutySchulde { get; set; }
+        public ICommand? DutySchulde { get; set; }
         /// <summary>
         /// Команда перехода на регистрацию пользователей
         /// </summary>
-        public ICommand Registration { get; set; }
+        public ICommand? Registration { get; set; }
         /// <summary>
         /// Команда перехода на окно восстановления пароля
         /// </summary>
-        public ICommand RestorePassword { get; set; }
+        public ICommand? RestorePassword { get; set; }
         /// <summary>
         /// Команда перехода на главную 
         /// </summary>
-        public ICommand Main { get; set; }
+        public ICommand? Main { get; set; }
 
 
 
@@ -201,72 +238,72 @@ namespace Client.ViewModels
         /// <summary>
         /// Команда перехода на окно профиля
         /// </summary>
-        public ICommand Profile { get; set; }
+        public ICommand? Profile { get; set; }
         /// <summary>
         /// Команда перехода на журнал
         /// </summary>
-        public ICommand Record { get; set; }
+        public ICommand? Record { get; set; }
         /// <summary>
         /// Комманда перехода на окно составления заявления
         /// </summary>
-        public ICommand Statement { get; set; }
+        public ICommand? Statement { get; set; }
         /// <summary>
         /// Комманда перехода на окно расписания мероприятий
         /// </summary>
-        public ICommand Events { get; set; }
+        public ICommand? Events { get; set; }
         /// <summary>
         /// Комманда перехода на окно ежедневной проверки
         /// </summary>
-        public ICommand DailyCheck { get; set; }
+        public ICommand? DailyCheck { get; set; }
 
         /// <summary>
         /// Комманда перехода на окно графика мероприятий (для сотрудников)
         /// </summary>
-        public ICommand EventsList { get; set; }
+        public ICommand? EventsList { get; set; }
         /// <summary>
         /// Комманда перехода на окно графика дежурств
         /// </summary>
-        public ICommand DutyChart { get; set; }
+        public ICommand? DutyChart { get; set; }
         /// <summary>
         /// Комманда перехода на окно со списком студентов
         /// </summary>
-        public ICommand ListStudents { get; set; }
+        public ICommand? ListStudents { get; set; }
         /// <summary>
         /// Комманда перехода на окно экрана чистоты
         /// </summary>
-        public ICommand PurityChart { get; set; }
+        public ICommand? PurityChart { get; set; }
         /// <summary>
         /// Комманда перехода на окно "рейда" чистоты
         /// </summary>
-        public ICommand CleanRaid { get; set; }
+        public ICommand? CleanRaid { get; set; }
         /// <summary>
         /// Команда перехода на окно с комнатами
         /// </summary>
         [Reactive]
-        public ICommand Room {  get; set; }
+        public ICommand? Room {  get; set; }
         /// <summary>
         /// Команда перехода на окно с статусами
         /// </summary>
         [Reactive]
-        public ICommand Status { get; set; }
+        public ICommand? Status { get; set; }
         /// <summary>
         /// Команда перехода на окно с группами
         /// </summary>
         [Reactive]
-        public ICommand Group { get; set; }
+        public ICommand? Group { get; set; }
         /// <summary>
         /// Команда перехода на окно с ролями
         /// </summary>
         [Reactive]
-        public ICommand Role { get; set; }
+        public ICommand? Role { get; set; }
         /// <summary>
         /// Комманда перехода на окно справки (FAQ)
         /// </summary>
-        public ICommand Faq { get; set; }
+        public ICommand? Faq { get; set; }
         /// <summary>
         /// Комманда выхода из учетной записи и переход на окно авторизации
         /// </summary>
-        public ICommand Exit { get; set; }
+        public ICommand? Exit { get; set; }
         #endregion
 
         #region Propertyes

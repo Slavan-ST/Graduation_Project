@@ -34,11 +34,11 @@ namespace WebAPI.Controllers
 
             if (user == null)
             {
-                return StatusCode(403, "Неверный логин или пароль!");
+                return new UserDTO() { Name = "^not found^"};
             }
-            if (SecretHasher.Verify(password, user.Password))
+            if (!SecretHasher.Verify(password, user.Password))
             {
-                return StatusCode(403, "Неверный логин или пароль!");
+                return new UserDTO() { Name = "^not found^" }; ;
             }
 
 

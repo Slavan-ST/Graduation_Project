@@ -20,6 +20,17 @@ namespace Client.API
             try
             {
                 var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Home/SignIn/?login={login}&password={password}");
+                
+                if (response == null)
+                {
+                    return response;
+                }
+
+                if (response.Name == "^not found^")
+                {
+                    return null;
+                }
+
                 return response;
             }
             catch (Exception e)

@@ -40,12 +40,16 @@ namespace Client.ViewModels
                 if (user == null)
                 {
                     IsLoading = false;
-                    Message.Show("Error", "Пользователь не найден!");
+                    Message.Show("Error", "Проверьте логин и пароль!");
                     return;
                 }
                 IsLoading = false;
-                Services.Authorization.GetAuthorization().IsEmployee = user.Role!.Name == "Сотрудник";
-                HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen));
+                if (user.Role == null)
+                {
+                    HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen));
+                    return;
+                }
+                HostScreen.Router.Navigate.Execute(new MainMenuViewModel(HostScreen, user.Role.Name));
             });
             IsLoading = false;
         }

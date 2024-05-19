@@ -23,24 +23,7 @@ namespace Helper.Models.Main
         public byte[]? Image { get; set; }
         [Reactive]
         public int RoleId { get; set; }
-
-        Role? _role;
-        public Role? Role
-        {
-            get
-            {
-                if (_role == null)
-                {
-                    return null;
-                }
-                _role.Users = null;               
-                return _role;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _role, value);
-            }
-        }
+        public Role? Role{ get; set; }
 
     }
 }

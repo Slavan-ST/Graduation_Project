@@ -4,8 +4,8 @@ using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -52,6 +52,17 @@ namespace Client.ViewModels
                 SaveStudentInApi();
                 IsLoading = false;
             });
+            Delete = ReactiveCommand.Create(async () =>
+            {
+                if (Student == null)
+                {
+                    return;
+                }
+                IsLoading = true;
+                await API.StudentAPI.DeleteStudentAsync(Student.Id);
+                IsLoading = false;
+                this.HostScreen.Router.Navigate.Execute(new ListStudentsViewModel(this.HostScreen));
+            });
             FillComboBoxesAsync();
             IsLoading = false;
         }
@@ -74,8 +85,10 @@ namespace Client.ViewModels
                 IsLoading = false;
                 return;
             }
+
             await API.StudentAPI.PostStudentAsync(this.Student);
             IsLoading = false;
+            this.HostScreen.Router.Navigate.Execute(new ListStudentsViewModel(this.HostScreen));
         }
 
 
@@ -126,7 +139,7 @@ namespace Client.ViewModels
             SelectedGroup = Groups.FirstOrDefault();
             SelectedRoom = Rooms.FirstOrDefault();
             SelectedStatus = Statuses.FirstOrDefault();
-            
+
         }
         #endregion
     }

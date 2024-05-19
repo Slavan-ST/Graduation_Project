@@ -75,6 +75,7 @@
 							<Button Content="Комнаты" Command="{Binding Room}" Classes="sideBar"/>
 							<Button Content="Группы" Command="{Binding Group}" Classes="sideBar"/>
 							<Button Content="Статусы" Command="{Binding Status}" Classes="sideBar"/>
+							<Button Content="Выход" Command="{Binding Exit}" Classes="sideBar"/>
 						</StackPanel>
 						<Button Content="Вопрос-ответ" Command="{Binding Faq}" Classes="sideBar"/>
 					</StackPanel>
