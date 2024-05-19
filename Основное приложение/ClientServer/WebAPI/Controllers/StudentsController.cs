@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
             var students = await db.Students
                 .Include(c => c.Room)
                 .Include(c => c.Status)
-                .Include(c => c.AttendanceLogs)
+                .Include(c => c.Group)
                 .ToListAsync();
 
             if (students == null)
@@ -52,6 +52,7 @@ namespace WebAPI.Controllers
                 .Include(c => c.Room)
                 .Include(c => c.Status)
                 .Include(c => c.AttendanceLogs)
+                .Include(c => c.Group)
                 .Where(x => x.Room!.Number == room)
                 .ToListAsync();
 
@@ -82,6 +83,7 @@ namespace WebAPI.Controllers
                 .Include(c => c.Room)
                 .Include(c => c.Status)
                 .Include(c => c.AttendanceLogs)
+                .Include(c => c.Group)
                 .Where(x => x.Room!.Number == room && x.Surname == surname && x.Name == name && x.Patronymic == patronymic)
                 .FirstOrDefaultAsync();
 
@@ -119,6 +121,7 @@ namespace WebAPI.Controllers
                 Student? student = await db.Students
                     .Include(c => c.Room)
                     .Include(c => c.Status)
+                    .Include(c => c.Group)
                     .Where(x => x.Id == studentDTO.Id ||
                                 x.Phone == studentDTO.Phone &&
                                 x.Name == studentDTO.Name &&

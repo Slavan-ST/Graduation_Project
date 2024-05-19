@@ -81,6 +81,14 @@ namespace Client.ViewModels
         public async void FillJournal(int year, int month, Func<Task<IEnumerable<Student>?>> func )
         {
             IsLoading = true;
+            var logs = await API.AttendanceLogAPI.GetAttendanceLogsMonth(year, month);
+            if (logs == null)
+            {
+                IsLoading = false;
+                return;
+            }
+
+
             Source.Items = new List<MarksOfStudents>();
 
             //получаем кол-во дней в текущем месяце
@@ -100,10 +108,10 @@ namespace Client.ViewModels
 
             foreach (var student in students)
             {
+                student.AttendanceLogs = logs.Where(x => x.StudentId == student.Id).ToList();
                 if (student.AttendanceLogs == null)
                 {
-                    IsLoading = false;
-                    return;
+                    continue;
                 }
 
                 //получаем логи за текущий месяц
@@ -111,8 +119,7 @@ namespace Client.ViewModels
 
                 if (studLogs == null)
                 {
-                    IsLoading = false;
-                    return;
+                    continue;
                 }
 
                 //добавляем новую строку

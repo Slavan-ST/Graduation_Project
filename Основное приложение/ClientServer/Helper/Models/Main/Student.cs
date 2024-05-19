@@ -22,73 +22,39 @@ namespace Helper.Models.Main
         [Reactive]
         public string Surname { get; set; } = string.Empty;
         [Reactive]
-        public string Patronymic { get; set; } = string.Empty;
+        public string? Patronymic { get; set; } = string.Empty;
         [Reactive]
         public DateTime DateBirthday { get; set; }
 
         [Reactive]
-        public string Phone { get; set; } = string.Empty;
+        public string? Phone { get; set; } = string.Empty;
         [Reactive]
-        public string Address { get; set; } = string.Empty;
+        public string? Address { get; set; } = string.Empty;
         [Reactive]
-        public string RepresentativeName { get; set; } = string.Empty;
+        public string? RepresentativeName { get; set; } = string.Empty;
         [Reactive]
-        public string RepresentativeSurname { get; set; } = string.Empty;
+        public string? RepresentativeSurname { get; set; } = string.Empty;
         [Reactive]
-        public string RepresentativePatronymic { get; set; } = string.Empty;
+        public string? RepresentativePatronymic { get; set; } = string.Empty;
         [Reactive]
-        public string RepresentativePhone { get; set; } = string.Empty;
+        public string? RepresentativePhone { get; set; } = string.Empty;
         [Reactive]
-        public string Gender { get; set; } = string.Empty; //1 символ
+        public string? Gender { get; set; } = string.Empty; //1 символ
 
 
         [Reactive]
-        public int RoomId { get; set; }
+        public int? RoomId { get; set; }
         [Reactive]
-        public int GroupId { get; set; }
+        public int? GroupId { get; set; }
         [Reactive]
-        public int StatusId { get; set; }
+        public int? StatusId { get; set; }
 
 
 
-        IEnumerable<AttendanceLog>? _attendanceLogs = new List<AttendanceLog>();
-        public IEnumerable<AttendanceLog>? AttendanceLogs
-        {
-            get
-            {
-                if (_attendanceLogs != null)
-                {
-                    foreach (var log in _attendanceLogs)
-                    {
-                        log.Student = null;
-                    }
-                }
-                return _attendanceLogs;
-            }
-            set
-            {
-                _attendanceLogs = value;
-            }
-        }
-        IEnumerable<DutySchedule>? _dutySchedules = new List<DutySchedule>();
-        public IEnumerable<DutySchedule>? DutySchedules
-        {
-            get
-            {
-                if (_dutySchedules != null)
-                {
-                    foreach (var log in _dutySchedules)
-                    {
-                        log.Student = null;
-                    }
-                }
-                return _dutySchedules;
-            }
-            set
-            {
-                _dutySchedules = value;
-            }
-        }
+        [JsonIgnore]
+        public IEnumerable<AttendanceLog>? AttendanceLogs { get; set; }
+        [JsonIgnore]
+        public IEnumerable<DutySchedule>? DutySchedules{ get; set; }
 
         Room? _room;
         public Room? Room

@@ -1,6 +1,7 @@
 ﻿using Helper.Models.Main;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using WebAPI.Data;
 
 namespace WebAPI.Controllers
@@ -137,15 +138,28 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> PostDutySchedule(DutySchedule dutyScheduleDTO)
         {
+
             if (dutyScheduleDTO == null)
             {
                 return NoContent();
             }
 
+            if (dutyScheduleDTO.Student != null)
+            {
+                Debug.WriteLine("dutyScheduleDTO: " + dutyScheduleDTO.Student.Id);
+            }
+            else
+            {
+                Debug.WriteLine("dutyScheduleDTO: NO" );
+            }
+
             ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
-            DutySchedule? dutySchedule = await db.DutySchedule.Where(x => x.Id == dutyScheduleDTO.Id).FirstOrDefaultAsync();
+            DutySchedule? dutySchedule = await db.DutySchedule
+                .Include(c => c.Student)
+                .Where(x => x.Id == dutyScheduleDTO.Id)
+                .FirstOrDefaultAsync();
             
             if (dutySchedule != null)
             {
@@ -174,6 +188,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new();
 
             var dutySchedule = await db.DutySchedule
+                .Include(c => c.Student)
                 .Where(x => x.Id == dutyScheduleDTO.Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -202,6 +217,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new();
 
             var dutySchedule = await db.DutySchedule
+                .Include(c => c.Student)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 

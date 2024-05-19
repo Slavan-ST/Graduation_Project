@@ -11,9 +11,12 @@ namespace Helper.Models.Main
 {
     public class DutySchedule : Base
     {
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
         public DateTime Date { get; set; }
-        public string ShortDate { get => Date.ToShortDateString(); }
+        public string? ShortDate 
+        { 
+            get => Date.ToShortDateString(); 
+        }
 
 
         Student? _student;
