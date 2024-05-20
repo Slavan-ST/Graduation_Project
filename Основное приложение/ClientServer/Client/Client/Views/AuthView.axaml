@@ -11,7 +11,7 @@
 		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
 				    Margin="0,250,0,0">
 			<TextBlock Text="Добро пожаловать!" Classes="h1" HorizontalAlignment="Center"/>
-			<TextBlock Text="Чтобы продолжить, авторизируйтесь" Classes="h2"/>
+			<TextBlock Text="Чтобы продолжить, авторизуйтесь" Classes="h2"/>
 			<TextBox Watermark="Логин" Text="{Binding Login}" Classes="outline lightBlue h2"/>
 			<TextBox PasswordChar="•" Classes="revealPasswordButton outline lightBlue h2"
 					 Watermark="Пароль" Text="{Binding Password}"/>

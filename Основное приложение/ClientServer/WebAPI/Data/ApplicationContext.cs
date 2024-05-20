@@ -74,9 +74,9 @@ namespace WebAPI.Data
 
 #if DEBUG
             string? connectionString = config.GetConnectionString("DebugConnection");
-#else
-
-            string connectionString = config.GetConnectionString("Connection1080");
+#else            
+            //string connectionString = config.GetConnectionString("Connection1080");
+            string? connectionString = config.GetConnectionString("DebugConnection");
 #endif
 
 

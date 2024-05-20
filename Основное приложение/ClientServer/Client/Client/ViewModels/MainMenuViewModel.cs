@@ -45,7 +45,7 @@ namespace Client.ViewModels
             if (role == "Moderator")
             {
                 IsAdmin = false;
-                IsStudents = true;
+                IsStudents = false;
                 IsWorker = true;
                 Title = "Список студентов";
                 Router.Navigate.Execute(new ListStudentsViewModel(this));
@@ -64,7 +64,7 @@ namespace Client.ViewModels
                 IsStudents = true;
                 IsWorker = false;
                 Title = "Мероприятия";
-                Router.Navigate.Execute(new EventsListViewModel(this));
+                Router.Navigate.Execute(new EventsViewModel(this));
             }
         }
         void Initialize()
