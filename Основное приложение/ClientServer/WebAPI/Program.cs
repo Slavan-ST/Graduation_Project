@@ -57,15 +57,12 @@ namespace WebAPI
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger()
-                    .UseSwaggerUI(c =>
-                    {
-                        c.SwaggerEndpoint("/swagger/v2.0/swagger.json", "v2.0");
-                    });
-            }
 
+            app.UseSwagger()
+                .UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v2.0/swagger.json", "v2.0");
+                });
             // настраиваем CORS
             app.UseCors(builder => builder.AllowAnyOrigin());
 
