@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagram", "Diagram", "{0539
 		WebAPI\ClassDiagramServer.cd = WebAPI\ClassDiagramServer.cd
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.Browser", "ClientW.Browser\Client.Browser.csproj", "{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,14 @@ Global
 		{74CC1B60-0B94-462E-B8E7-1FA8804D7FBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74CC1B60-0B94-462E-B8E7-1FA8804D7FBD}.Release|x64.ActiveCfg = Release|x64
 		{74CC1B60-0B94-462E-B8E7-1FA8804D7FBD}.Release|x64.Build.0 = Release|x64
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Debug|x64.Build.0 = Debug|Any CPU
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Release|x64.ActiveCfg = Release|Any CPU
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +94,7 @@ Global
 		{068EF0AF-59C4-4249-887D-5CF6B99D73AA} = {A23ABB34-0AE5-4BB1-91E9-5B897B1C2C83}
 		{38452797-7397-4EC5-B1AF-98179BDFEB0E} = {A23ABB34-0AE5-4BB1-91E9-5B897B1C2C83}
 		{74CC1B60-0B94-462E-B8E7-1FA8804D7FBD} = {A23ABB34-0AE5-4BB1-91E9-5B897B1C2C83}
+		{10EB4F0E-779B-440F-BEBD-350EAAB2EAA9} = {A23ABB34-0AE5-4BB1-91E9-5B897B1C2C83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {169D163D-B8C1-4084-A1DF-FE60076E14F7}

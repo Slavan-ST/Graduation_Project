@@ -27,7 +27,7 @@ namespace Client.ViewModels
             Initialize();
             UnVisible("Guest");
         }
-        public MainMenuViewModel(IScreen? screen = null, string role = "user") : base(screen)
+        public MainMenuViewModel(IScreen? screen = null, string role = "User") : base(screen)
         {
             Initialize();
             UnVisible(role);
@@ -81,6 +81,7 @@ namespace Client.ViewModels
 
             Main = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new NewsViewModel(this));
                 Title = "Новости";
                 IsOpenSideBar = false;
@@ -88,12 +89,14 @@ namespace Client.ViewModels
 
             DutyChart = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new DutyChartListViewModel(this));
                 Title = "Дежурства";
                 IsOpenSideBar = false;
             });
             Events = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new EventsViewModel(this));
                 Title = "Мероприятия";
                 IsOpenSideBar = false;
@@ -101,6 +104,7 @@ namespace Client.ViewModels
 
             EventsList = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new EventsListViewModel(this));
                 Title = "План мероприятий";
                 IsOpenSideBar = false;
@@ -108,30 +112,35 @@ namespace Client.ViewModels
 
             Faq = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new FaqViewModel(this));
                 Title = "Вопрос-ответ";
                 IsOpenSideBar = false;
             });
             Group = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new GroupViewModel(this));
                 Title = "Группы";
                 IsOpenSideBar = false;
             });
             Role = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new RoleViewModel(this));
                 Title = "Роли";
                 IsOpenSideBar = false;
             });
             Room = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new RoomViewModel(this));
                 Title = "Комнаты";
                 IsOpenSideBar = false;
             });
             Status = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new StatusViewModel(this));
                 Title = "Статусы";
                 IsOpenSideBar = false;
@@ -139,6 +148,7 @@ namespace Client.ViewModels
 
             ListStudents = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new ListStudentsViewModel(this));
                 Title = "Список студентов";
                 IsOpenSideBar = false;
@@ -146,6 +156,7 @@ namespace Client.ViewModels
 
             PurityChart = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new PurityChartViewModel(this));
                 Title = "Экран чистоты";
                 IsOpenSideBar = false;
@@ -153,6 +164,7 @@ namespace Client.ViewModels
 
             Statement = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new StatementViewModel(this));
                 Title = "Заявление";
                 IsOpenSideBar = false;
@@ -160,6 +172,7 @@ namespace Client.ViewModels
 
             Profile = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new ProfileViewModel(this));
                 Title = "Профиль";
                 IsOpenSideBar = false;
@@ -167,6 +180,7 @@ namespace Client.ViewModels
 
             Record = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new RecordYearViewModel(this));
                 Title = "Годовой журнал";
                 IsOpenSideBar = false;
@@ -174,6 +188,7 @@ namespace Client.ViewModels
 
             CleanRaid = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new CleanLineRaidViewModel(this));
                 Title = "Рейд чистоты";
                 IsOpenSideBar = false;
@@ -181,24 +196,28 @@ namespace Client.ViewModels
 
             DailyCheck = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new DailyCheckViewModel(this));
                 Title = "Ежедневная проверка";
                 IsOpenSideBar = false;
             });
             Registration = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new RegistrationViewModel(this));
                 Title = "Регистрация";
                 IsOpenSideBar = false;
             });
             RestorePassword = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new RestorePasswordViewModel(this));
                 Title = "Восстановление пароля";
                 IsOpenSideBar = false;
             });
             DutySchulde = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 Router.Navigate.Execute(new DutyChartViewModel(this));
                 Title = "План дежурств";
                 IsOpenSideBar = false;
@@ -207,6 +226,7 @@ namespace Client.ViewModels
 
             Exit = ReactiveCommand.Create(() =>
             {
+                Router.Navigate.Dispose();
                 // + сюда добавить выход из учётной записи
                 HostScreen.Router.Navigate.Execute(new AuthViewModel(HostScreen));
             });
