@@ -16,5 +16,4 @@
 		</rxui:RoutedViewHost.DefaultContent>
 		
 	</rxui:RoutedViewHost>
-	
 </UserControl>

@@ -43,6 +43,10 @@ public partial class App : Application
             singleViewPlatform.MainView = new MainView();
             services.AddSingleton<Message>(new Message((singleViewPlatform.MainView as UserControl)!));
             services.AddSingleton<Services.FileDialog>(new Services.FileDialog((singleViewPlatform.MainView as UserControl)!));
+            this.Styles.Add(new StyleInclude(new Uri("avares://Client/Themes/Desktop.axaml"))
+            {
+                Source = new Uri("avares://Client/Themes/Desktop.axaml")
+            });
         }
 
 
