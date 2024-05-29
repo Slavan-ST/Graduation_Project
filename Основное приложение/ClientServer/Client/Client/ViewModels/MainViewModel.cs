@@ -19,7 +19,7 @@ public class MainViewModel : ViewModelBaseNavigator
     {
 
 #if DEBUG
-        Router.Navigate.Execute(new MainMenuViewModel(this, "Admin"));
+        Router.Navigate.Execute(new MainMenuViewModel(this, "MegaAdmin"));
         //Router.Navigate.Execute(new AuthViewModel(this));
 #else
         Router.Navigate.Execute(new AuthViewModel(this));

@@ -6,15 +6,37 @@ using System.Security.Claims;
 using WebAPI.Data;
 using WebAPI.Security;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using System.Net;
 
 namespace WebAPI.Controllers
 {
     /// <summary>
-    /// Контроллер для обработки авторизации
+    /// Test
     /// </summary>
     [ApiController]
+    [Route("[controller]")]
+    public class MessageController : ControllerBase
+    {
+        /// <summary>
+        /// отправка текстовых сообщений серверу
+        /// </summary>
+        /// <param name="message"></param>
+        [HttpGet("{message}")]
+        public HttpStatusCode GetMessage(string message)
+        {
+            Console.WriteLine(message);
+            return HttpStatusCode.OK;
+        }
+    }
+
+        /// <summary>
+        /// Контроллер для обработки авторизации
+        /// </summary>
+        [ApiController]
     public class HomeController : ControllerBase
     {
+
         /// <summary>
         /// Авторизация пользователя
         /// </summary>

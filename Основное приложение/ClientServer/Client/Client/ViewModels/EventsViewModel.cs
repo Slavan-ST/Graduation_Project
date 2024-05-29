@@ -6,8 +6,11 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Client.ViewModels
@@ -22,10 +25,15 @@ namespace Client.ViewModels
 
         public EventsViewModel(IScreen? screen = null) : base(screen)
         {
-            FillEventsAsync();
+
+            ThreadPool.QueueUserWorkItem(FillEventsAsync);
         }
-        async void FillEventsAsync()
+        async void FillEventsAsync(object? state)
         {
+
+            await new HttpClient().GetAsync(@"http://localhost:5000/Home/Test1");
+
+
             IsLoading = true;
             var events = await EventAPI.GetsAsync();
             if (events == null)

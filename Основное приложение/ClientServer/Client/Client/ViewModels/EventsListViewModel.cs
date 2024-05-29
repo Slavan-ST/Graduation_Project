@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -25,7 +26,7 @@ namespace Client.ViewModels
 
         public EventsListViewModel(IScreen? screen = null) : base(screen)
         {
-            FillEventsAsync();
+            ThreadPool.QueueUserWorkItem(FillEventsAsync);
             Save = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
@@ -94,7 +95,7 @@ namespace Client.ViewModels
             IsLoading = false;
         }
 
-        async void FillEventsAsync()
+        async void FillEventsAsync(object? state)
         {
             IsLoading = true;
             var events = await EventAPI.GetsAsync();

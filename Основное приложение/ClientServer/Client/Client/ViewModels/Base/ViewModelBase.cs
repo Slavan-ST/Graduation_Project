@@ -9,7 +9,7 @@ namespace Client.ViewModels.Base;
 public class ViewModelBase : ReactiveObject, IRoutableViewModel
 {
     public IScreen HostScreen { get; set; }
-    public string UrlPathSegment { get; } = Guid.NewGuid().ToString().Substring(0, 5);
+    public string UrlPathSegment { get; } = Guid.NewGuid().ToString()[..5];
     /// <summary>
     /// базовая модель
     /// </summary>
