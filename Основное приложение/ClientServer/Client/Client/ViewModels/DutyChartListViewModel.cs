@@ -5,11 +5,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -42,7 +38,7 @@ namespace Client.ViewModels
             MonthNext = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-                if(MonthInt != 12)
+                if (MonthInt != 12)
                 {
                     MonthInt += 1;
                     MonthString = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(MonthInt);
@@ -53,7 +49,7 @@ namespace Client.ViewModels
             MonthPrev = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
-                if(MonthInt != 1)
+                if (MonthInt != 1)
                 {
                     MonthInt -= 1;
                     MonthString = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(MonthInt);
@@ -67,7 +63,7 @@ namespace Client.ViewModels
         private async void GetAsync()
         {
             IsLoading = true;
-            DutyItems = await API.DutyScheduleAPI.GetDutySchedulesMonth(DateTime.Now.Year,MonthInt);
+            DutyItems = await API.DutyScheduleAPI.GetDutySchedulesMonth(DateTime.Now.Year, MonthInt);
             IsLoading = false;
         }
 

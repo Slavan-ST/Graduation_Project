@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Helper.Models.Main;
-using System.Text.Json.Serialization;
+﻿using Helper.Models.Main;
 
 namespace Helper.Models.DTO
 {
-    public class UserDTO:Base
+    public class UserDTO : Base
     {
         public string? Name { get; set; } = "";
         public string? Surname { get; set; } = "";
@@ -14,7 +11,7 @@ namespace Helper.Models.DTO
         public byte[]? Image { get; set; }
         public Role? Role { get; set; }
 
-        public UserDTO() {}
+        public UserDTO() { }
         public UserDTO(User? user)
         {
             if (user == null)

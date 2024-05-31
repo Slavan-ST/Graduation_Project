@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Helper.Models.Main
+﻿namespace Helper.Models.Main
 {
-    public class Status: Base
+    public class Status : Base
     {
         public string Name { get; set; } = string.Empty;
 
@@ -25,12 +17,12 @@ namespace Helper.Models.Main
                 {
                     return 0;
                 }
-                return Students.Count();
+                return Students.Count;
             }
         }
 
-        IEnumerable<Student>? _students = new List<Student>();
-        public IEnumerable<Student>? Students
+        List<Student>? _students = [];
+        public List<Student>? Students
         {
             get
             {

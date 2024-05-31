@@ -1,22 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Avalonia.Controls;
-using Avalonia.Controls.Chrome;
-using Client.Models;
-using Client.Services;
-using Client.ViewModels.Base;
-using Client.Views;
+﻿using Client.ViewModels.Base;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Splat;
+using System.Windows.Input;
 
 namespace Client.ViewModels
 {
@@ -306,7 +291,7 @@ namespace Client.ViewModels
         /// Команда перехода на окно с комнатами
         /// </summary>
         [Reactive]
-        public ICommand? Room {  get; set; }
+        public ICommand? Room { get; set; }
         /// <summary>
         /// Команда перехода на окно с статусами
         /// </summary>

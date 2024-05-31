@@ -1,9 +1,5 @@
-using Avalonia.Controls;
-using Avalonia.Controls.Templates;
-using Client.ViewModels;
 using ReactiveUI;
 using System;
-using System.Diagnostics;
 
 namespace Client
 {

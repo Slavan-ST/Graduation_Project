@@ -5,12 +5,8 @@ using Helper.Models.Main;
 using MsBox.Avalonia;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -36,7 +32,7 @@ namespace Client.ViewModels
                 DateOut = "";
                 IsLoading = false;
             });
-            GetFillStatement = ReactiveCommand.Create(async() =>
+            GetFillStatement = ReactiveCommand.Create(async () =>
             {
                 IsLoading = true;
                 if (ListStudentsSelectedItem == null)
@@ -45,7 +41,7 @@ namespace Client.ViewModels
                     IsLoading = false;
                     return;
                 }
-                StatementCreater.CreateStatement(ListStudentsSelectedItem,DateOut,DateIn);
+                StatementCreater.CreateStatement(ListStudentsSelectedItem, DateOut, DateIn);
                 ListStudentsSelectedItem = ListStudents.FirstOrDefault();
                 DateIn = "";
                 DateOut = "";

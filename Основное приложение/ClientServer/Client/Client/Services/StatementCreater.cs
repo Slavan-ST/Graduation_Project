@@ -6,9 +6,6 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using System;
-using System.IO;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Client.Services
 {
@@ -32,12 +29,12 @@ namespace Client.Services
         public static void CreateStatement(Student student, string dateOut, string dateIn)
         {
             var font = PdfFontFactory.CreateFont($"{Environment.CurrentDirectory}\\Fonts\\timesnewromanpsmt.ttf", "Identity-H");
-            
+
             using var document = new Document(new PdfDocument(new PdfWriter("заявление.pdf")));
             document.SetFont(font);
             document.SetFontSize(14);
 
-            string roomNum = (student.Room == null)? 20.ToString() : student.Room.Number;
+            string roomNum = (student.Room == null) ? 20.ToString() : student.Room.Number;
             string ageCategory = (student.Age >= 18) ? "совершеннолетний" : "несовершеннолетний";
 
             var par1 = new Paragraph(
@@ -78,7 +75,7 @@ namespace Client.Services
                 ).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT);
             }
             Paragraph par3 = new Paragraph(
-                
+
                     $"{dateOut}"
                 ).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
 

@@ -1,8 +1,5 @@
-
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using WebAPI.Security.Handlers;
 using WebAPI.Security.Requirements;
 
@@ -48,8 +45,8 @@ namespace WebAPI
                     policy.Requirements.Add(new AccessRequirement("Admin"));
                 })
                 .AddPolicy("moderator", policy => policy.Requirements.Add(new AccessRequirement("Moderator"))); //авторизация, добавление политик доступа
-            
-            
+
+
             builder.Services.AddSingleton<IAuthorizationHandler, AccessHandler>();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/login");
 

@@ -1,15 +1,9 @@
 ﻿using Client.API;
 using Client.ViewModels.Base;
-using Helper.Models.DTO;
 using Helper.Models.Main;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -22,7 +16,7 @@ namespace Client.ViewModels
         public User? NewUser { get; set; } = new User();
         [Reactive]
         public List<Role>? Roles { get; set; }
-        public ICommand Create {  get; set; }
+        public ICommand Create { get; set; }
         public RegistrationViewModel(IScreen? screen = null) : base(screen)
         {
             Fill();

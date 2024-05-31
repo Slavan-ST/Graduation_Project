@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -79,7 +77,7 @@ namespace Client.ViewModels
                 }
 
 
-                var code =await StatusAPI.DeleteStatusAsync(objRemove.Id);
+                var code = await StatusAPI.DeleteStatusAsync(objRemove.Id);
                 if (code == System.Net.HttpStatusCode.Conflict)
                 {
                     //тут можно сообщение об ошибке впихать, что-то вроде того что есть что-то с чем связана эта запись

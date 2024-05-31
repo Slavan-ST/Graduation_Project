@@ -1,12 +1,8 @@
-﻿using Avalonia.Controls.Templates;
-using Avalonia.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 using Avalonia.Media;
 using Client.ViewModels.Base;
+using System;
 
 namespace Client.Services
 {
@@ -25,7 +21,7 @@ namespace Client.Services
             }
             else
             {
-                return new TextBlock { Text = "Not Found: " + name , Background = Brushes.Red};
+                return new TextBlock { Text = "Not Found: " + name, Background = Brushes.Red };
             }
         }
 

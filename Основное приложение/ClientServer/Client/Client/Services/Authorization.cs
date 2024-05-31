@@ -1,16 +1,8 @@
-﻿using Avalonia;
-using Client.API;
-using Helper;
-using Microsoft.Extensions.DependencyInjection;
-using MsBox.Avalonia;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Client.Services
@@ -21,7 +13,7 @@ namespace Client.Services
         internal static Authorization GetAuthorization()
         {
             return authorization;
-        
+
         }
         private Authorization()
         {

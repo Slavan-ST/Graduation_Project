@@ -1,13 +1,10 @@
-﻿using Helper;
-using Helper.Models.Main;
+﻿using Helper.Models.Main;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Client.API
@@ -76,7 +73,7 @@ namespace Client.API
 
         public static async Task<IEnumerable<PurityRaidLog>?> GetPurityRaidLogsDay(int year, int month, int day)
         {
-            HttpClient client =     HttpClientSingleton.Client;
+            HttpClient client = HttpClientSingleton.Client;
             try
             {
                 var response = await client.GetFromJsonAsync<IEnumerable<PurityRaidLog>>(Connect.Connection + $"PurityRaidLogs/day:{day}.{month}.{year}");

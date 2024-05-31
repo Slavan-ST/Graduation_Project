@@ -1,10 +1,7 @@
-﻿using Helper.Converters;
-using Helper.Models.DTO;
-using Helper.Models.Main;
+﻿using Helper.Models.Main;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using WebAPI.Data;
 using WebAPI.Models;
 
@@ -78,7 +75,7 @@ namespace WebAPI.Controllers
             fio = fio.Trim();
 
             (string surname, string name, string? patronymic) = FIOConverter.GetSurnameNamePatronymicFromFIO(fio);
-            
+
             ApplicationContext db = new();
             var student = await db.Students
                 .Include(c => c.Room)
@@ -144,7 +141,7 @@ namespace WebAPI.Controllers
 
                 if (studentDTO.DateBirthday.Year < 1754)
                 {
-                    studentDTO.DateBirthday = new DateTime(1754,1,1);
+                    studentDTO.DateBirthday = new DateTime(1754, 1, 1);
                 }
                 await db.Database.ExecuteSqlRawAsync(
                     @"insert into Students values 
@@ -225,7 +222,7 @@ namespace WebAPI.Controllers
             ApplicationContext db = new();
             var student = await db.Students
                 .Include(x => x.AttendanceLogs)
-                 //.Include(x => x.Duty)
+                //.Include(x => x.Duty)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
@@ -234,7 +231,7 @@ namespace WebAPI.Controllers
                 return StatusCode(404);
             }
 
-           
+
 
             db.Students.Remove(student);
             await db.SaveChangesAsync();

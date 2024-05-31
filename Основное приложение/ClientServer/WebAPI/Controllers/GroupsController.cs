@@ -122,7 +122,7 @@ namespace WebAPI.Controllers
 
             if (group.Students != null)
             {
-                if (group.Students.Count() > 0)
+                if (group.Students.Any<Student>())
                 {
                     return StatusCode(409);
                 }

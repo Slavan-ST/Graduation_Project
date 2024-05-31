@@ -3,16 +3,13 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
-using Client.Models;
 using Client.Services;
 using Client.ViewModels;
 using Client.Views;
-using Helper.Models.Main;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
 using System;
-using System.Diagnostics;
 
 namespace Client;
 

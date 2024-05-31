@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-
-namespace Helper.Models.Main
+﻿namespace Helper.Models.Main
 {
-    public class Room: Base
+    public class Room : Base
     {
         public string Number { get; set; } = "";
 
@@ -21,12 +12,12 @@ namespace Helper.Models.Main
                 {
                     return 0;
                 }
-                return Students.Count();
+                return Students.Count;
             }
         }
 
-        IEnumerable<Student>? _students = new List<Student>();
-        public IEnumerable<Student>? Students
+        List<Student>? _students = [];
+        public List<Student>? Students
         {
             get
             {
@@ -44,8 +35,8 @@ namespace Helper.Models.Main
                 _students = value;
             }
         }
-        IEnumerable<PurityRaidLog>? _purityRaidLogs = new List<PurityRaidLog>();
-        public IEnumerable<PurityRaidLog>? PurityRaidLogs
+        List<PurityRaidLog>? _purityRaidLogs = [];
+        public List<PurityRaidLog>? PurityRaidLogs
         {
             get
             {

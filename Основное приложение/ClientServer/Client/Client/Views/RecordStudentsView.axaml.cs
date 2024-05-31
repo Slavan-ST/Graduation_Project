@@ -1,11 +1,7 @@
-using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Client.ViewModels;
 using ReactiveUI;
-using System.Diagnostics;
-using System.Linq;
 
 namespace Client.Views
 {

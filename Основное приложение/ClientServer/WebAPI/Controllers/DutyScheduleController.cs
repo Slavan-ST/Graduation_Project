@@ -150,7 +150,7 @@ namespace WebAPI.Controllers
             }
             else
             {
-                Debug.WriteLine("dutyScheduleDTO: NO" );
+                Debug.WriteLine("dutyScheduleDTO: NO");
             }
 
             ApplicationContext db = new();
@@ -160,7 +160,7 @@ namespace WebAPI.Controllers
                 .Include(c => c.Student)
                 .Where(x => x.Id == dutyScheduleDTO.Id)
                 .FirstOrDefaultAsync();
-            
+
             if (dutySchedule != null)
             {
                 return StatusCode(409);

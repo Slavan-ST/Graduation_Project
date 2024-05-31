@@ -1,15 +1,11 @@
 ﻿using Client.ViewModels.Base;
-using iText.StyledXmlParser.Node;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -109,7 +105,7 @@ namespace Client.ViewModels
         public List<MountStat>? YearStats { get; set; }
     }
 
-    public class MountStat:ReactiveObject
+    public class MountStat : ReactiveObject
     {
         public MountStat()
         {
@@ -119,7 +115,7 @@ namespace Client.ViewModels
         public int Month { get; set; }
 
         public int CountAll { get; set; } //человек
-        public int CountNS {  get; set; } //несовершеннолетних
+        public int CountNS { get; set; } //несовершеннолетних
         public int CountNotFound { get; set; } //статусных
 
         public string Name

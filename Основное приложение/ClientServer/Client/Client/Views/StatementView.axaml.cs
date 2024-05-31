@@ -1,10 +1,7 @@
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
-using Client.Services;
 using Client.ViewModels;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 
 namespace Client.Views
 {

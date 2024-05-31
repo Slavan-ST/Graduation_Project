@@ -1,6 +1,5 @@
 ﻿using Helper.Models.Main;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
 namespace WebAPI.Data
 {
@@ -57,7 +56,7 @@ namespace WebAPI.Data
         /// <summary>
         /// Журнал проверок чистоты
         /// </summary>
-        public DbSet<PurityRaidLog> PurityRaidLogs { get; set; } 
+        public DbSet<PurityRaidLog> PurityRaidLogs { get; set; }
 
 
         /// <summary>

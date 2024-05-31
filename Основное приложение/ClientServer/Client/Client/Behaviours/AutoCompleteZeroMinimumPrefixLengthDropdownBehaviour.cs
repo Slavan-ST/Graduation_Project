@@ -2,7 +2,6 @@
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Client.Behaviours

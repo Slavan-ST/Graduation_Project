@@ -4,19 +4,13 @@ using Client.API;
 using Client.Models;
 using Client.ViewModels.Base;
 using DynamicData;
-using Helper.Models.DTO;
 using Helper.Models.Main;
-using iText.Layout.Element;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Data.Common;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -76,9 +70,9 @@ namespace Client.ViewModels
             ListStudents = new List<Student>(students);
             ListStatuses = new List<Status>(statuses);
             ListRooms = new List<Room>(rooms);
-            IsLoading = false ;
+            IsLoading = false;
         }
-        public async void FillJournal(int year, int month, Func<Task<IEnumerable<Student>?>> func )
+        public async void FillJournal(int year, int month, Func<Task<IEnumerable<Student>?>> func)
         {
             IsLoading = true;
             var logs = await API.AttendanceLogAPI.GetAttendanceLogsMonth(year, month);
@@ -233,7 +227,7 @@ namespace Client.ViewModels
             }
             if (ListStudentsSelectedItem != null)
             {
-                list = list.Where(x => 
+                list = list.Where(x =>
                     x.Name == ListStudentsSelectedItem.Name &&
                     x.Surname == ListStudentsSelectedItem.Surname &&
                     x.Patronymic == ListStudentsSelectedItem.Patronymic

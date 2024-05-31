@@ -1,13 +1,12 @@
 ﻿using Helper.Models.DTO;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Security.Claims;
 using WebAPI.Data;
 using WebAPI.Security;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using System.Net;
 
 namespace WebAPI.Controllers
 {
@@ -39,10 +38,10 @@ namespace WebAPI.Controllers
         }
     }
 
-        /// <summary>
-        /// Контроллер для обработки авторизации
-        /// </summary>
-        [ApiController]
+    /// <summary>
+    /// Контроллер для обработки авторизации
+    /// </summary>
+    [ApiController]
     public class HomeController : ControllerBase
     {
 
@@ -65,7 +64,7 @@ namespace WebAPI.Controllers
 
             if (user == null)
             {
-                return new UserDTO() { Name = "^not found^"};
+                return new UserDTO() { Name = "^not found^" };
             }
             if (!SecretHasher.Verify(password, user.Password))
             {

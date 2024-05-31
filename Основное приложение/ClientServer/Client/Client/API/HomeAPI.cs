@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Helper.Models.DTO;
+using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http.Json;
-using Helper.Models.DTO;
-using Helper;
+using System.Threading.Tasks;
 
 namespace Client.API
 {
@@ -20,7 +16,7 @@ namespace Client.API
             try
             {
                 var response = await client.GetFromJsonAsync<UserDTO>(Connect.Connection + $"Home/SignIn/?login={login}&password={password}");
-                
+
                 if (response == null)
                 {
                     return response;

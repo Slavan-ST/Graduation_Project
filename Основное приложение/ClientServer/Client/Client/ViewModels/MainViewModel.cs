@@ -1,6 +1,4 @@
 ﻿using ReactiveUI;
-using System;
-using System.Reactive;
 
 namespace Client.ViewModels;
 

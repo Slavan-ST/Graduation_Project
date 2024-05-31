@@ -26,7 +26,7 @@ namespace Client.ViewModels
         [Reactive]
         public bool IsLoading { get; set; } = false;
 
-        public CleanLineRaidViewModel(IScreen? screen = null) : base(screen) 
+        public CleanLineRaidViewModel(IScreen? screen = null) : base(screen)
         {
             Initialize();
             Next = ReactiveCommand.Create(() =>

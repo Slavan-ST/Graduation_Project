@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -21,9 +19,9 @@ namespace Client.ViewModels
         public List<Room>? Rooms { get; set; }
         [Reactive]
         public Room? SelectedRoom { get; set; }
-        
-        public ICommand? NewRoom {  get; set; }
-        public ICommand? Delete {  get; set; }
+
+        public ICommand? NewRoom { get; set; }
+        public ICommand? Delete { get; set; }
         public ICommand? Save { get; set; }
         public RoomViewModel(IScreen? screen = null) : base(screen)
         {

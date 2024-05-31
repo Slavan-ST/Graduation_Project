@@ -1,16 +1,11 @@
 ﻿using Helper.Models.DTO;
 using Helper.Models.Main;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Helper.Converters
 {
     public static class ConverterDTO
     {
-       
+
         public static User UserFromDTO(UserDTO userDTO, string password)
         {
             return new User()
@@ -21,7 +16,7 @@ namespace Helper.Converters
                 Patronymic = userDTO.Patronymic,
                 Login = userDTO.Login,
                 Image = userDTO.Image,
-                Role =userDTO.Role,
+                Role = userDTO.Role,
                 Password = password
             };
         }

@@ -1,8 +1,7 @@
-﻿using Helper.Converters;
-using Helper.Models.DTO;
-using Helper.Models.Main;
+﻿using Helper.Models.Main;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WebAPI.Data;
 
 namespace WebAPI.Controllers
@@ -67,12 +66,12 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
             ApplicationContext db = new();
-            
+
             //проверка на существование такой записи в БД
             Room? room = await db.Rooms
                 .Where(x => x.Id == roomDTO.Id || x.Number == roomDTO.Number)
                 .FirstOrDefaultAsync();
-            
+
             if (room != null)
             {
                 return StatusCode(409);
@@ -142,14 +141,14 @@ namespace WebAPI.Controllers
             }
             if (room.Students != null)
             {
-                if (room.Students.Count() > 0)
+                if (room.Students.Count > 0)
                 {
                     return StatusCode(409);
                 }
             }
             if (room.PurityRaidLogs != null)
             {
-                if (room.PurityRaidLogs.Count() > 0)
+                if (room.PurityRaidLogs.Count > 0)
                 {
                     return StatusCode(409);
                 }

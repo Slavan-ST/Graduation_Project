@@ -1,6 +1,4 @@
-﻿using Helper.Converters;
-using Helper.Models.DTO;
-using Helper.Models.Main;
+﻿using Helper.Models.Main;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
@@ -22,7 +20,6 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var roles = await db.Roles
-                //.Include(x => x.Students)
                 .ToListAsync();
 
             if (roles == null)
@@ -44,7 +41,6 @@ namespace WebAPI.Controllers
             ApplicationContext applicationContext = new();
             ApplicationContext db = applicationContext;
             var role = await db.Roles
-                //.Include(x => x.Students)
                 .Where(x => x.Name == name)
                 .FirstOrDefaultAsync();
 
@@ -73,7 +69,6 @@ namespace WebAPI.Controllers
 
             //проверка на существование такой записи в БД
             Role? role = await db.Roles
-                //.Include(x => x.Students)
                 .Where(x => x.Id == roleDTO.Id || x.Name == roleDTO.Name)
                 .FirstOrDefaultAsync();
 

@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Helper.Models.Main;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Security;
 using WebAPI.Data;
-using System.Diagnostics;
-using Helper.Converters;
-using Helper.Models.Main;
 
 namespace WebAPI.Controllers
 {
@@ -26,7 +21,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)               
+                .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
                 .ToListAsync();
 
@@ -50,7 +45,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)             
+                .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
                 .Where(c => c.Date.Year == year && c.Date.Month == month && c.Date.Day == day)
                 .ToListAsync();
@@ -74,7 +69,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)              
+                .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
                 .Where(c => c.Date.Year == year && c.Date.Month == month)
                 .ToListAsync();
@@ -97,7 +92,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)              
+                .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
                 .Where(c => c.Date.Year == year)
                 .ToListAsync();
@@ -120,7 +115,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var attendanceLog = await db.AttendanceLog
-                .Include(c => c.Student)  
+                .Include(c => c.Student)
                 .Include(c => c.Student!.Room)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
@@ -150,7 +145,7 @@ namespace WebAPI.Controllers
 
             //проверка на существование такой записи в БД
             AttendanceLog? attendanceLog = await db.AttendanceLog
-                .Where(x => 
+                .Where(x =>
                     x.Date.Year == attendanceLogDTO.Date.Year &&
                     x.Date.Month == attendanceLogDTO.Date.Month &&
                     x.Date.Day == attendanceLogDTO.Date.Day &&
@@ -191,7 +186,7 @@ namespace WebAPI.Controllers
                     x.StudentId == attendanceLogDTO.StudentId)
                 .FirstOrDefaultAsync();
 
-            if(attendanceLog == null)
+            if (attendanceLog == null)
             {
                 return StatusCode(404);
             }

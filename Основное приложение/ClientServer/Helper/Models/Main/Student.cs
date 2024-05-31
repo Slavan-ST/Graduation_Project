@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using ReactiveUI;
+using System.Text.Json.Serialization;
 
 namespace Helper.Models.Main
 {
-    public class Student: Base
+    public class Student : Base
     {
-        public Student() 
+        public Student()
         {
 
         }
@@ -54,7 +47,7 @@ namespace Helper.Models.Main
         [JsonIgnore]
         public IEnumerable<AttendanceLog>? AttendanceLogs { get; set; }
         [JsonIgnore]
-        public IEnumerable<DutySchedule>? DutySchedules{ get; set; }
+        public IEnumerable<DutySchedule>? DutySchedules { get; set; }
 
         Room? _room;
         public Room? Room

@@ -1,14 +1,8 @@
-﻿using Avalonia.Styling;
-using Client.Models;
+﻿using Client.Models;
 using Client.ViewModels.Base;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
@@ -40,7 +34,7 @@ namespace Client.ViewModels
                 new TreeViewItem("Что делать если забыл пароль?", new ObservableCollection<TreeViewItem>
                     {
                         new TreeViewItem("Обратиться к администратору системы"),
-                    }), 
+                    }),
 
                 new TreeViewItem("Пароль возможно восстановить самостоятельно?", new ObservableCollection<TreeViewItem>
                     {

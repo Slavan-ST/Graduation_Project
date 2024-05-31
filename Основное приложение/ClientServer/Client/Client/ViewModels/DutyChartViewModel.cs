@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ViewModels
@@ -24,8 +22,8 @@ namespace Client.ViewModels
         [Reactive]
         public IEnumerable<DutySchedule>? DutyItems { get; set; }
 
-        public ICommand NewSchedule {  get; set; }
-        public ICommand Save {  get; set; }
+        public ICommand NewSchedule { get; set; }
+        public ICommand Save { get; set; }
         public ICommand Delete { get; set; }
         /// <summary>
         /// Переключается месяц вперед
