@@ -56,7 +56,7 @@ namespace Client.ViewModels
                 IsStudents = true;
                 IsWorker = true;
                 Title = "Вопрос-ответ";
-                Router.Navigate.Execute(new FaqViewModel(this));
+                Router.Navigate.Execute(new EventsViewModel(this));
             }
             if (role == "User")
             {

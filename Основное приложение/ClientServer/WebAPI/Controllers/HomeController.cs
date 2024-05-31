@@ -28,6 +28,15 @@ namespace WebAPI.Controllers
             Console.WriteLine(message);
             return HttpStatusCode.OK;
         }
+        /// <summary>
+        /// отправка текстовых сообщений серверу
+        /// </summary>
+        [HttpGet]
+        public HttpStatusCode Clear()
+        {
+            Console.Clear();
+            return HttpStatusCode.OK;
+        }
     }
 
         /// <summary>

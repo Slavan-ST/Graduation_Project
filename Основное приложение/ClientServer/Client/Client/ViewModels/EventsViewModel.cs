@@ -25,15 +25,11 @@ namespace Client.ViewModels
 
         public EventsViewModel(IScreen? screen = null) : base(screen)
         {
-
-            ThreadPool.QueueUserWorkItem(FillEventsAsync);
+            FillEventsAsync();
         }
-        async void FillEventsAsync(object? state)
+        
+        async void FillEventsAsync()
         {
-
-            await new HttpClient().GetAsync(@"http://localhost:5000/Home/Test1");
-
-
             IsLoading = true;
             var events = await EventAPI.GetsAsync();
             if (events == null)

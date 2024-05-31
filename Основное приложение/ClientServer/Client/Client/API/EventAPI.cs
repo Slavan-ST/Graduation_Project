@@ -12,7 +12,7 @@ using System.Net.Http.Json;
 
 namespace Client.API
 {
-    internal class EventAPI
+    public class EventAPI
     {
         public static async Task<IEnumerable<EventO>?> GetsAsync()
         {

@@ -26,7 +26,7 @@ namespace Client.ViewModels
 
         public EventsListViewModel(IScreen? screen = null) : base(screen)
         {
-            ThreadPool.QueueUserWorkItem(FillEventsAsync);
+            FillEventsAsync();
             Save = ReactiveCommand.Create(() =>
             {
                 IsLoading = true;
@@ -95,7 +95,7 @@ namespace Client.ViewModels
             IsLoading = false;
         }
 
-        async void FillEventsAsync(object? state)
+        async void FillEventsAsync()
         {
             IsLoading = true;
             var events = await EventAPI.GetsAsync();
