@@ -8,7 +8,7 @@
 				<Border Background="{StaticResource ResourceKey=lightBlue}"
 						Height="50" Width="50" CornerRadius="25" Margin="25"/>
 				<Border Background="{StaticResource ResourceKey=gradientLightBlueToPurple}"
-						Height="50" Width="50" CornerRadius="25" Margin="25"/>
+						Height="50" Width="500" CornerRadius="25" Margin="25"/>
 				<Border Background="{StaticResource ResourceKey=lightBlueAlpha}"
 						Height="50" Width="50" CornerRadius="25" Margin="25"/>
 			</StackPanel>
@@ -19,7 +19,7 @@
 	<SolidColorBrush x:Key="lightPurple" Color="#CBADFE"/>
 	<SolidColorBrush x:Key="lightBlueAlpha" Color="rgba(8, 255, 248, 0.45)"/>
 	<LinearGradientBrush x:Key="gradientLightBlueToPurple">
-		<GradientStop Color="#A378EB" Offset="0"/>
-		<GradientStop Color="#08F0E9" Offset="1"/>
+		<GradientStop Color="#070268" Offset="0"/>
+		<GradientStop Color="rgb(8,240,233,80)" Offset="1"/>
 	</LinearGradientBrush>
 </ResourceDictionary>
