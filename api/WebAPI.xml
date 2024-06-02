@@ -1,0 +1,674 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:WebAPI.Controllers.AttendanceLogController">
+            <summary>
+            Контроллер для работы с логами журнала наличия студентов в ночное время суток
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.GetAttendanceLogs">
+            <summary>
+            Получение всех логов
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.GetAttendanceLogsDay(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Получение логов за указанный день
+            </summary>
+            <param name="day"></param>
+            <param name="month"></param>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.GetAttendanceLogsMonth(System.Int32,System.Int32)">
+            <summary>
+            Получение логов за указанный месяц
+            </summary>
+            <param name="month"></param>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.GetAttendanceLogsYear(System.Int32)">
+            <summary>
+            Получение логов за указанный год
+            </summary>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.GetAttendanceLog(System.Int32)">
+            <summary>
+            Получение лога по id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.PostAttendanceLog(Helper.Models.Main.AttendanceLog)">
+            <summary>
+            Создание нового лога
+            </summary>
+            <param name="attendanceLogDTO">новый лог</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.PutAttendanceLog(Helper.Models.Main.AttendanceLog)">
+            <summary>
+            Обновление указанного лога
+            </summary>
+            <param name="attendanceLogDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.AttendanceLogController.DeleteAttendanceLog(System.Int32)">
+            <summary>
+            Удаление лога по id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.DutyScheduleController">
+            <summary>
+            Контроллер для работы с графиком дежурств
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.GetDutySchedule">
+            <summary>
+            Получение всех логов графика
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.GetDutyScheduleDay(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Получение графика на указанный день
+            </summary>
+            <param name="day"></param>
+            <param name="month"></param>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.GetDutyScheduleMonth(System.Int32,System.Int32)">
+            <summary>
+            Получение графика на указанный месяц
+            </summary>
+            <param name="month"></param>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.GetDutyScheduleYear(System.Int32)">
+            <summary>
+            Получение графика на указанный год
+            </summary>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.GetDutySchedule(System.Int32)">
+            <summary>
+            Получение лога графика по id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.PostDutySchedule(Helper.Models.Main.DutySchedule)">
+            <summary>
+            Добавление новой записи графика
+            </summary>
+            <param name="dutyScheduleDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.PutDutySchedule(Helper.Models.Main.DutySchedule)">
+            <summary>
+            Обновление записи графика
+            </summary>
+            <param name="dutyScheduleDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.DutyScheduleController.DeleteDutySchedule(System.Int32)">
+            <summary>
+            Удаление записи по id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.EventsController">
+            <summary>
+            Работа с мероприятиями
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.EventsController.GetEvents">
+            <summary>
+            Получение всех мероприятий
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.EventsController.PostEvent(Helper.Models.Main.EventO)">
+            <summary>
+            Добавление нового мероприятия
+            </summary>
+            <param name="eventODTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.EventsController.PutEvent(Helper.Models.Main.EventO)">
+            <summary>
+            Обновление мероприятия
+            </summary>
+            <param name="eventODTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.EventsController.DeleteEvent(System.Int32)">
+            <summary>
+            Удаление мероприятия
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.GroupsController">
+            <summary>
+            Контроллер для работы с группами
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.GroupsController.GetGroups">
+            <summary>
+            Получение всех групп
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.GroupsController.PostGroup(Helper.Models.Main.Group)">
+            <summary>
+            Добавление новой группы
+            </summary>
+            <param name="groupDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.GroupsController.PutGroup(Helper.Models.Main.Group)">
+            <summary>
+            Изменение группы
+            </summary>
+            <param name="groupDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.GroupsController.DeleteGroup(System.Int32)">
+            <summary>
+            Удаление группы
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.MessageController">
+            <summary>
+            Test
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.MessageController.GetMessage(System.String)">
+            <summary>
+            отправка текстовых сообщений серверу
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:WebAPI.Controllers.MessageController.Clear">
+            <summary>
+            отправка текстовых сообщений серверу
+            </summary>
+        </member>
+        <member name="T:WebAPI.Controllers.HomeController">
+            <summary>
+            Контроллер для обработки авторизации
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.HomeController.SignInAsync(System.String,System.String)">
+            <summary>
+            Авторизация пользователя
+            </summary>
+            <param name="login"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.HomeController.SignOutAsync">
+            <summary>
+            Выход
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.HomeController.TestConnect">
+            <summary>
+            Выход
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="T:WebAPI.Controllers.PurityRaidLogsController">
+            <summary>
+            Контроллер для работы с логами журнала рейда чистоты
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.GetPurityRaidLogs">
+            <summary>
+            Получение всех записей
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.GetPurityRaidLogsDay(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Получение записей за указанный день
+            </summary>
+            <param name="day"></param>
+            <param name="month"></param>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.GetPurityRaidLogsMonth(System.Int32,System.Int32)">
+            <summary>
+            Получение записей за указанный месяц
+            </summary>
+            <param name="month"></param>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.GetPurityRaidLogsYear(System.Int32)">
+            <summary>
+            Получение записей за указанный год
+            </summary>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.GetPurityRaidLog(System.Int32)">
+            <summary>
+            Получение записей по id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.PostPurityRaidLog(Helper.Models.Main.PurityRaidLog)">
+            <summary>
+            Добавление новой записи
+            </summary>
+            <param name="purityRaidLogDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.PutPurityRaidLog(Helper.Models.Main.PurityRaidLog)">
+            <summary>
+            Изменение указанной записи
+            </summary>
+            <param name="purityRaidLogDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PurityRaidLogsController.DeletePurityRaidLog(System.Int32)">
+            <summary>
+            Удаление записи по id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.RolesController">
+            <summary>
+            Контроллер для работы с комнатами
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.RolesController.GetRoles">
+            <summary>
+            Получение всех комнат 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RolesController.GetRole(System.String)">
+            <summary>
+            Получение комнаты по номеру
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RolesController.PostRole(Helper.Models.Main.Role)">
+            <summary>
+            Добавление комнаты
+            </summary>
+            <param name="roleDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RolesController.PutRole(Helper.Models.Main.Role)">
+            <summary>
+            Изменение комнаты
+            </summary>
+            <param name="roleDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RolesController.DeleteRole(System.Int32)">
+            <summary>
+            Удаление комнаты
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.RoomsController">
+            <summary>
+            Контроллер для работы с комнатами
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.RoomsController.GetRooms">
+            <summary>
+            Получение всех комнат 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RoomsController.GetRoom(System.String)">
+            <summary>
+            Получение комнаты по номеру
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RoomsController.PostRoom(Helper.Models.Main.Room)">
+            <summary>
+            Добавление комнаты
+            </summary>
+            <param name="roomDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RoomsController.PutRoom(Helper.Models.Main.Room)">
+            <summary>
+            Изменение комнаты
+            </summary>
+            <param name="roomDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.RoomsController.DeleteRoom(System.Int32)">
+            <summary>
+            Удаление комнаты
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.StatusesController">
+            <summary>
+            Контроллер для работы со статусами
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.StatusesController.GetStatuses">
+            <summary>
+            Получение всех статусов
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StatusesController.PostStatus(Helper.Models.Main.Status)">
+            <summary>
+            Добавление статуса
+            </summary>
+            <param name="statusDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StatusesController.PutStatus(Helper.Models.Main.Status)">
+            <summary>
+            Обновление статуса
+            </summary>
+            <param name="statusDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StatusesController.DeleteStatus(System.Int32)">
+            <summary>
+            Удаление статуса
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.StudentsController">
+            <summary>
+            Контроллер для работы со студентами
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.StudentsController.GetStudents">
+            <summary>
+            Получение всех студентов
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StudentsController.GetStudentsFromRoom(System.String)">
+            <summary>
+            Получение студентов по указанной комнате
+            </summary>
+            <param name="room"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StudentsController.GetStudent(System.String,System.String)">
+            <summary>
+            Получение студента по комнате и ФИО
+            </summary>
+            <param name="room"></param>
+            <param name="fio"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StudentsController.Post(Helper.Models.Main.Student)">
+            <summary>
+            Добавление нового студента
+            </summary>
+            <param name="studentDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StudentsController.Put(Helper.Models.Main.Student)">
+            <summary>
+            Изменение студента
+            </summary>
+            <param name="studentDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.StudentsController.Delete(System.Int32)">
+            <summary>
+            Удаление студента
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Controllers.UsersController">
+            <summary>
+            Контроллер для работы с пользователями
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.UsersController.GetUser(System.String)">
+            <summary>
+            Получение пользователя по логину
+            </summary>
+            <param name="login"></param>
+            <returns>Пользователь без пароля</returns>
+        </member>
+        <member name="M:WebAPI.Controllers.UsersController.GetUsers">
+            <summary>
+            Получение всех пользователей
+            </summary>
+            <returns>Пользователи(без пароля)</returns>
+        </member>
+        <member name="M:WebAPI.Controllers.UsersController.PostUser(Helper.Models.Main.User)">
+            <summary>
+            Добавление нового пользователя
+            </summary>
+            <param name="userDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.UsersController.PutUser(Helper.Models.Main.User)">
+            <summary>
+            Обновление пользователя
+            </summary>
+            <param name="userDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.UsersController.PutUser(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="login"></param>
+            <param name="newPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.UsersController.DeleteUser(System.String)">
+            <summary>
+            Удаление пользователя
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Data.ApplicationContext">
+            <summary>
+            Класс для работы с БД
+            </summary>
+        </member>
+        <member name="M:WebAPI.Data.ApplicationContext.#ctor">
+            <summary>
+            Конструктор без параметров
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.Rooms">
+            <summary>
+            Комнаты
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.Roles">
+            <summary>
+            Роли
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.Users">
+            <summary>
+            Пользователи
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.Events">
+            <summary>
+            Мероприятия
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.Groups">
+            <summary>
+            Группы
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.Statuses">
+            <summary>
+            Статусы
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.Students">
+            <summary>
+            Студенты
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.DutySchedule">
+            <summary>
+            График дежурств
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.AttendanceLog">
+            <summary>
+            Журнал проверок нахождения в общежитие в ночное время
+            </summary>
+        </member>
+        <member name="P:WebAPI.Data.ApplicationContext.PurityRaidLogs">
+            <summary>
+            Журнал проверок чистоты
+            </summary>
+        </member>
+        <member name="M:WebAPI.Data.ApplicationContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            Первоначальная конфигурация контекста
+            </summary>
+            <param name="optionsBuilder"></param>
+        </member>
+        <member name="M:WebAPI.Data.ApplicationContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Настройка моделей
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:WebAPI.Models.FIOConverter">
+            <summary>
+            Для перевода из сокращенного ФИО в полное
+            </summary>
+        </member>
+        <member name="M:WebAPI.Models.FIOConverter.GetSurnameNamePatronymicFromFIO(System.String)">
+            <summary>
+            Для перевода из сокращенного ФИО в полное
+            </summary>
+            <param name="fio"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Program">
+            <summary>
+            Основной класс программы
+            </summary>
+        </member>
+        <member name="M:WebAPI.Program.Main(System.String[])">
+            <summary>
+            Метод входа в программу
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:WebAPI.Security.Handlers.AccessHandler">
+            <summary>
+            Класс обработчика доступа к определенным запросам
+            </summary>
+        </member>
+        <member name="M:WebAPI.Security.Handlers.AccessHandler.#ctor">
+            <summary>
+            Конструктор обработчика доступа к определенным запросам
+            </summary>
+        </member>
+        <member name="M:WebAPI.Security.Handlers.AccessHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,WebAPI.Security.Requirements.AccessRequirement)">
+            <summary>
+            Обработка разрешений
+            </summary>
+            <param name="context"></param>
+            <param name="requirement"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Security.MultiPolicyAuthorizeAttribute">
+            <summary>
+            Атрибут мульти-прав, разные пользователи могут иметь схожие права
+            </summary>
+        </member>
+        <member name="M:WebAPI.Security.MultiPolicyAuthorizeAttribute.#ctor(System.String[])">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="policies"></param>
+        </member>
+        <member name="M:WebAPI.Security.MultiPolicyAuthorizeAttribute.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            Авторизация
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebAPI.Security.Requirements.AccessRequirement">
+            <summary>
+            Атрибут доступа
+            </summary>
+        </member>
+        <member name="M:WebAPI.Security.Requirements.AccessRequirement.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="role"></param>
+        </member>
+        <member name="P:WebAPI.Security.Requirements.AccessRequirement.Role">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:WebAPI.Security.SecretHasher">
+            <summary>
+            Хэширование паролей
+            </summary>
+        </member>
+        <member name="M:WebAPI.Security.SecretHasher.Hash(System.String)">
+            <summary>
+            Хэширование
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Security.SecretHasher.Verify(System.String,System.String)">
+            <summary>
+            сравнение введенного пароля с существующим
+            </summary>
+            <param name="input"></param>
+            <param name="hashString"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var attendanceLogs = await db.AttendanceLog
-                .Include(c => c.Student)
+                //.Include(c => c.Student)
                 .Include(c => c.Student!.Room)
                 .Where(c => c.Date.Year == year && c.Date.Month == month)
                 .ToListAsync();
@@ -115,7 +115,7 @@ namespace WebAPI.Controllers
         {
             ApplicationContext db = new();
             var attendanceLog = await db.AttendanceLog
-                .Include(c => c.Student)
+                //.Include(c => c.Student)
                 .Include(c => c.Student!.Room)
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
@@ -128,6 +128,32 @@ namespace WebAPI.Controllers
 
             return new JsonResult(attendanceLog);
         }
+
+
+
+        class Filter<T>
+        {
+            public int Count { get; set; } = -1;
+
+            public static void GetObjects(Func<T> funcEdit)
+            {
+                Func<T> func = funcEdit;
+
+
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
         /// <summary>
         /// Создание нового лога
         /// </summary>
@@ -154,6 +180,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLog != null)
             {
+                await db.DisposeAsync();
                 return StatusCode(409);
             }
 
@@ -188,6 +215,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLog == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -216,6 +244,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLog == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
             db.AttendanceLog.Remove(attendanceLog);
