@@ -2,16 +2,16 @@
 
 
 путь к директории приложения
-/home/slavan/API/Основное приложение/ClientServer/WebAPI/bin/Release/net8.0/publish
+WorkingDirectory=/home/slavan/API/Основное приложение/ClientServer/WebAPI/bin/Release/net8.0/publish
 
 путь к опубликованной dll
-/home/slavan/API/Основное приложение/ClientServer/WebAPI/bin/Release/net8.0/publish/WebAPI.dll          
+ExecStart=/home/slavan/API/Основное приложение/ClientServer/WebAPI/bin/Release/net8.0/publish/WebAPI.dll          
 
-
+Команды (для меня)
 cd /etc/systemd/system/
 sudo nano /etc/systemd/system/kestrel-test.service
 
-
+Для начала создаётся сервис (АПИ в моём случае)
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 [Unit]
 
@@ -31,9 +31,10 @@ WantedBy=multi-user.target
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-вариант создания сервиса
-файл /etc/nginx/sites-available/aspnetcore.conf  
+Настройка nginx для прослушивания порта 8888 и перенаправление его на 8080 локалхоста
+Создать файл /etc/nginx/sites-available/aspnetcore.conf  
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 server {
     listen 8888;
     location / {
@@ -45,8 +46,9 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-подключение
+Создание сслыки на файл
 sudo ln -s /etc/nginx/sites-available/aspnetcore.conf /etc/nginx/sites-enabled/aspnetcore.conf
 
 
@@ -66,5 +68,9 @@ sudo systemctl status kestrel-test.service
 
 Тестирование порта
 ls | nc -l -p 8888
+	...и в другой машине
+		telnet 51.250.101.134 8888
 
-telnet 51.250.101.134 8888
+
+
+
