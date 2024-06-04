@@ -31,8 +31,21 @@ WantedBy=multi-user.target
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-вариант
+вариант создания сервиса
 файл /etc/nginx/sites-available/aspnetcore.conf  
+
+server {
+    listen 8888;
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection keep-alive;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
 подключение
 sudo ln -s /etc/nginx/sites-available/aspnetcore.conf /etc/nginx/sites-enabled/aspnetcore.conf
 
@@ -44,6 +57,8 @@ sudo systemctl start kestrel-test.service
 
 рестарт
 sudo systemctl restart kestrel-test.service
+stop
+sudo systemctl stop kestrel-test.service
 
 проверка состояния 
 sudo systemctl status kestrel-test.service
