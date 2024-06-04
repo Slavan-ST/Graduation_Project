@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
 using WebAPI.Security.Handlers;
 using WebAPI.Security.Requirements;
 
@@ -62,6 +63,13 @@ namespace WebAPI
                 });
             // настраиваем CORS
             app.UseCors(builder => builder.AllowAnyOrigin());
+
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
 
             app.UseAuthentication();   // добавление middleware аутентификации 
             app.UseAuthorization();   // добавление middleware авторизации 
