@@ -15,15 +15,15 @@ sudo nano /etc/systemd/system/kestrel-test.service
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 [Unit]
 
-Description=Example .NET Web API Application running on Ubuntu
+Description=Test API
 
 [Service]
 WorkingDirectory=/home/slavan/API/main/ClientServer/WebAPI/bin/Release/net8.0/publish
-ExecStart=/home/slavan//API/main/ClientServer/WebAPI/bin/Release/net8.0/publish/WebAPI.dll
+ExecStart=/usr/bin/dotnet ./WebAPI.dll
 Restart=always
-RestartSec=10 # Перезапускать сервис через 10 секунд при краше приложения
+RestartSec=10
 SyslogIdentifier=dotnet-example
-User= slavan # пользователь, под которым следует запускать ваш сервис
+User=slavan
 Environment=ASPNETCORE_ENVIRONMENT=Production
 
 [Install]
@@ -31,6 +31,10 @@ WantedBy=multi-user.target
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+вариант
+файл /etc/nginx/sites-available/aspnetcore.conf  
+подключение
+sudo ln -s /etc/nginx/sites-available/aspnetcore.conf /etc/nginx/sites-enabled/aspnetcore.conf
 
 
 сам запуск сервисов
@@ -38,6 +42,14 @@ WantedBy=multi-user.target
 sudo systemctl enable kestrel-test.service
 sudo systemctl start kestrel-test.service
 
+рестарт
+sudo systemctl restart kestrel-test.service
+
 проверка состояния 
 sudo systemctl status kestrel-test.service
 
+
+Тестирование порта
+ls | nc -l -p 8888
+
+telnet 51.250.101.134 8888
