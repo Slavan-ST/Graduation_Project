@@ -16,7 +16,7 @@
             }
         }
 
-        List<Student>? _students = [];
+        List<Student>? _students = new();
         public List<Student>? Students
         {
             get
@@ -35,7 +35,7 @@
                 _students = value;
             }
         }
-        List<PurityRaidLog>? _purityRaidLogs = [];
+        List<PurityRaidLog>? _purityRaidLogs = new();
         public List<PurityRaidLog>? PurityRaidLogs
         {
             get

@@ -20,8 +20,8 @@
                 return Students.Count();
             }
         }
-        IEnumerable<Student>? _students = [];
-        public IEnumerable<Student>? Students
+        List<Student>? _students = new();
+        public List<Student>? Students
         {
             get
             {

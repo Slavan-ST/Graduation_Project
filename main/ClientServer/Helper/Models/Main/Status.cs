@@ -21,7 +21,7 @@
             }
         }
 
-        List<Student>? _students = [];
+        List<Student>? _students = new();
         public List<Student>? Students
         {
             get
