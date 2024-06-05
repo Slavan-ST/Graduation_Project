@@ -55,6 +55,7 @@ namespace WebAPI.Controllers
 
             if (group != null)
             {
+                await db.DisposeAsync();
                 return StatusCode(409);
             }
 
@@ -89,6 +90,7 @@ namespace WebAPI.Controllers
 
             if (group == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -117,13 +119,15 @@ namespace WebAPI.Controllers
 
             if (group == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
             if (group.Students != null)
             {
-                if (group.Students.Any<Student>())
+                if (group.Students.Count > 0)
                 {
+                    await db.DisposeAsync();
                     return StatusCode(409);
                 }
             }

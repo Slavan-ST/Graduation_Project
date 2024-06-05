@@ -24,6 +24,7 @@ namespace WebAPI.Controllers
             var eventOs = await db.Events.ToListAsync();
             if (eventOs == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -52,6 +53,7 @@ namespace WebAPI.Controllers
 
             if (eventO != null)
             {
+                await db.DisposeAsync();
                 return StatusCode(409);
             }
 
@@ -61,7 +63,6 @@ namespace WebAPI.Controllers
             await db.SaveChangesAsync();
             await db.DisposeAsync();
 
-            Debug.WriteLine("New event, id: " + eventO.Id);
             return new JsonResult(eventO.Id);
         }
         /// <summary>
@@ -86,6 +87,7 @@ namespace WebAPI.Controllers
 
             if (eventO == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -113,6 +115,7 @@ namespace WebAPI.Controllers
 
             if (eventO == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 

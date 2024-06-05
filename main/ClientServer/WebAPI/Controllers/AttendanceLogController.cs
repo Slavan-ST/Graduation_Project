@@ -27,6 +27,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLogs == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -52,6 +53,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLogs == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -76,6 +78,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLogs == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -99,6 +102,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLogs == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -122,6 +126,7 @@ namespace WebAPI.Controllers
 
             if (attendanceLog == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();

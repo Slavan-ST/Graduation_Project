@@ -64,10 +64,12 @@ namespace WebAPI.Controllers
 
             if (user == null)
             {
+                await db.DisposeAsync();
                 return new UserDTO() { Name = "^not found^" };
             }
             if (!SecretHasher.Verify(password, user.Password))
             {
+                await db.DisposeAsync();
                 return new UserDTO() { Name = "^not found^" }; ;
             }
 

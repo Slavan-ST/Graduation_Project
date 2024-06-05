@@ -30,6 +30,7 @@ namespace WebAPI.Controllers
 
             if (students == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -56,6 +57,7 @@ namespace WebAPI.Controllers
 
             if (students == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -87,6 +89,7 @@ namespace WebAPI.Controllers
 
             if (student == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -129,6 +132,7 @@ namespace WebAPI.Controllers
 
                 if (student != null)
                 {
+                    await db.DisposeAsync();
                     return StatusCode(409);
                 }
 
@@ -199,6 +203,7 @@ namespace WebAPI.Controllers
 
             if (student == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -228,6 +233,7 @@ namespace WebAPI.Controllers
 
             if (student == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 

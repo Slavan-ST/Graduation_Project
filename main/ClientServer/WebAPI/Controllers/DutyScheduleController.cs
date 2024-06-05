@@ -28,6 +28,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedules == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -53,6 +54,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedules == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -77,6 +79,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedules == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -100,6 +103,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedules == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -124,6 +128,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedule == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -144,15 +149,6 @@ namespace WebAPI.Controllers
                 return NoContent();
             }
 
-            if (dutyScheduleDTO.Student != null)
-            {
-                Debug.WriteLine("dutyScheduleDTO: " + dutyScheduleDTO.Student.Id);
-            }
-            else
-            {
-                Debug.WriteLine("dutyScheduleDTO: NO");
-            }
-
             ApplicationContext db = new();
 
             //проверка на существование такой записи в БД
@@ -163,6 +159,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedule != null)
             {
+                await db.DisposeAsync();
                 return StatusCode(409);
             }
 
@@ -195,6 +192,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedule == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -223,6 +221,7 @@ namespace WebAPI.Controllers
 
             if (dutySchedule == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
             db.DutySchedule.Remove(dutySchedule);

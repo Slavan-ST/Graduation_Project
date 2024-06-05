@@ -24,6 +24,7 @@ namespace WebAPI.Controllers
 
             if (roles == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -46,6 +47,7 @@ namespace WebAPI.Controllers
 
             if (role == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -74,6 +76,7 @@ namespace WebAPI.Controllers
 
             if (role != null)
             {
+                await db.DisposeAsync();
                 return StatusCode(409);
             }
 
@@ -107,6 +110,7 @@ namespace WebAPI.Controllers
 
             if (role == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -134,6 +138,7 @@ namespace WebAPI.Controllers
 
             if (role == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 

@@ -23,6 +23,7 @@ namespace WebAPI.Controllers
             var statuses = await db.Statuses.Include(x => x.Students).ToListAsync();
             if (statuses == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -51,6 +52,7 @@ namespace WebAPI.Controllers
 
             if (status != null)
             {
+                await db.DisposeAsync();
                 return StatusCode(409);
             }
 
@@ -84,6 +86,7 @@ namespace WebAPI.Controllers
 
             if (status == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -112,12 +115,14 @@ namespace WebAPI.Controllers
 
             if (status == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
             if (status.Students != null)
             {
-                if (status.Students.Count() > 0)
+                if (status.Students.Count > 0)
                 {
+                    await db.DisposeAsync();
                     return StatusCode(409);
                 }
             }

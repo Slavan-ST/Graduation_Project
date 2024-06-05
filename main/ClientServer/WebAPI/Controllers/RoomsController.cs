@@ -24,6 +24,7 @@ namespace WebAPI.Controllers
             var rooms = await db.Rooms.Include(x => x.Students).ToListAsync();
             if (rooms == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -46,6 +47,7 @@ namespace WebAPI.Controllers
 
             if (room == null)
             {
+                await db.DisposeAsync();
                 return NotFound();
             }
             await db.DisposeAsync();
@@ -74,6 +76,7 @@ namespace WebAPI.Controllers
 
             if (room != null)
             {
+                await db.DisposeAsync();
                 return StatusCode(409);
             }
 
@@ -108,6 +111,7 @@ namespace WebAPI.Controllers
 
             if (room == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
 
@@ -137,12 +141,14 @@ namespace WebAPI.Controllers
 
             if (room == null)
             {
+                await db.DisposeAsync();
                 return StatusCode(404);
             }
             if (room.Students != null)
             {
                 if (room.Students.Count > 0)
                 {
+                    await db.DisposeAsync();
                     return StatusCode(409);
                 }
             }
@@ -150,6 +156,7 @@ namespace WebAPI.Controllers
             {
                 if (room.PurityRaidLogs.Count > 0)
                 {
+                    await db.DisposeAsync();
                     return StatusCode(409);
                 }
             }
