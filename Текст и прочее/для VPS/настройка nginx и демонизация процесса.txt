@@ -51,6 +51,7 @@ server {
 Создание сслыки на файл
 sudo ln -s /etc/nginx/sites-available/aspnetcore.conf /etc/nginx/sites-enabled/aspnetcore.conf
 
+sudo ufw allow 8889
 
 сам запуск сервисов
 
