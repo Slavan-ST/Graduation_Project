@@ -1,0 +1,58 @@
+dotnet run /home/slavan/API/main/publish_site/Client.Browser.dll
+
+sudoedit /etc/systemd/system/systemo-sait.service
+
+[Unit]
+
+Description=Test API
+
+[Service]
+WorkingDirectory=/home/slavan/API/main/publish_site
+ExecStart=/usr/bin/dotnet ./Client.Browser.dll
+Restart=always
+RestartSec=10
+SyslogIdentifier=systemo-sait
+User=slavan
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+sudoedit /etc/nginx/sites-available/systemo-sait.conf
+
+
+
+
+server {
+    listen 8889;
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection keep-alive;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+
+sudo ln -s /etc/nginx/sites-available/aspnetcore.conf /etc/nginx/sites-enabled/systemo-sait.conf
+
+открыть порт
+sudo ufw allow 8889
+
+сам запуск сервисов
+
+sudo systemctl enable systemo-sait.service
+sudo systemctl start systemo-sait.service
+
+рестарт
+sudo systemctl restart systemo-sait.service
+stop
+sudo systemctl stop systemo-sait.service
+
+проверка состояния 
+sudo systemctl status systemo-sait.service
